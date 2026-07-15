@@ -1,0 +1,36 @@
+{
+  "patient_id": "case_001",
+  "identity": { "age": 54, "sex": "F" },
+  "chief_complaint": "douleur abdominale",
+  "history": [
+    {
+      "fact_id": "h1",
+      "text": "douleur intense de l'hypocondre droit (en haut à droite du ventre) depuis 48h",
+      "reveal_policy": "direct_if_asked"
+    },
+    {
+      "fact_id": "h2",
+      "text": "la douleur irradie vers l'épaule droite et le dos",
+      "reveal_policy": "only_if_pain_characteristics_explored"
+    },
+    {
+      "fact_id": "h3",
+      "text": "épisode similaire il y a 2 ans, déclenché après un repas familial très copieux",
+      "reveal_policy": "only_if_history_explored"
+    }
+  ],
+  "treatments": [
+    {
+      "fact_id": "t1",
+      "text": "Amlodipine 5 mg tous les matins pour la tension",
+      "reveal_policy": "if_medication_asked"
+    }
+  ],
+  "vitals": [
+    {
+      "fact_id": "v1",
+      "text": "Apyrétique (pas de fièvre, température prise à 37.2°C ce matin)",
+      "reveal_policy": "if_vitals_asked"
+    }
+  ]
+}

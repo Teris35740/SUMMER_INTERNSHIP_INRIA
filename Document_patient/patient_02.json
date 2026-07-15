@@ -1,0 +1,41 @@
+{
+  "patient_id": "case_002",
+  "identity": { "age": 22, "sex": "M" },
+  "chief_complaint": "difficulté à respirer",
+  "history": [
+    {
+      "fact_id": "h1",
+      "text": "sensation d'oppression thoracique et sifflements apparus ce matin au réveil",
+      "reveal_policy": "direct_if_asked"
+    },
+    {
+      "fact_id": "h2",
+      "text": "je suis asthmatique depuis l'enfance, c'est connu",
+      "reveal_policy": "direct_if_asked"
+    },
+    {
+      "fact_id": "h3",
+      "text": "j'ai passé la soirée d'hier chez un ami qui a un chat, je suis très allergique aux chats",
+      "reveal_policy": "only_if_context_or_allergies_explored"
+    }
+  ],
+  "treatments": [
+    {
+      "fact_id": "t1",
+      "text": "Ventoline (Salbutamol) à la demande, j'en ai pris 3 fois ce matin sans que ça ne me soulage",
+      "reveal_policy": "if_medication_asked"
+    },
+    {
+      "fact_id": "t2",
+      "text": "j'ai un traitement de fond par corticoïdes inhalés (Seretide) mais j'ai arrêté de le prendre de moi-même il y a 1 mois car j'en avais marre",
+      "reveal_policy": "only_if_compliance_explored"
+    }
+  ],
+  "vitals": [
+    {
+      "fact_id": "v1",
+      "text": "Je me sens essoufflé même quand je parle, je respire vite",
+      "reveal_policy": "direct_if_asked"
+    }
+  ]
+}

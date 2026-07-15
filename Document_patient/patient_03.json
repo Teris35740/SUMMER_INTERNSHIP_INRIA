@@ -1,0 +1,41 @@
+{
+  "patient_id": "case_003",
+  "identity": { "age": 28, "sex": "F" },
+  "chief_complaint": "brûlures en urinant",
+  "history": [
+    {
+      "fact_id": "h1",
+      "text": "douleur intense type brûlure pendant la miction (en faisant pipi), apparue hier soir",
+      "reveal_policy": "direct_if_asked"
+    },
+    {
+      "fact_id": "h2",
+      "text": "j'ai tout le temps envie d'aller aux toilettes, même pour trois gouttes",
+      "reveal_policy": "direct_if_asked"
+    },
+    {
+      "fact_id": "h3",
+      "text": "mes urines sont un peu troubles et sentent plus fort que d'habitude",
+      "reveal_policy": "only_if_symptoms_explored"
+    },
+    {
+      "fact_id": "h4",
+      "text": "je n'ai absolument pas mal dans le bas du dos ni sur les flancs, et je n'ai pas eu de frissons",
+      "reveal_policy": "if_specific_negative_asked"
+    }
+  ],
+  "treatments": [
+    {
+      "fact_id": "t1",
+      "text": "je prends uniquement la pilule contraceptive (Optimizette), aucun autre médicament",
+      "reveal_policy": "if_medication_asked"
+    }
+  ],
+  "vitals": [
+    {
+      "fact_id": "v1",
+      "text": "Je ne pense pas avoir de fièvre, je me sens normalement chaude",
+      "reveal_policy": "if_vitals_asked"
+    }
+  ]
+}

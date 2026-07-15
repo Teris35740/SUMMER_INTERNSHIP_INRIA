@@ -1,0 +1,52 @@
+# macOS
+.DS_Store
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / frontend dependencies
+node_modules/
+
+# Internship notes and planning folder
+Stage_INRIA_2026/
+Backend/mdp.md
+evaluation_rag_pipeline.md
+Backend/vieuc
