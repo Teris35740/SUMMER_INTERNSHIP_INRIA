@@ -8,94 +8,112 @@
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 36 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "travel_history": [
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "th2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Opération des dents de sagesse",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "sh1"
             },
             {
                 "information": "Césarienne",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "sh2"
             },
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "sh3"
             }
         ],
         "social_history": [
             {
                 "information": "Travaille de nuit",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "soh2"
             },
             {
                 "information": "Stress professionnel important",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "soh3"
             }
         ],
         "treatments": [
             {
                 "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Rien à signaler",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "pmh2"
             }
         ],
         "family_history": [
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "fh1"
             }
         ],
         "allergies": [
             {
                 "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "a1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "rf1"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "v1"
             }
         ]
     },

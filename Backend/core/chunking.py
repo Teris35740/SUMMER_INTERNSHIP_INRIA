@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 from sentence_transformers import util
 
-from core.config import _model, _tokenizer
-from core.text_processing import split_into_sentences, extract_pages_from_pdf
+from .config import _model, _tokenizer
+from .text_processing import split_into_sentences, extract_pages_from_pdf
 
 
 def semantic_chunking(text, model=None, tokenizer=None, max_tokens=250, similarity_threshold=0.65):
@@ -187,23 +187,61 @@ def build_chunk_records_from_json(json_path):
 
     with open(json_path, "r", encoding="utf-8") as file:
         doc = json.load(file)
+        
+    if "patient" in doc:
+        patient_data = doc["patient"]
+        identity = patient_data.get("identity", {})
+        patient_id = identity.get("patient_id", "unknown")
+        age = identity.get("age", "inconnu")
+        gender = identity.get("gender", "inconnu")
+        behavior = identity.get("behavior", "neutre")
+    else:
+        patient_data = doc
+        patient_id = doc.get("patient_id", "unknown")
+        identity = doc.get("identity", {})
+        age = identity.get("age", "inconnu")
+        gender = identity.get("sex", "inconnu")
 
-    patient_id = doc.get("patient_id", "unknown")
-    categories = ["history", "treatments", "vitals"]
+    context_prefix = f"Patient {patient_id} ({gender}, {age} ans, trait de caractère : {behavior})"
 
+    categories = [
+        "chief_complaint", "history", "treatments", "vitals", "allergies", 
+        "past_medical_history", "family_history", 
+        "surgical_history", "travel_history", 
+        "social_history", "risk_factors"
+    ]
+    
+    chunk_index = 1
+    
     for category in categories:
-        if category in doc:
-            for index, fact in enumerate(doc[category], start=1):
+        if category in patient_data:
+            category_data = patient_data[category]
+            
+            facts = category_data if isinstance(category_data, list) else [category_data]
+            
+            for fact in facts:
+                fact_text = fact.get("information") or fact.get("text", "")
+                if not fact_text:
+                    continue
+                
+                fact_id = fact.get("fact_id", f"{category}_{chunk_index}")
+                
+                category_name_fr = category.replace('_', ' ').capitalize()
+                
+                enriched_content = f"{context_prefix} - Catégorie [{category_name_fr}] : {fact_text}"
+                
                 chunk_records.append({
-                    "content": fact["text"],
+                    "content": enriched_content,       
                     "source_type": "patient",
                     "source_file": json_name,
                     "patient_id": patient_id,
-                    "fact_id": fact["fact_id"],
+                    "fact_id": fact_id,              
                     "reveal_policy": fact.get("reveal_policy", "unknown"),
-                    "chunk_index": index,
+                    "chunk_index": chunk_index,
+                    "raw_fact": fact_text              
                 })
-
+                chunk_index += 1
+                
     return chunk_records
 
 

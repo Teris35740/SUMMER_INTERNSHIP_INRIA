@@ -8,70 +8,83 @@
         },
         "chief_complaint": {
             "information": "Dos bloqué après avoir porté un carton",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 5 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "social_history": [
             {
                 "information": "Stress professionnel important",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "soh2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "v1"
             }
         ],
         "treatments": [
             {
                 "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "t2"
             }
         ],
         "travel_history": [
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "th2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Aucune opération",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "sh1"
             }
         ],
         "family_history": [
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "fh1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "rf1"
             }
         ]
     },

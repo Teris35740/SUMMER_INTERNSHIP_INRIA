@@ -8,56 +8,66 @@
         },
         "chief_complaint": {
             "information": "Douleur violente en bas du ventre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 36 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "A souvent des règles irrégulières -> patiente minimise un retard",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "allergies": [
             {
                 "information": "Arachide",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "a1"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "v2"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "pmh1"
             }
         ],
         "social_history": [
             {
                 "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "soh1"
             }
         ],
         "treatments": [
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "t1"
             }
         ],
         "family_history": [
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "fh1"
             }
         ]
     },

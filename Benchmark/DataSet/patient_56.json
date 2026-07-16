@@ -8,132 +8,160 @@
         },
         "chief_complaint": {
             "information": "Toux grasse et forte fièvre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 41 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Connu pour un asthme léger -> risque de l'associer à une simple crise",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "rf1"
             },
             {
                 "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "rf2"
             },
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "rf3"
             },
             {
                 "information": "Non fumeur",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "rf4"
             }
         ],
         "travel_history": [
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "th2"
             },
             {
                 "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "th3"
             }
         ],
         "allergies": [
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "a1"
             },
             {
                 "information": "Arachide",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "a2"
             },
             {
                 "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "a3"
             }
         ],
         "social_history": [
             {
                 "information": "Travaille de nuit",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "soh2"
             },
             {
                 "information": "Étudiant en période d'examens",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "soh3"
             },
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "soh4"
             },
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "soh5"
             }
         ],
         "family_history": [
             {
                 "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "fh1"
             },
             {
                 "information": "Sans particularité",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "fh2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Aucune opération",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "sh2"
             },
             {
                 "information": "Césarienne",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "sh3"
             },
             {
                 "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "sh4"
             },
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "sh5"
             }
         ],
         "treatments": [
             {
                 "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "t1"
             },
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "t2"
             }
         ]
     },

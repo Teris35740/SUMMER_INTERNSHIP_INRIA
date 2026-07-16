@@ -8,88 +8,105 @@
         },
         "chief_complaint": {
             "information": "Fatigue extrême, confusion et fièvre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 17 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "treatments": [
             {
                 "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "t2"
             }
         ],
         "family_history": [
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "fh1"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "v1"
             }
         ],
         "social_history": [
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "soh1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "rf1"
             },
             {
                 "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "rf2"
             },
             {
                 "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "rf3"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Rien à signaler",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "pmh2"
             }
         ],
         "travel_history": [
             {
                 "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "th2"
             }
         ],
         "allergies": [
             {
                 "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "a2"
             }
         ]
     },

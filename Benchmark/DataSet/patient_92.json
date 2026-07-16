@@ -8,136 +8,165 @@
         },
         "chief_complaint": {
             "information": "Mal de tête insupportable et fièvre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 48 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "A des migraines habituellement -> risque de confondre avec une crise forte",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "travel_history": [
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "th1"
             },
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "th2"
             },
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "th3"
             },
             {
                 "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "th4"
             }
         ],
         "allergies": [
             {
                 "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "a2"
             },
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "a3"
             },
             {
                 "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "a4"
             }
         ],
         "surgical_history": [
             {
                 "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Césarienne",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "sh2"
             },
             {
                 "information": "Ligature des trompes",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "sh3"
             }
         ],
         "risk_factors": [
             {
                 "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "rf1"
             },
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "rf2"
             },
             {
                 "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "rf3"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "v2"
             },
             {
                 "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "v3"
             }
         ],
         "family_history": [
             {
                 "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "fh1"
             },
             {
                 "information": "Sans particularité",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "fh2"
             },
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "fh3"
             }
         ],
         "social_history": [
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Stress professionnel important",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "soh2"
             },
             {
                 "information": "Vit seul(e)",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "soh3"
             }
         ],
         "treatments": [
             {
                 "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t2"
             },
             {
                 "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "t3"
             }
         ]
     },

@@ -2,92 +2,453 @@
     {
         "id": "q001",
         "type": "positif_extraction_directe",
-        "question": "Quel est le comportement du patient PAT_001 lors de la consultation ?",
+        "question": "Selon l'étude de Moore et al. mentionnée dans asthma.pdf, quelle est l'augmentation des cellules totales pour les sujets atteints d'asthme léger ?",
         "target_documents": [
-            "patient_01.json"
+            "asthma.pdf"
         ],
-        "expected_answer": "Le patient PAT_001 minimise ses symptômes[cite: 1]."
+        "expected_answer": "L'augmentation des cellules totales est de $60.0 \\pm 48.5 \\times 10^{4}$ cellules/mL pour l'asthme léger[cite: 1]."
     },
     {
         "id": "q002",
-        "type": "positif_extraction_donnees_structurees",
-        "question": "Quelle est l'information principale de la plainte (chief_complaint) pour le patient PAT_002 ?",
+        "type": "positif_concept_medical",
+        "question": "Dans le document patella.pdf, comment est définie une lésion de grade III selon la classification d'Outerbridge ?",
         "target_documents": [
-            "patient_02.json"
+            "patella.pdf"
         ],
-        "expected_answer": "La plainte principale est 'Brûlures en urinant depuis 48h'[cite: 1]."
+        "expected_answer": "Une lésion de grade III se définit par une fissuration atteignant le niveau de l'os sous-chondral dans une zone d'un diamètre supérieur à 1,5 cm[cite: 2]."
     },
     {
         "id": "q003",
         "type": "faux_positif_sémantique",
-        "question": "Le patient PAT_001 souffre-t-il de brûlures en urinant ?",
+        "question": "Le patient PAT_006 doit-il appliquer de la glace sur son hypochondre droit pour soulager sa douleur ?",
         "target_documents": [
-            "patient_01.json",
-            "patient_02.json"
+            "patient_06.json",
+            "patient_01.json"
         ],
-        "expected_answer": "Non. Le patient PAT_001 a le dos bloqué après avoir porté un carton[cite: 1]. Les brûlures en urinant concernent le patient PAT_002[cite: 2]."
+        "expected_answer": "Non. La douleur à l'hypochondre droit ou une autre pathologie concerne un autre patient[cite: 4]."
     },
     {
         "id": "q004",
-        "type": "positif_logique_clinique",
-        "question": "Pourquoi existe-t-il un risque de confusion avec une pyélonéphrite chez le patient PAT_002 ?",
+        "type": "faux_positif_information_absente",
+        "question": "Quelle est la prévalence exacte de l'asthme chez les adultes de plus de 65 ans en France selon le document asthma.pdf ?",
         "target_documents": [
-            "patient_02.json"
+            "asthma.pdf"
         ],
-        "expected_answer": "Il y a un risque de confusion car le patient souffre de brûlures en urinant[cite: 1] et présente également une douleur lombaire ancienne (lombalgie connue)[cite: 2]."
+        "expected_answer": "Le document ne fournit pas de données sur la prévalence exacte de l'asthme chez les adultes de plus de 65 ans en France[cite: 1]."
     },
     {
         "id": "q005",
         "type": "positif_synthese_complexe",
-        "question": "Quels sont les facteurs de risque du patient PAT_001 qui pourraient compliquer sa prise en charge pour une lombalgie ?",
+        "question": "Quel rôle l'interleukine-17A (IL-17A) joue-t-elle sur les muscles lisses des voies respiratoires selon Pathologie de l'asthme.pdf ?",
         "target_documents": [
-            "patient_01.json"
+            "Pathologie de l'asthme.pdf"
         ],
-        "expected_answer": "Le patient PAT_001 présente plusieurs facteurs de risque : consommation d'alcool (3 verres/jour), obésité (IMC 35), sédentarité, et un surpoids global[cite: 1]. Il est également un ex-fumeur sevré depuis 5 ans[cite: 2]."
+        "expected_answer": "L'IL-17A renforce directement la force contractile des muscles lisses des voies respiratoires[cite: 3]."
     },
     {
         "id": "q006",
-        "type": "faux_positif_information_absente",
-        "question": "Quel est le traitement recommandé dans le document patient_01.json pour soigner la douleur sciatique ?",
+        "type": "positif_logique_clinique",
+        "question": "Pourquoi le patient s'est-il réveillé avec une difficulté à respirer et des sifflements ?",
         "target_documents": [
-            "patient_01.json"
+            "patient_02.json"
         ],
-        "expected_answer": "Le document ne précise pas de traitement recommandé pour la douleur sciatique. Il indique seulement qu'il utilise un inhalateur de Ventoline si besoin et qu'il n'a aucun traitement régulier[cite: 1]."
+        "expected_answer": "Le patient est potentiellement asthmatique et a été exposé à un allergène[cite: 5]."
     },
     {
         "id": "q007",
-        "type": "positif_extraction_directe",
-        "question": "Quelles sont les constantes vitales du patient PAT_001 ?",
+        "type": "faux_positif_mots_cles",
+        "question": "Dans le cadre de la gestion de la tachycardie, l'Amlodipine 5 mg est-elle recommandée par les auteurs du document tachycardia.pdf ?",
         "target_documents": [
-            "patient_01.json"
+            "tachycardia.pdf",
+            "patient_04.json"
         ],
-        "expected_answer": "Les constantes sont TA: 180/100, FC: 105, T: 37.5°C, Sat: 97% ou TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%[cite: 1]."
+        "expected_answer": "L'Amlodipine n'est pas mentionnée dans le document tachycardia.pdf pour la gestion de la tachycardie[cite: 10]. Elle apparaît peut-être dans l'ordonnance d'un patient pour le traitement de l'hypertension artérielle[cite: 7]."
     },
     {
         "id": "q008",
-        "type": "faux_positif_mots_cles",
-        "question": "Le patient PAT_008 a-t-il voyagé récemment en Afrique subsaharienne ?",
+        "type": "positif_extraction_donnees_structurees",
+        "question": "Quelle est la posologie exacte prescrite pour le patient concernant l'Amoxicilline ?",
         "target_documents": [
-            "patient_08.json"
+            "patient_05.json"
         ],
-        "expected_answer": "Oui, le patient PAT_008 a fait un séjour en Afrique subsaharienne il y a 1 mois[cite: 1]."
+        "expected_answer": "La posologie pourrait être de 1 comprimé (1 g) matin, midi et soir, à prendre au milieu des repas[cite: 8]."
     },
     {
         "id": "q009",
         "type": "positif_logique_clinique",
-        "question": "Pour le patient PAT_001, quelle est l'allergie qui ne peut être révélée que si l'historique chirurgical est exploré ?",
         "target_documents": [
-            "patient_01.json"
+            "patient_50.json"
         ],
-        "expected_answer": "L'allergie au pollen ne sera révélée que si l'historique chirurgical est exploré[cite: 1]."
+        "question": "Quel facteur de risque est identifié chez le patient PAT_050 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Obésité (IMC 35)'[cite: 1]."
     },
     {
         "id": "q010",
-        "type": "positif_synthese_complexe",
-        "question": "Quels antécédents médicaux familiaux et chirurgicaux sont mentionnés pour le patient PAT_001 ?",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_29.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_029 (78 ans) ?",
+        "expected_answer": "Le patient PAT_029 se plaint de : 'Brûlures en urinant depuis 48h'[cite: 1]."
+    },
+    {
+        "id": "q011",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_26.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_026 (79 ans) ?",
+        "expected_answer": "Le patient PAT_026 se plaint de : 'Nez bouché et mal de gorge'[cite: 1]."
+    },
+    {
+        "id": "q012",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_06.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_006 dans le fichier patient_06.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_006[cite: 1]."
+    },
+    {
+        "id": "q013",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_51.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_051 (80 ans) ?",
+        "expected_answer": "Le patient PAT_051 se plaint de : 'Douleur atroce dans le flanc gauche'[cite: 1]."
+    },
+    {
+        "id": "q014",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_37.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_037 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'dramatise'[cite: 1]."
+    },
+    {
+        "id": "q015",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_80.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_080 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'dramatise'[cite: 1]."
+    },
+    {
+        "id": "q016",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_97.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_097 dans le fichier patient_97.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_097[cite: 1]."
+    },
+    {
+        "id": "q017",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_34.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_034 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'sportif'[cite: 1]."
+    },
+    {
+        "id": "q018",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_59.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_059 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'sportif'[cite: 1]."
+    },
+    {
+        "id": "q019",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_15.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_015 (91 ans) ?",
+        "expected_answer": "Le patient PAT_015 se plaint de : 'Cheville droite gonflée après une torsion'[cite: 1]."
+    },
+    {
+        "id": "q020",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_02.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_002 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Tabagisme actif 15 PA'[cite: 1]."
+    },
+    {
+        "id": "q021",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_62.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_062 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'personne âgée'[cite: 1]."
+    },
+    {
+        "id": "q022",
+        "type": "positif_extraction_donnees_structurees",
         "target_documents": [
             "patient_01.json"
         ],
-        "expected_answer": "Ses antécédents familiaux incluent un cancer du sein chez la mère et une mère diabétique[cite: 1]. Ses antécédents chirurgicaux comprennent une appendicectomie à 15 ans et une césarienne[cite: 2]."
+        "question": "Comment est décrit le comportement du patient PAT_001 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'minimise ses symptômes'[cite: 1]."
+    },
+    {
+        "id": "q023",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_76.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_076 (57 ans) ?",
+        "expected_answer": "Le patient PAT_076 se plaint de : 'Essoufflement apparu d'un coup'[cite: 1]."
+    },
+    {
+        "id": "q024",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_55.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_055 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Consommation alcool (3 verres/jour)'[cite: 1]."
+    },
+    {
+        "id": "q025",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_59.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_059 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'sportif'[cite: 1]."
+    },
+    {
+        "id": "q026",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_43.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_043 dans le fichier patient_43.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_043[cite: 1]."
+    },
+    {
+        "id": "q027",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_37.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_037 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'dramatise'[cite: 1]."
+    },
+    {
+        "id": "q028",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_92.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_092 dans le fichier patient_92.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_092[cite: 1]."
+    },
+    {
+        "id": "q029",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_36.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_036 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'dramatise'[cite: 1]."
+    },
+    {
+        "id": "q030",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_26.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_026 dans le fichier patient_26.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_026[cite: 1]."
+    },
+    {
+        "id": "q031",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_31.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_031 (55 ans) ?",
+        "expected_answer": "Le patient PAT_031 se plaint de : 'Nausées, diarrhée liquide et crampes'[cite: 1]."
+    },
+    {
+        "id": "q032",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_31.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_031 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Obésité (IMC 35)'[cite: 1]."
+    },
+    {
+        "id": "q033",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_37.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_037 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Tabagisme actif 15 PA'[cite: 1]."
+    },
+    {
+        "id": "q034",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_05.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_005 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'sportif'[cite: 1]."
+    },
+    {
+        "id": "q035",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_93.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_093 dans le fichier patient_93.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_093[cite: 1]."
+    },
+    {
+        "id": "q036",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_29.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_029 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'dramatise'[cite: 1]."
+    },
+    {
+        "id": "q037",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_65.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_065 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'minimise ses symptômes'[cite: 1]."
+    },
+    {
+        "id": "q038",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_86.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_086 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Obésité (IMC 35)'[cite: 1]."
+    },
+    {
+        "id": "q039",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_73.json"
+        ],
+        "question": "Quand le problème du patient PAT_073 a-t-il commencé selon son historique ?",
+        "expected_answer": "Selon l'historique : 'Le problème a commencé il y a environ 39 heures.'[cite: 1]."
+    },
+    {
+        "id": "q040",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_69.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_069 (69 ans) ?",
+        "expected_answer": "Le patient PAT_069 se plaint de : 'Grosse fièvre avec frissons'[cite: 1]."
+    },
+    {
+        "id": "q041",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_63.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_063 (20 ans) ?",
+        "expected_answer": "Le patient PAT_063 se plaint de : 'Douleur sous les côtes à droite'[cite: 1]."
+    },
+    {
+        "id": "q042",
+        "type": "faux_positif_information_absente",
+        "target_documents": [
+            "patient_11.json"
+        ],
+        "question": "Quel est le résultat de l'IRM prescrite pour le patient PAT_011 dans le fichier patient_11.json ?",
+        "expected_answer": "Le document ne mentionne aucun résultat d'IRM pour le patient PAT_011[cite: 1]."
+    },
+    {
+        "id": "q043",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_04.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_004 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Consommation alcool (3 verres/jour)'[cite: 1]."
+    },
+    {
+        "id": "q044",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_07.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_007 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Non fumeur'[cite: 1]."
+    },
+    {
+        "id": "q045",
+        "type": "positif_extraction_directe",
+        "target_documents": [
+            "patient_81.json"
+        ],
+        "question": "Quelle est la plainte principale évoquée par le patient PAT_081 (37 ans) ?",
+        "expected_answer": "Le patient PAT_081 se plaint de : 'Essoufflement apparu d'un coup'[cite: 1]."
+    },
+    {
+        "id": "q046",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_94.json"
+        ],
+        "question": "Quand le problème du patient PAT_094 a-t-il commencé selon son historique ?",
+        "expected_answer": "Selon l'historique : 'Le problème a commencé il y a environ 31 heures.'[cite: 1]."
+    },
+    {
+        "id": "q047",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_61.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_061 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Consommation alcool (3 verres/jour)'[cite: 1]."
+    },
+    {
+        "id": "q048",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_25.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_025 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Consommation alcool (3 verres/jour)'[cite: 1]."
+    },
+    {
+        "id": "q049",
+        "type": "positif_extraction_donnees_structurees",
+        "target_documents": [
+            "patient_99.json"
+        ],
+        "question": "Comment est décrit le comportement du patient PAT_099 lors de la consultation ?",
+        "expected_answer": "Le comportement du patient est décrit comme : 'confus'[cite: 1]."
+    },
+    {
+        "id": "q050",
+        "type": "positif_logique_clinique",
+        "target_documents": [
+            "patient_46.json"
+        ],
+        "question": "Quel facteur de risque est identifié chez le patient PAT_046 ?",
+        "expected_answer": "Un des facteurs de risque identifié est : 'Obésité (IMC 35)'[cite: 1]."
     }
 ]

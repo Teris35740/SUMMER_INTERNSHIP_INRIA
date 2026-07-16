@@ -8,44 +8,52 @@
         },
         "chief_complaint": {
             "information": "Essoufflement apparu d'un coup",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 9 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "treatments": [
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "t1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "pmh1"
             }
         ],
         "travel_history": [
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "th2"
             }
         ],
         "family_history": [
             {
                 "information": "Sans particularité",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "fh1"
             }
         ]
     },

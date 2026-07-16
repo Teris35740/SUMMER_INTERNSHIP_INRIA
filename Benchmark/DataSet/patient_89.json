@@ -8,74 +8,88 @@
         },
         "chief_complaint": {
             "information": "Serrement intense dans la poitrine",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 32 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "pmh1"
             }
         ],
         "surgical_history": [
             {
                 "information": "Aucune opération",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "sh2"
             }
         ],
         "travel_history": [
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "th2"
             },
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "th3"
             }
         ],
         "allergies": [
             {
                 "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "a1"
             }
         ],
         "treatments": [
             {
                 "information": "Ramipril 5mg",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "t1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "rf1"
             }
         ],
         "social_history": [
             {
                 "information": "Travaille de nuit",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "soh2"
             }
         ]
     },

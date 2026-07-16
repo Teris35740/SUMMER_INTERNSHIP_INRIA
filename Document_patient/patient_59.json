@@ -8,60 +8,71 @@
         },
         "chief_complaint": {
             "information": "Douleur au ventre qui s'aggrave",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 22 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "family_history": [
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "fh1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "rf1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "pmh2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "v1"
             }
         ],
         "social_history": [
             {
                 "information": "Travaille de nuit",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "soh2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Ligature des trompes",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "sh1"
             }
         ]
     },

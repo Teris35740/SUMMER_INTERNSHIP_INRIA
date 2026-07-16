@@ -8,80 +8,96 @@
         },
         "chief_complaint": {
             "information": "Douleur au ventre qui s'aggrave",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 45 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "allergies": [
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "a2"
             },
             {
                 "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "a3"
             }
         ],
         "treatments": [
             {
                 "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "t2"
             }
         ],
         "travel_history": [
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "fh1"
             },
             {
                 "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "fh2"
             },
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "fh3"
             },
             {
                 "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "fh4"
             }
         ],
         "social_history": [
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "soh1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Non fumeur",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "rf1"
             },
             {
                 "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "rf2"
             }
         ]
     },

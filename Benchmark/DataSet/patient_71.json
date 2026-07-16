@@ -8,80 +8,95 @@
         },
         "chief_complaint": {
             "information": "Douleur atroce dans le flanc gauche",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 33 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Nausées et vomissements intenses -> confusion urgence digestive",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "risk_factors": [
             {
                 "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "rf1"
             }
         ],
         "family_history": [
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "fh1"
             },
             {
                 "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "fh2"
             }
         ],
         "treatments": [
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t1"
             },
             {
                 "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Aucune opération",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "sh2"
             }
         ],
         "travel_history": [
             {
                 "information": "Voyage récent en Asie",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "th1"
             }
         ],
         "social_history": [
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "soh1"
             }
         ],
         "allergies": [
             {
                 "information": "Acariens",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "a1"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "v2"
             }
         ]
     },

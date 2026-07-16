@@ -8,118 +8,142 @@
         },
         "chief_complaint": {
             "information": "Douleur déchirante dans le dos et le thorax",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 19 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Douleur dorsale initialement prise pour un lumbago très intense",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "travel_history": [
             {
                 "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "th2"
             }
         ],
         "risk_factors": [
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "rf1"
             },
             {
                 "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "rf2"
             },
             {
                 "information": "Non fumeur",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "rf3"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "v1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Asthme infantile",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "pmh2"
             },
             {
                 "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "pmh3"
             }
         ],
         "social_history": [
             {
                 "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "soh1"
             }
         ],
         "surgical_history": [
             {
                 "information": "Césarienne",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "sh2"
             }
         ],
         "family_history": [
             {
                 "information": "Sans particularité",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "fh1"
             },
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "fh2"
             },
             {
                 "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "fh3"
             },
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "fh4"
             }
         ],
         "treatments": [
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "t2"
             },
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "t3"
             }
         ],
         "allergies": [
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "a2"
             }
         ]
     },

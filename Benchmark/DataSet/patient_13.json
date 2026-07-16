@@ -8,146 +8,177 @@
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 7 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "family_history": [
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "fh1"
             },
             {
                 "information": "Père décédé d'un infarctus",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "fh2"
             },
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "fh3"
             },
             {
                 "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "fh4"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Rien à signaler",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Diabète de type 2",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "pmh2"
             },
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "pmh3"
             }
         ],
         "risk_factors": [
             {
                 "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "rf1"
             },
             {
                 "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "rf2"
             }
         ],
         "treatments": [
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t1"
             },
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "t2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "v2"
             },
             {
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "v3"
             },
             {
                 "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "v4"
             },
             {
                 "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "v5"
             }
         ],
         "travel_history": [
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "th2"
             },
             {
                 "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "th3"
             },
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "th4"
             }
         ],
         "social_history": [
             {
                 "information": "Travaille de nuit",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "soh2"
             },
             {
                 "information": "Vit seul(e)",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "soh3"
             }
         ],
         "surgical_history": [
             {
                 "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "sh2"
             },
             {
                 "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "sh3"
             }
         ],
         "allergies": [
             {
                 "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "a2"
             }
         ]
     },

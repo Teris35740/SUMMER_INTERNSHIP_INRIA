@@ -8,80 +8,95 @@
         },
         "chief_complaint": {
             "information": "Faiblesse soudaine du bras droit",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 33 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Hypoglycémie récente mesurée au doigt -> risque de confondre avec malaise hypoglycémique",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "v2"
             }
         ],
         "risk_factors": [
             {
                 "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "th1"
             }
         ],
         "surgical_history": [
             {
                 "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "sh2"
             }
         ],
         "allergies": [
             {
                 "information": "Arachide",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "a2"
             }
         ],
         "treatments": [
             {
                 "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "t1"
             }
         ],
         "social_history": [
             {
                 "information": "Vit seul(e)",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "soh1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Diabète de type 2",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Asthme infantile",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "pmh2"
             }
         ]
     },

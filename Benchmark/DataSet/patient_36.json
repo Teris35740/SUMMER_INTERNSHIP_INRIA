@@ -8,44 +8,52 @@
         },
         "chief_complaint": {
             "information": "Toux grasse et forte fièvre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 44 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Connu pour un asthme léger -> risque de l'associer à une simple crise",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "family_history": [
             {
                 "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "fh1"
             }
         ],
         "treatments": [
             {
                 "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t1"
             },
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "allergies": [
             {
                 "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "a1"
             }
         ],
         "travel_history": [
             {
                 "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "th1"
             }
         ]
     },

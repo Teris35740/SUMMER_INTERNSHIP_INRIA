@@ -8,44 +8,52 @@
         },
         "chief_complaint": {
             "information": "Douleur au ventre qui s'aggrave",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 6 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "travel_history": [
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "th2"
             }
         ],
         "allergies": [
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "a1"
             }
         ],
         "treatments": [
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "t1"
             }
         ],
         "surgical_history": [
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "sh1"
             }
         ]
     },

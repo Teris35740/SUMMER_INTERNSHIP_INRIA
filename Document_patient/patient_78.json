@@ -8,44 +8,52 @@
         },
         "chief_complaint": {
             "information": "Fatigue extrême, confusion et fièvre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 38 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Ligature des trompes",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "sh1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Asthme infantile",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "pmh2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "v1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Non fumeur",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "rf1"
             }
         ]
     },

@@ -8,88 +8,105 @@
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 15 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "pmh1"
             }
         ],
         "family_history": [
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "fh1"
             },
             {
                 "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "fh2"
             }
         ],
         "surgical_history": [
             {
                 "information": "Ligature des trompes",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "sh1"
             },
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "sh2"
             },
             {
                 "information": "Césarienne",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "sh3"
             }
         ],
         "social_history": [
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Étudiant en période d'examens",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "soh2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "v1"
             }
         ],
         "treatments": [
             {
                 "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "t1"
             },
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t2"
             },
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "t3"
             }
         ],
         "travel_history": [
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "th1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "rf1"
             }
         ]
     },

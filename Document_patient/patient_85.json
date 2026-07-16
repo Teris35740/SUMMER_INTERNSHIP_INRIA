@@ -8,126 +8,152 @@
         },
         "chief_complaint": {
             "information": "Douleur déchirante dans le dos et le thorax",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 20 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Douleur dorsale initialement prise pour un lumbago très intense",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "v2"
             },
             {
                 "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "v3"
             }
         ],
         "risk_factors": [
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "rf1"
             },
             {
                 "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "rf2"
             },
             {
                 "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "rf3"
             }
         ],
         "surgical_history": [
             {
                 "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "sh1"
             },
             {
                 "information": "Césarienne",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "sh2"
             },
             {
                 "information": "Fracture du poignet opérée",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "sh3"
             },
             {
                 "information": "Aucune opération",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "sh4"
             }
         ],
         "allergies": [
             {
                 "information": "Acariens",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "a1"
             }
         ],
         "family_history": [
             {
                 "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "fh1"
             },
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "fh2"
             },
             {
                 "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "fh3"
             }
         ],
         "travel_history": [
             {
                 "information": "Week-end à Londres",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "th1"
             },
             {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "th2"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Diabète de type 2",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "pmh2"
             },
             {
                 "information": "Rien à signaler",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "pmh3"
             },
             {
                 "information": "Asthme infantile",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh4"
             }
         ],
         "social_history": [
             {
                 "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "soh1"
             }
         ],
         "treatments": [
             {
                 "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "t2"
             }
         ]
     },

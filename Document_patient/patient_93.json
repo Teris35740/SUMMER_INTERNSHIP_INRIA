@@ -8,82 +8,98 @@
         },
         "chief_complaint": {
             "information": "Mal de tête insupportable et fièvre",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 13 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "A des migraines habituellement -> risque de confondre avec une crise forte",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_social_history_explored"
+                "reveal_policy": "only_if_social_history_explored",
+                "fact_id": "v1"
             },
             {
                 "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "v2"
             }
         ],
         "risk_factors": [
             {
                 "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "rf1"
             },
             {
                 "information": "Non fumeur",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "rf2"
             }
         ],
         "family_history": [
             {
                 "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "fh1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "direct_if_asked"
+                "reveal_policy": "direct_if_asked",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Rien à signaler",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "pmh2"
             },
             {
                 "information": "Diabète de type 2",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh3"
             }
         ],
         "treatments": [
             {
                 "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "t2"
             },
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t3"
             }
         ],
         "surgical_history": [
             {
                 "information": "Cholécysectomie",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "sh1"
             }
         ],
         "allergies": [
             {
                 "information": "Pollen",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "a1"
             }
         ]
     },

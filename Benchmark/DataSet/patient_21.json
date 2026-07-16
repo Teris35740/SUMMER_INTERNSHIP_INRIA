@@ -8,88 +8,105 @@
         },
         "chief_complaint": {
             "information": "Cheville droite gonflée après une torsion",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 47 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "social_history": [
             {
                 "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "soh1"
             },
             {
                 "information": "Stress professionnel important",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "soh2"
             },
             {
                 "information": "Étudiant en période d'examens",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "soh3"
             }
         ],
         "surgical_history": [
             {
                 "information": "Césarienne",
-                "reveal_policy": "only_if_travel_history_explored"
+                "reveal_policy": "only_if_travel_history_explored",
+                "fact_id": "sh1"
             }
         ],
         "allergies": [
             {
                 "information": "Iode (choc)",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "a1"
             },
             {
                 "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_surgical_history_explored"
+                "reveal_policy": "only_if_surgical_history_explored",
+                "fact_id": "a2"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_risk_factors_explored"
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh1"
             },
             {
                 "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "pmh2"
             }
         ],
         "treatments": [
             {
                 "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t1"
             },
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_medication_asked"
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "risk_factors": [
             {
                 "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "rf1"
             },
             {
                 "information": "Sédentarité",
-                "reveal_policy": "only_if_allergies_asked"
+                "reveal_policy": "only_if_allergies_asked",
+                "fact_id": "rf2"
             }
         ],
         "family_history": [
             {
                 "information": "Mère diabétique",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "fh1"
             }
         ],
         "vitals": [
             {
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_pain_characteristics_explored"
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "v1"
             }
         ]
     },

@@ -8,56 +8,66 @@
         },
         "chief_complaint": {
             "information": "Douleur au ventre qui s'aggrave",
-            "reveal_policy": "direct_if_asked"
+            "reveal_policy": "direct_if_asked",
+            "fact_id": "cc1"
         },
         "history": [
             {
                 "information": "Le problème a commencé il y a environ 47 heures.",
-                "reveal_policy": "only_if_history_explored"
+                "reveal_policy": "only_if_history_explored",
+                "fact_id": "h1"
             },
             {
                 "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "h2"
             }
         ],
         "treatments": [
             {
                 "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t1"
             },
             {
                 "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_associated_symptoms_explored"
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "t2"
             }
         ],
         "family_history": [
             {
                 "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "fh1"
             }
         ],
         "allergies": [
             {
                 "information": "Pollen",
-                "reveal_policy": "only_if_family_history_explored"
+                "reveal_policy": "only_if_family_history_explored",
+                "fact_id": "a1"
             }
         ],
         "social_history": [
             {
                 "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_context_explored"
+                "reveal_policy": "only_if_context_explored",
+                "fact_id": "soh1"
             }
         ],
         "risk_factors": [
             {
                 "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_gynecological_history_explored"
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "rf1"
             }
         ],
         "past_medical_history": [
             {
                 "information": "Rien à signaler",
-                "reveal_policy": "only_if_substance_use_explored"
+                "reveal_policy": "only_if_substance_use_explored",
+                "fact_id": "pmh1"
             }
         ]
     },

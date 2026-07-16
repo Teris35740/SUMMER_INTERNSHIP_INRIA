@@ -1,4 +1,4 @@
-from core.config import LAYER_WEIGHTS, SUPABASE_KEYWORD_RPC, SUPABASE_VECTOR_RPC
+from .config import LAYER_WEIGHTS, SUPABASE_KEYWORD_RPC, SUPABASE_VECTOR_RPC
 
 
 def embed_question(question, model):

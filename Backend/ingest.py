@@ -37,7 +37,7 @@ def main():
     pdf_path = "patella.pdf"
     if os.path.exists(pdf_path):
         print(f"Ingestion du PDF : {pdf_path}")
-        chunk_records_pdf = build_chunk_records_from_pdf(pdf_path)
+        chunk_records_pdf = build_chunk_records_from_pdf(pdf_path, method="semantic")
     
         if chunk_records_pdf:
             chunks = [record["content"] for record in chunk_records_pdf]
