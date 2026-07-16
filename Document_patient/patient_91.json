@@ -1,0 +1,153 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_091",
+            "age": 66,
+            "gender": "femme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Serrement intense dans la poitrine",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 11 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Arachide",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "direct_if_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardiologie",
+        "expected_diagnosis": "Syndrome coronarien aigu",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Irradiation mâchoire/bras",
+            "Sueurs profuses",
+            "Douleur constrictive"
+        ]
+    }
+}

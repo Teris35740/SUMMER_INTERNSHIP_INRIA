@@ -1,0 +1,187 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_065",
+            "age": 37,
+            "gender": "homme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Grosse fièvre avec frissons",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 10 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur diffuse dans le ventre au début -> confusion digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Pyélonéphrite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Marbrures",
+            "Hypotension",
+            "Oligurie"
+        ]
+    }
+}

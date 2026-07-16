@@ -1,0 +1,147 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_085",
+            "age": 30,
+            "gender": "femme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Douleur déchirante dans le dos et le thorax",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 20 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur dorsale initialement prise pour un lumbago très intense",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "direct_if_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardio-vasculaire",
+        "expected_diagnosis": "Dissection aortique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Asymétrie des pouls",
+            "Déficit neurologique transitoire",
+            "Choc"
+        ]
+    }
+}

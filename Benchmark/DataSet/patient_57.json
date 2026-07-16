@@ -1,0 +1,76 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_057",
+            "age": 78,
+            "gender": "femme",
+            "behavior": "personne âgée"
+        },
+        "chief_complaint": {
+            "information": "Douleur au ventre qui s'aggrave",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 47 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gastro-entérologie",
+        "expected_diagnosis": "Appendicite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Défense en fosse iliaque droite",
+            "Fièvre persistante"
+        ]
+    }
+}

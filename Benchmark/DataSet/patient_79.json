@@ -1,0 +1,159 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_079",
+            "age": 53,
+            "gender": "femme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Serrement intense dans la poitrine",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 14 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardiologie",
+        "expected_diagnosis": "Syndrome coronarien aigu",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Irradiation mâchoire/bras",
+            "Sueurs profuses",
+            "Douleur constrictive"
+        ]
+    }
+}

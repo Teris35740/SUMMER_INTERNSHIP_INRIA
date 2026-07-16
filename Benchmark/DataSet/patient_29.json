@@ -1,0 +1,113 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_029",
+            "age": 78,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Brûlures en urinant depuis 48h",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 25 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur lombaire ancienne (lombalgie connue) -> risque de confusion avec pyélonéphrite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Cystite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Fièvre > 38.5 (absente)"
+        ]
+    }
+}

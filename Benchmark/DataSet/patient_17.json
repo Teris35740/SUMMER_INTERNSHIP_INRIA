@@ -1,0 +1,110 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_017",
+            "age": 25,
+            "gender": "homme",
+            "behavior": "personne âgée"
+        },
+        "chief_complaint": {
+            "information": "Mal de tête atroce pulsatile",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 30 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Neurologie",
+        "expected_diagnosis": "Migraine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Déficit neurologique focal",
+            "Début brutal en coup de tonnerre"
+        ]
+    }
+}

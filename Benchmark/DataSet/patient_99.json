@@ -1,0 +1,139 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_099",
+            "age": 37,
+            "gender": "femme",
+            "behavior": "confus"
+        },
+        "chief_complaint": {
+            "information": "Douleur déchirante dans le dos et le thorax",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 19 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur dorsale initialement prise pour un lumbago très intense",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardio-vasculaire",
+        "expected_diagnosis": "Dissection aortique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Asymétrie des pouls",
+            "Déficit neurologique transitoire",
+            "Choc"
+        ]
+    }
+}

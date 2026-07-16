@@ -1,0 +1,104 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_055",
+            "age": 23,
+            "gender": "femme",
+            "behavior": "sportif"
+        },
+        "chief_complaint": {
+            "information": "Douleur violente en bas du ventre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 11 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gynécologie",
+        "expected_diagnosis": "Grossesse extra-utérine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Vertiges (choc hémorragique)",
+            "Pâleur extrême"
+        ]
+    }
+}

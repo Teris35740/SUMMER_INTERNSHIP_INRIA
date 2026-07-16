@@ -1,0 +1,158 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_063",
+            "age": 20,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Douleur sous les côtes à droite",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 46 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Brûlures d'estomac habituelles -> confusion avec RGO",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Arachide",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "direct_if_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gastro-entérologie",
+        "expected_diagnosis": "Cholécystite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Signe de Murphy positif",
+            "Ictère"
+        ]
+    }
+}

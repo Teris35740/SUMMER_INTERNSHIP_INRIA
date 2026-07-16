@@ -1,0 +1,166 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_018",
+            "age": 31,
+            "gender": "femme",
+            "behavior": "personne âgée"
+        },
+        "chief_complaint": {
+            "information": "Mal de tête atroce pulsatile",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 46 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Neurologie",
+        "expected_diagnosis": "Migraine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Déficit neurologique focal",
+            "Début brutal en coup de tonnerre"
+        ]
+    }
+}

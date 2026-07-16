@@ -1,0 +1,66 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_023",
+            "age": 76,
+            "gender": "femme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Mal de tête atroce pulsatile",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 41 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Neurologie",
+        "expected_diagnosis": "Migraine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Déficit neurologique focal",
+            "Début brutal en coup de tonnerre"
+        ]
+    }
+}

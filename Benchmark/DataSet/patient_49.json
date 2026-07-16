@@ -1,0 +1,104 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_049",
+            "age": 48,
+            "gender": "femme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Douleur au ventre qui s'aggrave",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 15 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gastro-entérologie",
+        "expected_diagnosis": "Appendicite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Défense en fosse iliaque droite",
+            "Fièvre persistante"
+        ]
+    }
+}

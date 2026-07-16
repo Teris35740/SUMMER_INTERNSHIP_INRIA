@@ -1,0 +1,112 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_038",
+            "age": 58,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Douleur atroce dans le flanc gauche",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 39 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anurie",
+            "Fièvre associée (risque de pyélonéphrite obstructive)"
+        ]
+    }
+}

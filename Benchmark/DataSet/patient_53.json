@@ -1,0 +1,88 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_053",
+            "age": 71,
+            "gender": "homme",
+            "behavior": "anxieux"
+        },
+        "chief_complaint": {
+            "information": "Douleur violente en bas du ventre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 2 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gynécologie",
+        "expected_diagnosis": "Grossesse extra-utérine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Vertiges (choc hémorragique)",
+            "Pâleur extrême"
+        ]
+    }
+}

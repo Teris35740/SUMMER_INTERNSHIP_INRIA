@@ -1,0 +1,90 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_058",
+            "age": 22,
+            "gender": "homme",
+            "behavior": "personne âgée"
+        },
+        "chief_complaint": {
+            "information": "Douleur atroce dans le flanc gauche",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 42 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anurie",
+            "Fièvre associée (risque de pyélonéphrite obstructive)"
+        ]
+    }
+}

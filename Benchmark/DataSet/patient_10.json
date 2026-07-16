@@ -1,0 +1,98 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_010",
+            "age": 75,
+            "gender": "homme",
+            "behavior": "anxieux"
+        },
+        "chief_complaint": {
+            "information": "Dos bloqué après avoir porté un carton",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 39 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Rhumatologie",
+        "expected_diagnosis": "Lombalgie",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anesthésie en selle",
+            "Troubles sphinctériens"
+        ]
+    }
+}

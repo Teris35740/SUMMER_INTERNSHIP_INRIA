@@ -1,0 +1,114 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_022",
+            "age": 52,
+            "gender": "homme",
+            "behavior": "confus"
+        },
+        "chief_complaint": {
+            "information": "Nausées, diarrhée liquide et crampes",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 4 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur fosse iliaque droite fugace -> risque de confusion avec appendicite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Gastro-entérologie",
+        "expected_diagnosis": "Gastro-entérite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Signes du pli cutané",
+            "Tachycardie"
+        ]
+    }
+}

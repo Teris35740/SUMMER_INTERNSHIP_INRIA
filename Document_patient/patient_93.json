@@ -1,0 +1,103 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_093",
+            "age": 63,
+            "gender": "femme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Mal de tête insupportable et fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 13 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "A des migraines habituellement -> risque de confondre avec une crise forte",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Infectiologie",
+        "expected_diagnosis": "Méningite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Raideur de la nuque",
+            "Photophobie",
+            "Purpura fulminans"
+        ]
+    }
+}

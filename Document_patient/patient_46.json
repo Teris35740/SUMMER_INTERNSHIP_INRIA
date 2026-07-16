@@ -1,0 +1,191 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_046",
+            "age": 55,
+            "gender": "homme",
+            "behavior": "confus"
+        },
+        "chief_complaint": {
+            "information": "Grosse fièvre avec frissons",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 29 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur diffuse dans le ventre au début -> confusion digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Pyélonéphrite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Marbrures",
+            "Hypotension",
+            "Oligurie"
+        ]
+    }
+}

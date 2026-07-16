@@ -1,0 +1,100 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_071",
+            "age": 89,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Douleur atroce dans le flanc gauche",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 33 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anurie",
+            "Fièvre associée (risque de pyélonéphrite obstructive)"
+        ]
+    }
+}

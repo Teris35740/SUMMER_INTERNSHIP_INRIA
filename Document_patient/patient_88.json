@@ -1,0 +1,65 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_088",
+            "age": 65,
+            "gender": "femme",
+            "behavior": "sportif"
+        },
+        "chief_complaint": {
+            "information": "Essoufflement apparu d'un coup",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 9 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Pneumologie",
+        "expected_diagnosis": "Embolie pulmonaire",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tachycardie inexpliquée",
+            "Douleur pleurétique",
+            "Hémoptysie"
+        ]
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_076",
+            "age": 57,
+            "gender": "homme",
+            "behavior": "personne âgée"
+        },
+        "chief_complaint": {
+            "information": "Essoufflement apparu d'un coup",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 22 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Pneumologie",
+        "expected_diagnosis": "Embolie pulmonaire",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tachycardie inexpliquée",
+            "Douleur pleurétique",
+            "Hémoptysie"
+        ]
+    }
+}

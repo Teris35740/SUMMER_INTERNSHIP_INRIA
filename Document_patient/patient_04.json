@@ -1,0 +1,108 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_004",
+            "age": 69,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Mal de tête atroce pulsatile",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 15 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Neurologie",
+        "expected_diagnosis": "Migraine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Déficit neurologique focal",
+            "Début brutal en coup de tonnerre"
+        ]
+    }
+}

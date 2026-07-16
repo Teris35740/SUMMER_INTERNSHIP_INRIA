@@ -1,0 +1,71 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_083",
+            "age": 86,
+            "gender": "femme",
+            "behavior": "anxieux"
+        },
+        "chief_complaint": {
+            "information": "Serrement intense dans la poitrine",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 4 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardiologie",
+        "expected_diagnosis": "Syndrome coronarien aigu",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Irradiation mâchoire/bras",
+            "Sueurs profuses",
+            "Douleur constrictive"
+        ]
+    }
+}

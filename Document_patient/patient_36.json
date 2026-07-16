@@ -1,0 +1,64 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_036",
+            "age": 55,
+            "gender": "femme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Toux grasse et forte fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 44 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Connu pour un asthme léger -> risque de l'associer à une simple crise",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Pneumologie",
+        "expected_diagnosis": "Pneumonie",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Désaturation < 92%",
+            "Tachypnée > 25/min"
+        ]
+    }
+}

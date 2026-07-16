@@ -1,0 +1,66 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_006",
+            "age": 32,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Nausées, diarrhée liquide et crampes",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 31 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur fosse iliaque droite fugace -> risque de confusion avec appendicite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Arachide",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Gastro-entérologie",
+        "expected_diagnosis": "Gastro-entérite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Signes du pli cutané",
+            "Tachycardie"
+        ]
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_015",
+            "age": 91,
+            "gender": "femme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Cheville droite gonflée après une torsion",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 7 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Traumatologie",
+        "expected_diagnosis": "Entorse de cheville",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Incapacité totale de faire 4 pas (Critères d'Ottawa)"
+        ]
+    }
+}

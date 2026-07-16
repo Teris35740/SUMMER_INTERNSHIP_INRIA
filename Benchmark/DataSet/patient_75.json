@@ -1,0 +1,154 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_075",
+            "age": 80,
+            "gender": "femme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Douleur atroce dans le flanc gauche",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 34 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anurie",
+            "Fièvre associée (risque de pyélonéphrite obstructive)"
+        ]
+    }
+}

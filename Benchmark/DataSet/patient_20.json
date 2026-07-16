@@ -1,0 +1,90 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_020",
+            "age": 42,
+            "gender": "femme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Dos bloqué après avoir porté un carton",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 5 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Rhumatologie",
+        "expected_diagnosis": "Lombalgie",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anesthésie en selle",
+            "Troubles sphinctériens"
+        ]
+    }
+}

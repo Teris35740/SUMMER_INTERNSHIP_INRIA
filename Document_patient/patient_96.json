@@ -1,0 +1,101 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_096",
+            "age": 32,
+            "gender": "homme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Faiblesse soudaine du bras droit",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 33 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Hypoglycémie récente mesurée au doigt -> risque de confondre avec malaise hypoglycémique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Arachide",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "direct_if_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Neurologie",
+        "expected_diagnosis": "AVC ischémique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Aphasie",
+            "Déviation de la commissure labiale",
+            "Trouble visuel soudain"
+        ]
+    }
+}

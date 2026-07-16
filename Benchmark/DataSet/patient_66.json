@@ -1,0 +1,112 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_066",
+            "age": 73,
+            "gender": "homme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Toux grasse et forte fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 24 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Connu pour un asthme léger -> risque de l'associer à une simple crise",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Pneumologie",
+        "expected_diagnosis": "Pneumonie",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Désaturation < 92%",
+            "Tachypnée > 25/min"
+        ]
+    }
+}

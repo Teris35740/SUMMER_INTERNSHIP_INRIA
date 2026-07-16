@@ -1,0 +1,65 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_078",
+            "age": 73,
+            "gender": "homme",
+            "behavior": "anxieux"
+        },
+        "chief_complaint": {
+            "information": "Fatigue extrême, confusion et fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 38 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Réanimation",
+        "expected_diagnosis": "Choc septique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tension < 90 mmHg",
+            "Marbrures",
+            "Oligurie"
+        ]
+    }
+}

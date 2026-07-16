@@ -1,0 +1,82 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_050",
+            "age": 62,
+            "gender": "femme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Douleur violente en bas du ventre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 16 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gynécologie",
+        "expected_diagnosis": "Grossesse extra-utérine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Vertiges (choc hémorragique)",
+            "Pâleur extrême"
+        ]
+    }
+}

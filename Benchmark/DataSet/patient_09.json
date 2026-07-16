@@ -1,0 +1,62 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_009",
+            "age": 34,
+            "gender": "femme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Mal de tête atroce pulsatile",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 23 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Neurologie",
+        "expected_diagnosis": "Migraine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Déficit neurologique focal",
+            "Début brutal en coup de tonnerre"
+        ]
+    }
+}

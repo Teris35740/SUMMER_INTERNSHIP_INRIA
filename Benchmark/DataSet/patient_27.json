@@ -1,0 +1,93 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_027",
+            "age": 85,
+            "gender": "homme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Brûlures en urinant depuis 48h",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 34 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur lombaire ancienne (lombalgie connue) -> risque de confusion avec pyélonéphrite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Cystite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Fièvre > 38.5 (absente)"
+        ]
+    }
+}

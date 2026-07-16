@@ -1,0 +1,79 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_082",
+            "age": 54,
+            "gender": "homme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Fatigue extrême, confusion et fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 35 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Arachide",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "direct_if_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Réanimation",
+        "expected_diagnosis": "Choc septique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tension < 90 mmHg",
+            "Marbrures",
+            "Oligurie"
+        ]
+    }
+}

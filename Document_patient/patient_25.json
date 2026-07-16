@@ -1,0 +1,170 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_025",
+            "age": 75,
+            "gender": "femme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Nez bouché et mal de gorge",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 12 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Toux sèche importante -> risque confusion pneumonie",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Arachide",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Médecine générale",
+        "expected_diagnosis": "Rhinopharyngite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Dyspnée",
+            "Fièvre prolongée > 5 jours"
+        ]
+    }
+}

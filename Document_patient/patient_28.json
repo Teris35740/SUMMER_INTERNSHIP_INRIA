@@ -1,0 +1,181 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_028",
+            "age": 79,
+            "gender": "femme",
+            "behavior": "anxieux"
+        },
+        "chief_complaint": {
+            "information": "Cheville droite gonflée après une torsion",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 7 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Traumatologie",
+        "expected_diagnosis": "Entorse de cheville",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Incapacité totale de faire 4 pas (Critères d'Ottawa)"
+        ]
+    }
+}

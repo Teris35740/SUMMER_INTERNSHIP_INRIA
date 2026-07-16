@@ -1,0 +1,95 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_067",
+            "age": 60,
+            "gender": "femme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Grosse fièvre avec frissons",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 35 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur diffuse dans le ventre au début -> confusion digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "direct_if_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Pyélonéphrite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Marbrures",
+            "Hypotension",
+            "Oligurie"
+        ]
+    }
+}

@@ -1,0 +1,108 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_043",
+            "age": 50,
+            "gender": "femme",
+            "behavior": "confus"
+        },
+        "chief_complaint": {
+            "information": "Douleur atroce dans le flanc gauche",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 4 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Césarienne",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anurie",
+            "Fièvre associée (risque de pyélonéphrite obstructive)"
+        ]
+    }
+}

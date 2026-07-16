@@ -1,0 +1,142 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_060",
+            "age": 53,
+            "gender": "homme",
+            "behavior": "sportif"
+        },
+        "chief_complaint": {
+            "information": "Douleur violente en bas du ventre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 23 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Arachide",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gynécologie",
+        "expected_diagnosis": "Grossesse extra-utérine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Vertiges (choc hémorragique)",
+            "Pâleur extrême"
+        ]
+    }
+}

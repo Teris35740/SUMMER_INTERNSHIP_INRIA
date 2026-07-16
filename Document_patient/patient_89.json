@@ -1,0 +1,95 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_089",
+            "age": 84,
+            "gender": "femme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Serrement intense dans la poitrine",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 32 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardiologie",
+        "expected_diagnosis": "Syndrome coronarien aigu",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Irradiation mâchoire/bras",
+            "Sueurs profuses",
+            "Douleur constrictive"
+        ]
+    }
+}

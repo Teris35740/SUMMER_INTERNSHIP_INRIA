@@ -1,0 +1,86 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_054",
+            "age": 45,
+            "gender": "homme",
+            "behavior": "sportif"
+        },
+        "chief_complaint": {
+            "information": "Douleur violente en bas du ventre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 26 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Gynécologie",
+        "expected_diagnosis": "Grossesse extra-utérine",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Vertiges (choc hémorragique)",
+            "Pâleur extrême"
+        ]
+    }
+}

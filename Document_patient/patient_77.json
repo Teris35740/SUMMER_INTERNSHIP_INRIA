@@ -1,0 +1,145 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_077",
+            "age": 71,
+            "gender": "homme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Douleur déchirante dans le dos et le thorax",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 22 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur dorsale initialement prise pour un lumbago très intense",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Opération des dents de sagesse",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Cardio-vasculaire",
+        "expected_diagnosis": "Dissection aortique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Asymétrie des pouls",
+            "Déficit neurologique transitoire",
+            "Choc"
+        ]
+    }
+}

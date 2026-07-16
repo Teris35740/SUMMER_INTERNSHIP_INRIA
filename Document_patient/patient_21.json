@@ -1,0 +1,107 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_021",
+            "age": 93,
+            "gender": "homme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Cheville droite gonflée après une torsion",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 47 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Ouvrier dans le bâtiment",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Traumatologie",
+        "expected_diagnosis": "Entorse de cheville",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Incapacité totale de faire 4 pas (Critères d'Ottawa)"
+        ]
+    }
+}

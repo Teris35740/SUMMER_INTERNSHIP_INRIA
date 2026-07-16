@@ -1,0 +1,91 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_094",
+            "age": 58,
+            "gender": "homme",
+            "behavior": "sportif"
+        },
+        "chief_complaint": {
+            "information": "Fatigue extrême, confusion et fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 31 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune opération",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Réanimation",
+        "expected_diagnosis": "Choc septique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tension < 90 mmHg",
+            "Marbrures",
+            "Oligurie"
+        ]
+    }
+}

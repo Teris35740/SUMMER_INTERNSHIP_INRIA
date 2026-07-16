@@ -1,0 +1,93 @@
+[
+    {
+        "id": "q001",
+        "type": "positif_extraction_directe",
+        "question": "Quel est le comportement du patient PAT_001 lors de la consultation ?",
+        "target_documents": [
+            "patient_01.json"
+        ],
+        "expected_answer": "Le patient PAT_001 minimise ses symptômes[cite: 1]."
+    },
+    {
+        "id": "q002",
+        "type": "positif_extraction_donnees_structurees",
+        "question": "Quelle est l'information principale de la plainte (chief_complaint) pour le patient PAT_002 ?",
+        "target_documents": [
+            "patient_02.json"
+        ],
+        "expected_answer": "La plainte principale est 'Brûlures en urinant depuis 48h'[cite: 1]."
+    },
+    {
+        "id": "q003",
+        "type": "faux_positif_sémantique",
+        "question": "Le patient PAT_001 souffre-t-il de brûlures en urinant ?",
+        "target_documents": [
+            "patient_01.json",
+            "patient_02.json"
+        ],
+        "expected_answer": "Non. Le patient PAT_001 a le dos bloqué après avoir porté un carton[cite: 1]. Les brûlures en urinant concernent le patient PAT_002[cite: 2]."
+    },
+    {
+        "id": "q004",
+        "type": "positif_logique_clinique",
+        "question": "Pourquoi existe-t-il un risque de confusion avec une pyélonéphrite chez le patient PAT_002 ?",
+        "target_documents": [
+            "patient_02.json"
+        ],
+        "expected_answer": "Il y a un risque de confusion car le patient souffre de brûlures en urinant[cite: 1] et présente également une douleur lombaire ancienne (lombalgie connue)[cite: 2]."
+    },
+    {
+        "id": "q005",
+        "type": "positif_synthese_complexe",
+        "question": "Quels sont les facteurs de risque du patient PAT_001 qui pourraient compliquer sa prise en charge pour une lombalgie ?",
+        "target_documents": [
+            "patient_01.json"
+        ],
+        "expected_answer": "Le patient PAT_001 présente plusieurs facteurs de risque : consommation d'alcool (3 verres/jour), obésité (IMC 35), sédentarité, et un surpoids global[cite: 1]. Il est également un ex-fumeur sevré depuis 5 ans[cite: 2]."
+    },
+    {
+        "id": "q006",
+        "type": "faux_positif_information_absente",
+        "question": "Quel est le traitement recommandé dans le document patient_01.json pour soigner la douleur sciatique ?",
+        "target_documents": [
+            "patient_01.json"
+        ],
+        "expected_answer": "Le document ne précise pas de traitement recommandé pour la douleur sciatique. Il indique seulement qu'il utilise un inhalateur de Ventoline si besoin et qu'il n'a aucun traitement régulier[cite: 1]."
+    },
+    {
+        "id": "q007",
+        "type": "positif_extraction_directe",
+        "question": "Quelles sont les constantes vitales du patient PAT_001 ?",
+        "target_documents": [
+            "patient_01.json"
+        ],
+        "expected_answer": "Les constantes sont TA: 180/100, FC: 105, T: 37.5°C, Sat: 97% ou TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%[cite: 1]."
+    },
+    {
+        "id": "q008",
+        "type": "faux_positif_mots_cles",
+        "question": "Le patient PAT_008 a-t-il voyagé récemment en Afrique subsaharienne ?",
+        "target_documents": [
+            "patient_08.json"
+        ],
+        "expected_answer": "Oui, le patient PAT_008 a fait un séjour en Afrique subsaharienne il y a 1 mois[cite: 1]."
+    },
+    {
+        "id": "q009",
+        "type": "positif_logique_clinique",
+        "question": "Pour le patient PAT_001, quelle est l'allergie qui ne peut être révélée que si l'historique chirurgical est exploré ?",
+        "target_documents": [
+            "patient_01.json"
+        ],
+        "expected_answer": "L'allergie au pollen ne sera révélée que si l'historique chirurgical est exploré[cite: 1]."
+    },
+    {
+        "id": "q010",
+        "type": "positif_synthese_complexe",
+        "question": "Quels antécédents médicaux familiaux et chirurgicaux sont mentionnés pour le patient PAT_001 ?",
+        "target_documents": [
+            "patient_01.json"
+        ],
+        "expected_answer": "Ses antécédents familiaux incluent un cancer du sein chez la mère et une mère diabétique[cite: 1]. Ses antécédents chirurgicaux comprennent une appendicectomie à 15 ans et une césarienne[cite: 2]."
+    }
+]

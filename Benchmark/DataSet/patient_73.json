@@ -1,0 +1,64 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_073",
+            "age": 57,
+            "gender": "homme",
+            "behavior": "dramatise"
+        },
+        "chief_complaint": {
+            "information": "Douleur atroce dans le flanc gauche",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 39 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anurie",
+            "Fièvre associée (risque de pyélonéphrite obstructive)"
+        ]
+    }
+}

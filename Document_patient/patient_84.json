@@ -1,0 +1,109 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_084",
+            "age": 37,
+            "gender": "femme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Fatigue extrême, confusion et fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 17 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Ex-fumeur sevré depuis 5 ans",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Réanimation",
+        "expected_diagnosis": "Choc septique",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tension < 90 mmHg",
+            "Marbrures",
+            "Oligurie"
+        ]
+    }
+}

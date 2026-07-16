@@ -1,0 +1,154 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_070",
+            "age": 28,
+            "gender": "homme",
+            "behavior": "répond uniquement à la question"
+        },
+        "chief_complaint": {
+            "information": "Toux grasse et forte fièvre",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 30 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Connu pour un asthme léger -> risque de l'associer à une simple crise",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Pénicilline (urticaire)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Aucune allergie connue",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Césarienne",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Pneumologie",
+        "expected_diagnosis": "Pneumonie",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Désaturation < 92%",
+            "Tachypnée > 25/min"
+        ]
+    }
+}

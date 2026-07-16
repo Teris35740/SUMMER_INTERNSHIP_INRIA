@@ -1,0 +1,107 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_100",
+            "age": 79,
+            "gender": "femme",
+            "behavior": "minimise ses symptômes"
+        },
+        "chief_complaint": {
+            "information": "Essoufflement apparu d'un coup",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 41 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "direct_if_asked"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_allergies_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Tabagisme actif 15 PA",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "hard",
+        "specialty": "Pneumologie",
+        "expected_diagnosis": "Embolie pulmonaire",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Tachycardie inexpliquée",
+            "Douleur pleurétique",
+            "Hémoptysie"
+        ]
+    }
+}

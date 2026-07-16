@@ -1,0 +1,194 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_016",
+            "age": 18,
+            "gender": "homme",
+            "behavior": "confus"
+        },
+        "chief_complaint": {
+            "information": "Dos bloqué après avoir porté un carton",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 26 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Stress professionnel important",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Retraité(e) actif(ve)",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Sédentarité",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Surpoids (IMC 28)",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Pilule contraceptive",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Aucun traitement régulier",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Cancer du sein chez la mère",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Sans particularité",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Rien à signaler",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_substance_use_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_substance_use_explored"
+            },
+            {
+                "information": "Appendicectomie à 15 ans",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_travel_history_explored"
+            },
+            {
+                "information": "Iode (choc)",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "AINS (Aspirine/Ibuprofène)",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Rhumatologie",
+        "expected_diagnosis": "Lombalgie",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Anesthésie en selle",
+            "Troubles sphinctériens"
+        ]
+    }
+}

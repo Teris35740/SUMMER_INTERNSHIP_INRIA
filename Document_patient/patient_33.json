@@ -1,0 +1,68 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_033",
+            "age": 64,
+            "gender": "femme",
+            "behavior": "sportif"
+        },
+        "chief_complaint": {
+            "information": "Nez bouché et mal de gorge",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 19 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Toux sèche importante -> risque confusion pneumonie",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "reveal_policy": "only_if_family_history_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Non fumeur",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Médecine générale",
+        "expected_diagnosis": "Rhinopharyngite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Dyspnée",
+            "Fièvre prolongée > 5 jours"
+        ]
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_045",
+            "age": 78,
+            "gender": "femme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Grosse fièvre avec frissons",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 12 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur diffuse dans le ventre au début -> confusion digestive",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ligature des trompes",
+                "reveal_policy": "only_if_medication_asked"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "medium",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Pyélonéphrite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Marbrures",
+            "Hypotension",
+            "Oligurie"
+        ]
+    }
+}

@@ -1,0 +1,161 @@
+{
+    "patient": {
+        "identity": {
+            "patient_id": "PAT_012",
+            "age": 57,
+            "gender": "homme",
+            "behavior": "très bavard"
+        },
+        "chief_complaint": {
+            "information": "Brûlures en urinant depuis 48h",
+            "reveal_policy": "direct_if_asked"
+        },
+        "history": [
+            {
+                "information": "Le problème a commencé il y a environ 22 heures.",
+                "reveal_policy": "only_if_history_explored"
+            },
+            {
+                "information": "Douleur lombaire ancienne (lombalgie connue) -> risque de confusion avec pyélonéphrite",
+                "reveal_policy": "only_if_context_explored"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédent de phlébite chez le père",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Père décédé d'un infarctus",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Sœur avec sclérose en plaques",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "Mère diabétique",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Fracture du poignet opérée",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Acariens",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Pollen",
+                "reveal_policy": "only_if_risk_factors_explored"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Voyage récent en Asie",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Retour de ski dans les Alpes",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            },
+            {
+                "information": "Week-end à Londres",
+                "reveal_policy": "only_if_pain_characteristics_explored"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_associated_symptoms_explored"
+            },
+            {
+                "information": "Paracétamol occasionnel",
+                "reveal_policy": "only_if_medication_asked"
+            },
+            {
+                "information": "Lévothyrox 75",
+                "reveal_policy": "only_if_family_history_explored"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "reveal_policy": "only_if_surgical_history_explored"
+            },
+            {
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "reveal_policy": "only_if_gynecological_history_explored"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines fréquentes",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_risk_factors_explored"
+            },
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Travaille de nuit",
+                "reveal_policy": "only_if_allergies_asked"
+            },
+            {
+                "information": "Étudiant en période d'examens",
+                "reveal_policy": "only_if_context_explored"
+            },
+            {
+                "information": "Marié(e) avec 2 enfants",
+                "reveal_policy": "direct_if_asked"
+            },
+            {
+                "information": "Vit seul(e)",
+                "reveal_policy": "only_if_travel_history_explored"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Consommation alcool (3 verres/jour)",
+                "reveal_policy": "only_if_social_history_explored"
+            },
+            {
+                "information": "Obésité (IMC 35)",
+                "reveal_policy": "only_if_social_history_explored"
+            }
+        ]
+    },
+    "metadata": {
+        "difficulty": "easy",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Cystite",
+        "alternative_diagnoses": [
+            "À définir par l'IA lors de l'évaluation"
+        ],
+        "red_flags": [
+            "Fièvre > 38.5 (absente)"
+        ]
+    }
+}
