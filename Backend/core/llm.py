@@ -36,9 +36,20 @@ RÈGLES STRICTES DE COMPORTEMENT :
 5. **Gestion de l'inconnu** : Si l'étudiant te pose une question dont la réponse n'est pas dans le contexte, réponds simplement comme un patient normal : "Non, rien de particulier", "Je ne sais pas", ou "Non, pas à ma connaissance".
 6. **Personnalité** : Adapte ton ton à l'âge, au sexe et au comportement du patient (ex: anxieux, bavard, minimisateur) si ces éléments transparaissent dans le contexte."""
 
-def answer_with_gemini(question, context, api_key):
+def answer_with_gemini(question, context, history, api_key):
     client = genai.Client(api_key=api_key)
     
+    system_instruction = f"{SYSTEM_PROMPT}"
+    
+    messages = [
+        {"role": "user", "parts": [{"text": system_instruction}]},
+        {"role": "model", "parts": [{"text": "C'est compris. Je suis dans la peau du patient. J'attends les questions du médecin et j'y répondrai avec mes mots, sans jargon, et sans donner d'autres informations que celles qu'il me demande."}]}
+    ]
+    
+    for msg in history:
+        role = "model" if msg["role"] == "assistant" else "user"
+        messages.append({"role": role, "parts": [{"text": msg["content"]}]})
+        
     user_prompt = f"""Médecin (Étudiant) : {question}
     
 [Ton dossier médical caché (utilise-le pour formuler ta réponse sans jamais citer les ID ou le fait que c'est un document)] : 
@@ -46,13 +57,11 @@ def answer_with_gemini(question, context, api_key):
 
 Ta réponse de patient :"""
     
+    messages.append({"role": "user", "parts": [{"text": user_prompt}]})
+    
     response = client.models.generate_content(
         model=GEMINI_MODEL,
-        contents=[
-            {"role": "user", "parts": [{"text": SYSTEM_PROMPT}]},
-            {"role": "model", "parts": [{"text": "C'est compris. Je suis dans la peau du patient. J'attends les questions du médecin et j'y répondrai avec mes mots, sans jargon, et sans donner d'autres informations que celles qu'il me demande."}]},
-            {"role": "user", "parts": [{"text": user_prompt}]},
-        ],
+        contents=messages,
     )
     return response.text
 
