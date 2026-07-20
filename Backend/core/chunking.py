@@ -133,7 +133,7 @@ def parent_child_chunking(text, parent_chunk_size=1000):
     return parent_child_records
 
 
-def build_chunk_records_from_pdf(pdf_path, method="semantic", model=None, tokenizer=None, max_tokens=250, similarity_threshold=0.65):
+def build_chunk_records_from_pdf(pdf_path, method="parent_child", model=None, tokenizer=None, max_tokens=250, similarity_threshold=0.65):
     '''
     Génère les records de chunks selon la méthode choisie ('semantic', 'fixed', 'sentence', 'structure', 'parent_child').
     '''
@@ -182,6 +182,9 @@ def build_chunk_records_from_pdf(pdf_path, method="semantic", model=None, tokeni
 
 
 def build_chunk_records_from_json(json_path):
+    '''Génère les records de chunks à partir d'un fichier JSON structuré pour les patients.
+    Chaque chunk contient le texte enrichi avec le contexte du patient et la catégorie de l'information.
+    '''
     json_name = Path(json_path).name
     chunk_records = []
 
@@ -246,6 +249,7 @@ def build_chunk_records_from_json(json_path):
 
 
 def _merge_splits(splits, separator, chunk_size):
+    '''Fusionne les segments de texte en chunks de taille maximale spécifiée, en utilisant le séparateur donné.'''
     chunks = []
     current_splits = []
     current_len = 0

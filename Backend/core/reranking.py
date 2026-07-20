@@ -11,6 +11,21 @@ def re_ranking(rows, question, model):
     return sorted(ranked_rows, key=lambda item: item["rerank_score"], reverse=True)
 
 
+def expansion_parent_child(rows):
+    '''Si on a trouvé un enfant pertinent alors on transmet également le parents au llm ppur avoir plus de contexte.'''
+    parent_rows = [row for row in rows if row.get("metadata", {}).get("chunk_index") == 0]
+    child_rows = [row for row in rows if row.get("metadata", {}).get("chunk_index") != 0]
+
+    expanded_rows = []
+
+    for parent in parent_rows:
+        parent_id = parent["id"]
+        children = [child for child in child_rows if child.get("metadata", {}).get("parent_id") == parent_id]
+        expanded_rows.extend([parent] + children)
+
+    return expanded_rows
+
+
 def build_context(rows):
     parts = []
     for row in rows:

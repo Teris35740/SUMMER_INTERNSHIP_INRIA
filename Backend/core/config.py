@@ -31,9 +31,11 @@ GEMINI_MODEL = "gemini-2.5-flash"
 EXCERPT_COUNT = int(os.getenv("EXCERPT_COUNT", "50"))
 
 # --- Noms des tables et RPC Supabase ---
-SUPABASE_DOCUMENTS_TABLE = os.getenv("SUPABASE_DOCUMENTS_TABLE", "documents_rag_bge")
-SUPABASE_VECTOR_RPC = os.getenv("SUPABASE_VECTOR_RPC", "match_documents_vector_bge")
-SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_documents_keyword_bge")
+SUPABASE_DOCUMENTS_TABLE = os.getenv("SUPABASE_DOCUMENTS_TABLE", "documents_json")
+# SUPABASE_VECTOR_RPC = os.getenv("SUPABASE_VECTOR_RPC", "match_documents_vector_bge")
+SUPABASE_VECTOR_RPC = os.getenv("SUPABASE_VECTOR_RPC", "match_vector_documents_json")
+# SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_documents_keyword_bge")
+SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_text_documents_json")
 
 # VIEUC_SUPABASE_DOCUMENTS_TABLE = os.getenv("VIEUC_SUPABASE_DOCUMENTS_TABLE", "documents_rag")
 # VIEUC_SUPABASE_VECTOR_RPC = os.getenv("VIEUC_SUPABASE_VECTOR_RPC", "match_documents_vector")

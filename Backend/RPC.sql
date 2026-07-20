@@ -1,35 +1,27 @@
-CREATE OR REPLACE FUNCTION match_documents_keyword(
-  query_text text,
-  match_count int default 5,
-  filter_source_type varchar default null,
-  filter_patient_id text default null
-)
-RETURNS TABLE (
-  id bigint,
-  content text,
-  source_type varchar,
-  metadata jsonb,
-  score float
-)
-LANGUAGE sql
-STABLE
-AS $$
-  SELECT
-    id,
-    content,
-    source_type,
-    metadata,
-    ts_rank(fts_vector, websearch_to_tsquery('simple', query_text)) as score
-  FROM documents_rag
-  WHERE
-    fts_vector @@ websearch_to_tsquery('simple', query_text)
-    AND (filter_source_type IS NULL OR source_type = filter_source_type)
-    AND (filter_patient_id IS NULL OR metadata->>'patient_id' = filter_patient_id)
-  ORDER BY score DESC
-  LIMIT match_count;
-$$;
+CREATE EXTENSION IF NOT EXISTS vector;
 
-create or replace function match_documents_vector(
+CREATE TABLE documents_json (
+    id BIGSERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    embedding VECTOR(768),
+    source_type VARCHAR(50) NOT NULL,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+--------------------------------------------------------------------------------------------
+
+CREATE INDEX ON documents_json USING hnsw (embedding vector_cosine_ops);
+
+ALTER TABLE documents_json 
+ADD COLUMN fts_vector tsvector 
+GENERATED ALWAYS AS (to_tsvector('simple', content)) STORED;
+
+CREATE INDEX documents_json_fts_idx ON documents_json USING GIN (fts_vector);
+
+--------------------------------------------------------------------------------------------
+
+create or replace function match_vector_documents_json(
   query_embedding vector(768),
   match_count int default 5,
   filter_source_type varchar default null,
@@ -51,10 +43,46 @@ as $$
     source_type,
     metadata,
     1 - (embedding <=> query_embedding) as similarity
-  from documents_rag
+  from documents_json
   where
     (filter_source_type is null or source_type = filter_source_type)
     and (filter_patient_id is null or metadata->>'patient_id' = filter_patient_id)
   order by embedding <=> query_embedding
   limit match_count;
 $$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION match_text_documents_json(
+  query_text text,
+  match_count int default 5,
+  filter_source_type varchar default null,
+  filter_patient_id text default null
+)
+RETURNS TABLE (
+  id bigint,
+  content text,
+  source_type varchar,
+  metadata jsonb,
+  score float
+)
+LANGUAGE sql
+STABLE
+AS $$
+  SELECT
+    id,
+    content,
+    source_type,
+    metadata,
+    ts_rank(fts_vector, websearch_to_tsquery('simple', query_text)) as score
+  FROM documents_json
+  WHERE
+    fts_vector @@ websearch_to_tsquery('simple', query_text)
+    AND (filter_source_type IS NULL OR source_type = filter_source_type)
+    AND (filter_patient_id IS NULL OR metadata->>'patient_id' = filter_patient_id)
+  ORDER BY score DESC
+  LIMIT match_count;
+$$;
+
+--------------------------------------------------------------------------------------------
+
