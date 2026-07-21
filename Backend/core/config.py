@@ -25,7 +25,7 @@ MODEL_NAME_QUERY = "BAAI/bge-base-en-v1.5"
 # --- Modèles pour le encoder ---
 MODEL_NAME_CROSS_ENCODER = "ncbi/MedCPT-Cross-Encoder"
 # MODEL_NAME_CROSS_ENCODER = "NeuML/biomedbert-base-reranker"
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-flash-lite-latest"
 
 
 EXCERPT_COUNT = int(os.getenv("EXCERPT_COUNT", "50"))
