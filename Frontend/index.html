@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface RAG Médical</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Gauche: État Clinique -->
+        <aside class="sidebar left-sidebar">
+            <div class="glass-panel">
+                <h2>🩺 État Clinique</h2>
+                <div class="scroll-content" id="clinical-state-container">
+                    <p class="placeholder">En attente des données du patient...</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Centre: Chat -->
+        <main class="chat-container">
+            <div class="glass-panel main-panel">
+                <header class="chat-header">
+                    <h1>Consultation Virtuelle</h1>
+                    <button id="clear-btn" class="secondary-btn">Nouvelle Session</button>
+                </header>
+                
+                <div class="chat-history" id="chat-history">
+                    <div class="message system">
+                        Bonjour ! Je suis le patient. Posez-moi vos questions.
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="question-input" placeholder="Posez une question au patient..." autocomplete="off">
+                    <button id="send-btn" class="primary-btn">Envoyer</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar Droite: Analyse & JSON -->
+        <aside class="sidebar right-sidebar">
+            <div class="glass-panel top-panel">
+                <h2>🧠 Analyse de la Question</h2>
+                <div class="scroll-content" id="analysis-container">
+                    <p class="placeholder">Posez une question pour voir l'analyse.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel bottom-panel">
+                <h2>⚙️ Réponse JSON Brute</h2>
+                <div class="scroll-content">
+                    <pre id="json-container" class="code-block">{}</pre>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
