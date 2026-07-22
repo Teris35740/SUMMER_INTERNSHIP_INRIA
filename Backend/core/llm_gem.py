@@ -8,6 +8,7 @@ from .config import GEMINI_MODEL
 class QuestionAnalysis(BaseModel):
     question_type: str
     target_slots: List[str]
+    search_keywords: str
     requires_retrieval: bool
 
 class AnswerStruct(BaseModel):
@@ -80,7 +81,8 @@ Analyse la question de l'étudiant en médecine suivante : "{question}"
 Instructions :
 1. question_type : Catégorise la question (ex: "history", "risk_factors", "travel_history", "family_history", "past_medical_history", "social_history", "treatments", "surgical_history", "allergies", "vitals").
 2. target_slots : Extrais les thèmes précis abordés sous forme de mots-clés (ex: "pain_duration", "pain_location", "history_explored", "context_explored", "gynecological_history_explored", "pain_characteristics_explored", "travel_history_explored", "surgical_history_explored", "family_history_explored", "medication_asked", "associated_symptoms_explored", "substance_use_explored", "allergies_asked", "risk_factors_explored", "social_history_explored").
-3. requires_retrieval : true si la question nécessite de fouiller le dossier du patient, false si c'est juste une salutation (ex: "Bonjour")."""
+3. requires_retrieval : true si la question nécessite de fouiller le dossier du patient, false si c'est juste une salutation (ex: "Bonjour").
+4. search_keywords : Génère une courte chaîne contenant uniquement les mots-clés cliniques pertinents, ainsi que le nom du patient où son id, pour une recherche dans une base de données stricte (retire les mots de liaison, les salutations, etc. Ex: "douleur dos depuis 3 heures" devient "douleur dos 3 heures")."""
 
     response = client.models.generate_content(
         model=GEMINI_MODEL,
@@ -100,7 +102,8 @@ def split_question_analysis(analysis):
     question_type = analysis.get("question_type", "")
     target_slots = analysis.get("target_slots", [])
     requires_retrieval = analysis.get("requires_retrieval", False)
-    return question_type, target_slots, requires_retrieval
+    search_keywords = analysis.get("search_keywords", "")
+    return question_type, target_slots, requires_retrieval, search_keywords
 
 
 def split_answer_struct(answer_struct):
@@ -111,3 +114,32 @@ def split_answer_struct(answer_struct):
     used_fact_ids = answer_struct.get("used_fact_ids", [])
     contains_new_claim = answer_struct.get("contains_new_claim", False)
     return answer_text, used_fact_ids, contains_new_claim
+
+
+TEST_PDF_PROMPT = """Tu es un assistant IA spécialisé dans l'analyse de documents médicaux.
+Ta tâche est de répondre à la question de l'utilisateur en utilisant UNIQUEMENT le contexte fourni.
+Le contexte provient d'une extraction de documents (ex: PDF). 
+Si la réponse n'est pas dans le contexte, indique simplement que l'information n'est pas disponible dans les documents fournis.
+"""
+
+def test_pdf_answer_with_gemini(question, context, api_key):
+    client = genai.Client(api_key=api_key)
+    
+    prompt = f"""{TEST_PDF_PROMPT}
+
+[Contexte issu du document] :
+{context}
+
+[Question] :
+{question}
+
+Réponse :"""
+    
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=prompt,
+        config={
+            "temperature": 0.2
+        }
+    )
+    return response.text

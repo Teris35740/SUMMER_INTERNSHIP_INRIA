@@ -34,7 +34,7 @@ def search_keyword(supabase, query_text, match_count=5, filter_source_type=None,
     ).execute().data
 
 
-def fusion_rows(supabase, query_embedding, question, match_count=10, alpha=0.5, k=60):
+def fusion_rows(supabase, query_embedding, question, match_count=10, alpha=0.5, k=60, filter_source_type=None, filter_patient_id=None):
     """Récupération hybride stratifiée.
 
     Score : s_hyb(d_i, q_t) = λ(d_i) * ( α / (k + r_dense(d_i)) + (1 - α) / (k + r_sparse(d_i)) )
@@ -45,8 +45,8 @@ def fusion_rows(supabase, query_embedding, question, match_count=10, alpha=0.5, 
     - k = 60, constante technique RRF
     - λ(d_i) donne davantage de poids aux fragments du dossier patient
     """
-    vector_rows = search_vector(supabase, query_embedding, match_count=match_count)
-    keyword_rows = search_keyword(supabase, question, match_count=match_count)
+    vector_rows = search_vector(supabase, query_embedding, match_count=match_count, filter_source_type=filter_source_type, filter_patient_id=filter_patient_id)
+    keyword_rows = search_keyword(supabase, question, match_count=match_count, filter_source_type=filter_source_type, filter_patient_id=filter_patient_id)
 
     dense_rank = {row["id"]: rank for rank, row in enumerate(vector_rows, start=1)}
     sparse_rank = {row["id"]: rank for rank, row in enumerate(keyword_rows, start=1)}

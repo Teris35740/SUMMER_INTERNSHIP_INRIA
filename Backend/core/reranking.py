@@ -12,16 +12,33 @@ def re_ranking(rows, question, model):
 
 
 def expansion_parent_child(rows):
-    '''Si on a trouvé un enfant pertinent alors on transmet également le parents au llm ppur avoir plus de contexte.'''
-    parent_rows = [row for row in rows if row.get("metadata", {}).get("chunk_index") == 0]
-    child_rows = [row for row in rows if row.get("metadata", {}).get("chunk_index") != 0]
-
+    '''
+    Remplace le contenu du chunk par son parent pour donner plus de contexte au LLM.
+    On ne le fait que pour les documents de type 'reference' (les PDF), pas pour les 'patient' (JSON).
+    On s'assure aussi de ne pas dupliquer les parents si plusieurs enfants du même parent ont été trouvés.
+    '''
     expanded_rows = []
+    seen_parents = set()
 
-    for parent in parent_rows:
-        parent_id = parent["id"]
-        children = [child for child in child_rows if child.get("metadata", {}).get("parent_id") == parent_id]
-        expanded_rows.extend([parent] + children)
+    for row in rows:
+        source_type = row.get("source_type", "")
+        metadata = row.get("metadata", {})
+        
+        if source_type != "patient":
+            parent_content = metadata.get("parent_content")
+            
+            if parent_content:
+                parent_id = metadata.get("parent_id")
+                source_file = metadata.get("source_file")
+                parent_key = f"{source_file}_{parent_id}"
+                
+                if parent_key not in seen_parents:
+                    seen_parents.add(parent_key)
+                    new_row = dict(row)
+                    new_row["content"] = parent_content
+                    expanded_rows.append(new_row)
+                continue
+        expanded_rows.append(row)
 
     return expanded_rows
 

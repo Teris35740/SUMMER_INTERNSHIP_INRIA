@@ -29,6 +29,7 @@ GEMINI_MODEL = "gemini-flash-lite-latest"
 
 
 EXCERPT_COUNT = int(os.getenv("EXCERPT_COUNT", "50"))
+MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
 
 # --- Noms des tables et RPC Supabase ---
 SUPABASE_DOCUMENTS_TABLE = os.getenv("SUPABASE_DOCUMENTS_TABLE", "documents_json")
