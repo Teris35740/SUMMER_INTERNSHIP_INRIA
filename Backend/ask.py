@@ -4,13 +4,14 @@ import os
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from supabase import create_client
 
-from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, normalize_supabase_url
+from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, MAX_RETRIES, normalize_supabase_url
 from core.retrieval import embed_question, fusion_rows
 from core.reranking import re_ranking, build_context, expansion_parent_child
 from core.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, test_pdf_answer_with_gemini
 # from core.llm_openai import answer_with_mistral, analyze_student_question, split_question_analysis, split_answer_struct
 from core.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact
 from core.state_motor import state_motor_simple, state_motor_advanced
+from core.verification import verification_answer, fact_id_authorized_by_motor
 
 
 def main():
@@ -84,11 +85,23 @@ def main():
             print("------------------------------\n")
 
             print("Génération de la réponse...")
-            answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key)
-            # answer = test_pdf_answer_with_gemini(question, context, gemini_api_key)
-            # answer = answer_with_mistral(question, context, history, clinical_state, mistral_api_key, base_url=mistral_base_url)
 
-            answer_text, used_fact_ids, contains_new_claim = split_answer_struct(answer)
+            tentatives = 0
+            while tentatives < MAX_RETRIES:
+                try:
+                    answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key)
+                    # answer = test_pdf_answer_with_gemini(question, context, gemini_api_key)
+                    # answer = answer_with_mistral(question, context, history, clinical_state, mistral_api_key, base_url=mistral_base_url)
+                    answer_text, used_fact_ids, contains_new_claim = split_answer_struct(answer)
+                    is_valid, msg = verification_answer(answer_text, used_fact_ids, contains_new_claim, fact_id_authorized_by_motor(rows))
+                    if not is_valid:
+                        raise Exception(f"Vérification échouée : {msg}")
+                    break
+                except Exception as e:
+                    tentatives += 1
+                    print(f"Erreur lors de la génération de la réponse (tentative {tentatives}/{MAX_RETRIES}) : {e}")
+                    if tentatives >= MAX_RETRIES:
+                        raise SystemExit("Échec après plusieurs tentatives. Veuillez réessayer plus tard.")
 
             add_message(session_id, "user", question)
             add_message(session_id, "assistant", answer_text)

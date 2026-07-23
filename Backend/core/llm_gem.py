@@ -82,7 +82,7 @@ Instructions :
 1. question_type : Catégorise la question (ex: "history", "risk_factors", "travel_history", "family_history", "past_medical_history", "social_history", "treatments", "surgical_history", "allergies", "vitals").
 2. target_slots : Extrais les thèmes précis abordés sous forme de mots-clés (ex: "pain_duration", "pain_location", "history_explored", "context_explored", "gynecological_history_explored", "pain_characteristics_explored", "travel_history_explored", "surgical_history_explored", "family_history_explored", "medication_asked", "associated_symptoms_explored", "substance_use_explored", "allergies_asked", "risk_factors_explored", "social_history_explored").
 3. requires_retrieval : true si la question nécessite de fouiller le dossier du patient, false si c'est juste une salutation (ex: "Bonjour").
-4. search_keywords : Génère une courte chaîne contenant uniquement les mots-clés cliniques pertinents, ainsi que le nom du patient où son id, pour une recherche dans une base de données stricte (retire les mots de liaison, les salutations, etc. Ex: "douleur dos depuis 3 heures" devient "douleur dos 3 heures"). Ajoute les acronymes médicaux courants (ex : tension artérielle = TA)."""
+4. search_keywords : Génère une courte chaîne contenant uniquement les mots-clés cliniques pertinents, ainsi que le nom du patient où son id, pour une recherche dans une base de données stricte (retire les mots de liaison, les salutations, etc. Ex: "douleur dos depuis 3 heures" devient "douleur dos 3 heures"). Ajoute les acronymes médicaux courants (ex : tension artérielle = TA etc...)."""
 
     response = client.models.generate_content(
         model=GEMINI_MODEL,
