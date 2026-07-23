@@ -153,6 +153,16 @@ function updateAnalysis(analysis) {
         </div>
     `;
 
+    if (analysis.search_keywords) {
+        html += `
+        <div class="state-item">
+            <strong>Mots-clés de recherche:</strong>
+            <span class="tag" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">
+                ${analysis.search_keywords}
+            </span>
+        </div>`;
+    }
+
     if (analysis.target_slots && analysis.target_slots.length > 0) {
         html += '<div class="state-item"><strong>Slots cibles:</strong>';
         analysis.target_slots.forEach(slot => {

@@ -6,10 +6,11 @@ from supabase import create_client
 
 from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, normalize_supabase_url
 from core.retrieval import embed_question, fusion_rows
-from core.reranking import re_ranking, build_context
-from core.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct
+from core.reranking import re_ranking, build_context, expansion_parent_child
+from core.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, test_pdf_answer_with_gemini
 # from core.llm_openai import answer_with_mistral, analyze_student_question, split_question_analysis, split_answer_struct
 from core.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact
+from core.state_motor import state_motor_simple, state_motor_advanced
 
 
 def main():
@@ -24,6 +25,9 @@ def main():
         raise SystemExit("Erreur : Variables d'environnement manquantes (SUPABASE_URL, SUPABASE_KEY, GEMINI_API_KEY, GEMINI_API_KEY_QUESTION_ANALYSIS).")
 
     try:
+
+        patient_id = "PAT_001"  # Pour l'instant, on utilise un patient fixe. À améliorer pour gérer plusieurs patients.
+
         while True:
             question = " ".join(sys.argv[1:]).strip() if len(sys.argv) > 1 else input("Question de l'étudiant : ").strip()
 
@@ -43,11 +47,12 @@ def main():
             print(clinical_state)
 
             rep = analyze_student_question(question, gemini_api_key_question_analysis)
-            question_type, target_slots, requires_retrieval = split_question_analysis(rep)
+            question_type, target_slots, requires_retrieval, search_keywords = split_question_analysis(rep)
             print("\n--- Analyse de la question ---")
             print(f"Type de question : {question_type}")
             print(f"Thèmes abordés : {', '.join(target_slots)}")
             print(f"Nécessite récupération : {'Oui' if requires_retrieval else 'Non'}")
+            print(f"Mots-clés de recherche : {search_keywords}")
 
             print("Chargement du modèle d'embedding...")
             model = SentenceTransformer(MODEL_NAME_QUERY)
@@ -56,7 +61,7 @@ def main():
             print("Recherche des documents pertinents...")
             query_embedding = embed_question(question, model)
 
-            rows = fusion_rows(supabase, query_embedding, question)
+            rows = fusion_rows(supabase, query_embedding, search_keywords, filter_patient_id=patient_id)
 
             if not rows:
                 print("Aucun contexte trouvé dans la base de données.")
@@ -64,8 +69,14 @@ def main():
 
             rows = re_ranking(rows, question, cross_encoder)
 
+            rows = expansion_parent_child(rows)
             TOP_K = EXCERPT_COUNT
             rows = rows[:TOP_K]
+
+            global_topics = clinical_state.get('asked_topics', [])
+
+            # rows = state_motor_simple(target_slots, rows)
+            rows = state_motor_advanced(global_topics, target_slots, rows)
 
             context = build_context(rows)
             print("\n--- Contexte fourni au LLM (top {}) ---".format(TOP_K))
@@ -74,6 +85,7 @@ def main():
 
             print("Génération de la réponse...")
             answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key)
+            # answer = test_pdf_answer_with_gemini(question, context, gemini_api_key)
             # answer = answer_with_mistral(question, context, history, clinical_state, mistral_api_key, base_url=mistral_base_url)
 
             answer_text, used_fact_ids, contains_new_claim = split_answer_struct(answer)

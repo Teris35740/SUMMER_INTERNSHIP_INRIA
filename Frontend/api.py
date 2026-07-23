@@ -20,6 +20,7 @@ from core.retrieval import embed_question, fusion_rows
 from core.reranking import re_ranking, build_context, expansion_parent_child
 from core.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct
 from core.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact
+from core.state_motor import state_motor_simple
 
 app = FastAPI(title="RAG Medical API")
 
@@ -69,23 +70,26 @@ def ask_question(request: AskRequest):
 
     # Analyze
     rep = analyze_student_question(question, gemini_api_key_question_analysis)
-    question_type, target_slots, requires_retrieval = split_question_analysis(rep)
+    question_type, target_slots, requires_retrieval, search_keywords = split_question_analysis(rep)
     
     analysis_dict = {
         "question_type": question_type,
         "target_slots": target_slots,
-        "requires_retrieval": requires_retrieval
+        "requires_retrieval": requires_retrieval,
+        "search_keywords": search_keywords
     }
 
     # Retrieve & Rerank
     query_embedding = embed_question(question, mod)
-    rows = fusion_rows(supabase, query_embedding, question)
+    patient_id = "PAT_001"
+    rows = fusion_rows(supabase, query_embedding, search_keywords, filter_patient_id=patient_id)
     
     context = ""
     if rows:
         rows = re_ranking(rows, question, ce)
         rows = expansion_parent_child(rows)
         rows = rows[:EXCERPT_COUNT]
+        rows = state_motor_simple(target_slots, rows)
         context = build_context(rows)
 
     # Generate
