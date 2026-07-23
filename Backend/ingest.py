@@ -1,8 +1,8 @@
 import os
 import glob
 from core.config import normalize_supabase_url
-from core.chunking import build_chunk_records_from_json, build_chunk_records_from_pdf
-from core.embedding import embedding_db, store_embeddings_in_supabase
+from core.rag.chunking import build_chunk_records_from_json, build_chunk_records_from_pdf
+from core.rag.embedding import embedding_db, store_embeddings_in_supabase
 
 
 def main():

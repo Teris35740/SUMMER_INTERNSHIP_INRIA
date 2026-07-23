@@ -5,11 +5,11 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from supabase import create_client
 
 from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, MAX_RETRIES, normalize_supabase_url
-from core.retrieval import embed_question, fusion_rows
-from core.reranking import re_ranking, build_context, expansion_parent_child
-from core.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, test_pdf_answer_with_gemini
+from core.rag.retrieval import embed_question, fusion_rows
+from core.rag.reranking import re_ranking, build_context, expansion_parent_child
+from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, test_pdf_answer_with_gemini
 # from core.llm_openai import answer_with_mistral, analyze_student_question, split_question_analysis, split_answer_struct
-from core.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact
+from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact
 from core.state_motor import state_motor_simple, state_motor_advanced
 from core.verification import verification_answer, fact_id_authorized_by_motor
 

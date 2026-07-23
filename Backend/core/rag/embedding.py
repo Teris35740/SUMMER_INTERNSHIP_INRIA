@@ -1,6 +1,6 @@
 from supabase import create_client
 
-from .config import SUPABASE_DOCUMENTS_TABLE, _model, normalize_supabase_url
+from ..config import SUPABASE_DOCUMENTS_TABLE, _model, normalize_supabase_url
 
 
 def embedding_db(chunks, model=None):

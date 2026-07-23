@@ -25,8 +25,8 @@ MODEL_NAME_QUERY = "BAAI/bge-base-en-v1.5"
 # --- Modèles pour le encoder ---
 MODEL_NAME_CROSS_ENCODER = "ncbi/MedCPT-Cross-Encoder"
 # MODEL_NAME_CROSS_ENCODER = "NeuML/biomedbert-base-reranker"
-GEMINI_MODEL = "gemini-flash-lite-latest"
 
+GEMINI_MODEL = "gemini-flash-lite-latest"
 
 EXCERPT_COUNT = int(os.getenv("EXCERPT_COUNT", "50"))
 MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
@@ -37,10 +37,6 @@ SUPABASE_DOCUMENTS_TABLE = os.getenv("SUPABASE_DOCUMENTS_TABLE", "documents_json
 SUPABASE_VECTOR_RPC = os.getenv("SUPABASE_VECTOR_RPC", "match_vector_documents_json")
 # SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_documents_keyword_bge")
 SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_text_documents_json")
-
-# VIEUC_SUPABASE_DOCUMENTS_TABLE = os.getenv("VIEUC_SUPABASE_DOCUMENTS_TABLE", "documents_rag")
-# VIEUC_SUPABASE_VECTOR_RPC = os.getenv("VIEUC_SUPABASE_VECTOR_RPC", "match_documents_vector")
-# VIEUC_SUPABASE_KEYWORD_RPC = os.getenv("VIEUC_SUPABASE_KEYWORD_RPC", "match_documents_keyword")
 
 # --- Facteurs de couche λ pour la récupération stratifiée ---
 LAYER_WEIGHTS = {

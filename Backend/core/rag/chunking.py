@@ -2,8 +2,8 @@ import json
 from pathlib import Path
 from sentence_transformers import util
 
-from .config import _model, _tokenizer
-from .text_processing import split_into_sentences, extract_pages_from_pdf
+from ..config import _model, _tokenizer
+from ..utils.text_processing import split_into_sentences, extract_pages_from_pdf
 
 
 def semantic_chunking(text, model=None, tokenizer=None, max_tokens=250, similarity_threshold=0.65):

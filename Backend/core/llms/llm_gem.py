@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List
 import json
 
-from .config import GEMINI_MODEL
+from ..config import GEMINI_MODEL
 
 class QuestionAnalysis(BaseModel):
     question_type: str
