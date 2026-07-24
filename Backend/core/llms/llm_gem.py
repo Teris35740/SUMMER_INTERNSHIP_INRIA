@@ -33,7 +33,7 @@ INSTRUCTIONS ÉCRITURES RÉPONSE :
 - contains_new_claim : Indique si la réponse contient une information nouvelle qui n'était pas explicitement mentionnée dans le contexte fourni. Par exemple, si le contexte indique "J'ai eu une appendicectomie", et que le patient répond "Oui, on m'a enlevé l'appendice", cela ne constitue pas une nouvelle information. Mais si le patient répond "Oui, j'ai eu une appendicectomie il y a 5 ans", alors contains_new_claim serait True, car la date n'était pas dans le contexte.
 """
 
-def answer_with_gemini(question, context, history, clinical_state, api_key):
+def answer_with_gemini(question, context, history, clinical_state, api_key, correction=""):
     client = genai.Client(api_key=api_key)
     
     system_instruction = f"{SYSTEM_PROMPT}"
@@ -57,6 +57,16 @@ def answer_with_gemini(question, context, history, clinical_state, api_key):
 {context}
 
 Ta réponse de patient :"""
+
+    if correction:
+        user_prompt += f"""
+
+==================================================
+ALERTE ERREUR SUR TA TENTATIVE PRÉCÉDENTE 
+Ton précédent JSON a été rejeté par le système de sécurité pour la raison suivante :
+{correction}
+Tu DOIS impérativement tenir compte de cette remarque et corriger ta réponse. N'invente aucune information qui n'est pas dans ton dossier.
+=================================================="""
     
     messages.append({"role": "user", "parts": [{"text": user_prompt}]})
     

@@ -7,7 +7,7 @@ from core.rag.embedding import embedding_db, store_embeddings_in_supabase
 
 def main():
     supabase_url = normalize_supabase_url(
-        os.getenv("SUPABASE_URL", "https://xjvdlkbbiwpafceaguan.supabase.co")
+        os.getenv("SUPABASE_URL")
     )
     supabase_key = os.getenv("SUPABASE_KEY")
 

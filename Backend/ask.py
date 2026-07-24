@@ -12,6 +12,7 @@ from core.llms.llm_gem import answer_with_gemini, analyze_student_question, spli
 from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact
 from core.state_motor import state_motor_simple, state_motor_advanced
 from core.verification import verification_answer, fact_id_authorized_by_motor
+from core.utils.helpers import load_patient_attitude
 
 
 def main():
@@ -29,15 +30,6 @@ def main():
 
         patient_id = "PAT_001"  # Pour l'instant, on utilise un patient fixe. À améliorer pour gérer plusieurs patients.
 
-        # Charger le fichier patient pour récupérer le patient_attitude
-        import json
-        patient_file = os.path.join(os.path.dirname(__file__), "..", "Document_patient", f"patient_{patient_id.split('_')[1]}.json")
-        patient_attitude = None
-        if os.path.exists(patient_file):
-            with open(patient_file, "r", encoding="utf-8") as f:
-                patient_data = json.load(f)
-            patient_attitude = patient_data.get("patient", {}).get("identity", {}).get("patient_attitude")
-
         while True:
             question = " ".join(sys.argv[1:]).strip() if len(sys.argv) > 1 else input("Question de l'étudiant : ").strip()
 
@@ -47,6 +39,7 @@ def main():
             supabase = create_client(supabase_url, supabase_key)
 
             session_id = "session_1"  # Pour l'instant, on utilise une session fixe. À améliorer pour gérer plusieurs sessions.
+            patient_attitude = load_patient_attitude(patient_id)
             init_session(session_id, patient_attitude=patient_attitude)
             history = get_history(session_id)
             print("\n--- Historique de la session ---")
@@ -71,6 +64,10 @@ def main():
             print("Recherche des documents pertinents...")
             query_embedding = embed_question(question, model)
 
+            rows = []
+            TOP_K = EXCERPT_COUNT
+            # if requires_retrieval: # Si le llm a déterminé que la question nécessite de fouiller le dossier du patient, on effectue la recherche dans la base de données.
+
             rows = fusion_rows(supabase, query_embedding, search_keywords, filter_patient_id=patient_id)
 
             if not rows:
@@ -80,7 +77,6 @@ def main():
             rows = re_ranking(rows, question, cross_encoder)
 
             rows = expansion_parent_child(rows)
-            TOP_K = EXCERPT_COUNT
             rows = rows[:TOP_K]
 
             global_topics = clinical_state.get('asked_topics', [])
@@ -96,14 +92,16 @@ def main():
             print("Génération de la réponse...")
 
             tentatives = 0
+            error = ""
             while tentatives < MAX_RETRIES:
                 try:
-                    answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key)
+                    answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key, correction= error)
                     # answer = test_pdf_answer_with_gemini(question, context, gemini_api_key)
                     # answer = answer_with_mistral(question, context, history, clinical_state, mistral_api_key, base_url=mistral_base_url)
                     answer_text, used_fact_ids, contains_new_claim = split_answer_struct(answer)
                     is_valid, msg = verification_answer(answer_text, used_fact_ids, contains_new_claim, fact_id_authorized_by_motor(rows))
                     if not is_valid:
+                        error = msg
                         raise Exception(f"Vérification échouée : {msg}")
                     break
                 except Exception as e:
