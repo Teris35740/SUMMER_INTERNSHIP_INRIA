@@ -4,7 +4,11 @@
             "patient_id": "PAT_024",
             "age": 57,
             "gender": "femme",
-            "behavior": "confus"
+            "patient_attitude": {
+                "anxiety": 0.75,
+                "precision": 0.16,
+                "cooperativeness": 0.61
+            }
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
@@ -47,7 +51,7 @@
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Stress professionnel important",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "soh1"
             },
@@ -62,41 +66,21 @@
                 "fact_id": "soh3"
             },
             {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "soh4"
-            },
-            {
                 "information": "Marié(e) avec 2 enfants",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh5"
+                "fact_id": "soh4"
             },
             {
                 "information": "Travaille de nuit",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh6"
+                "fact_id": "soh5"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_travel_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v3"
-            },
-            {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "v4"
             }
         ],
         "family_history": [
@@ -123,14 +107,9 @@
                 "fact_id": "a2"
             },
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "a3"
-            },
-            {
                 "information": "Acariens",
                 "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a4"
+                "fact_id": "a3"
             }
         ],
         "travel_history": [
@@ -162,18 +141,18 @@
                 "information": "Hypertension artérielle",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
             }
         ],
         "treatments": [
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t1"
-            },
-            {
                 "information": "Lévothyrox 75",
                 "reveal_policy": "only_if_context_explored",
-                "fact_id": "t2"
+                "fact_id": "t1"
             }
         ]
     },

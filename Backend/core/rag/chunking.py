@@ -197,15 +197,16 @@ def build_chunk_records_from_json(json_path):
         patient_id = identity.get("patient_id", "unknown")
         age = identity.get("age", "inconnu")
         gender = identity.get("gender", "inconnu")
-        behavior = identity.get("behavior", "neutre")
+        patient_attitude = identity.get("patient_attitude", {"anxiety": 0.5, "precision": 0.5, "cooperativeness": 0.8})
     else:
         patient_data = doc
         patient_id = doc.get("patient_id", "unknown")
         identity = doc.get("identity", {})
         age = identity.get("age", "inconnu")
         gender = identity.get("sex", "inconnu")
+        patient_attitude = identity.get("patient_attitude", {"anxiety": 0.5, "precision": 0.5, "cooperativeness": 0.8})
 
-    context_prefix = f"Patient {patient_id} ({gender}, {age} ans, trait de caractère : {behavior})"
+    context_prefix = f"Patient {patient_id} ({gender}, {age} ans, attitude: anxiété={patient_attitude['anxiety']}, précision={patient_attitude['precision']}, coopérativité={patient_attitude['cooperativeness']})"
 
     categories = [
         "chief_complaint", "history", "treatments", "vitals", "allergies", 

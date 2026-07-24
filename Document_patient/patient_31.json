@@ -4,10 +4,14 @@
             "patient_id": "PAT_031",
             "age": 55,
             "gender": "homme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.18,
+                "precision": 0.66,
+                "cooperativeness": 0.83
+            }
         },
         "chief_complaint": {
-            "information": "Nausées, diarrhée liquide et crampes",
+            "information": "Vomissements et diarrhée depuis 24h",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur fosse iliaque droite fugace -> risque de confusion avec appendicite",
+                "information": "Sensibilité abdominale basse -> confusion avec appendicite",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -37,14 +41,9 @@
                 "fact_id": "soh1"
             },
             {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh2"
-            },
-            {
                 "information": "Travaille de nuit",
                 "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "soh3"
+                "fact_id": "soh2"
             }
         ],
         "family_history": [
@@ -71,7 +70,7 @@
                 "fact_id": "t1"
             },
             {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_surgical_history_explored",
                 "fact_id": "t2"
             },
@@ -93,19 +92,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
                 "reveal_policy": "only_if_travel_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "v3"
             }
         ],
         "allergies": [
@@ -127,9 +116,19 @@
                 "fact_id": "pmh2"
             },
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh3"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh4"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh5"
             }
         ],
         "travel_history": [

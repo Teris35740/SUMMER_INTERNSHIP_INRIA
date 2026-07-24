@@ -4,7 +4,11 @@
             "patient_id": "PAT_016",
             "age": 18,
             "gender": "homme",
-            "behavior": "confus"
+            "patient_attitude": {
+                "anxiety": 0.65,
+                "precision": 0.17,
+                "cooperativeness": 0.5
+            }
         },
         "chief_complaint": {
             "information": "Dos bloqué après avoir porté un carton",
@@ -25,29 +29,24 @@
         ],
         "social_history": [
             {
-                "information": "Vit seul(e)",
+                "information": "Stress professionnel important",
                 "reveal_policy": "only_if_gynecological_history_explored",
                 "fact_id": "soh1"
             },
             {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "soh2"
-            },
-            {
                 "information": "Retraité(e) actif(ve)",
                 "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "soh3"
+                "fact_id": "soh2"
             },
             {
                 "information": "Marié(e) avec 2 enfants",
                 "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "soh4"
+                "fact_id": "soh3"
             },
             {
                 "information": "Travaille de nuit",
                 "reveal_policy": "only_if_medication_asked",
-                "fact_id": "soh5"
+                "fact_id": "soh4"
             }
         ],
         "risk_factors": [
@@ -65,11 +64,6 @@
                 "information": "Surpoids (IMC 28)",
                 "reveal_policy": "only_if_gynecological_history_explored",
                 "fact_id": "rf3"
-            },
-            {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "rf4"
             }
         ],
         "treatments": [
@@ -79,19 +73,14 @@
                 "fact_id": "t1"
             },
             {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "t2"
             },
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "t3"
-            },
-            {
                 "information": "Statine (Tahor)",
                 "reveal_policy": "only_if_context_explored",
-                "fact_id": "t4"
+                "fact_id": "t3"
             }
         ],
         "family_history": [
@@ -146,28 +135,18 @@
                 "information": "Hypercholestérolémie",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "pmh5"
-            },
-            {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh6"
             }
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "th1"
-            },
-            {
                 "information": "Week-end à Londres",
                 "reveal_policy": "direct_if_asked",
-                "fact_id": "th2"
+                "fact_id": "th1"
             },
             {
                 "information": "Retour de ski dans les Alpes",
                 "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th3"
+                "fact_id": "th2"
             }
         ],
         "surgical_history": [
@@ -189,14 +168,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v2"
             }
         ],
         "allergies": [

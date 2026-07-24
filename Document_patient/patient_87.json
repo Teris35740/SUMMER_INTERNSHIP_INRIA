@@ -4,10 +4,14 @@
             "patient_id": "PAT_087",
             "age": 40,
             "gender": "femme",
-            "behavior": "confus"
+            "patient_attitude": {
+                "anxiety": 0.75,
+                "precision": 0.17,
+                "cooperativeness": 0.41
+            }
         },
         "chief_complaint": {
-            "information": "Faiblesse soudaine du bras droit",
+            "information": "Bras gauche qui ne bouge plus depuis 1h",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Hypoglycémie récente mesurée au doigt -> risque de confondre avec malaise hypoglycémique",
+                "information": "Patient confus -> confusion avec ivresse ou hypoglycémie",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -28,21 +32,6 @@
                 "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
                 "reveal_policy": "only_if_surgical_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "v3"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "v4"
             }
         ],
         "family_history": [
@@ -74,14 +63,9 @@
                 "fact_id": "a1"
             },
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a2"
-            },
-            {
                 "information": "Pollen",
                 "reveal_policy": "only_if_history_explored",
-                "fact_id": "a3"
+                "fact_id": "a2"
             }
         ],
         "social_history": [
@@ -99,33 +83,23 @@
                 "information": "Marié(e) avec 2 enfants",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "soh3"
-            },
-            {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh4"
             }
         ],
         "treatments": [
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t1"
-            },
-            {
                 "information": "Ramipril 5mg",
                 "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t2"
+                "fact_id": "t1"
             },
             {
                 "information": "Pilule contraceptive",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t3"
+                "fact_id": "t2"
             },
             {
                 "information": "Inhalateur de Ventoline si besoin",
                 "reveal_policy": "direct_if_asked",
-                "fact_id": "t4"
+                "fact_id": "t3"
             }
         ],
         "risk_factors": [
@@ -157,13 +131,13 @@
                 "fact_id": "pmh1"
             },
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "direct_if_asked",
                 "fact_id": "pmh2"
             },
             {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "direct_if_asked",
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh3"
             }
         ],

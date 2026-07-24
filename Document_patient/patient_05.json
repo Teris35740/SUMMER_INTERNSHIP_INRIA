@@ -4,7 +4,11 @@
             "patient_id": "PAT_005",
             "age": 20,
             "gender": "homme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.11,
+                "precision": 0.69,
+                "cooperativeness": 0.88
+            }
         },
         "chief_complaint": {
             "information": "Dos bloqué après avoir porté un carton",
@@ -25,14 +29,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v2"
             }
         ],
         "family_history": [
@@ -59,29 +58,19 @@
                 "fact_id": "t1"
             },
             {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_context_explored",
                 "fact_id": "t2"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t3"
-            },
-            {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t4"
-            },
-            {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "t5"
+                "fact_id": "t3"
             },
             {
                 "information": "Paracétamol occasionnel",
                 "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t6"
+                "fact_id": "t4"
             }
         ],
         "travel_history": [
@@ -96,14 +85,9 @@
                 "fact_id": "th2"
             },
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "th3"
-            },
-            {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
                 "reveal_policy": "direct_if_asked",
-                "fact_id": "th4"
+                "fact_id": "th3"
             }
         ],
         "social_history": [
@@ -115,7 +99,7 @@
         ],
         "surgical_history": [
             {
-                "information": "Ligature des trompes",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_substance_use_explored",
                 "fact_id": "sh1"
             },
@@ -130,6 +114,11 @@
                 "information": "Hypothyroïdie",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
             }
         ],
         "allergies": [

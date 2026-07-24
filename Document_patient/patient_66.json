@@ -4,7 +4,11 @@
             "patient_id": "PAT_066",
             "age": 73,
             "gender": "homme",
-            "behavior": "répond uniquement à la question"
+            "patient_attitude": {
+                "anxiety": 0.35,
+                "precision": 0.92,
+                "cooperativeness": 0.64
+            }
         },
         "chief_complaint": {
             "information": "Toux grasse et forte fièvre",
@@ -39,7 +43,7 @@
         ],
         "treatments": [
             {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_surgical_history_explored",
                 "fact_id": "t1"
             },
@@ -59,28 +63,18 @@
                 "information": "Hypercholestérolémie",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_substance_use_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v3"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v4"
             }
         ],
         "risk_factors": [
@@ -92,7 +86,7 @@
         ],
         "surgical_history": [
             {
-                "information": "Césarienne",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "sh1"
             },

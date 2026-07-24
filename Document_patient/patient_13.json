@@ -4,7 +4,11 @@
             "patient_id": "PAT_013",
             "age": 32,
             "gender": "femme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.22,
+                "precision": 0.79,
+                "cooperativeness": 0.76
+            }
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
@@ -47,19 +51,14 @@
         ],
         "past_medical_history": [
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "pmh1"
-            },
-            {
                 "information": "Diabète de type 2",
                 "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh2"
+                "fact_id": "pmh1"
             },
             {
                 "information": "Hypothyroïdie",
                 "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "pmh3"
+                "fact_id": "pmh2"
             }
         ],
         "risk_factors": [
@@ -88,51 +87,26 @@
         ],
         "vitals": [
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_family_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v3"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "v4"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "v5"
             }
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
+                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "th1"
             },
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "th2"
-            },
-            {
                 "information": "Voyage récent en Asie",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "th3"
+                "fact_id": "th2"
             },
             {
                 "information": "Week-end à Londres",
                 "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "th4"
+                "fact_id": "th3"
             }
         ],
         "social_history": [

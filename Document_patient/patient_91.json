@@ -4,10 +4,14 @@
             "patient_id": "PAT_091",
             "age": 66,
             "gender": "femme",
-            "behavior": "très bavard"
+            "patient_attitude": {
+                "anxiety": 0.63,
+                "precision": 0.28,
+                "cooperativeness": 0.84
+            }
         },
         "chief_complaint": {
-            "information": "Serrement intense dans la poitrine",
+            "information": "Douleur dans la poitrine qui serre",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
+                "information": "Douleur épigastrique associée -> confusion avec reflux ou ulcère",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -35,14 +39,9 @@
                 "fact_id": "a2"
             },
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "a3"
-            },
-            {
                 "information": "Pollen",
                 "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a4"
+                "fact_id": "a3"
             }
         ],
         "risk_factors": [
@@ -64,58 +63,43 @@
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Retraité(e) actif(ve)",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "soh1"
             },
             {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh2"
-            },
-            {
                 "information": "Marié(e) avec 2 enfants",
                 "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "soh3"
+                "fact_id": "soh2"
             },
             {
                 "information": "Stress professionnel important",
                 "reveal_policy": "direct_if_asked",
-                "fact_id": "soh4"
+                "fact_id": "soh3"
             }
         ],
         "treatments": [
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t1"
-            },
-            {
                 "information": "Statine (Tahor)",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t2"
+                "fact_id": "t1"
             },
             {
                 "information": "Paracétamol occasionnel",
                 "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t3"
+                "fact_id": "t2"
             },
             {
                 "information": "Inhalateur de Ventoline si besoin",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t4"
+                "fact_id": "t3"
             }
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "th1"
-            },
-            {
                 "information": "Voyage récent en Asie",
                 "reveal_policy": "only_if_context_explored",
-                "fact_id": "th2"
+                "fact_id": "th1"
             }
         ],
         "family_history": [
@@ -162,6 +146,11 @@
                 "information": "Syndrome de l'intestin irritable",
                 "reveal_policy": "direct_if_asked",
                 "fact_id": "pmh2"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh3"
             }
         ]
     },

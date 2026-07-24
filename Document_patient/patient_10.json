@@ -4,7 +4,11 @@
             "patient_id": "PAT_010",
             "age": 75,
             "gender": "homme",
-            "behavior": "anxieux"
+            "patient_attitude": {
+                "anxiety": 0.84,
+                "precision": 0.6,
+                "cooperativeness": 0.68
+            }
         },
         "chief_complaint": {
             "information": "Dos bloqué après avoir porté un carton",
@@ -61,19 +65,14 @@
                 "fact_id": "rf1"
             },
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "rf2"
-            },
-            {
                 "information": "Surpoids (IMC 28)",
                 "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "rf3"
+                "fact_id": "rf2"
             }
         ],
         "surgical_history": [
             {
-                "information": "Ligature des trompes",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_surgical_history_explored",
                 "fact_id": "sh1"
             },
@@ -92,9 +91,16 @@
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_gynecological_history_explored",
                 "fact_id": "v1"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh1"
             }
         ]
     },

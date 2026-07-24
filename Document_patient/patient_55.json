@@ -4,7 +4,11 @@
             "patient_id": "PAT_055",
             "age": 23,
             "gender": "femme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.11,
+                "precision": 0.7,
+                "cooperativeness": 0.88
+            }
         },
         "chief_complaint": {
             "information": "Douleur violente en bas du ventre",

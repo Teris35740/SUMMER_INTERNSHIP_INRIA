@@ -4,7 +4,11 @@
             "patient_id": "PAT_008",
             "age": 39,
             "gender": "femme",
-            "behavior": "répond uniquement à la question"
+            "patient_attitude": {
+                "anxiety": 0.29,
+                "precision": 0.82,
+                "cooperativeness": 0.4
+            }
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
@@ -78,13 +82,13 @@
         ],
         "past_medical_history": [
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "pmh1"
             },
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh2"
             }
         ],
@@ -111,7 +115,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_family_history_explored",
                 "fact_id": "v1"
             }

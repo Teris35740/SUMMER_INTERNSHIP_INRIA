@@ -4,10 +4,14 @@
             "patient_id": "PAT_051",
             "age": 80,
             "gender": "femme",
-            "behavior": "confus"
+            "patient_attitude": {
+                "anxiety": 0.61,
+                "precision": 0.12,
+                "cooperativeness": 0.44
+            }
         },
         "chief_complaint": {
-            "information": "Douleur atroce dans le flanc gauche",
+            "information": "Douleur violente dans le flanc gauche",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,21 +22,21 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Nausées et vomissements intenses -> confusion urgence digestive",
+                "information": "Hématurie microscopique -> risque de confusion avec infection urinaire",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "v1"
             }
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Retraité(e) actif(ve)",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "soh1"
             },
@@ -68,14 +72,9 @@
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "th1"
-            },
-            {
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
                 "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "th2"
+                "fact_id": "th1"
             }
         ],
         "surgical_history": [

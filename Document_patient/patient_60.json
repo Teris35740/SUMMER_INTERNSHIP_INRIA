@@ -4,10 +4,14 @@
             "patient_id": "PAT_060",
             "age": 53,
             "gender": "homme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.25,
+                "precision": 0.78,
+                "cooperativeness": 0.95
+            }
         },
         "chief_complaint": {
-            "information": "Douleur violente en bas du ventre",
+            "information": "Douleur violente dans le flanc gauche",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,31 +22,26 @@
                 "fact_id": "h1"
             },
             {
-                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "information": "Hématurie microscopique -> risque de confusion avec infection urinaire",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "allergies": [
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "a1"
-            },
-            {
                 "information": "Iode (choc)",
                 "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "a2"
+                "fact_id": "a1"
             },
             {
                 "information": "AINS (Aspirine/Ibuprofène)",
                 "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "a3"
+                "fact_id": "a2"
             },
             {
                 "information": "Arachide",
                 "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a4"
+                "fact_id": "a3"
             }
         ],
         "family_history": [
@@ -67,28 +66,13 @@
                 "information": "Tabagisme actif 15 PA",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "rf2"
-            },
-            {
-                "information": "Non fumeur",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "rf3"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_family_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v2"
             }
         ],
         "social_history": [
@@ -105,36 +89,26 @@
         ],
         "surgical_history": [
             {
-                "information": "Aucune opération",
+                "information": "Opération des dents de sagesse",
                 "reveal_policy": "only_if_substance_use_explored",
                 "fact_id": "sh1"
             },
             {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "sh2"
-            },
-            {
                 "information": "Fracture du poignet opérée",
                 "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh3"
+                "fact_id": "sh2"
             }
         ],
         "treatments": [
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Statine (Tahor)",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "t1"
             },
             {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "t3"
+                "fact_id": "t2"
             }
         ],
         "past_medical_history": [
@@ -142,6 +116,11 @@
                 "information": "Syndrome de l'intestin irritable",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
             }
         ],
         "travel_history": [
@@ -154,14 +133,14 @@
     },
     "metadata": {
         "difficulty": "medium",
-        "specialty": "Gynécologie",
-        "expected_diagnosis": "Grossesse extra-utérine",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
         "alternative_diagnoses": [
             "À définir par l'IA lors de l'évaluation"
         ],
         "red_flags": [
-            "Vertiges (choc hémorragique)",
-            "Pâleur extrême"
+            "Fièvre (pyélonéphrite associée)",
+            "Anurie"
         ]
     }
 }

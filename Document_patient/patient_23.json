@@ -4,7 +4,11 @@
             "patient_id": "PAT_023",
             "age": 76,
             "gender": "femme",
-            "behavior": "très bavard"
+            "patient_attitude": {
+                "anxiety": 0.43,
+                "precision": 0.29,
+                "cooperativeness": 0.97
+            }
         },
         "chief_complaint": {
             "information": "Mal de tête atroce pulsatile",
@@ -39,7 +43,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_gynecological_history_explored",
                 "fact_id": "v1"
             }

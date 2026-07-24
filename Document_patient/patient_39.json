@@ -4,10 +4,14 @@
             "patient_id": "PAT_039",
             "age": 47,
             "gender": "femme",
-            "behavior": "personne âgée"
+            "patient_attitude": {
+                "anxiety": 0.49,
+                "precision": 0.48,
+                "cooperativeness": 0.67
+            }
         },
         "chief_complaint": {
-            "information": "Douleur au ventre qui s'aggrave",
+            "information": "Douleur en bas à droite du ventre",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
+                "information": "La douleur a commencé autour du nombril -> confusion avec gastro",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -28,11 +32,6 @@
                 "information": "Week-end à Londres",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "th2"
             }
         ],
         "allergies": [

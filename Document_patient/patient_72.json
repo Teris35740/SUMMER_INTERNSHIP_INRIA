@@ -4,10 +4,14 @@
             "patient_id": "PAT_072",
             "age": 82,
             "gender": "homme",
-            "behavior": "personne âgée"
+            "patient_attitude": {
+                "anxiety": 0.47,
+                "precision": 0.52,
+                "cooperativeness": 0.67
+            }
         },
         "chief_complaint": {
-            "information": "Douleur sous les côtes à droite",
+            "information": "Douleur sous les côtes à droite après un repas gras",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Brûlures d'estomac habituelles -> confusion avec RGO",
+                "information": "Douleur épigastrique -> confusion avec gastrite",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -38,23 +42,13 @@
                 "information": "AINS (Aspirine/Ibuprofène)",
                 "reveal_policy": "only_if_history_explored",
                 "fact_id": "a3"
-            },
-            {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "a4"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v2"
             }
         ],
         "past_medical_history": [
@@ -67,6 +61,11 @@
                 "information": "Syndrome de l'intestin irritable",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "pmh2"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh3"
             }
         ],
         "surgical_history": [

@@ -4,7 +4,11 @@
             "patient_id": "PAT_015",
             "age": 91,
             "gender": "femme",
-            "behavior": "minimise ses symptômes"
+            "patient_attitude": {
+                "anxiety": 0.15,
+                "precision": 0.38,
+                "cooperativeness": 0.43
+            }
         },
         "chief_complaint": {
             "information": "Cheville droite gonflée après une torsion",
@@ -32,7 +36,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "v1"
             }

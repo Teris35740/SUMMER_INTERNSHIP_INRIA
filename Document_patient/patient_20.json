@@ -4,7 +4,11 @@
             "patient_id": "PAT_020",
             "age": 42,
             "gender": "femme",
-            "behavior": "répond uniquement à la question"
+            "patient_attitude": {
+                "anxiety": 0.35,
+                "precision": 0.88,
+                "cooperativeness": 0.52
+            }
         },
         "chief_complaint": {
             "information": "Dos bloqué après avoir porté un carton",
@@ -37,7 +41,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "v1"
             }
@@ -59,11 +63,6 @@
                 "information": "Séjour en Afrique subsaharienne il y a 1 mois",
                 "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "th2"
             }
         ],
         "surgical_history": [
@@ -85,6 +84,13 @@
                 "information": "Sédentarité",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "rf1"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh1"
             }
         ]
     },

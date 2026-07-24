@@ -29,6 +29,15 @@ def main():
 
         patient_id = "PAT_001"  # Pour l'instant, on utilise un patient fixe. À améliorer pour gérer plusieurs patients.
 
+        # Charger le fichier patient pour récupérer le patient_attitude
+        import json
+        patient_file = os.path.join(os.path.dirname(__file__), "..", "Document_patient", f"patient_{patient_id.split('_')[1]}.json")
+        patient_attitude = None
+        if os.path.exists(patient_file):
+            with open(patient_file, "r", encoding="utf-8") as f:
+                patient_data = json.load(f)
+            patient_attitude = patient_data.get("patient", {}).get("identity", {}).get("patient_attitude")
+
         while True:
             question = " ".join(sys.argv[1:]).strip() if len(sys.argv) > 1 else input("Question de l'étudiant : ").strip()
 
@@ -38,7 +47,7 @@ def main():
             supabase = create_client(supabase_url, supabase_key)
 
             session_id = "session_1"  # Pour l'instant, on utilise une session fixe. À améliorer pour gérer plusieurs sessions.
-            init_session(session_id)  # Initialisation de la session avec un comportement par défaut, ne pas oublié de modifié cela une fois qu'on fera la selection du patient.
+            init_session(session_id, patient_attitude=patient_attitude)
             history = get_history(session_id)
             print("\n--- Historique de la session ---")
             for msg in history:

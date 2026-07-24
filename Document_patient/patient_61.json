@@ -4,7 +4,11 @@
             "patient_id": "PAT_061",
             "age": 30,
             "gender": "femme",
-            "behavior": "personne âgée"
+            "patient_attitude": {
+                "anxiety": 0.33,
+                "precision": 0.42,
+                "cooperativeness": 0.71
+            }
         },
         "chief_complaint": {
             "information": "Toux grasse et forte fièvre",
@@ -38,6 +42,11 @@
                 "information": "Hypercholestérolémie",
                 "reveal_policy": "only_if_substance_use_explored",
                 "fact_id": "pmh3"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh4"
             }
         ],
         "family_history": [
@@ -71,14 +80,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_medication_asked",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v2"
             }
         ],
         "travel_history": [

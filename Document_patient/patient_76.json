@@ -4,7 +4,11 @@
             "patient_id": "PAT_076",
             "age": 57,
             "gender": "homme",
-            "behavior": "personne âgée"
+            "patient_attitude": {
+                "anxiety": 0.35,
+                "precision": 0.59,
+                "cooperativeness": 0.65
+            }
         },
         "chief_complaint": {
             "information": "Essoufflement apparu d'un coup",
@@ -51,7 +55,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_medication_asked",
                 "fact_id": "v1"
             }

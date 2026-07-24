@@ -4,7 +4,11 @@
             "patient_id": "PAT_088",
             "age": 65,
             "gender": "femme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.27,
+                "precision": 0.79,
+                "cooperativeness": 0.87
+            }
         },
         "chief_complaint": {
             "information": "Essoufflement apparu d'un coup",
@@ -25,7 +29,7 @@
         ],
         "treatments": [
             {
-                "information": "Pilule contraceptive",
+                "information": "Calcium + Vitamine D",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "t1"
             }

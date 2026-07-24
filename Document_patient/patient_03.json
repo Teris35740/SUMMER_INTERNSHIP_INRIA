@@ -4,7 +4,11 @@
             "patient_id": "PAT_003",
             "age": 25,
             "gender": "femme",
-            "behavior": "dramatise"
+            "patient_attitude": {
+                "anxiety": 0.93,
+                "precision": 0.22,
+                "cooperativeness": 0.58
+            }
         },
         "chief_complaint": {
             "information": "Cheville droite gonflée après une torsion",
@@ -35,11 +39,6 @@
                 "information": "Lévothyrox 75",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "t1"
-            },
-            {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "t2"
             }
         ],
         "family_history": [
@@ -51,14 +50,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "v2"
             }
         ],
         "social_history": [
@@ -82,13 +76,13 @@
         ],
         "past_medical_history": [
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Syndrome de l'intestin irritable",
+                "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "pmh1"
             },
             {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh2"
             }
         ]

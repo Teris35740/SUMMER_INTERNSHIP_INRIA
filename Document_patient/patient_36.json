@@ -4,7 +4,11 @@
             "patient_id": "PAT_036",
             "age": 55,
             "gender": "femme",
-            "behavior": "dramatise"
+            "patient_attitude": {
+                "anxiety": 0.84,
+                "precision": 0.39,
+                "cooperativeness": 0.71
+            }
         },
         "chief_complaint": {
             "information": "Toux grasse et forte fièvre",
@@ -32,14 +36,9 @@
         ],
         "treatments": [
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t1"
-            },
-            {
                 "information": "Paracétamol occasionnel",
                 "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t2"
+                "fact_id": "t1"
             }
         ],
         "allergies": [

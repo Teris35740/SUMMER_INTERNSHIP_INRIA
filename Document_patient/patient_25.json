@@ -4,10 +4,14 @@
             "patient_id": "PAT_025",
             "age": 75,
             "gender": "femme",
-            "behavior": "minimise ses symptômes"
+            "patient_attitude": {
+                "anxiety": 0.18,
+                "precision": 0.62,
+                "cooperativeness": 0.49
+            }
         },
         "chief_complaint": {
-            "information": "Nez bouché et mal de gorge",
+            "information": "Rhume qui ne passe pas depuis 5 jours",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,14 +22,14 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Toux sèche importante -> risque confusion pneumonie",
+                "information": "Maux de tête légers -> confusion avec sinusite ou grippe",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "treatments": [
             {
-                "information": "Pilule contraceptive",
+                "information": "Calcium + Vitamine D",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "t1"
             },
@@ -99,11 +103,6 @@
                 "information": "Voyage récent en Asie",
                 "reveal_policy": "only_if_history_explored",
                 "fact_id": "th3"
-            },
-            {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th4"
             }
         ],
         "family_history": [
@@ -125,26 +124,21 @@
                 "fact_id": "pmh1"
             },
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh2"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh3"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v3"
             }
         ],
         "allergies": [
@@ -176,14 +170,9 @@
                 "fact_id": "rf2"
             },
             {
-                "information": "Non fumeur",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "rf3"
-            },
-            {
                 "information": "Ex-fumeur sevré depuis 5 ans",
                 "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "rf4"
+                "fact_id": "rf3"
             }
         ]
     },

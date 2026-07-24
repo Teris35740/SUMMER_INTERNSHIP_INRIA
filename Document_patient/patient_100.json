@@ -4,7 +4,11 @@
             "patient_id": "PAT_100",
             "age": 79,
             "gender": "femme",
-            "behavior": "minimise ses symptômes"
+            "patient_attitude": {
+                "anxiety": 0.26,
+                "precision": 0.57,
+                "cooperativeness": 0.51
+            }
         },
         "chief_complaint": {
             "information": "Essoufflement apparu d'un coup",
@@ -25,24 +29,14 @@
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v3"
             }
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Retraité(e) actif(ve)",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "soh1"
             }
@@ -59,8 +53,8 @@
                 "fact_id": "pmh2"
             },
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "direct_if_asked",
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh3"
             }
         ],
@@ -81,11 +75,6 @@
                 "information": "Voyage récent en Asie",
                 "reveal_policy": "only_if_travel_history_explored",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "th2"
             }
         ],
         "risk_factors": [

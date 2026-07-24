@@ -4,10 +4,14 @@
             "patient_id": "PAT_053",
             "age": 71,
             "gender": "homme",
-            "behavior": "anxieux"
+            "patient_attitude": {
+                "anxiety": 0.86,
+                "precision": 0.37,
+                "cooperativeness": 0.69
+            }
         },
         "chief_complaint": {
-            "information": "Douleur violente en bas du ventre",
+            "information": "Douleur violente dans le flanc gauche",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "information": "Hématurie microscopique -> risque de confusion avec infection urinaire",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -61,7 +65,7 @@
         ],
         "treatments": [
             {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_family_history_explored",
                 "fact_id": "t1"
             },
@@ -73,7 +77,7 @@
         ],
         "surgical_history": [
             {
-                "information": "Césarienne",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "sh1"
             }
@@ -84,18 +88,25 @@
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "rf1"
             }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh1"
+            }
         ]
     },
     "metadata": {
         "difficulty": "medium",
-        "specialty": "Gynécologie",
-        "expected_diagnosis": "Grossesse extra-utérine",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
         "alternative_diagnoses": [
             "À définir par l'IA lors de l'évaluation"
         ],
         "red_flags": [
-            "Vertiges (choc hémorragique)",
-            "Pâleur extrême"
+            "Fièvre (pyélonéphrite associée)",
+            "Anurie"
         ]
     }
 }

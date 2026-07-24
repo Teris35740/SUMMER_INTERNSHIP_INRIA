@@ -4,10 +4,14 @@
             "patient_id": "PAT_094",
             "age": 58,
             "gender": "homme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.23,
+                "precision": 0.7,
+                "cooperativeness": 0.85
+            }
         },
         "chief_complaint": {
-            "information": "Fatigue extrême, confusion et fièvre",
+            "information": "Fièvre très élevée et confusion",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,21 +22,21 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
+                "information": "Confusion et agitation -> risque de conclure à un épisode psychiatrique",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Stress professionnel important",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "soh1"
             }
         ],
         "treatments": [
             {
-                "information": "Pilule contraceptive",
+                "information": "Oméprazole 20mg",
                 "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "t1"
             }
@@ -58,19 +62,14 @@
         ],
         "allergies": [
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "a1"
-            },
-            {
                 "information": "Iode (choc)",
                 "reveal_policy": "direct_if_asked",
-                "fact_id": "a2"
+                "fact_id": "a1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
                 "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "v1"
             }

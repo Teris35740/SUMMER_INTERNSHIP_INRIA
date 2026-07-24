@@ -4,10 +4,14 @@
             "patient_id": "PAT_054",
             "age": 45,
             "gender": "homme",
-            "behavior": "sportif"
+            "patient_attitude": {
+                "anxiety": 0.15,
+                "precision": 0.83,
+                "cooperativeness": 0.92
+            }
         },
         "chief_complaint": {
-            "information": "Douleur violente en bas du ventre",
+            "information": "Douleur violente dans le flanc gauche",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "information": "Hématurie microscopique -> risque de confusion avec infection urinaire",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -47,7 +51,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_gynecological_history_explored",
                 "fact_id": "v1"
             }
@@ -86,14 +90,14 @@
     },
     "metadata": {
         "difficulty": "medium",
-        "specialty": "Gynécologie",
-        "expected_diagnosis": "Grossesse extra-utérine",
+        "specialty": "Urologie",
+        "expected_diagnosis": "Colique néphrétique",
         "alternative_diagnoses": [
             "À définir par l'IA lors de l'évaluation"
         ],
         "red_flags": [
-            "Vertiges (choc hémorragique)",
-            "Pâleur extrême"
+            "Fièvre (pyélonéphrite associée)",
+            "Anurie"
         ]
     }
 }

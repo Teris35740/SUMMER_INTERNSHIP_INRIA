@@ -4,10 +4,14 @@
             "patient_id": "PAT_093",
             "age": 63,
             "gender": "femme",
-            "behavior": "dramatise"
+            "patient_attitude": {
+                "anxiety": 0.87,
+                "precision": 0.34,
+                "cooperativeness": 0.51
+            }
         },
         "chief_complaint": {
-            "information": "Mal de tête insupportable et fièvre",
+            "information": "Mal de tête avec forte fièvre et nuque raide",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,21 +22,16 @@
                 "fact_id": "h1"
             },
             {
-                "information": "A des migraines habituellement -> risque de confondre avec une crise forte",
+                "information": "Fièvre modérée -> confusion avec syndrome grippal",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "v2"
             }
         ],
         "risk_factors": [
@@ -40,11 +39,6 @@
                 "information": "Ex-fumeur sevré depuis 5 ans",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Non fumeur",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "rf2"
             }
         ],
         "family_history": [
@@ -61,31 +55,26 @@
                 "fact_id": "pmh1"
             },
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Diabète de type 2",
+                "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "pmh2"
             },
             {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh3"
             }
         ],
         "treatments": [
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Inhalateur de Ventoline si besoin",
+                "reveal_policy": "only_if_surgical_history_explored",
                 "fact_id": "t1"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Pilule contraceptive",
+                "information": "Calcium + Vitamine D",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t3"
+                "fact_id": "t2"
             }
         ],
         "surgical_history": [

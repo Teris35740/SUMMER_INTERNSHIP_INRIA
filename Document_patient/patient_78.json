@@ -4,10 +4,14 @@
             "patient_id": "PAT_078",
             "age": 73,
             "gender": "homme",
-            "behavior": "anxieux"
+            "patient_attitude": {
+                "anxiety": 0.86,
+                "precision": 0.39,
+                "cooperativeness": 0.77
+            }
         },
         "chief_complaint": {
-            "information": "Fatigue extrême, confusion et fièvre",
+            "information": "Fièvre très élevée et confusion",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,14 +22,14 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Patient âgé avec démence légère -> confusion mise sur le compte de l'âge",
+                "information": "Confusion et agitation -> risque de conclure à un épisode psychiatrique",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "surgical_history": [
             {
-                "information": "Ligature des trompes",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_medication_asked",
                 "fact_id": "sh1"
             }
@@ -44,7 +48,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
                 "reveal_policy": "only_if_substance_use_explored",
                 "fact_id": "v1"
             }

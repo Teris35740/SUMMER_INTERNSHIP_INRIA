@@ -4,10 +4,14 @@
             "patient_id": "PAT_022",
             "age": 52,
             "gender": "homme",
-            "behavior": "confus"
+            "patient_attitude": {
+                "anxiety": 0.49,
+                "precision": 0.11,
+                "cooperativeness": 0.48
+            }
         },
         "chief_complaint": {
-            "information": "Nausées, diarrhée liquide et crampes",
+            "information": "Vomissements et diarrhée depuis 24h",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,31 +22,26 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur fosse iliaque droite fugace -> risque de confusion avec appendicite",
+                "information": "Sensibilité abdominale basse -> confusion avec appendicite",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "surgical_history": [
             {
-                "information": "Ligature des trompes",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "sh1"
             },
             {
-                "information": "Aucune opération",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "sh2"
-            },
-            {
                 "information": "Fracture du poignet opérée",
                 "reveal_policy": "direct_if_asked",
-                "fact_id": "sh3"
+                "fact_id": "sh2"
             }
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Stress professionnel important",
                 "reveal_policy": "direct_if_asked",
                 "fact_id": "soh1"
             }
@@ -85,14 +84,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
+                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "v2"
             }
         ],
         "risk_factors": [
@@ -114,6 +108,11 @@
                 "information": "Hypertension artérielle",
                 "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
             }
         ]
     },

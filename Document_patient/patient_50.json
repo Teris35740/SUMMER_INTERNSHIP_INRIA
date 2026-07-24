@@ -4,7 +4,11 @@
             "patient_id": "PAT_050",
             "age": 62,
             "gender": "femme",
-            "behavior": "minimise ses symptômes"
+            "patient_attitude": {
+                "anxiety": 0.3,
+                "precision": 0.54,
+                "cooperativeness": 0.48
+            }
         },
         "chief_complaint": {
             "information": "Douleur violente en bas du ventre",
@@ -18,16 +22,21 @@
                 "fact_id": "h1"
             },
             {
-                "information": "A souvent des règles irrégulières -> patiente minimise un retard",
+                "information": "Douleur intermittente -> confusion avec colique néphrétique",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Hypothyroïdie",
+                "reveal_policy": "only_if_medication_asked",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
             }
         ],
         "treatments": [
@@ -51,7 +60,7 @@
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "v1"
             }
@@ -81,13 +90,13 @@
     "metadata": {
         "difficulty": "medium",
         "specialty": "Gynécologie",
-        "expected_diagnosis": "Grossesse extra-utérine",
+        "expected_diagnosis": "Torsion ovarienne",
         "alternative_diagnoses": [
             "À définir par l'IA lors de l'évaluation"
         ],
         "red_flags": [
-            "Vertiges (choc hémorragique)",
-            "Pâleur extrême"
+            "Défense abdominale",
+            "Nausées/vomissements"
         ]
     }
 }

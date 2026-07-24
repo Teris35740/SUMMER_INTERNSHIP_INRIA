@@ -4,7 +4,11 @@
             "patient_id": "PAT_027",
             "age": 85,
             "gender": "homme",
-            "behavior": "très bavard"
+            "patient_attitude": {
+                "anxiety": 0.43,
+                "precision": 0.37,
+                "cooperativeness": 0.96
+            }
         },
         "chief_complaint": {
             "information": "Brûlures en urinant depuis 48h",
@@ -66,6 +70,11 @@
                 "information": "Hypertension artérielle",
                 "reveal_policy": "only_if_family_history_explored",
                 "fact_id": "pmh2"
+            },
+            {
+                "information": "Hypercholestérolémie",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh3"
             }
         ],
         "social_history": [

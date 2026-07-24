@@ -4,7 +4,11 @@
             "patient_id": "PAT_011",
             "age": 57,
             "gender": "homme",
-            "behavior": "confus"
+            "patient_attitude": {
+                "anxiety": 0.79,
+                "precision": 0.18,
+                "cooperativeness": 0.57
+            }
         },
         "chief_complaint": {
             "information": "Dos bloqué après avoir porté un carton",
@@ -28,11 +32,6 @@
                 "information": "Retour de ski dans les Alpes",
                 "reveal_policy": "only_if_medication_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "th2"
             }
         ],
         "risk_factors": [
@@ -47,36 +46,16 @@
                 "fact_id": "rf2"
             },
             {
-                "information": "Non fumeur",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "rf3"
-            },
-            {
                 "information": "Ex-fumeur sevré depuis 5 ans",
                 "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "rf4"
+                "fact_id": "rf3"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "direct_if_asked",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "v3"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v4"
             }
         ],
         "family_history": [
@@ -113,19 +92,14 @@
                 "fact_id": "t2"
             },
             {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "t3"
-            },
-            {
                 "information": "Paracétamol occasionnel",
                 "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t4"
+                "fact_id": "t3"
             },
             {
                 "information": "Ramipril 5mg",
                 "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t5"
+                "fact_id": "t4"
             }
         ],
         "social_history": [
@@ -150,7 +124,7 @@
                 "fact_id": "soh4"
             },
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Stress professionnel important",
                 "reveal_policy": "only_if_history_explored",
                 "fact_id": "soh5"
             },
@@ -189,19 +163,14 @@
                 "fact_id": "sh1"
             },
             {
-                "information": "Aucune opération",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Cholécysectomie",
+                "reveal_policy": "only_if_social_history_explored",
                 "fact_id": "sh2"
             },
             {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "sh3"
-            },
-            {
-                "information": "Ligature des trompes",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_history_explored",
-                "fact_id": "sh4"
+                "fact_id": "sh3"
             }
         ],
         "past_medical_history": [
@@ -209,6 +178,16 @@
                 "information": "Hypothyroïdie",
                 "reveal_policy": "only_if_risk_factors_explored",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh2"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh3"
             }
         ]
     },

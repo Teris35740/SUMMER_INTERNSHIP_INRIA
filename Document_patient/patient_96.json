@@ -4,10 +4,14 @@
             "patient_id": "PAT_096",
             "age": 32,
             "gender": "homme",
-            "behavior": "minimise ses symptômes"
+            "patient_attitude": {
+                "anxiety": 0.18,
+                "precision": 0.43,
+                "cooperativeness": 0.35
+            }
         },
         "chief_complaint": {
-            "information": "Faiblesse soudaine du bras droit",
+            "information": "Bras gauche qui ne bouge plus depuis 1h",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,21 +22,16 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Hypoglycémie récente mesurée au doigt -> risque de confondre avec malaise hypoglycémique",
+                "information": "Patient confus -> confusion avec ivresse ou hypoglycémie",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
                 "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v2"
             }
         ],
         "risk_factors": [

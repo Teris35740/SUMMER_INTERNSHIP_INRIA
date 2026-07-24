@@ -4,10 +4,14 @@
             "patient_id": "PAT_083",
             "age": 86,
             "gender": "femme",
-            "behavior": "anxieux"
+            "patient_attitude": {
+                "anxiety": 0.87,
+                "precision": 0.44,
+                "cooperativeness": 0.73
+            }
         },
         "chief_complaint": {
-            "information": "Serrement intense dans la poitrine",
+            "information": "Douleur dans la poitrine qui serre",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,21 +22,16 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Prend des IPP pour reflux gastrique connu -> risque de passer à côté",
+                "information": "Douleur épigastrique associée -> confusion avec reflux ou ulcère",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "th1"
-            },
-            {
                 "information": "Retour de ski dans les Alpes",
                 "reveal_policy": "only_if_history_explored",
-                "fact_id": "th2"
+                "fact_id": "th1"
             }
         ],
         "risk_factors": [

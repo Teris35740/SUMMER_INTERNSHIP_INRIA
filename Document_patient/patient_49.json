@@ -4,10 +4,14 @@
             "patient_id": "PAT_049",
             "age": 48,
             "gender": "femme",
-            "behavior": "dramatise"
+            "patient_attitude": {
+                "anxiety": 0.9,
+                "precision": 0.24,
+                "cooperativeness": 0.54
+            }
         },
         "chief_complaint": {
-            "information": "Douleur au ventre qui s'aggrave",
+            "information": "Douleur en bas à droite du ventre",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,7 +22,7 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Selles molles ce matin -> risque de confusion avec gastro-entérite",
+                "information": "La douleur a commencé autour du nombril -> confusion avec gastro",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
@@ -42,7 +46,7 @@
         ],
         "social_history": [
             {
-                "information": "Étudiant en période d'examens",
+                "information": "Stress professionnel important",
                 "reveal_policy": "only_if_gynecological_history_explored",
                 "fact_id": "soh1"
             }
@@ -75,19 +79,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_history_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v2"
-            },
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "v3"
             }
         ],
         "past_medical_history": [

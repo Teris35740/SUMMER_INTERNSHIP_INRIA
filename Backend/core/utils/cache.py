@@ -2,18 +2,20 @@ from datetime import datetime, timezone
 
 cache = {}
 
-def init_session(session_id):
+def init_session(session_id, patient_attitude=None):
+    if patient_attitude is None:
+        patient_attitude = {
+            "anxiety": 0.5,
+            "precision": 0.5,
+            "cooperativeness": 0.8
+        }
     if session_id not in cache:
         cache[session_id] = {
             "messages": [],
             "state": {
                 "revealed_facts": [],
                 "asked_topics": [],
-                "patient_attitude": {
-                    "anxiety": 0.5,
-                    "precision": 0.5,
-                    "cooperativeness": 0.8
-                },
+                "patient_attitude": patient_attitude,
                 "exam_results_unlocked": False
             }
         }

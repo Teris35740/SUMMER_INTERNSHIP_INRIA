@@ -4,7 +4,11 @@
             "patient_id": "PAT_029",
             "age": 78,
             "gender": "homme",
-            "behavior": "dramatise"
+            "patient_attitude": {
+                "anxiety": 0.85,
+                "precision": 0.22,
+                "cooperativeness": 0.46
+            }
         },
         "chief_complaint": {
             "information": "Brûlures en urinant depuis 48h",
@@ -44,7 +48,7 @@
         ],
         "surgical_history": [
             {
-                "information": "Ligature des trompes",
+                "information": "Hernie inguinale opérée",
                 "reveal_policy": "only_if_family_history_explored",
                 "fact_id": "sh1"
             }
@@ -76,6 +80,11 @@
                 "information": "Migraines fréquentes",
                 "reveal_policy": "direct_if_asked",
                 "fact_id": "pmh2"
+            },
+            {
+                "information": "Hypertension artérielle",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh3"
             }
         ],
         "treatments": [
@@ -87,26 +96,16 @@
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "th1"
-            },
-            {
                 "information": "Retour de ski dans les Alpes",
                 "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "th2"
+                "fact_id": "th1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
+                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
                 "reveal_policy": "only_if_allergies_asked",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "v2"
             }
         ],
         "allergies": [

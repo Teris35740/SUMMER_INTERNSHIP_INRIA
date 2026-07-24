@@ -4,10 +4,14 @@
             "patient_id": "PAT_064",
             "age": 91,
             "gender": "femme",
-            "behavior": "très bavard"
+            "patient_attitude": {
+                "anxiety": 0.42,
+                "precision": 0.43,
+                "cooperativeness": 0.89
+            }
         },
         "chief_complaint": {
-            "information": "Douleur sous les côtes à droite",
+            "information": "Douleur sous les côtes à droite après un repas gras",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
@@ -18,14 +22,14 @@
                 "fact_id": "h1"
             },
             {
-                "information": "Brûlures d'estomac habituelles -> confusion avec RGO",
+                "information": "Douleur épigastrique -> confusion avec gastrite",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "h2"
             }
         ],
         "treatments": [
             {
-                "information": "Pilule contraceptive",
+                "information": "Calcium + Vitamine D",
                 "reveal_policy": "direct_if_asked",
                 "fact_id": "t1"
             },
@@ -44,14 +48,9 @@
         ],
         "vitals": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
                 "reveal_policy": "only_if_context_explored",
                 "fact_id": "v1"
-            },
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v2"
             }
         ],
         "surgical_history": [
@@ -73,6 +72,13 @@
                 "information": "Pas de voyage récent",
                 "reveal_policy": "only_if_surgical_history_explored",
                 "fact_id": "th1"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Asthme infantile",
+                "reveal_policy": "only_if_medication_asked",
+                "fact_id": "pmh1"
             }
         ]
     },
