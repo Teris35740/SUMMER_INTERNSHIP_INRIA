@@ -1,7 +1,7 @@
 import os
 import sys
 
-from sentence_transformers import SentenceTransformer, CrossEncoder
+from sentence_transformers import CrossEncoder
 from supabase import create_client
 
 from core.config import (
@@ -9,6 +9,7 @@ from core.config import (
     MAX_RETRIES,
     MODEL_NAME_CROSS_ENCODER,
     MODEL_NAME_QUERY,
+    get_model,
     normalize_supabase_url
 )
 from core.llms.llm_gem import (
@@ -63,7 +64,7 @@ def main():
         supabase = create_client(supabase_url, supabase_key)
         
         print("Chargement des modèles ML d'embedding et de reranking...")
-        model = SentenceTransformer(MODEL_NAME_QUERY)
+        model = get_model(MODEL_NAME_QUERY)
         cross_encoder = CrossEncoder(MODEL_NAME_CROSS_ENCODER)
 
         while True:

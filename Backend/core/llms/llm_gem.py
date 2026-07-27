@@ -1,9 +1,16 @@
+from functools import lru_cache
+
 from google import genai
 from pydantic import BaseModel
 from typing import List
 import json
 
 from ..config import GEMINI_MODEL
+
+
+@lru_cache(maxsize=4)
+def _get_client(api_key):
+    return genai.Client(api_key=api_key)
 
 class QuestionAnalysis(BaseModel):
     question_type: str
@@ -34,7 +41,7 @@ INSTRUCTIONS ÉCRITURES RÉPONSE :
 """
 
 def answer_with_gemini(question, context, history, clinical_state, api_key, correction=""):
-    client = genai.Client(api_key=api_key)
+    client = _get_client(api_key)
     
     system_instruction = f"{SYSTEM_PROMPT}"
     clinical_state_text = clinical_state if clinical_state else {}
@@ -83,7 +90,7 @@ Tu DOIS impérativement tenir compte de cette remarque et corriger ta réponse. 
 
 
 def analyze_student_question(question, api_key):
-    client = genai.Client(api_key=api_key)
+    client = _get_client(api_key)
 
     prompt = f"""Tu es un expert en analyse de dialogue médical.
 Analyse la question de l'étudiant en médecine suivante : "{question}"
@@ -104,7 +111,6 @@ Instructions :
         }
     )
     
-    import json
     return json.loads(response.text)
 
 
@@ -133,7 +139,7 @@ Si la réponse n'est pas dans le contexte, indique simplement que l'information 
 """
 
 def test_pdf_answer_with_gemini(question, context, api_key):
-    client = genai.Client(api_key=api_key)
+    client = _get_client(api_key)
     
     prompt = f"""{TEST_PDF_PROMPT}
 

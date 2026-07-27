@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from sentence_transformers import util
 
-from ..config import _model, _tokenizer
+from ..config import get_model, get_tokenizer
 from ..utils.text_processing import split_into_sentences, extract_pages_from_pdf
 
 
@@ -18,9 +18,9 @@ def semantic_chunking(text, model=None, tokenizer=None, max_tokens=250, similari
         return []
 
     if model is None:
-        model = _model
+        model = get_model()
     if tokenizer is None:
-        tokenizer = _tokenizer
+        tokenizer = get_tokenizer()
 
     embeddings = model.encode(
         sentences,
@@ -141,9 +141,9 @@ def build_chunk_records_from_pdf(pdf_path, method="parent_child", model=None, to
     chunk_records = []
 
     if model is None:
-        model = _model
+        model = get_model()
     if tokenizer is None:
-        tokenizer = _tokenizer
+        tokenizer = get_tokenizer()
 
     for page in extract_pages_from_pdf(pdf_path):
         page_text = page["text"]

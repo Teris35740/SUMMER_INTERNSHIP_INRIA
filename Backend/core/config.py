@@ -1,7 +1,5 @@
 import os
-
-from sentence_transformers import SentenceTransformer
-from transformers import AutoTokenizer
+from functools import lru_cache
 
 try:
     from dotenv import load_dotenv
@@ -44,9 +42,21 @@ LAYER_WEIGHTS = {
     "reference": 1.0,
 }
 
-# --- Chargement unique du modèle et du tokenizer ---
-_model = SentenceTransformer(MODEL_NAME)
-_tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+
+# --- Chargement lazy des modèles ML (évite le side-effect à l'import) ---
+@lru_cache(maxsize=4)
+def get_model(model_name=None):
+    from sentence_transformers import SentenceTransformer
+    if model_name is None:
+        model_name = MODEL_NAME
+    return SentenceTransformer(model_name)
+
+@lru_cache(maxsize=4)
+def get_tokenizer(model_name=None):
+    from transformers import AutoTokenizer
+    if model_name is None:
+        model_name = MODEL_NAME
+    return AutoTokenizer.from_pretrained(model_name)
 
 
 def normalize_supabase_url(raw_url):

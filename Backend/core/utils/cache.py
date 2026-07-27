@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 
 cache = {}
 
-def init_session(session_id, patient_attitude=None):
+def init_session(session_id, patient_attitude):
     if patient_attitude is None:
         patient_attitude = {
             "anxiety": 0.5,
@@ -31,7 +31,7 @@ def add_revealed_fact(session_id, fact_id):
 
 def add_message(session_id, role, content):
     if session_id not in cache:
-        init_session(session_id, "default")
+        init_session(session_id, None)
 
     cache[session_id]["messages"].append({
         "session_id": session_id,

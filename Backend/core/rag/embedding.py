@@ -1,11 +1,11 @@
 from supabase import create_client
 
-from ..config import SUPABASE_DOCUMENTS_TABLE, _model, normalize_supabase_url
+from ..config import SUPABASE_DOCUMENTS_TABLE, get_model, normalize_supabase_url
 
 
 def embedding_db(chunks, model=None):
     if model is None:
-        model = _model
+        model = get_model()
     embeddings = model.encode(
         chunks,
         normalize_embeddings=True,
