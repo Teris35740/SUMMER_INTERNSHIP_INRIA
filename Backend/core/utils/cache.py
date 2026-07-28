@@ -12,6 +12,7 @@ def init_session(session_id, patient_attitude):
     if session_id not in cache:
         cache[session_id] = {
             "messages": [],
+            "question_count": 0,
             "state": {
                 "revealed_facts": [],
                 "asked_topics": [],
@@ -47,6 +48,13 @@ def get_history(session_id):
 def get_clinical_state(session_id):
     session = cache.get(session_id, {})
     return session.get("state", {})
+
+def increment_question_count(session_id):
+    if session_id in cache:
+        cache[session_id]["question_count"] = cache[session_id].get("question_count", 0) + 1
+
+def get_question_count(session_id):
+    return cache.get(session_id, {}).get("question_count", 0)
 
 def clear_session(session_id):
     cache.pop(session_id, None)

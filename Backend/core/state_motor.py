@@ -33,6 +33,7 @@ def state_motor_simple(target_slots, rows):
 def state_motor_advanced(global_asked_topics, current_target_slots, rows):
     """
     Filtre les informations du RAG en utilisant la mémoire complète de la session.
+    Retourne (authorized_rows, blocked_rows) pour la traçabilité.
     """
     all_explored_topics = set()
     for topic_group in global_asked_topics:
@@ -46,6 +47,7 @@ def state_motor_advanced(global_asked_topics, current_target_slots, rows):
         all_explored_topics.add(slot)
 
     authorized_rows = []
+    blocked_rows = []
     
     for row in rows:
         source_type = row.get("source_type", "unknown")
@@ -55,12 +57,14 @@ def state_motor_advanced(global_asked_topics, current_target_slots, rows):
             continue
             
         reveal_policy = row.get("metadata", {}).get("reveal_policy", "unknown")
+        fact_id = row.get("metadata", {}).get("fact_id", "?")
         
         if reveal_policy == "direct_if_asked":
             authorized_rows.append(row)
             continue
             
         is_authorized = False
+        required_topic = None
         if reveal_policy.startswith("only_if_"):
             required_topic = reveal_policy.replace("only_if_", "")
             if required_topic in all_explored_topics:
@@ -68,5 +72,12 @@ def state_motor_advanced(global_asked_topics, current_target_slots, rows):
                 
         if is_authorized:
             authorized_rows.append(row)
+        else:
+            blocked_rows.append({
+                "fact_id": fact_id,
+                "reveal_policy": reveal_policy,
+                "required_topic": required_topic,
+                "explored_topics": list(all_explored_topics),
+            })
             
-    return authorized_rows
+    return authorized_rows, blocked_rows

@@ -1,5 +1,7 @@
 import os
 import sys
+import re
+import json
 
 from sentence_transformers import CrossEncoder
 from supabase import create_client
@@ -29,10 +31,12 @@ from core.utils.cache import (
     clear_session,
     get_clinical_state,
     get_history,
+    increment_question_count,
+    get_question_count,
     init_session
 )
-from core.utils.helpers import load_patient_attitude
-from core.verification import fact_id_authorized_by_motor, verification_answer
+from core.utils.helpers import load_patient_attitude, load_expected_diagnosis
+from core.verification import fact_id_authorized_by_motor, verification_answer, verify_diagnosis
 
 
 def main():
@@ -59,6 +63,12 @@ def main():
     # à améliorer pour gérer plusieurs sessions/patients
     patient_id = "PAT_001"
     session_id = "session_1"
+    MIN_QUESTIONS = 3
+
+    # Charger le diagnostic attendu depuis le fichier patient
+    expected_diagnosis = load_expected_diagnosis(patient_id)
+    if expected_diagnosis is None:
+        raise SystemExit(f"Erreur : Impossible de charger le diagnostic attendu pour {patient_id}.")
     
     try:
         supabase = create_client(supabase_url, supabase_key)
@@ -76,6 +86,27 @@ def main():
 
             if not question:
                 print("Erreur : Question vide. Veuillez formuler une question.")
+                continue
+
+            # Détection du diagnostic : si l'étudiant tape "diag : ..."
+            diag_match = re.match(r'^diag\s*:\s*(.+)', question, re.IGNORECASE)
+            if diag_match:
+                student_diagnosis = diag_match.group(1).strip()
+                q_count = get_question_count(session_id)
+                if q_count < MIN_QUESTIONS:
+                    remaining = MIN_QUESTIONS - q_count
+                    print(f"\n  Vous devez poser au moins {MIN_QUESTIONS} questions avant de diagnostiquer.")
+                    print(f"    Questions posées : {q_count}/{MIN_QUESTIONS} (encore {remaining})")
+                    continue
+
+                is_correct, feedback = verify_diagnosis(student_diagnosis, expected_diagnosis)
+                print("\n" + "=" * 50)
+                if is_correct:
+                    print(f"DIAGNOSTIC CORRECT !")
+                else:
+                    print(f"DIAGNOSTIC INCORRECT")
+                print(f"   {feedback}")
+                print("=" * 50)
                 continue
             
             # Gestion de la session et de l'historique
@@ -120,7 +151,14 @@ def main():
 
             global_topics = clinical_state.get('asked_topics', [])
             # rows = state_motor_simple(target_slots, rows)
-            rows = state_motor_advanced(global_topics, target_slots, rows)
+            rows, blocked = state_motor_advanced(global_topics, target_slots, rows)
+
+            if blocked:
+                print(f"\n--- Faits bloqués par le moteur d'état ({len(blocked)}) ---")
+                for b in blocked:
+                    print(f"  [BLOQUÉ] {b['fact_id']} | policy: {b['reveal_policy']} | "
+                          f"topic requis: {b['required_topic']} | "
+                          f"topics explorés: {b['explored_topics']}")
 
             # Construction du contexte
             context = build_context(rows)
@@ -161,12 +199,14 @@ def main():
 
             # Mise à jour de la session si succès
             if tentatives < MAX_RETRIES:
+                increment_question_count(session_id)
                 add_message(session_id, "user", question)
                 add_message(session_id, "assistant", answer_text)
                 add_asked_topic(session_id, target_slots)
                 add_revealed_fact(session_id, used_fact_ids)
 
-                print("\n--- Réponse finale ---")
+                q_count = get_question_count(session_id)
+                print(f"\n--- Réponse finale (question {q_count}/{MIN_QUESTIONS} avant diagnostic) ---")
                 print(answer)
 
     except KeyboardInterrupt:
