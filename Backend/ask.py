@@ -1,6 +1,5 @@
 import os
 import sys
-import re
 import json
 
 from sentence_transformers import CrossEncoder
@@ -23,6 +22,7 @@ from core.llms.llm_gem import (
 )
 from core.rag.reranking import build_context, expansion_parent_child, re_ranking
 from core.rag.retrieval import embed_question, fusion_rows
+from core.diagnostic import parse_diagnosis_attempt, handle_diagnosis
 from core.state_motor import state_motor_advanced, state_motor_simple
 from core.utils.cache import (
     add_asked_topic,
@@ -36,7 +36,7 @@ from core.utils.cache import (
     init_session
 )
 from core.utils.helpers import load_patient_attitude, load_expected_diagnosis
-from core.verification import fact_id_authorized_by_motor, verification_answer, verify_diagnosis
+from core.verification import fact_id_authorized_by_motor, verification_answer
 
 
 def main():
@@ -89,23 +89,21 @@ def main():
                 continue
 
             # Détection du diagnostic : si l'étudiant tape "diag : ..."
-            diag_match = re.match(r'^diag\s*:\s*(.+)', question, re.IGNORECASE)
-            if diag_match:
-                student_diagnosis = diag_match.group(1).strip()
-                q_count = get_question_count(session_id)
-                if q_count < MIN_QUESTIONS:
-                    remaining = MIN_QUESTIONS - q_count
-                    print(f"\n  Vous devez poser au moins {MIN_QUESTIONS} questions avant de diagnostiquer.")
-                    print(f"    Questions posées : {q_count}/{MIN_QUESTIONS} (encore {remaining})")
+            student_diagnosis = parse_diagnosis_attempt(question)
+            if student_diagnosis is not None:
+                result = handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, MIN_QUESTIONS)
+
+                if result["status"] == "too_early":
+                    print(f"\n  Vous devez poser au moins {result['min_questions']} questions avant de diagnostiquer.")
+                    print(f"    Questions posées : {result['q_count']}/{result['min_questions']} (encore {result['remaining']})")
                     continue
 
-                is_correct, feedback = verify_diagnosis(student_diagnosis, expected_diagnosis)
                 print("\n" + "=" * 50)
-                if is_correct:
-                    print(f"DIAGNOSTIC CORRECT !")
+                if result["is_correct"]:
+                    print("DIAGNOSTIC CORRECT !")
                 else:
-                    print(f"DIAGNOSTIC INCORRECT")
-                print(f"   {feedback}")
+                    print("DIAGNOSTIC INCORRECT")
+                print(f"   {result['feedback']}")
                 print("=" * 50)
                 continue
             
