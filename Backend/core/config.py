@@ -63,3 +63,52 @@ def normalize_supabase_url(raw_url):
     if not raw_url:
         return raw_url
     return raw_url.rstrip("/").removesuffix("/rest/v1")
+
+
+# --- Scoring de l'étudiant ---
+# Poids des indicateurs : w4 > w1 > w2 > w3
+SCORING_WEIGHTS = {
+    "w1_coverage": 0.30,       # Couverture de l'anamnèse
+    "w2_pertinence": 0.15,     # Pertinence des questions
+    "w3_structure": 0.10,      # Structure de l'entretien
+    "w4_diagnostic": 0.45,     # Performance diagnostique
+}
+
+# Ordre clinique idéal (enseigné aux étudiants en médecine)
+# 1. Motif de la venue
+# 2. Antécédents personnels médicaux et chirurgicaux
+# 3. Antécédents familiaux
+# 4. Traitements (médicaments)
+# 5. Allergies
+# 6. Mode de vie (substances, social, voyages, facteurs de risque)
+# 7. Histoire de la maladie (évolution, caractéristiques de la douleur)
+# 8. Symptômes associés
+IDEAL_TOPIC_ORDER = [
+    "context_explored",
+    "past_medical_history_explored",
+    "surgical_history_explored",
+    "family_history_explored",
+    "medication_asked",
+    "allergies_asked",
+    "substance_use_explored",
+    "social_history_explored",
+    "travel_history_explored",
+    "risk_factors_explored",
+    "history_explored",
+    "pain_characteristics_explored",
+    "associated_symptoms_explored",
+]
+
+# Mapping section du JSON patient -> topic du système
+SECTION_TO_TOPIC = {
+    "chief_complaint": "context_explored",
+    "history": "history_explored",
+    "past_medical_history": "past_medical_history_explored",
+    "surgical_history": "surgical_history_explored",
+    "family_history": "family_history_explored",
+    "treatments": "medication_asked",
+    "allergies": "allergies_asked",
+    "social_history": "social_history_explored",
+    "travel_history": "travel_history_explored",
+    "risk_factors": "risk_factors_explored",
+}
