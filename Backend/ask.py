@@ -3,7 +3,6 @@ import sys
 import json
 
 from sentence_transformers import CrossEncoder
-from supabase import create_client
 
 from core.config import (
     EXCERPT_COUNT,
@@ -11,7 +10,6 @@ from core.config import (
     MODEL_NAME_CROSS_ENCODER,
     MODEL_NAME_QUERY,
     get_model,
-    normalize_supabase_url
 )
 from core.llms.llm_gem import (
     analyze_student_question,
@@ -42,16 +40,12 @@ from core.verification import fact_id_authorized_by_motor, verification_answer
 
 
 def main():
-    supabase_url = normalize_supabase_url(os.getenv("SUPABASE_URL"))
-    supabase_key = os.getenv("SUPABASE_KEY")
     gemini_api_key = os.getenv("GEMINI_API_KEY")
     gemini_api_key_question_analysis = os.getenv("GEMINI_API_KEY_QUESTION_ANALYSIS")
     # mistral_api_key = os.getenv("RAGARENN")
     # mistral_base_url = os.getenv("URL_RAGARENN")
 
     env_vars = [
-        supabase_url, 
-        supabase_key, 
         gemini_api_key, 
         gemini_api_key_question_analysis
     ]
@@ -59,7 +53,7 @@ def main():
     if not all(env_vars):
         raise SystemExit(
             "Erreur : Variables d'environnement manquantes "
-            "(SUPABASE_URL, SUPABASE_KEY, GEMINI_API_KEY, GEMINI_API_KEY_QUESTION_ANALYSIS)."
+            "(GEMINI_API_KEY, GEMINI_API_KEY_QUESTION_ANALYSIS)."
         )
 
     # à améliorer pour gérer plusieurs sessions/patients
@@ -77,8 +71,6 @@ def main():
         print(f"Attention : Données patient complètes non disponibles pour {patient_id}. Le scoring sera désactivé.")
     
     try:
-        supabase = create_client(supabase_url, supabase_key)
-        
         print("Chargement des modèles ML d'embedding et de reranking...")
         model = get_model(MODEL_NAME_QUERY)
         cross_encoder = CrossEncoder(MODEL_NAME_CROSS_ENCODER)
@@ -153,7 +145,7 @@ def main():
             query_embedding = embed_question(question, model)
 
             # if requires_retrieval: # Si le llm a déterminé que la question nécessite de fouiller le dossier.
-            rows = fusion_rows(supabase, query_embedding, search_keywords, filter_patient_id=patient_id)
+            rows = fusion_rows(query_embedding, search_keywords, filter_patient_id=patient_id)
 
             if not rows:
                 print("Aucun contexte trouvé dans la base de données.")
