@@ -29,12 +29,11 @@ GEMINI_MODEL = "gemini-flash-lite-latest"
 EXCERPT_COUNT = int(os.getenv("EXCERPT_COUNT", "50"))
 MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
 
-# --- Noms des tables et RPC Supabase ---
-SUPABASE_DOCUMENTS_TABLE = os.getenv("SUPABASE_DOCUMENTS_TABLE", "documents_json")
-# SUPABASE_VECTOR_RPC = os.getenv("SUPABASE_VECTOR_RPC", "match_documents_vector_bge")
-SUPABASE_VECTOR_RPC = os.getenv("SUPABASE_VECTOR_RPC", "match_vector_documents_json")
-# SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_documents_keyword_bge")
-SUPABASE_KEYWORD_RPC = os.getenv("SUPABASE_KEYWORD_RPC", "match_text_documents_json")
+# --- Weaviate ---
+WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
+WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY", "")
+WEAVIATE_COLLECTION = os.getenv("WEAVIATE_COLLECTION", "MedicalDocuments")
+WEAVIATE_EMBEDDING_DIM = 768
 
 # --- Facteurs de couche λ pour la récupération stratifiée ---
 LAYER_WEIGHTS = {
@@ -59,10 +58,23 @@ def get_tokenizer(model_name=None):
     return AutoTokenizer.from_pretrained(model_name)
 
 
-def normalize_supabase_url(raw_url):
-    if not raw_url:
-        return raw_url
-    return raw_url.rstrip("/").removesuffix("/rest/v1")
+_weaviate_client = None
+
+def get_weaviate_client():
+    global _weaviate_client
+    if _weaviate_client is None:
+        import weaviate
+        if WEAVIATE_API_KEY:
+            _weaviate_client = weaviate.connect_to_weaviate_cloud(
+                cluster_url=WEAVIATE_URL,
+                auth_credentials=weaviate.auth.AuthApiKey(WEAVIATE_API_KEY),
+            )
+        else:
+            _weaviate_client = weaviate.connect_to_local(
+                host=WEAVIATE_URL.replace("http://", "").replace("https://", "").split(":")[0],
+                port=int(WEAVIATE_URL.split(":")[-1]) if ":" in WEAVIATE_URL.split("//")[-1] else 8080,
+            )
+    return _weaviate_client
 
 
 # --- Scoring de l'étudiant ---
