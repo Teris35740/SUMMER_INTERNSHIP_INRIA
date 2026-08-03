@@ -13,6 +13,8 @@ def init_session(session_id, patient_attitude):
         cache[session_id] = {
             "messages": [],
             "question_count": 0,
+            "useful_question_count": 0,
+            "useful_questions_list": [],
             "state": {
                 "revealed_facts": [],
                 "asked_topics": [],
@@ -55,6 +57,17 @@ def increment_question_count(session_id):
 
 def get_question_count(session_id):
     return cache.get(session_id, {}).get("question_count", 0)
+
+def add_useful_question(session_id, question):
+    if session_id in cache:
+        cache[session_id]["useful_question_count"] = cache[session_id].get("useful_question_count", 0) + 1
+        cache[session_id]["useful_questions_list"].append(question)
+
+def get_useful_question_count(session_id):
+    return cache.get(session_id, {}).get("useful_question_count", 0)
+
+def get_useful_questions(session_id):
+    return cache.get(session_id, {}).get("useful_questions_list", [])
 
 def clear_session(session_id):
     cache.pop(session_id, None)

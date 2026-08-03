@@ -32,10 +32,12 @@ from core.utils.cache import (
     get_clinical_state,
     get_history,
     increment_question_count,
+    add_useful_question,
     get_question_count,
     init_session
 )
-from core.utils.helpers import load_patient_attitude, load_expected_diagnosis
+from core.utils.helpers import load_patient_attitude, load_expected_diagnosis, load_patient_data
+from core.scoring import format_report
 from core.verification import fact_id_authorized_by_motor, verification_answer
 
 
@@ -65,10 +67,14 @@ def main():
     session_id = "session_1"
     MIN_QUESTIONS = 3
 
-    # Charger le diagnostic attendu depuis le fichier patient
+    # Charger le diagnostic attendu et les données complètes du patient
     expected_diagnosis = load_expected_diagnosis(patient_id)
     if expected_diagnosis is None:
         raise SystemExit(f"Erreur : Impossible de charger le diagnostic attendu pour {patient_id}.")
+
+    patient_data = load_patient_data(patient_id)
+    if patient_data is None:
+        print(f"Attention : Données patient complètes non disponibles pour {patient_id}. Le scoring sera désactivé.")
     
     try:
         supabase = create_client(supabase_url, supabase_key)
@@ -91,7 +97,10 @@ def main():
             # Détection du diagnostic : si l'étudiant tape "diag : ..."
             student_diagnosis = parse_diagnosis_attempt(question)
             if student_diagnosis is not None:
-                result = handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, MIN_QUESTIONS)
+                result = handle_diagnosis(
+                    student_diagnosis, expected_diagnosis, session_id, MIN_QUESTIONS,
+                    patient_data=patient_data,
+                )
 
                 if result["status"] == "too_early":
                     print(f"\n  Vous devez poser au moins {result['min_questions']} questions avant de diagnostiquer.")
@@ -105,6 +114,11 @@ def main():
                     print("DIAGNOSTIC INCORRECT")
                 print(f"   {result['feedback']}")
                 print("=" * 50)
+
+                # Affichage du rapport de notation
+                if result.get("report"):
+                    print(format_report(result["report"]))
+
                 continue
             
             # Gestion de la session et de l'historique
@@ -129,6 +143,10 @@ def main():
             print(f"Thèmes abordés : {', '.join(target_slots)}")
             print(f"Nécessite récupération : {'Oui' if requires_retrieval else 'Non'}")
             print(f"Mots-clés de recherche : {search_keywords}")
+
+            # Tracking de la pertinence (question utile si nécessite une recherche)
+            if requires_retrieval:
+                add_useful_question(session_id, question)
 
             # RAG : Recherche et traitement des documents
             print("\nRecherche des documents pertinents...")
