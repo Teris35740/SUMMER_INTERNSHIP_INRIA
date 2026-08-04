@@ -5,169 +5,149 @@
             "age": 69,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.28,
-                "precision": 0.77,
-                "cooperativeness": 0.48
+                "anxiety": 0.74,
+                "precision": 0.36,
+                "cooperativeness": 0.67
             }
         },
         "chief_complaint": {
-            "information": "Dos bloqué après avoir porté un carton",
+            "information": "Dos bloqué en soulevant un objet lourd, je n'arrive plus à me redresser.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 31 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Blocage lombaire survenu il y a 42 heures en soulevant un objet lourd. Sensation de 'coup de poignard' dans le bas du dos.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 7/10 au mouvement, 3/10 au repos allongé.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "th1"
             },
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "th2"
+                "information": "Localisation : Douleur lombaire basse en barre, avec contracture musculaire paravertébrale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "th3"
+                "information": "Irradiation : Petite douleur irradiant dans la fesse gauche. Ne descend PAS dans la cuisse ni la jambe.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h4"
             },
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "th4"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "fh1"
+                "information": "Facteurs aggravants : Se pencher en avant, position assise prolongée, passer de assis à debout.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
             },
             {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh2"
+                "information": "Facteurs calmants : Position allongée sur le dos, genoux pliés.",
+                "reveal_policy": "only_if_alleviating_factors_asked",
+                "fact_id": "h6"
             },
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "fh3"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "fh4"
-            },
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "fh5"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t3"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Iode (choc)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "v1"
+                "information": "Drapeaux rouges (Négatifs) : Pas de perte de sensation périnéale, pas de troubles sphinctériens, pas de fièvre, pas de déficit moteur.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
         "risk_factors": [
             {
-                "information": "Non fumeur",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "rf2"
             }
         ],
-        "surgical_history": [
+        "travel_history": [
             {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh3"
-            },
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "sh4"
+                "information": "Séjour en Amérique du Sud il y a 4 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
-        "social_history": [
+        "family_history": [
             {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh1"
+                "information": "Parents en bonne santé. Rien de notable.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 134/80.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.0°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Épisodes de lombalgies récurrents, environ 3 fois par an.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Metformine 500mg matin et soir (diabète).",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
             },
             {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "pmh2"
+                "information": "Automédication : A pris 1g de paracétamol il y a 1h, soulagement modéré.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à l'arachide (œdème facial).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
             },
             {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Pharmacienne titulaire.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Divorcée, garde alternée de 2 enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne il y a 11 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -176,11 +156,16 @@
         "specialty": "Rhumatologie",
         "expected_diagnosis": "Lombalgie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sciatique",
+            "Hernie discale",
+            "Tassement vertébral",
+            "Spondylodiscite"
         ],
         "red_flags": [
             "Anesthésie en selle",
-            "Troubles sphinctériens"
+            "Troubles sphinctériens",
+            "Déficit moteur",
+            "Fièvre"
         ]
     }
 }

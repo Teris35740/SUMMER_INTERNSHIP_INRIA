@@ -5,97 +5,129 @@
             "age": 32,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.18,
-                "precision": 0.43,
-                "cooperativeness": 0.35
+                "anxiety": 0.67,
+                "precision": 0.82,
+                "cooperativeness": 0.65
             }
         },
         "chief_complaint": {
-            "information": "Bras gauche qui ne bouge plus depuis 1h",
+            "information": "Mon bras droit ne bouge plus depuis 1 heure, j'ai aussi du mal à parler.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 33 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Paralysie brutale du bras droit apparue il y a 1 heure, d'un seul coup. ",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Patient confus -> confusion avec ivresse ou hypoglycémie",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "h2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "Déficit moteur : Impossibilité de lever le bras droit. La jambe n’est pas touchée.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v1"
+                "fact_id": "h2"
+            },
+            {
+                "information": "Troubles du langage : Difficultés pour trouver les mots (aphasie d’expression).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Céphalée : Pas de céphalée intense associée (oriente vers AVC ischémique plutôt qu'hémorragique).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteurs de risque : Hypertension artérielle mal équilibrée.",
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fumeur actif, 6 cigarettes par jour depuis 9 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
             }
         ],
-        "surgical_history": [
+        "family_history": [
             {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh1"
+                "information": "Père : Insuffisance cardiaque. Mère : Alzheimer diagnostiqué à 67 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 186/95.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh2"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Arachide",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "a1"
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Acariens",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "a2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Aucun traitement régulier",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "t1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "soh1"
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Hypertension artérielle traitée. ",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Anticoagulant (apixaban) pour la FA.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Commercial itinérant, beaucoup de route.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
             },
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "pmh2"
+                "information": "Situation familiale : Veuf(ve), vit seul. Enfants adultes.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation occasionnelle en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fumeur actif, 6 cigarettes par jour depuis 9 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Prothèse totale de hanche droit il y a 5 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -104,12 +136,16 @@
         "specialty": "Neurologie",
         "expected_diagnosis": "AVC ischémique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "AIT",
+            "Hypoglycémie",
+            "Épilepsie partielle",
+            "Migraine avec aura prolongée"
         ],
         "red_flags": [
-            "Aphasie",
-            "Déviation de la commissure labiale",
-            "Trouble visuel soudain"
+            "Aggravation neurologique",
+            "Troubles de la conscience",
+            "Engagement cérébral",
+            "Transformation hémorragique"
         ]
     }
 }

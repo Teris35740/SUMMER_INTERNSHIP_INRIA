@@ -5,154 +5,154 @@
             "age": 32,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.22,
-                "precision": 0.79,
-                "cooperativeness": 0.76
+                "anxiety": 0.77,
+                "precision": 0.25,
+                "cooperativeness": 0.87
             }
         },
         "chief_complaint": {
-            "information": "Mal de tête atroce pulsatile",
+            "information": "Mal de tête atroce pulsatile depuis 11 heures.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 7 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La céphalée a commencé après des troubles visuels (scotomes scintillants) il y a 11 heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Aura visuelle : Scotomes scintillants (zigzags lumineux) ayant duré environ 27 minutes avant la céphalée. C'est habituel chez elle.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h1b"
+            },
+            {
+                "information": "Intensité : 6/10 au pic. Pulsatile, augmentée par les battements du cœur.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh1"
             },
             {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "fh2"
+                "information": "Localisation : Hémicrânienne gauche, frontale et temporale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "fh3"
+                "information": "Symptômes associés : Nausées avec un vomissement. Photophobie et phonophobie marquées.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
             },
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "fh4"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh1"
+                "information": "Facteurs aggravants : Lumière, bruit, effort physique. Préfère rester dans le noir.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
             },
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "pmh2"
+                "information": "Drapeaux rouges (Négatifs) : Pas de raideur de nuque, pas de fièvre, pas de déficit neurologique focal, pas de céphalée en coup de tonnerre.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "rf2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "v1"
             }
         ],
         "travel_history": [
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Vacances en Portugal il y a 3 mois.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "th3"
             }
         ],
-        "social_history": [
+        "family_history": [
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "soh1"
+                "information": "Père : Décédé d'un cancer du poumon à 68 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
             },
             {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh3"
+                "information": "Mère : Arthrose sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
             }
         ],
-        "surgical_history": [
+        "vitals": [
             {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh1"
+                "information": "Tension Artérielle : 116/73.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh2"
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh3"
+                "information": "Température : 37.1°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines avec aura récurrentes depuis l'âge de 17 ans, environ 3 crises par mois.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Sumatriptan 50mg en comprimé au début de la crise (pris, en cours d’action).",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g pris il y a 3h, soulagement partiel.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "allergies": [
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Allergie aux AINS (ibuprofène) : urticaire.",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
             },
             {
-                "information": "Acariens",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Pas d'autre allergie.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
                 "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Femme au foyer, s'occupe de 3 enfants.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 2 enfants (8 et 12 ans).",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 3 bières par jour le soir après le travail.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cure de hernie inguinale gauche à 16 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -161,11 +161,15 @@
         "specialty": "Neurologie",
         "expected_diagnosis": "Migraine",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Céphalée de tension",
+            "Hémorragie sous-arachnoïdienne",
+            "Artérite temporale"
         ],
         "red_flags": [
+            "Céphalée en coup de tonnerre",
+            "Raideur de nuque",
             "Déficit neurologique focal",
-            "Début brutal en coup de tonnerre"
+            "Fièvre"
         ]
     }
 }

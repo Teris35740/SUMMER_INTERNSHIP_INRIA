@@ -1,6 +1,8 @@
-from supabase import create_client
+import json
 
-from ..config import SUPABASE_DOCUMENTS_TABLE, get_model, normalize_supabase_url
+import weaviate.classes.config as wvc
+
+from ..config import WEAVIATE_COLLECTION, WEAVIATE_EMBEDDING_DIM, get_model, get_weaviate_client
 
 
 def embedding_db(chunks, model=None):
@@ -15,25 +17,49 @@ def embedding_db(chunks, model=None):
     return embeddings
 
 
-def store_embeddings_in_supabase(chunk_records, embeddings, supabase_url, supabase_key, table_name=SUPABASE_DOCUMENTS_TABLE):
-    supabase_url = normalize_supabase_url(supabase_url)
-    supabase = create_client(supabase_url, supabase_key)
+def _ensure_collection_exists(client, collection_name=WEAVIATE_COLLECTION):
+    """Crée la collection Weaviate si elle n'existe pas encore."""
+    if not client.collections.exists(collection_name):
+        client.collections.create(
+            name=collection_name,
+            vectorizer_config=wvc.Configure.Vectorizer.none(),
+            properties=[
+                wvc.Property(name="content", data_type=wvc.DataType.TEXT),
+                wvc.Property(name="source_type", data_type=wvc.DataType.TEXT),
+                wvc.Property(name="metadata_json", data_type=wvc.DataType.TEXT),
+            ],
+        )
 
-    rows = []
+
+def store_in_weaviate(chunk_records, embeddings, collection_name=WEAVIATE_COLLECTION):
+    """Stocke les chunks avec leurs embeddings dans Weaviate.
+    
+    Remplace l'ancienne fonction store_embeddings_in_supabase.
+    Les metadata sont sérialisées en JSON string car Weaviate ne supporte
+    pas les objets JSONB imbriqués aussi facilement que PostgreSQL.
+    """
+    client = get_weaviate_client()
+    _ensure_collection_exists(client, collection_name)
+
+    collection = client.collections.get(collection_name)
     embs = embeddings.cpu().numpy()
 
-    for record, emb in zip(chunk_records, embs):
-        record_data = record.copy()
+    with collection.batch.dynamic() as batch:
+        for record, emb in zip(chunk_records, embs):
+            record_data = record.copy()
 
-        content = record_data.pop("content")
-        source_type = record_data.pop("source_type")
+            content = record_data.pop("content")
+            source_type = record_data.pop("source_type")
 
-        rows.append({
-            "content": content,
-            "embedding": emb.tolist(),
-            "source_type": source_type,
-            "metadata": record_data,
-        })
+            properties = {
+                "content": content,
+                "source_type": source_type,
+                "metadata_json": json.dumps(record_data, ensure_ascii=False),
+            }
 
-    response = supabase.table(table_name).insert(rows).execute()
-    return response
+            batch.add_object(
+                properties=properties,
+                vector=emb.tolist(),
+            )
+
+    return {"status": "ok", "count": len(chunk_records)}

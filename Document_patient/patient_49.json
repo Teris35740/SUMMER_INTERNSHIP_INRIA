@@ -6,96 +6,143 @@
             "gender": "femme",
             "patient_attitude": {
                 "anxiety": 0.9,
-                "precision": 0.24,
-                "cooperativeness": 0.54
+                "precision": 0.74,
+                "cooperativeness": 0.72
             }
         },
         "chief_complaint": {
-            "information": "Douleur en bas à droite du ventre",
+            "information": "Douleur dans le ventre en bas à droite depuis 19 heures, ça empire.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 15 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La douleur a commencé il y a 19 heures autour du nombril (péri-ombilicale), puis s'est déplacée en fosse iliaque droite en quelques heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "La douleur a commencé autour du nombril -> confusion avec gastro",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 6/10, en augmentation progressive. Douleur continue, pas par crises.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "sh1"
             },
             {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh2"
+                "information": "Localisation : Douleur localisée au point de McBurney (fosse iliaque droite), augmentée à la palpation.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "sh3"
-            }
-        ],
-        "social_history": [
+                "information": "Symptômes associés : Nausées . Perte d'appétit marquée (anorexie).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
             {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "soh1"
+                "information": "Facteurs aggravants : La marche, la toux, les mouvements brusques augmentent la douleur.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges : Légère défense en fosse iliaque droite à la palpation.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "t1"
             }
         ],
         "travel_history": [
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Vacances en Croatie il y a 3 mois.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "th2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "pmh1"
             }
         ],
         "family_history": [
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Antécédents familiaux de diabète de type 2 (mère et grand-mère maternelle).",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 124/76.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 91 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Antécédents de troubles digestifs fonctionnels.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris du Spasfon sans effet, puis 1g de paracétamol il y a 2h avec un soulagement minime.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à la pénicilline (éruption cutanée).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Caissière en grande surface.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 4 petits-enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune intervention chirurgicale antérieure.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -104,11 +151,16 @@
         "specialty": "Gastro-entérologie",
         "expected_diagnosis": "Appendicite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Gastro-entérite",
+            "Colique néphrétique droite",
+            "Torsion ovarienne",
+            "GEU"
         ],
         "red_flags": [
-            "Défense en fosse iliaque droite",
-            "Fièvre persistante"
+            "Défense en FID",
+            "Fièvre persistante",
+            "Péritonite",
+            "Choc"
         ]
     }
 }

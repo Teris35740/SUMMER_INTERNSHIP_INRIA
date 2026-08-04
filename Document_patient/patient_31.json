@@ -5,144 +5,139 @@
             "age": 55,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.18,
-                "precision": 0.66,
-                "cooperativeness": 0.83
+                "anxiety": 0.51,
+                "precision": 0.35,
+                "cooperativeness": 0.89
             }
         },
         "chief_complaint": {
-            "information": "Vomissements et diarrhée depuis 24h",
+            "information": "Vomissements et diarrhée depuis 32h, je suis épuisé.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 21 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Les symptômes ont commencé il y a 32 heures, quelques heures après un repas au restaurant.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Sensibilité abdominale basse -> confusion avec appendicite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Vomissements : 4 épisodes, d'abord alimentaires puis bilieux.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
-            }
-        ],
-        "surgical_history": [
+            },
             {
-                "information": "Opération des dents de sagesse",
+                "information": "Diarrhée : Selles liquides, environ 7 fois. Pas de sang ni de glaires.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "soh1"
+                "fact_id": "h3"
             },
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh1"
+                "information": "Douleurs abdominales : Crampes diffuses dans tout le ventre, soulagées après les selles.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h4"
             },
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "fh3"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Oméprazole 20mg",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "t3"
-            },
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t4"
-            },
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t5"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "a1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh4"
-            },
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh5"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "th1"
+                "information": "Drapeaux rouges (Négatifs) : Pas de sang dans les selles, pas de fièvre élevée, pas de douleur localisée en fosse iliaque droite.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Fumeur actif, 12 cigarettes par jour depuis 13 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Asie du Sud-Est il y a 6 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père : Infarctus du myocarde à 69 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Mère : Cancer du sein à 75 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 119/78.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 94 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.4°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris du Smecta et essaye de s'hydrater avec de l'eau et du bouillon.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux fruits de mer (urticaire et gonflement).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Chauffeur de taxi. Longues heures assis.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, pas d'enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation occasionnelle en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fumeur actif, 12 cigarettes par jour depuis 13 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécystectomie par cœlioscopie il y a 14 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -151,11 +146,15 @@
         "specialty": "Gastro-entérologie",
         "expected_diagnosis": "Gastro-entérite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Intoxication alimentaire",
+            "Appendicite",
+            "Occlusion intestinale"
         ],
         "red_flags": [
-            "Signes du pli cutané",
-            "Tachycardie"
+            "Déshydratation sévère",
+            "Sang dans les selles",
+            "Douleur localisée FID",
+            "Fièvre > 39°C"
         ]
     }
 }

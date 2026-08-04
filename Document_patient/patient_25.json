@@ -5,174 +5,139 @@
             "age": 75,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.18,
-                "precision": 0.62,
-                "cooperativeness": 0.49
+                "anxiety": 0.88,
+                "precision": 0.78,
+                "cooperativeness": 0.9
             }
         },
         "chief_complaint": {
-            "information": "Rhume qui ne passe pas depuis 5 jours",
+            "information": "Nez bouché et qui coule depuis 3 jours, avec mal de gorge.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 12 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Rhinorrhée et obstruction nasale apparues progressivement il y a 3 jours. Début par un mal de gorge.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Maux de tête légers -> confusion avec sinusite ou grippe",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "h2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Calcium + Vitamine D",
+                "information": "Symptômes : Nez bouché alternativement des deux côtés, écoulement nasal clair puis devenu plus épais et jaunâtre. Éternuements fréquents.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t1"
+                "fact_id": "h2"
             },
             {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "t2"
+                "information": "Gorge : Irritation et légère douleur à la déglutition, sans difficulté pour avaler.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "t3"
+                "information": "Fièvre : Petite fièvre à 37.8°C les 2 premiers jours, maintenant normalisée.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
             },
             {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t4"
-            },
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "t5"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Ligature des trompes",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh3"
-            },
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "sh4"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th1"
-            },
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "th3"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "fh2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v1"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Arachide",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "a3"
+                "information": "Drapeaux rouges (Négatifs) : Pas de dyspnée, pas d'otalgie, pas de douleur faciale intense, pas de fièvre persistante.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Vacances en Italie il y a 2 mois.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Parents en bonne santé. Rien de notable.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 137/82.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "rf2"
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "rf3"
+                "information": "Température : 36.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Rhinopharyngites fréquentes, 3-4 épisodes par an.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses pathologies chroniques.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g × 2/jour, lavages de nez au sérum physiologique, pastilles pour la gorge.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à la pénicilline (éruption cutanée).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Retraitée, ancienne institutrice.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Divorcée, garde alternée de 2 enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne il y a 7 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -181,11 +146,15 @@
         "specialty": "Médecine générale",
         "expected_diagnosis": "Rhinopharyngite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sinusite",
+            "Grippe",
+            "COVID-19",
+            "Allergie"
         ],
         "red_flags": [
+            "Fièvre > 39°C prolongée",
             "Dyspnée",
-            "Fièvre prolongée > 5 jours"
+            "Douleur faciale intense"
         ]
     }
 }

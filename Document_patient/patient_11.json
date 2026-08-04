@@ -5,189 +5,159 @@
             "age": 57,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.79,
-                "precision": 0.18,
-                "cooperativeness": 0.57
+                "anxiety": 0.4,
+                "precision": 0.7,
+                "cooperativeness": 0.8
             }
         },
         "chief_complaint": {
-            "information": "Dos bloqué après avoir porté un carton",
+            "information": "J'ai le dos complètement coincé, ça m'est arrivé en jardinant.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 42 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Blocage lombaire survenu il y a 8 heures en se relevant après avoir arraché des mauvaises herbes dans son jardin (flexion + rotation).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 7/10 initialement, descend à 4/10 au repos allongé, remonte à 8/10 en se levant.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "travel_history": [
+            },
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "th1"
+                "information": "Localisation : Douleur lombaire basse, plutôt à gauche, avec contracture musculaire.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Irradiation : Pas d'irradiation dans les fesses ni dans les jambes.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de troubles sensitifs, pas de troubles sphinctériens, pas de fièvre.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Surpoids (IMC 30 : 95 kg pour 1m78).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "rf1"
             },
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Travail de bureau sédentaire en semaine, jardinage intense le week-end.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
                 "fact_id": "rf2"
-            },
-            {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "rf3"
             }
         ],
-        "vitals": [
+        "travel_history": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "v1"
+                "information": "Voyage à la Réunion il y a 2 mois pour des vacances en famille.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Père : Arthrose sévère, prothèse de genou à 70 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
             },
             {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Mère : Ostéoporose diagnostiquée à 65 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh2"
-            },
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "fh3"
-            },
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh4"
             }
         ],
-        "treatments": [
+        "vitals": [
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "t1"
+                "information": "Tension Artérielle : 130/80.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "t2"
+                "information": "Fréquence Cardiaque : 74 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t3"
-            },
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t4"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh3"
-            },
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "soh4"
-            },
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh5"
-            },
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "soh6"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "a3"
-            },
-            {
-                "information": "Arachide",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a4"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "sh3"
+                "information": "Température : 36.9°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Lombalgies récurrentes (2-3 épisodes par an), jamais explorées par imagerie.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
             },
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Diabète de type 2 diagnostiqué il y a 5 ans, bien contrôlé.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh2"
             },
             {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Hypercholestérolémie.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh3"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Metformine 1000 mg matin et soir pour le diabète.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Atorvastatine 10 mg le soir pour le cholestérol.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t2"
+            },
+            {
+                "information": "Automédication : A pris du Voltarène gel (diclofénac) en application locale + 1g de paracétamol, soulagement modéré.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t3"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pas d'allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Cadre dans une entreprise d'assurance. Travail sédentaire.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Marié, 3 enfants (16, 19, 22 ans).",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Alcool : 2 verres de vin aux repas, quotidiennement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Arthroscopie du genou droit pour ménisque il y a 8 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -196,11 +166,15 @@
         "specialty": "Rhumatologie",
         "expected_diagnosis": "Lombalgie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sciatique",
+            "Hernie discale",
+            "Spondylodiscite"
         ],
         "red_flags": [
             "Anesthésie en selle",
-            "Troubles sphinctériens"
+            "Troubles sphinctériens",
+            "Déficit moteur",
+            "Fièvre"
         ]
     }
 }

@@ -5,81 +5,139 @@
             "age": 60,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.34,
-                "precision": 0.92,
-                "cooperativeness": 0.4
+                "anxiety": 0.49,
+                "precision": 0.47,
+                "cooperativeness": 0.79
             }
         },
         "chief_complaint": {
-            "information": "Fièvre avec douleur dans le dos côté droit",
+            "information": "Fièvre à 38.6°C et douleur dans le dos du côté droit depuis 33h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 35 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Début par des brûlures urinaires il y a 55 heures, puis apparition de fièvre et douleur lombaire droit il y a 33 heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Brûlures urinaires -> confusion avec simple cystite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fièvre : Pics fébriles à 38.6°C avec frissons intenses.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
-            }
-        ],
-        "social_history": [
+            },
             {
-                "information": "Marié(e) avec 2 enfants",
+                "information": "Douleur : Douleur de la fosse lombaire droit, profonde, majorée à la percussion (signe de Giordano positif).",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes urinaires : Brûlures mictionnelles, pollakiurie. Urines troubles.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh1"
+                "fact_id": "h4"
             },
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "soh3"
-            },
-            {
-                "information": "Stress professionnel important",
+                "information": "Symptômes associés : Nausées , fatigue intense, frissons.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh4"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Ligature des trompes",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh2"
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Ex-fumeur, arrêté il y a 11 ans (17 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
             }
         ],
-        "allergies": [
+        "travel_history": [
             {
-                "information": "Pollen",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "a1"
+                "information": "Séjour en Afrique de l’Ouest il y a 6 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Migraineuse. Sœur : Hypothyroïdie.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 139/79.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 116 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 38.9°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "direct_if_asked",
+                "information": "Antécédent de cystites à répétition (3-4 par an).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g × 3/jour pour la fièvre, sans effet suffisant.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à l'arachide (œdème facial).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Coiffeuse à domicile.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, 1 enfant adulte parti.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 1 verre de vin au dîner quotidiennement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ex-fumeur, arrêté il y a 11 ans (17 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Opération du canal carpien gauche il y a 3 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -88,12 +146,16 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Pyélonéphrite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Cystite simple",
+            "Colique néphrétique",
+            "Pneumonie basale",
+            "Lombalgie infectieuse"
         ],
         "red_flags": [
-            "Marbrures",
-            "Hypotension",
-            "Oligurie"
+            "Sepsis",
+            "Choc septique",
+            "Anurie",
+            "Abcès rénal"
         ]
     }
 }

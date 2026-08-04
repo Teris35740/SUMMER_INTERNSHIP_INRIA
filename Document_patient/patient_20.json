@@ -5,92 +5,154 @@
             "age": 42,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.35,
-                "precision": 0.88,
-                "cooperativeness": 0.52
+                "anxiety": 0.33,
+                "precision": 0.55,
+                "cooperativeness": 0.9
             }
         },
         "chief_complaint": {
-            "information": "Dos bloqué après avoir porté un carton",
+            "information": "Dos bloqué en soulevant un objet lourd, je n'arrive plus à me redresser.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 5 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Blocage lombaire survenu il y a 32 heures en soulevant un objet lourd. Sensation de 'coup de poignard' dans le bas du dos.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 7/10 au mouvement, 4/10 au repos allongé.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "soh1"
             },
             {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t1"
+                "information": "Localisation : Douleur lombaire basse en barre, avec contracture musculaire paravertébrale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "t2"
-            }
-        ],
-        "travel_history": [
+                "information": "Irradiation : Petite douleur irradiant dans la fesse droite. Ne descend PAS dans la cuisse ni la jambe.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h4"
+            },
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "th1"
-            }
-        ],
-        "surgical_history": [
+                "information": "Facteurs aggravants : Se pencher en avant, position assise prolongée, passer de assis à debout.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
             {
-                "information": "Aucune opération",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "family_history": [
+                "information": "Facteurs calmants : Position allongée sur le dos, genoux pliés.",
+                "reveal_policy": "only_if_alleviating_factors_asked",
+                "fact_id": "h6"
+            },
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "fh1"
+                "information": "Drapeaux rouges (Négatifs) : Pas de perte de sensation périnéale, pas de troubles sphinctériens, pas de fièvre, pas de déficit moteur.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
         "risk_factors": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Père : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 121/75.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Premier épisode de lombalgie.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement au long cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris 1g de paracétamol il y a 3h, sans efficacité notable.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux acariens (asthme allergique dans l'enfance).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Pharmacienne titulaire.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit seule.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 11 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -99,11 +161,16 @@
         "specialty": "Rhumatologie",
         "expected_diagnosis": "Lombalgie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sciatique",
+            "Hernie discale",
+            "Tassement vertébral",
+            "Spondylodiscite"
         ],
         "red_flags": [
             "Anesthésie en selle",
-            "Troubles sphinctériens"
+            "Troubles sphinctériens",
+            "Déficit moteur",
+            "Fièvre"
         ]
     }
 }

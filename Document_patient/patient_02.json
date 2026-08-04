@@ -5,164 +5,179 @@
             "age": 79,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.86,
-                "precision": 0.57,
-                "cooperativeness": 0.7
+                "anxiety": 0.8,
+                "precision": 0.4,
+                "cooperativeness": 0.2
             }
         },
         "chief_complaint": {
-            "information": "Brûlures en urinant depuis 48h",
+            "information": "Brûlures très désagréables en urinant depuis 2 jours, ça me pique à chaque fois.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 3 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Les brûlures urinaires sont apparues progressivement il y a 48 heures, sans facteur déclenchant identifié.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur lombaire ancienne (lombalgie connue) -> risque de confusion avec pyélonéphrite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fréquence urinaire : Besoin d'uriner toutes les 30 à 45 minutes, y compris la nuit (4-5 levers nocturnes inhabituels).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Aspect des urines : Urines troubles, odeur forte inhabituelle. Pas de sang visible.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Douleur lombaire : Ancienne douleur lombaire chronique connue (arthrose), stable, sans rapport avec l'épisode actuel. Pas de douleur dans le flanc ni de fièvre.",
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de fièvre, pas de frissons, pas de douleur dans le flanc, pas de nausées ni vomissements.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Hypertrophie bénigne de la prostate connue depuis 5 ans (favorise les infections urinaires).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "rf1"
             },
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Hydratation insuffisante : boit environ 3 verres d'eau par jour seulement.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
                 "fact_id": "rf2"
             }
         ],
         "travel_history": [
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Pas de voyage récent, ne sort quasiment plus de chez lui.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "th3"
             }
         ],
         "family_history": [
             {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Père : Cancer de la prostate diagnostiqué à 72 ans, traité par chirurgie.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
             },
             {
-                "information": "Sans particularité",
-                "reveal_policy": "direct_if_asked",
+                "information": "Mère : Décédée d'un AVC à 85 ans. Était hypertendue.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
-            },
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh4"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh3"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Oméprazole 20mg",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t3"
-            },
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "t4"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh3"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "sh4"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "a1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Tension Artérielle : 145/90 (hypertension connue et traitée).",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm, régulière.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.0°C (apyrétique).",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle traitée depuis 15 ans.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypercholestérolémie.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh2"
+            },
+            {
+                "information": "Arthrose lombaire et cervicale (douleurs chroniques anciennes).",
+                "reveal_policy": "only_if_past_back_pain_asked",
+                "fact_id": "pmh3"
+            },
+            {
+                "information": "Hypertrophie bénigne de la prostate diagnostiquée il y a 5 ans.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh4"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5 mg le matin pour l'hypertension.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Atorvastatine 20 mg (Tahor) le soir pour le cholestérol.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t2"
+            },
+            {
+                "information": "Tamsulosine 0.4 mg le soir pour la prostate.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t3"
+            },
+            {
+                "information": "Automédication : A essayé de boire plus d'eau et du jus de cranberry depuis hier, sans amélioration notable.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t4"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à la pénicilline (éruption cutanée lors d'un traitement il y a 20 ans).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité, ancien comptable. Vit seul depuis le décès de sa femme il y a 3 ans.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Veuf, 3 enfants adultes. Une fille qui passe le voir 2 fois par semaine.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Un verre de vin rouge au dîner, pas d'excès.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : N'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Prothèse totale de hanche droite il y a 8 ans (coxarthrose).",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
+            },
+            {
+                "information": "Cure de hernie inguinale gauche à 55 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh2"
             }
         ]
     },
@@ -171,10 +186,15 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Cystite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pyélonéphrite",
+            "Prostatite aiguë",
+            "Infection urinaire sur sonde"
         ],
         "red_flags": [
-            "Fièvre > 38.5 (absente)"
+            "Fièvre > 38.5°C",
+            "Douleur lombaire unilatérale",
+            "Frissons",
+            "Rétention urinaire aiguë"
         ]
     }
 }

@@ -5,61 +5,149 @@
             "age": 86,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.87,
-                "precision": 0.44,
-                "cooperativeness": 0.73
+                "anxiety": 0.52,
+                "precision": 0.41,
+                "cooperativeness": 0.78
             }
         },
         "chief_complaint": {
-            "information": "Douleur dans la poitrine qui serre",
+            "information": "Douleur dans la poitrine qui serre depuis 3h, ça irradie dans le bras gauche.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 4 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur thoracique rétrosternale constrictive apparue il y a 3 heures, à l’effort (montée d’escaliers).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur épigastrique associée -> confusion avec reflux ou ulcère",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 8/10. Sensation d’oppression, 'comme un étau' ou 'un éléphant sur la poitrine'.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "travel_history": [
+            },
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "th1"
+                "information": "Irradiation : La douleur irradie dans le bras gauche, la mâchoire inférieure et le cou.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Sueurs froides, nausées. Sensation d'angoisse de mort.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Effort : Pas de douleur thoracique antérieure.",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_family_history_explored",
+                "information": "Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
             }
         ],
-        "allergies": [
+        "travel_history": [
             {
-                "information": "Iode (choc)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a1"
+                "information": "Séjour en Asie du Sud-Est il y a 6 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Père : Décédé d'un cancer du poumon à 56 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            },
+            {
+                "information": "Mère : Arthrose sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 168/93.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 89 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 99%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Hypertension artérielle traitée. Diabète de type 2.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "",
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh2"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement cardiovasculaire.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à l'arachide (œdème facial).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Avocate en droit du travail.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 2 enfants (8 et 12 ans).",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 3 bières par jour le soir après le travail.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cure de hernie inguinale gauche à 48 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -68,12 +156,16 @@
         "specialty": "Cardiologie",
         "expected_diagnosis": "Syndrome coronarien aigu",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Embolie pulmonaire",
+            "Dissection aortique",
+            "Péricardite",
+            "Douleur pariétale"
         ],
         "red_flags": [
-            "Irradiation mâchoire/bras",
-            "Sueurs profuses",
-            "Douleur constrictive"
+            "Choc cardiogénique",
+            "OAP",
+            "Troubles du rythme",
+            "Arrêt cardiaque"
         ]
     }
 }

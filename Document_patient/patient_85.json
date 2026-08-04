@@ -5,139 +5,134 @@
             "age": 30,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.65,
-                "precision": 0.26,
-                "cooperativeness": 0.85
+                "anxiety": 0.62,
+                "precision": 0.58,
+                "cooperativeness": 0.75
             }
         },
         "chief_complaint": {
-            "information": "Douleur thoracique brutale irradiant dans le dos",
+            "information": "Douleur thoracique brutale en coup de poignard irradiant dans le dos depuis 6h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 20 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur thoracique d'apparition brutale ('en coup de poignard') il y a 6 heures, irradiant dans le dos entre les omoplates.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur thoracique -> confusion avec syndrome coronarien aigu",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 9/10, la pire douleur de sa vie. Sensation de 'déchirure'.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "vitals": [
+            },
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v1"
+                "information": "Migration : La douleur a semblé migrer du thorax vers le dos puis vers l'abdomen.",
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Malaise lipothymique initial. Sueurs profuses. ",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
             }
         ],
         "risk_factors": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "rf2"
-            },
-            {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "rf3"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "sh3"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Acariens",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "fh3"
             }
         ],
         "travel_history": [
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Vacances en Croatie il y a 3 mois.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Parents en bonne santé. Rien de notable.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 197/99.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "th2"
+                "information": "Fréquence Cardiaque : 115 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 99%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Hypertension artérielle mal contrôlée (ne prend pas toujours ses médicaments).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
-            },
-            {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "pmh3"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "soh1"
             }
         ],
         "treatments": [
             {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Antihypertenseur prescrit mais prise irrégulière.",
+                "reveal_policy": "direct_if_treatments_asked",
                 "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux AINS (ibuprofène) : urticaire.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "t2"
+                "information": "Pas d'autre allergie.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Retraitée, ancienne institutrice.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Divorcée, garde alternée de 2 enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne il y a 9 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -146,12 +141,16 @@
         "specialty": "Cardio-vasculaire",
         "expected_diagnosis": "Dissection aortique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Syndrome coronarien aigu",
+            "Embolie pulmonaire",
+            "Pneumothorax",
+            "Péricardite"
         ],
         "red_flags": [
-            "Asymétrie des pouls",
-            "Déficit neurologique transitoire",
-            "Choc"
+            "Asymétrie tensionnelle",
+            "Insuffisance aortique",
+            "Tamponnade",
+            "Ischémie de membre"
         ]
     }
 }

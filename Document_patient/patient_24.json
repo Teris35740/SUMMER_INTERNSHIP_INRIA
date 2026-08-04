@@ -5,154 +5,144 @@
             "age": 57,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.75,
-                "precision": 0.16,
-                "cooperativeness": 0.61
+                "anxiety": 0.65,
+                "precision": 0.42,
+                "cooperativeness": 0.85
             }
         },
         "chief_complaint": {
-            "information": "Mal de tête atroce pulsatile",
+            "information": "Mal de tête atroce intense depuis 8 heures.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 38 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La céphalée a commencé progressivement il y a 8 heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 6/10 au pic. Pulsatile, augmentée par les battements du cœur.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh1"
             },
             {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "sh2"
+                "information": "Localisation : Hémicrânienne droite, frontale et temporale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Ligature des trompes",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "sh3"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "sh4"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh3"
-            },
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh4"
-            },
-            {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh5"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "fh2"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Arachide",
+                "information": "Symptômes associés : Nausées avec un vomissement. Photophobie et phonophobie marquées.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "a1"
+                "fact_id": "h4"
             },
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "a2"
+                "information": "Facteurs aggravants : Lumière, bruit, effort physique. Préfère rester dans le noir.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
             },
             {
-                "information": "Acariens",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a3"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "th1"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "th2"
+                "information": "Drapeaux rouges (Négatifs) : Pas de raideur de nuque, pas de fièvre, pas de déficit neurologique focal, pas de céphalée en coup de tonnerre.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
             },
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "rf2"
+                "information": "Frère : Asthme sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 128/78.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.9°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Migraines sans aura récurrentes depuis l'âge de 21 ans, environ 2 crises par mois.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
-            },
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
             }
         ],
         "treatments": [
             {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Sumatriptan 50mg en comprimé au début de la crise (pris, en cours d’action).",
+                "reveal_policy": "direct_if_treatments_asked",
                 "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g pris il y a 2h, soulagement partiel.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Sage-femme libérale.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 3 enfants adolescents.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Amygdalectomie dans l'enfance.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -161,11 +151,15 @@
         "specialty": "Neurologie",
         "expected_diagnosis": "Migraine",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Céphalée de tension",
+            "Hémorragie sous-arachnoïdienne",
+            "Artérite temporale"
         ],
         "red_flags": [
+            "Céphalée en coup de tonnerre",
+            "Raideur de nuque",
             "Déficit neurologique focal",
-            "Début brutal en coup de tonnerre"
+            "Fièvre"
         ]
     }
 }

@@ -5,102 +5,179 @@
             "age": 75,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.84,
-                "precision": 0.6,
-                "cooperativeness": 0.68
+                "anxiety": 0.5,
+                "precision": 0.55,
+                "cooperativeness": 0.75
             }
         },
         "chief_complaint": {
-            "information": "Dos bloqué après avoir porté un carton",
+            "information": "Je me suis bloqué le dos en portant un carton de livres, je n'arrive plus à me relever.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 39 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Blocage lombaire survenu il y a environ 5 heures en soulevant un lourd carton de livres dans le grenier.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 7/10 au moment du blocage, actuellement 5/10 au repos mais remonte à 8/10 au moindre mouvement.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "t1"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "t2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "fh1"
+                "information": "Localisation et type : Douleur lombaire basse en barre, avec une forte contracture musculaire paravertébrale bilatérale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "fh2"
+                "information": "Irradiation : Petite douleur qui descend dans la fesse droite. Ne descend PAS dans la cuisse ni dans la jambe.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteurs aggravants : Se pencher, passer de la position assise à debout, tousser.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Facteurs calmants : Position allongée sur le dos avec les genoux surélevés.",
+                "reveal_policy": "only_if_alleviating_factors_asked",
+                "fact_id": "h6"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de perte de sensation périnéale, pas de troubles sphinctériens, pas de fièvre, pas de perte de poids inexpliquée.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Surpoids modéré (IMC 28 : 84 kg pour 1m73).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "rf1"
             },
             {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Sédentarité depuis la retraite, ne fait plus de sport.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
                 "fact_id": "rf2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh1"
             },
             {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh2"
+                "information": "Ex-fumeur, arrêté il y a 10 ans (20 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf3"
             }
         ],
         "travel_history": [
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Pas de voyage récent, reste chez lui essentiellement.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père : Décédé d'un infarctus du myocarde à 68 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Mère : Diabétique de type 2, décédée à 82 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Tension Artérielle : 142/88 (hypertension connue).",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 78 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.0°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Épisodes de lombalgie récurrents depuis 20 ans, environ 1-2 fois par an. Cet épisode est comparable aux précédents.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh2"
+            },
+            {
+                "information": "Arthrose lombaire dégénérative connue (radiographies il y a 3 ans).",
+                "reveal_policy": "only_if_past_back_pain_asked",
+                "fact_id": "pmh3"
+            },
+            {
+                "information": "Asthme infantile disparu à l'adolescence.",
+                "reveal_policy": "only_if_respiratory_history_asked",
+                "fact_id": "pmh4"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Amlodipine 5 mg pour l'hypertension.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g pris il y a 2 heures, effet modeste.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux pollens (rhinite saisonnière).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Retraité, ancien menuisier. Port de charges lourdes pendant toute sa carrière.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Marié, 2 enfants adultes. Vit avec sa femme dans une maison à étage.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 1 verre de vin au repas du soir.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cure de hernie inguinale droite à 50 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
+            },
+            {
+                "information": "Fracture du poignet gauche opérée (ostéosynthèse) après une chute il y a 15 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh2"
             }
         ]
     },
@@ -109,11 +186,17 @@
         "specialty": "Rhumatologie",
         "expected_diagnosis": "Lombalgie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sciatique",
+            "Hernie discale",
+            "Tassement vertébral ostéoporotique",
+            "Spondylodiscite"
         ],
         "red_flags": [
             "Anesthésie en selle",
-            "Troubles sphinctériens"
+            "Troubles sphinctériens",
+            "Déficit moteur",
+            "Fièvre",
+            "Perte de poids inexpliquée"
         ]
     }
 }

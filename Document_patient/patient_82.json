@@ -5,83 +5,144 @@
             "age": 54,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.2,
-                "precision": 0.83,
-                "cooperativeness": 0.55
+                "anxiety": 0.56,
+                "precision": 0.32,
+                "cooperativeness": 0.65
             }
         },
         "chief_complaint": {
-            "information": "Fièvre très élevée et confusion",
+            "information": "Fièvre très élevée et confusion depuis 16h, état général très altéré.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 35 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Fièvre élevée avec frissons apparue il y a 16 heures, d'origine probablement pulmonaire. Confusion depuis quelques heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Confusion et agitation -> risque de conclure à un épisode psychiatrique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fièvre : Pics à 40.0°C avec frissons intenses et sueurs.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "t1"
             },
             {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t2"
+                "information": "Confusion : Désorientation temporo-spatiale, propos incohérents.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Porte d'entrée : Toux productive avec fièvre depuis 5 jours.",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "État général : Marbrures sur les genoux, extrémités froides, tachycardie.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
-        "allergies": [
+        "risk_factors": [
             {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Arachide",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a3"
+                "information": "Ex-fumeur, arrêté il y a 14 ans (24 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "direct_if_asked",
+                "information": "Voyage professionnel à Londres il y a 2 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : AVC à 63 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Père : En bonne santé.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 127/77.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 100 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 38.9°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 97%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Insuffisance rénale chronique modérée.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses comorbidités.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux pollens de graminées (rhinite saisonnière).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Électricien en bâtiment.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Marié, 1 enfant en bas âge.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 1 verre de vin au dîner quotidiennement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ex-fumeur, arrêté il y a 14 ans (24 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Arthroscopie du genou droit pour ménisque il y a 3 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -90,12 +151,16 @@
         "specialty": "Réanimation",
         "expected_diagnosis": "Choc septique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Méningite",
+            "Endocardite",
+            "Paludisme",
+            "Choc anaphylactique"
         ],
         "red_flags": [
-            "Tension < 90 mmHg",
-            "Marbrures",
-            "Oligurie"
+            "Hypotension réfractaire",
+            "Défaillance multi-organes",
+            "Lactates élevés",
+            "Marbrures"
         ]
     }
 }

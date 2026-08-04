@@ -5,100 +5,149 @@
             "age": 35,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.33,
-                "precision": 0.94,
-                "cooperativeness": 0.38
+                "anxiety": 0.4,
+                "precision": 0.86,
+                "cooperativeness": 0.88
             }
         },
         "chief_complaint": {
-            "information": "Douleur en bas à droite du ventre",
+            "information": "Douleur dans le ventre en bas à droite depuis 20 heures, ça empire.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 45 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La douleur a commencé il y a 20 heures autour du nombril (péri-ombilicale), puis s'est déplacée en fosse iliaque droite en quelques heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "La douleur a commencé autour du nombril -> confusion avec gastro",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 8/10, en augmentation progressive. Douleur continue, pas par crises.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Acariens",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "a1"
             },
             {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "a2"
+                "information": "Localisation : Douleur localisée au point de McBurney (fosse iliaque droite), augmentée à la palpation.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a3"
+                "information": "Symptômes associés : Nausées . Perte d'appétit marquée (anorexie).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteurs aggravants : La marche, la toux, les mouvements brusques augmentent la douleur.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges : Légère défense en fosse iliaque droite à la palpation.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
-        "treatments": [
+        "risk_factors": [
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t1"
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Mère : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
             },
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Frère : Asthme sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh2"
-            },
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh3"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh4"
             }
         ],
-        "social_history": [
+        "vitals": [
             {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "risk_factors": [
+                "information": "Tension Artérielle : 117/74.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "rf1"
+                "information": "Fréquence Cardiaque : 97 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 38.2°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Aucun antécédent médical particulier.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris du Spasfon sans effet, puis 1g de paracétamol il y a 3h avec un soulagement minime.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux acariens (asthme allergique dans l'enfance).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Ouvrier en usine automobile.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Marié, 3 enfants adolescents.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Amygdalectomie dans l'enfance.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -107,11 +156,16 @@
         "specialty": "Gastro-entérologie",
         "expected_diagnosis": "Appendicite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Gastro-entérite",
+            "Colique néphrétique droite",
+            "Torsion ovarienne",
+            "GEU"
         ],
         "red_flags": [
-            "Défense en fosse iliaque droite",
-            "Fièvre persistante"
+            "Défense en FID",
+            "Fièvre persistante",
+            "Péritonite",
+            "Choc"
         ]
     }
 }

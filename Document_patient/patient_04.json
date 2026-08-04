@@ -5,117 +5,169 @@
             "age": 69,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.76,
-                "precision": 0.24,
-                "cooperativeness": 0.6
+                "anxiety": 0.7,
+                "precision": 0.75,
+                "cooperativeness": 0.8
             }
         },
         "chief_complaint": {
-            "information": "Mal de tête atroce pulsatile",
+            "information": "Mal de tête atroce, ça tape comme un marteau derrière l'œil droit.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 15 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La céphalée a commencé ce matin au réveil, s'est intensifiée progressivement en 2-3 heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 7/10 au pic, actuellement 5/10. C'est pulsatile, le cœur bat dans la tête.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "pmh1"
             },
             {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh1"
+                "information": "Localisation et type : Douleur hémicrânienne droite, pulsatile, surtout frontale et rétro-orbitaire (derrière l'œil droit).",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Arthroscopie du genou",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh3"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Oméprazole 20mg",
+                "information": "Symptômes associés : Nausées sans vomissements. Gêne avec la lumière (photophobie) et le bruit (phonophobie). Pas d'aura visuelle.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t2"
+                "fact_id": "h4"
             },
             {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t3"
-            }
-        ],
-        "travel_history": [
+                "information": "Facteurs aggravants : Lumière vive, bruit, effort physique. Préfère rester dans le noir.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "th1"
+                "information": "Facteurs calmants : Repos dans une pièce sombre et calme. Le paracétamol pris il y a 1h commence à soulager un peu.",
+                "reveal_policy": "only_if_alleviating_factors_asked",
+                "fact_id": "h6"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de raideur de nuque, pas de fièvre, pas de troubles neurologiques focaux, pas de céphalée 'en coup de tonnerre', pas de perte de connaissance.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
         "risk_factors": [
             {
-                "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Stress important lié à une procédure administrative en cours.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
                 "fact_id": "rf1"
+            },
+            {
+                "information": "Sommeil perturbé depuis 2 semaines (insomnie d'endormissement).",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
+                "fact_id": "rf2"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Migraineuse connue, traitée pendant des années.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Père : Diabétique de type 2, décédé à 78 ans d'une insuffisance rénale.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 138/82.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 68 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.9°C (apyrétique).",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines récurrentes depuis l'âge de 30 ans, en moyenne 2-3 crises par mois. La crise actuelle est typique de ses crises habituelles.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypertension artérielle légère, sous surveillance sans traitement.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh2"
+            },
+            {
+                "information": "Reflux gastro-œsophagien occasionnel.",
+                "reveal_policy": "only_if_digestive_history_asked",
+                "fact_id": "pmh3"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Sumatriptan 50 mg en comprimé à prendre au début de la crise (ne l'a pas pris ce matin car il n'en avait plus).",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris 1g de Paracétamol il y a 1 heure, soulagement partiel.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            },
+            {
+                "information": "Oméprazole 20 mg si besoin pour le reflux.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t3"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Pas d'allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Retraité depuis 4 ans, ancien professeur de lycée.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Marié, 2 enfants adultes. Vit avec sa femme.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Tabac : Ancien fumeur, arrêté il y a 20 ans (15 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Alcool : 1 verre de vin le soir au dîner, occasionnellement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécystectomie (ablation de la vésicule biliaire) par cœlioscopie il y a 10 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -124,11 +176,17 @@
         "specialty": "Neurologie",
         "expected_diagnosis": "Migraine",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Céphalée de tension",
+            "Hémorragie sous-arachnoïdienne",
+            "Artérite temporale (Horton)",
+            "Hypertension intracrânienne"
         ],
         "red_flags": [
+            "Céphalée en coup de tonnerre",
+            "Raideur de nuque",
             "Déficit neurologique focal",
-            "Début brutal en coup de tonnerre"
+            "Première céphalée après 50 ans",
+            "Fièvre associée"
         ]
     }
 }

@@ -5,189 +5,144 @@
             "age": 18,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.65,
-                "precision": 0.17,
-                "cooperativeness": 0.5
+                "anxiety": 0.8,
+                "precision": 0.35,
+                "cooperativeness": 0.61
             }
         },
         "chief_complaint": {
-            "information": "Dos bloqué après avoir porté un carton",
+            "information": "Dos bloqué en se relevant brusquement, je n'arrive plus à me redresser.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 26 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Blocage lombaire survenu il y a 9 heures en se relevant brusquement. Sensation de 'coup de poignard' dans le bas du dos.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 8/10 au mouvement, 5/10 au repos allongé.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "soh1"
             },
             {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "soh2"
+                "information": "Localisation : Douleur lombaire basse en barre, avec contracture musculaire paravertébrale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "soh3"
+                "information": "Irradiation : Pas d’irradiation dans les fesses ni les jambes.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h4"
             },
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "soh4"
+                "information": "Facteurs aggravants : Se pencher en avant, position assise prolongée, passer de assis à debout.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Facteurs calmants : Position allongée sur le dos, genoux pliés.",
+                "reveal_policy": "only_if_alleviating_factors_asked",
+                "fact_id": "h6"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de perte de sensation périnéale, pas de troubles sphinctériens, pas de fièvre, pas de déficit moteur.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
         "risk_factors": [
             {
-                "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Fumeur actif, 19 cigarettes par jour depuis 21 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "rf2"
-            },
-            {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "rf3"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Oméprazole 20mg",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t3"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "fh3"
-            },
-            {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh4"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "fh5"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "pmh3"
-            },
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "pmh4"
-            },
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "pmh5"
             }
         ],
         "travel_history": [
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "direct_if_asked",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th2"
             }
         ],
-        "surgical_history": [
+        "family_history": [
             {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "sh2"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "sh3"
+                "information": "Père : Insuffisance cardiaque. Mère : Alzheimer diagnostiqué à 74 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Tension Artérielle : 109/70.",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.0°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Premier épisode de lombalgie.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement au long cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris 400mg d’ibuprofène il y a 1h, sans efficacité notable.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "allergies": [
             {
-                "information": "Pollen",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Chauffeur de taxi. Longues heures assis.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
             },
             {
-                "information": "Iode (choc)",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "a2"
+                "information": "Situation familiale : Veuf(ve), vit seul. Enfants adultes.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
             },
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "a3"
+                "information": "Alcool : Consommation occasionnelle en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fumeur actif, 19 cigarettes par jour depuis 21 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Prothèse totale de hanche gauche il y a 3 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -196,11 +151,16 @@
         "specialty": "Rhumatologie",
         "expected_diagnosis": "Lombalgie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sciatique",
+            "Hernie discale",
+            "Tassement vertébral",
+            "Spondylodiscite"
         ],
         "red_flags": [
             "Anesthésie en selle",
-            "Troubles sphinctériens"
+            "Troubles sphinctériens",
+            "Déficit moteur",
+            "Fièvre"
         ]
     }
 }

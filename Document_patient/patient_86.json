@@ -5,80 +5,139 @@
             "age": 24,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.51,
-                "precision": 0.29,
-                "cooperativeness": 0.7
+                "anxiety": 0.32,
+                "precision": 0.66,
+                "cooperativeness": 0.8
             }
         },
         "chief_complaint": {
-            "information": "Mal de tête avec forte fièvre et nuque raide",
+            "information": "Mal de tête violent avec fièvre à 39.8°C et la nuque complètement raide depuis 19h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 24 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Céphalées intenses d'apparition rapide il y a 19 heures, avec fièvre et raideur de nuque progressives.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Fièvre modérée -> confusion avec syndrome grippal",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité céphalée : 10/10, la pire céphalée de sa vie. Diffuse, en casque.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "fh1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "pmh1"
             },
             {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
-            }
-        ],
-        "vitals": [
+                "information": "Raideur de nuque : Impossibilité de fléchir le menton sur le sternum. Douleur à la mobilisation du cou.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "social_history": [
+                "information": "Photophobie : Intolérance majeure à la lumière, reste dans le noir.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
             {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "t1"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "sh1"
+                "information": "Symptômes associés : Nausées et vomissements en jet. Pas de purpura cutané.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "direct_if_asked",
+                "information": "Fumeur actif, 11 cigarettes par jour depuis 5 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage professionnel à Londres il y a 6 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père : Insuffisance cardiaque. Mère : Alzheimer diagnostiqué à 59 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 108/71.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 117 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 38.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Aucun antécédent particulier.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g pris il y a 3h, sans effet.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie au latex (prurit au contact).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Retraitée, ancienne couturière.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Veuf(ve), vit seule. Enfants adultes.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation occasionnelle en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fumeur actif, 11 cigarettes par jour depuis 5 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Prothèse totale de hanche droit il y a 2 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -87,12 +146,16 @@
         "specialty": "Infectiologie",
         "expected_diagnosis": "Méningite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Hémorragie méningée",
+            "Encéphalite",
+            "Migraine sévère",
+            "Abcès cérébral"
         ],
         "red_flags": [
-            "Raideur de la nuque",
-            "Photophobie",
-            "Purpura fulminans"
+            "Purpura fulminans",
+            "Coma",
+            "Convulsions",
+            "Choc septique"
         ]
     }
 }

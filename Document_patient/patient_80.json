@@ -5,139 +5,144 @@
             "age": 91,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.83,
-                "precision": 0.32,
-                "cooperativeness": 0.61
+                "anxiety": 0.5,
+                "precision": 0.84,
+                "cooperativeness": 0.57
             }
         },
         "chief_complaint": {
-            "information": "Douleur dans la poitrine qui serre",
+            "information": "Douleur dans la poitrine qui serre depuis 6h, ça irradie dans le bras gauche.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 38 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur thoracique rétrosternale constrictive apparue il y a 6 heures, au repos.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur épigastrique associée -> confusion avec reflux ou ulcère",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 9/10. Sensation d’oppression, 'comme un étau' ou 'un éléphant sur la poitrine'.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "vitals": [
+            },
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "Irradiation : La douleur irradie dans le bras gauche, la mâchoire inférieure et le cou.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Sueurs froides, nausées. Sensation d'angoisse de mort.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "th1"
+                "fact_id": "h4"
             },
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "th3"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "fh3"
-            },
-            {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "fh4"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Arachide",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Iode (choc)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "a3"
-            },
-            {
-                "information": "Acariens",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "a4"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "pmh2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "sh2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "soh1"
+                "information": "Effort : Douleur similaire à l’effort les dernières semaines mais plus légère et passait au repos (angor d’effort).",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Père : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 146/93.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 93 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 95%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle traitée. Diabète de type 2.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            },
+            {
+                "information": "Tabagisme actif 15 PA.",
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh2"
             }
         ],
         "treatments": [
             {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Aspirine 75mg, statine, IEC.",
+                "reveal_policy": "direct_if_treatments_asked",
                 "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Pharmacienne titulaire.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit seule.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 20 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -146,12 +151,16 @@
         "specialty": "Cardiologie",
         "expected_diagnosis": "Syndrome coronarien aigu",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Embolie pulmonaire",
+            "Dissection aortique",
+            "Péricardite",
+            "Douleur pariétale"
         ],
         "red_flags": [
-            "Irradiation mâchoire/bras",
-            "Sueurs profuses",
-            "Douleur constrictive"
+            "Choc cardiogénique",
+            "OAP",
+            "Troubles du rythme",
+            "Arrêt cardiaque"
         ]
     }
 }

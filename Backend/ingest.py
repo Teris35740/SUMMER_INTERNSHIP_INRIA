@@ -1,9 +1,8 @@
 import logging
 import os
 import glob
-from core.config import normalize_supabase_url
 from core.rag.chunking import build_chunk_records_from_json, build_chunk_records_from_pdf
-from core.rag.embedding import embedding_db, store_embeddings_in_supabase
+from core.rag.embedding import embedding_db, store_in_weaviate
 
 logging.basicConfig(
     level=logging.INFO,
@@ -13,15 +12,6 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    supabase_url = normalize_supabase_url(
-        os.getenv("SUPABASE_URL")
-    )
-    supabase_key = os.getenv("SUPABASE_KEY")
-
-    if not supabase_url or not supabase_key:
-        logger.error("Variables d'environnement manquantes (SUPABASE_URL et/ou SUPABASE_KEY).")
-        exit(1)
-
     # --- INGESTION PATIENT ---
     patient_files = glob.glob("../Document_patient/patient_*.json")
     for json_path in sorted(patient_files):
@@ -33,13 +23,11 @@ def main():
                 chunks = [record["content"] for record in chunk_records_json]
                 embeddings = embedding_db(chunks)
 
-                store_embeddings_in_supabase(
+                store_in_weaviate(
                     chunk_records_json,
                     embeddings,
-                    supabase_url,
-                    supabase_key,
                 )
-                logger.info("Insertion JSON réussie pour %s.", os.path.basename(json_path))
+                logger.info("Insertion Weaviate réussie pour %s.", os.path.basename(json_path))
 
     # --- INGESTION PDF  ---
     # pdf_path = "patella.pdf"
@@ -51,13 +39,11 @@ def main():
     #         chunks = [record["content"] for record in chunk_records_pdf]
     #         embeddings = embedding_db(chunks)
     
-    #         store_embeddings_in_supabase(
+    #         store_in_weaviate(
     #             chunk_records_pdf,
     #             embeddings,
-    #             supabase_url,
-    #             supabase_key,
     #         )
-    #         logger.info("Insertion PDF réussie.")
+    #         logger.info("Insertion PDF Weaviate réussie.")
 
 
 if __name__ == "__main__":

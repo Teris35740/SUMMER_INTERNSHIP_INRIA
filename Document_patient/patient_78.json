@@ -5,59 +5,139 @@
             "age": 73,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.86,
-                "precision": 0.39,
-                "cooperativeness": 0.77
+                "anxiety": 0.35,
+                "precision": 0.65,
+                "cooperativeness": 0.83
             }
         },
         "chief_complaint": {
-            "information": "Fièvre très élevée et confusion",
+            "information": "Fièvre très élevée et confusion depuis 8h, je ne reconnais plus mes proches.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 38 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Fièvre élevée avec frissons apparue il y a 8 heures, d'origine probablement biliaire. Confusion depuis quelques heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Confusion et agitation -> risque de conclure à un épisode psychiatrique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fièvre : Pics à 40.4°C avec frissons intenses et sueurs.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "sh1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "pmh1"
             },
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "pmh2"
-            }
-        ],
-        "vitals": [
+                "information": "Confusion : Désorientation temporo-spatiale, propos incohérents.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "v1"
+                "information": "Porte d'entrée : Douleurs abdominales sous les côtes droites depuis 3 jours.",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "État général : Marbrures sur les genoux, extrémités froides, tachycardie.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Non fumeur",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage professionnel à Bruxelles il y a 3 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père : Goutte. Mère : Ostéoporose.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 136/81.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 120 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 40.0°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 93%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Diabète de type 2 (immunodépression relative).",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses comorbidités.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie au latex (prurit au contact).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Ingénieur informatique, télétravail.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit en colocation.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 3 bières par jour le soir après le travail.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ablation de polypes du côlon par coloscopie il y a 4 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -66,12 +146,16 @@
         "specialty": "Réanimation",
         "expected_diagnosis": "Choc septique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Méningite",
+            "Endocardite",
+            "Paludisme",
+            "Choc anaphylactique"
         ],
         "red_flags": [
-            "Tension < 90 mmHg",
-            "Marbrures",
-            "Oligurie"
+            "Hypotension réfractaire",
+            "Défaillance multi-organes",
+            "Lactates élevés",
+            "Marbrures"
         ]
     }
 }

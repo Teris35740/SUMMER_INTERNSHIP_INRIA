@@ -5,95 +5,149 @@
             "age": 25,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.36,
-                "precision": 0.38,
-                "cooperativeness": 0.85
+                "anxiety": 0.79,
+                "precision": 0.58,
+                "cooperativeness": 0.63
             }
         },
         "chief_complaint": {
-            "information": "Mal de tête atroce pulsatile",
+            "information": "Mal de tête atroce intense depuis 6 heures.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 30 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La céphalée a commencé après des troubles visuels (scotomes scintillants) il y a 6 heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Aura visuelle : Scotomes scintillants (zigzags lumineux) ayant duré environ 30 minutes avant la céphalée. C'est habituel chez lui.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h1b"
+            },
+            {
+                "information": "Intensité : 6/10 au pic. Pulsatile, augmentée par les battements du cœur.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Localisation : Hémicrânienne droite, frontale et temporale.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Nausées sans vomissements. Photophobie et phonophobie marquées.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteurs aggravants : Lumière, bruit, effort physique. Préfère rester dans le noir.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de raideur de nuque, pas de fièvre, pas de déficit neurologique focal, pas de céphalée en coup de tonnerre.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Ex-fumeur, arrêté il y a 1 ans (8 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "rf2"
-            },
-            {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "rf3"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "sh1"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v1"
             }
         ],
         "travel_history": [
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Vacances en Italie il y a 2 mois.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "th2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "pmh1"
             }
         ],
         "family_history": [
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Mère : Migraineuse. Sœur : Hypothyroïdie.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 112/72.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.1°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Migraines avec aura récurrentes depuis l'âge de 17 ans, environ 2 crises par mois.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Sumatriptan 50mg en comprimé au début de la crise (n’en avait plus).",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g pris il y a 2h, soulagement partiel.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à la pénicilline (éruption cutanée).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Artisan boulanger, lève à 4h du matin.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, 1 enfant adulte parti.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 1 verre de vin au dîner quotidiennement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ex-fumeur, arrêté il y a 1 ans (8 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Opération du canal carpien droit il y a 10 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -102,11 +156,15 @@
         "specialty": "Neurologie",
         "expected_diagnosis": "Migraine",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Céphalée de tension",
+            "Hémorragie sous-arachnoïdienne",
+            "Artérite temporale"
         ],
         "red_flags": [
+            "Céphalée en coup de tonnerre",
+            "Raideur de nuque",
             "Déficit neurologique focal",
-            "Début brutal en coup de tonnerre"
+            "Fièvre"
         ]
     }
 }

@@ -5,164 +5,139 @@
             "age": 84,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.28,
-                "precision": 0.6,
-                "cooperativeness": 0.38
+                "anxiety": 0.89,
+                "precision": 0.51,
+                "cooperativeness": 0.6
             }
         },
         "chief_complaint": {
-            "information": "Essoufflement apparu d'un coup",
+            "information": "Essoufflement brutal apparu d'un coup il y a 4h, j'ai du mal à respirer.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 19 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Dyspnée soudaine apparue il y a 4 heures, au repos / en se levant du canapé.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Douleur thoracique : Douleur pleurale du côté gauche, majorée à l'inspiration profonde.",
+                "reveal_policy": "only_if_pain_type_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh1"
             },
             {
-                "information": "Retraité(e) actif(ve)",
+                "information": "Intensité de la dyspnée : Essoufflement majeur pour des efforts minimes. ",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh2"
+                "fact_id": "h3"
             },
             {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh3"
-            },
-            {
-                "information": "Stress professionnel important",
+                "information": "Symptômes associés :  Hémoptysie (crachats teintés de sang). Malaise lipothymique initial.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh4"
+                "fact_id": "h4"
             },
             {
-                "information": "Travaille de nuit",
+                "information": "Facteur de risque récent : Immobilisation prolongée (alitement post-chirurgie il y a 2 semaines).",
                 "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh5"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t1"
+                "fact_id": "h5"
             },
             {
-                "information": "Calcium + Vitamine D",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "t3"
+                "information": "Jambe : Mollet droit douloureux et un peu gonflé depuis quelques jours (possible TVP).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "rf2"
-            },
-            {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "rf3"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "a3"
-            },
-            {
-                "information": "Acariens",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "a4"
             }
         ],
         "travel_history": [
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Séjour en Asie du Sud-Est il y a 6 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "v1"
             }
         ],
         "family_history": [
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Parents en bonne santé. Rien de notable.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 142/83.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "fh2"
+                "information": "Fréquence Cardiaque : 117 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "fh3"
+                "information": "Température : 37.3°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 91%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Aucun antécédent thrombo-embolique.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux fruits de mer (urticaire et gonflement).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Pharmacienne titulaire.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
             },
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
+                "information": "Situation familiale : Divorcée, garde alternée de 2 enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne il y a 2 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -171,12 +146,16 @@
         "specialty": "Pneumologie",
         "expected_diagnosis": "Embolie pulmonaire",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pneumothorax",
+            "Pneumonie",
+            "Syndrome coronarien aigu",
+            "Crise d'angoisse"
         ],
         "red_flags": [
-            "Tachycardie inexpliquée",
-            "Douleur pleurétique",
-            "Hémoptysie"
+            "SpO2 < 90%",
+            "Choc obstructif",
+            "Syncope",
+            "Hémoptysie massive"
         ]
     }
 }

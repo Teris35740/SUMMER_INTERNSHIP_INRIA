@@ -1,3 +1,21 @@
+def _extract_topic_from_policy(reveal_policy):
+    """Extrait le topic requis d'une reveal_policy.
+
+    Conventions :
+    - "direct_if_asked"       → None (toujours autorisé)
+    - "direct_if_<topic>"     → "<topic>" (autorisé si topic exploré, info donnée facilement)
+    - "only_if_<topic>"       → "<topic>" (autorisé si topic exploré, info donnée si on creuse)
+    - autre                   → None
+    """
+    if reveal_policy == "direct_if_asked":
+        return None
+    if reveal_policy.startswith("direct_if_"):
+        return reveal_policy[len("direct_if_"):]
+    if reveal_policy.startswith("only_if_"):
+        return reveal_policy[len("only_if_"):]
+    return None
+
+
 def state_motor_simple(target_slots, rows):
     """
     Filtre les documents récupérés par le RAG. 
@@ -18,15 +36,13 @@ def state_motor_simple(target_slots, rows):
         if reveal_policy == "direct_if_asked":
             authorized_rows.append(row)
             continue
-            
-        is_authorized = False
-        for slot in target_slots:
-            if slot in reveal_policy:
-                is_authorized = True
-                break
-                
-        if is_authorized:
-            authorized_rows.append(row)
+
+        # Gestion des patterns direct_if_<topic> et only_if_<topic>
+        required_topic = _extract_topic_from_policy(reveal_policy)
+        if required_topic is not None:
+            if any(slot in required_topic or required_topic in slot for slot in target_slots):
+                authorized_rows.append(row)
+                continue
             
     return authorized_rows
 
@@ -59,16 +75,17 @@ def state_motor_advanced(global_asked_topics, current_target_slots, rows):
         reveal_policy = row.get("metadata", {}).get("reveal_policy", "unknown")
         fact_id = row.get("metadata", {}).get("fact_id", "?")
         
+        # Toujours autorisé
         if reveal_policy == "direct_if_asked":
             authorized_rows.append(row)
             continue
-            
+
+        # Extraction du topic requis (fonctionne pour direct_if_* et only_if_*)
+        required_topic = _extract_topic_from_policy(reveal_policy)
+
         is_authorized = False
-        required_topic = None
-        if reveal_policy.startswith("only_if_"):
-            required_topic = reveal_policy.replace("only_if_", "")
-            if required_topic in all_explored_topics:
-                is_authorized = True
+        if required_topic is not None and required_topic in all_explored_topics:
+            is_authorized = True
                 
         if is_authorized:
             authorized_rows.append(row)
