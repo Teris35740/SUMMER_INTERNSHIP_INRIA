@@ -3,59 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interface RAG Médical</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="description" content="MedSim — Simulateur de consultation médicale virtuelle avec RAG pour l'entraînement au diagnostic clinique.">
+    <title>MedSim — Consultation Virtuelle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Sidebar Gauche: État Clinique -->
-        <aside class="sidebar left-sidebar">
-            <div class="glass-panel">
-                <h2>🩺 État Clinique</h2>
-                <div class="scroll-content" id="clinical-state-container">
-                    <p class="placeholder">En attente des données du patient...</p>
-                </div>
-            </div>
-        </aside>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
 
-        <!-- Centre: Chat -->
-        <main class="chat-container">
-            <div class="glass-panel main-panel">
-                <header class="chat-header">
-                    <h1>Consultation Virtuelle</h1>
-                    <button id="clear-btn" class="secondary-btn">Nouvelle Session</button>
-                </header>
-                
-                <div class="chat-history" id="chat-history">
-                    <div class="message system">
-                        Bonjour ! Je suis le patient. Posez-moi vos questions.
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+            </div>
+            <div class="navbar-brand">
+                <span class="navbar-title">MedSim</span>
+                <span class="navbar-subtitle">Consultation Virtuelle</span>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <div class="patient-selector" id="patient-selector-wrapper">
+                <label for="patient-select">Patient :</label>
+                <select id="patient-select">
+                    <option value="1">Chargement...</option>
+                </select>
+                <div class="patient-badge" id="patient-badge"></div>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="status-indicator" id="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Prêt</span>
+            </div>
+            <button id="toggle-pipeline-btn" class="icon-btn" title="Pipeline Internals">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="app-layout">
+        
+        <!-- Chat Area (Main) -->
+        <main class="chat-main" id="chat-main">
+            
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chat-history">
+                <div class="message-row system-row">
+                    <div class="message system-message">
+                        <div class="system-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        </div>
+                        <span>Bienvenue ! Sélectionnez un patient et posez vos questions pour établir un diagnostic.</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="chat-input-area">
-                    <input type="text" id="question-input" placeholder="Posez une question au patient..." autocomplete="off">
-                    <button id="send-btn" class="primary-btn">Envoyer</button>
+            <!-- Clinical State Bar -->
+            <div class="clinical-bar" id="clinical-bar">
+                <div class="clinical-bar-header" id="clinical-bar-toggle">
+                    <div class="clinical-bar-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                        </svg>
+                        <span>État Clinique</span>
+                    </div>
+                    <svg class="clinical-bar-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                </div>
+                <div class="clinical-bar-content" id="clinical-state-container">
+                    <p class="placeholder-text">En attente des données du patient...</p>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area" id="input-area">
+                <div class="input-row">
+                    <div class="textarea-wrapper">
+                        <textarea id="question-input" placeholder="Posez une question au patient..." rows="1" autocomplete="off"></textarea>
+                    </div>
+                    <div class="input-actions">
+                        <button id="send-btn" class="action-btn send-btn" title="Envoyer (Entrée)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-footer">
+                    <div class="question-counter" id="question-counter">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        <span>0/3 questions avant diagnostic</span>
+                    </div>
+                    <div class="input-footer-actions">
+                        <button id="diagnose-btn" class="diagnose-btn" disabled title="Posez au moins 3 questions avant de diagnostiquer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <span>Diagnostiquer</span>
+                        </button>
+                        <button id="clear-btn" class="clear-btn" title="Réinitialiser la session">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10"/>
+                                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                            </svg>
+                            <span>Nouvelle Session</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <!-- Sidebar Droite: Analyse & JSON -->
-        <aside class="sidebar right-sidebar">
-            <div class="glass-panel top-panel">
-                <h2>🧠 Analyse de la Question</h2>
-                <div class="scroll-content" id="analysis-container">
-                    <p class="placeholder">Posez une question pour voir l'analyse.</p>
-                </div>
+        <!-- Pipeline Panel (Right) -->
+        <aside class="pipeline-panel" id="pipeline-panel">
+            <div class="pipeline-header">
+                <h2 class="pipeline-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    Pipeline Internals
+                </h2>
+                <button id="close-pipeline-btn" class="icon-btn icon-btn-sm" title="Fermer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
             </div>
 
-            <div class="glass-panel bottom-panel">
-                <h2>⚙️ Réponse JSON Brute</h2>
-                <div class="scroll-content">
-                    <pre id="json-container" class="code-block">{}</pre>
+            <div class="pipeline-scroll">
+                <!-- Loading Steps -->
+                <div id="loading-steps" class="loading-steps hidden">
+                    <h3>Progression</h3>
+                    <ul id="steps-list"></ul>
+                </div>
+
+                <!-- Accordions -->
+                <div id="accordions-container" class="hidden">
+                    
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                Analyse de la Question
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="analysis-container"></div>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                Retrieval (RAG)
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="retrieval-container"></div>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/></svg>
+                                Reranking
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="reranking-container"></div>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06A1.65 1.65 0 0 0 15 19.4a1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.38.23.85.36 1.36.36H21a2 2 0 0 1 0 4h-.09c-.51 0-.98.13-1.36.36z"/></svg>
+                                State Motor
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="motor-container"></div>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                Contexte LLM
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="context-container"></div>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                Vérification
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="verification-container"></div>
+                    </div>
+                    
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                Timing
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content" id="timing-container"></div>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span class="accordion-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                JSON Brut
+                            </span>
+                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="accordion-content">
+                            <pre id="json-container" class="code-block">{}</pre>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="internals-placeholder" class="pipeline-placeholder">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    <p>Posez une question pour voir les détails du pipeline.</p>
                 </div>
             </div>
         </aside>
+    </div>
+
+    <!-- Diagnosis Modal -->
+    <div class="modal-overlay" id="diagnosis-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    Proposer un Diagnostic
+                </h3>
+                <button id="close-modal-btn" class="icon-btn icon-btn-sm">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Quel est votre diagnostic pour ce patient ?</p>
+                <input type="text" id="diagnosis-input" placeholder="Ex: Lombalgie aiguë, Appendicite..." autocomplete="off">
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-diagnosis-btn" class="clear-btn">Annuler</button>
+                <button id="submit-diagnosis-btn" class="diagnose-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    Soumettre
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
