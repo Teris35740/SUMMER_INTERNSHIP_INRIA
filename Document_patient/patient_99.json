@@ -5,144 +5,134 @@
             "age": 37,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.4,
-                "precision": 0.12,
-                "cooperativeness": 0.7
+                "anxiety": 0.84,
+                "precision": 0.7,
+                "cooperativeness": 0.83
             }
         },
         "chief_complaint": {
-            "information": "Douleur thoracique brutale irradiant dans le dos",
+            "information": "Douleur thoracique brutale en coup de poignard irradiant dans le dos depuis 4h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 19 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur thoracique d'apparition brutale ('en coup de poignard') il y a 4 heures, irradiant dans le dos entre les omoplates.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur thoracique -> confusion avec syndrome coronarien aigu",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 10/10, la pire douleur de sa vie. Sensation de 'déchirure'.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "th1"
             },
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "th2"
+                "information": "Migration : La douleur a semblé migrer du thorax vers le dos puis vers l'abdomen.",
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés :  Sueurs profuses. Sensation de froideur d’un membre.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
             }
         ],
         "risk_factors": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "rf2"
             }
         ],
-        "vitals": [
+        "travel_history": [
             {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh3"
-            },
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh4"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "sh2"
+                "information": "Séjour en Asie du Sud-Est il y a 5 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Antécédents familiaux de diabète de type 2 (mère et grand-mère maternelle).",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 179/98.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "fh2"
+                "information": "Fréquence Cardiaque : 101 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "fh3"
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             },
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "fh4"
+                "information": "Saturation en oxygène (SpO2) : 98%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle mal contrôlée (ne prend pas toujours ses médicaments).",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
             }
         ],
         "treatments": [
             {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Antihypertenseur prescrit mais prise irrégulière.",
+                "reveal_policy": "direct_if_treatments_asked",
                 "fact_id": "t1"
-            },
-            {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Pilule contraceptive",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "t3"
             }
         ],
         "allergies": [
             {
-                "information": "Acariens",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Allergie à l'arachide (œdème facial).",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Sage-femme libérale.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 4 petits-enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune intervention chirurgicale antérieure.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -151,12 +141,16 @@
         "specialty": "Cardio-vasculaire",
         "expected_diagnosis": "Dissection aortique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Syndrome coronarien aigu",
+            "Embolie pulmonaire",
+            "Pneumothorax",
+            "Péricardite"
         ],
         "red_flags": [
-            "Asymétrie des pouls",
-            "Déficit neurologique transitoire",
-            "Choc"
+            "Asymétrie tensionnelle",
+            "Insuffisance aortique",
+            "Tamponnade",
+            "Ischémie de membre"
         ]
     }
 }

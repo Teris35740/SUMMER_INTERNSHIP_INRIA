@@ -22,9 +22,9 @@ def _build_weaviate_filters(filter_source_type=None, filter_patient_id=None):
             wvq.Filter.by_property("source_type").equal(filter_source_type)
         )
     if filter_patient_id:
-        # Le patient_id est dans le JSON des metadata, on filtre via metadata_json contenant le patient_id
+        # Le patient_id est dans le JSON des metadata, on filtre via metadata_json
         filters.append(
-            wvq.Filter.by_property("metadata_json").contains_any([filter_patient_id])
+            wvq.Filter.by_property("metadata_json").like(f"*{filter_patient_id}*")
         )
 
     if not filters:
@@ -82,6 +82,9 @@ def search_vector(query_embedding, match_count=5, filter_source_type=None, filte
 
 def search_bm25(query_text, match_count=5, filter_source_type=None, filter_patient_id=None):
     """Recherche BM25 native via Weaviate."""
+    if not query_text or not str(query_text).strip():
+        return []
+
     client = get_weaviate_client()
     collection = client.collections.get(WEAVIATE_COLLECTION)
 

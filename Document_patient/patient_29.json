@@ -5,114 +5,139 @@
             "age": 78,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.85,
-                "precision": 0.22,
-                "cooperativeness": 0.46
+                "anxiety": 0.43,
+                "precision": 0.78,
+                "cooperativeness": 0.85
             }
         },
         "chief_complaint": {
-            "information": "Brûlures en urinant depuis 48h",
+            "information": "Brûlures en urinant depuis 2 jours, c'est très désagréable.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 25 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Les brûlures mictionnelles sont apparues progressivement il y a 64 heures, sans facteur déclenchant identifié.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur lombaire ancienne (lombalgie connue) -> risque de confusion avec pyélonéphrite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fréquence urinaire : Besoin d’uriner toutes les 38 minutes, y compris 4 fois la nuit.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Aspect des urines : Urines troubles avec une odeur forte. Pas de sang visible.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de fièvre, pas de frissons, pas de douleur lombaire, pas de nausées.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h4"
             }
         ],
         "risk_factors": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "direct_if_asked",
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Ouvrier dans le bâtiment",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "soh2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh3"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "t1"
             }
         ],
         "travel_history": [
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_family_history_explored",
+                "information": "Vacances en Grèce il y a 2 mois.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédents familiaux de diabète de type 2 (mère et grand-mère maternelle).",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Tension Artérielle : 139/82.",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.9°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            },
+            {
+                "information": "Hypertrophie bénigne de la prostate (favorise les infections urinaires).",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh2"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Ramipril 5mg.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A essayé de boire beaucoup d'eau, sans amélioration significative.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "allergies": [
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Allergie aux AINS (ibuprofène) : urticaire.",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Ouvrier en usine automobile.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Marié, 4 petits-enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune intervention chirurgicale antérieure.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -121,10 +146,15 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Cystite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pyélonéphrite",
+            "Urétrite",
+            "Prostatite"
         ],
         "red_flags": [
-            "Fièvre > 38.5 (absente)"
+            "Fièvre > 38.5°C",
+            "Douleur lombaire unilatérale",
+            "Frissons",
+            "Hématurie macroscopique"
         ]
     }
 }

@@ -5,149 +5,144 @@
             "age": 80,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.87,
-                "precision": 0.3,
-                "cooperativeness": 0.71
+                "anxiety": 0.4,
+                "precision": 0.81,
+                "cooperativeness": 0.57
             }
         },
         "chief_complaint": {
-            "information": "Douleur violente dans le flanc gauche",
+            "information": "Douleur insupportable dans le flanc gauche, ça vient par vagues depuis 8h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 34 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur brutale apparue il y a 8 heures dans le flanc gauche, d'intensité croissante.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Hématurie microscopique -> risque de confusion avec infection urinaire",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 9/10 pendant les crises (paroxysmes), descend à 6/10 entre les crises.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "t1"
             },
             {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "pmh1"
+                "information": "Localisation et irradiation : Douleur du flanc gauche irradiant vers la fosse iliaque et les organes génitaux externes. Le patient ne tient pas en place.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "pmh3"
-            },
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "pmh4"
-            },
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh5"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Iode (choc)",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "a3"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th1"
-            },
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "th3"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "Symptômes associés : Nausées sans vomissements. Pas de diarrhée.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Vit seul(e)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh1"
+                "fact_id": "h4"
             },
             {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "soh3"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "fh1"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Fracture du poignet opérée",
+                "information": "Urines : Pas de sang visible dans les urines, mais le patient note une envie fréquente d’uriner.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh2"
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de fièvre, pas de frissons, pas d'anurie (continue à uriner).",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_social_history_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique de l’Ouest il y a 2 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Parents en bonne santé. Rien de notable.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 147/83.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 90 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Aucun antécédent de lithiase urinaire.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses pathologies chroniques.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris 400mg de kétoprofène, soulagement modéré.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à l'arachide (œdème facial).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Infirmière en milieu hospitalier. Travail debout avec horaires décalés.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Divorcée, garde alternée de 2 enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne il y a 3 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -156,11 +151,16 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Colique néphrétique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pyélonéphrite",
+            "Appendicite",
+            "Dissection aortique",
+            "Torsion ovarienne"
         ],
         "red_flags": [
+            "Fièvre > 38.5°C",
             "Anurie",
-            "Fièvre associée (risque de pyélonéphrite obstructive)"
+            "Sepsis",
+            "Rein unique"
         ]
     }
 }

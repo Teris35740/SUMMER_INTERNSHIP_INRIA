@@ -6,6 +6,7 @@ from typing import List
 import json
 
 from ..config import GEMINI_MODEL
+from ..config_topics import format_target_slots_for_prompt
 
 
 @lru_cache(maxsize=4)
@@ -32,7 +33,7 @@ RÈGLES STRICTES DE COMPORTEMENT :
 3. **Réponds UNIQUEMENT à la question posée** : Ne déballe pas tout ton dossier. Si on te demande tes allergies, ne parle pas de tes opérations passées. L'étudiant doit mériter les informations en posant les bonnes questions.
 4. **Respecte ton dossier** : Base-toi UNIQUEMENT sur les fragments de contexte fournis. N'invente aucun symptôme, antécédent ou voyage qui n'y figure pas.
 5. **Gestion de l'inconnu** : Si l'étudiant te pose une question dont la réponse n'est pas dans le contexte, réponds simplement comme un patient normal : "Non, rien de particulier", "Je ne sais pas", ou "Non, pas à ma connaissance".
-6. **Personnalité** : Adapte ton ton en fonction de l'attitude du patient indiquée dans l'état clinique (anxiety, precision, cooperativeness). Un patient très anxieux (anxiety élevée) posera des questions inquiètes, un patient peu précis (precision basse) donnera des réponses vagues, un patient coopératif (cooperativeness élevée) répondra volontiers et en détail.
+6. **Personnalité** : Adopte scrupuleusement le trait de caractère et l'attitude décrits ci-dessous dans la section [Ta Personnalité]. Ton ton, ton vocabulaire et la longueur de tes réponses doivent refléter cet état d'esprit.
 
 INSTRUCTIONS ÉCRITURES RÉPONSE :
 - answer_text : La réponse du patient à l'étudiant, en respectant les règles ci-dessus.
@@ -40,11 +41,54 @@ INSTRUCTIONS ÉCRITURES RÉPONSE :
 - contains_new_claim : Indique si la réponse contient une information nouvelle qui n'était pas explicitement mentionnée dans le contexte fourni. Par exemple, si le contexte indique "J'ai eu une appendicectomie", et que le patient répond "Oui, on m'a enlevé l'appendice", cela ne constitue pas une nouvelle information. Mais si le patient répond "Oui, j'ai eu une appendicectomie il y a 5 ans", alors contains_new_claim serait True, car la date n'était pas dans le contexte.
 """
 
+def _format_attitude(attitude_dict):
+    if not attitude_dict:
+        return "Tu as une attitude normale et neutre."
+        
+    anxiety = attitude_dict.get("anxiety", 0.5)
+    precision = attitude_dict.get("precision", 0.5)
+    coop = attitude_dict.get("cooperativeness", 0.8)
+    
+    parts = []
+    
+    if anxiety >= 0.8:
+        parts.append("Tu es très anxieux, inquiet et limite paniqué par ce qui t'arrive.")
+    elif anxiety >= 0.6:
+        parts.append("Tu es un peu soucieux et nerveux.")
+    elif anxiety <= 0.2:
+        parts.append("Tu es extrêmement calme, détendu et tu ne t'inquiètes pas du tout.")
+    elif anxiety <= 0.4:
+        parts.append("Tu es plutôt serein et pas vraiment inquiet.")
+        
+    if precision >= 0.8:
+        parts.append("Tu es extrêmement précis, tu donnes des détails exacts et tu es très factuel.")
+    elif precision >= 0.6:
+        parts.append("Tu es clair dans tes explications.")
+    elif precision <= 0.2:
+        parts.append("Tu es très vague, évasif, et tu as beaucoup de mal à décrire clairement tes symptômes.")
+    elif precision <= 0.4:
+        parts.append("Tu es un peu flou et imprécis dans tes explications.")
+        
+    if coop >= 0.8:
+        parts.append("Tu es très coopératif, amical, et tu as vraiment envie d'aider le médecin.")
+    elif coop >= 0.6:
+        parts.append("Tu réponds volontiers aux questions de façon polie.")
+    elif coop <= 0.2:
+        parts.append("Tu es hostile, fermé, réticent à répondre, et tu fais des phrases très courtes voire un peu agressives.")
+    elif coop <= 0.4:
+        parts.append("Tu es un peu sur la défensive, peu bavard et tu as l'air agacé.")
+        
+    return " ".join(parts)
+
+
 def answer_with_gemini(question, context, history, clinical_state, api_key, correction=""):
     client = _get_client(api_key)
     
     system_instruction = f"{SYSTEM_PROMPT}"
-    clinical_state_text = clinical_state if clinical_state else {}
+    
+    clinical_state_dict = clinical_state if clinical_state else {}
+    attitude_dict = clinical_state_dict.get("patient_attitude", {})
+    attitude_text = _format_attitude(attitude_dict)
     
     messages = [
         {"role": "user", "parts": [{"text": system_instruction}]},
@@ -56,9 +100,12 @@ def answer_with_gemini(question, context, history, clinical_state, api_key, corr
         messages.append({"role": role, "parts": [{"text": msg["content"]}]})
         
     user_prompt = f"""Médecin (Étudiant) : {question}
+
+[Ta Personnalité (TRÈS IMPORTANT, adapte ton ton en fonction)] :
+{attitude_text}
     
-[État clinique courant du patient à prendre en compte] :
-{clinical_state_text}
+[État clinique courant de la consultation (topics abordés, faits révélés)] :
+{clinical_state_dict}
 
 [Ton dossier médical caché (utilise-le pour formuler ta réponse sans jamais citer les ID ou le fait que c'est un document)] : 
 {context}
@@ -92,14 +139,20 @@ Tu DOIS impérativement tenir compte de cette remarque et corriger ta réponse. 
 def analyze_student_question(question, api_key):
     client = _get_client(api_key)
 
+    target_slots_reference = format_target_slots_for_prompt()
+
     prompt = f"""Tu es un expert en analyse de dialogue médical.
 Analyse la question de l'étudiant en médecine suivante : "{question}"
 
-Instructions :
+Instructions, tu dois obligatoirement remplir le champ search_keywords :
 1. question_type : Catégorise la question (ex: "history", "risk_factors", "travel_history", "family_history", "past_medical_history", "social_history", "treatments", "surgical_history", "allergies", "vitals").
-2. target_slots : Extrais les thèmes précis abordés sous forme de mots-clés (ex: "pain_duration", "pain_location", "history_explored", "context_explored", "gynecological_history_explored", "pain_characteristics_explored", "travel_history_explored", "surgical_history_explored", "family_history_explored", "medication_asked", "associated_symptoms_explored", "substance_use_explored", "allergies_asked", "risk_factors_explored", "social_history_explored").
+2. target_slots : Extrais les thèmes précis abordés. Utilise UNIQUEMENT des identifiants de la liste de référence ci-dessous. Tu peux en mettre plusieurs si la question aborde plusieurs thèmes.
 3. requires_retrieval : true si la question nécessite de fouiller le dossier du patient, false si c'est juste une salutation (ex: "Bonjour").
-4. search_keywords : Génère une courte chaîne contenant uniquement les mots-clés cliniques pertinents, ainsi que le nom du patient où son id, pour une recherche dans une base de données stricte (retire les mots de liaison, les salutations, etc. Ex: "douleur dos depuis 3 heures" devient "douleur dos 3 heures"). Ajoute les acronymes médicaux courants (ex : tension artérielle = TA etc...)."""
+4. search_keywords : Génère une courte chaîne contenant uniquement les mots-clés cliniques pertinents, ainsi que le nom du patient ou son id, pour une recherche dans une base de données stricte (retire les mots de liaison, les salutations, etc. Ex: "douleur dos depuis 3 heures" devient "douleur dos 3 heures"). Ajoute les acronymes médicaux courants (ex : tension artérielle = TA etc...).
+
+--- LISTE DE RÉFÉRENCE DES TARGET_SLOTS ---
+{target_slots_reference}
+--- FIN DE LA LISTE ---"""
 
     response = client.models.generate_content(
         model=GEMINI_MODEL,

@@ -5,92 +5,149 @@
             "age": 64,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.41,
-                "precision": 0.29,
-                "cooperativeness": 0.7
+                "anxiety": 0.85,
+                "precision": 0.76,
+                "cooperativeness": 0.8
             }
         },
         "chief_complaint": {
-            "information": "Toux grasse et forte fièvre",
+            "information": "Toux grasse avec de la fièvre à 38.7°C depuis 5 jours, je suis essoufflée.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 41 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Toux et fièvre apparues il y a 5 jours, initialement pris pour un simple rhume puis aggravation progressive.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Connu pour un asthme léger -> risque de l'associer à une simple crise",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Toux : Productive avec des crachats rouillés. Toux aggravée la nuit.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Douleur thoracique : Douleur pleurale du côté gauche, augmentée à l'inspiration profonde et à la toux.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Dyspnée : Essoufflement à l’effort modéré (montée d'un étage). Pas de dyspnée au repos.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de confusion, pas de marbrures, pas de détresse respiratoire au repos.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
-        "surgical_history": [
+        "risk_factors": [
             {
-                "information": "Aucune opération",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "sh1"
+                "information": "Ex-fumeur, arrêté il y a 2 ans (6 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Voyage professionnel à Bruxelles il y a 5 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : AVC à 68 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Père : En bonne santé.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 140/79.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 114 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 39.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 92%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "BPCO stade I (bronchite chronique).",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel : bronchodilatateurs inhalés.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g × 3/jour pour la fièvre, sirop contre la toux.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "allergies": [
             {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Allergie aux pollens de graminées (rhinite saisonnière).",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
             },
             {
-                "information": "Pollen",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
                 "fact_id": "a2"
             }
         ],
         "social_history": [
             {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh1"
+                "information": "Profession : Étudiante en médecine, 4ème année.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
             },
             {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "fh2"
+                "information": "Situation familiale : Mariée, 1 enfant en bas âge.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 1 verre de vin au dîner quotidiennement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ex-fumeur, arrêté il y a 2 ans (6 PA).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
             }
         ],
-        "past_medical_history": [
+        "surgical_history": [
             {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "pmh1"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "th1"
-            }
-        ],
-        "risk_factors": [
-            {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "rf1"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "v1"
+                "information": "Arthroscopie du genou droit pour ménisque il y a 12 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -99,11 +156,16 @@
         "specialty": "Pneumologie",
         "expected_diagnosis": "Pneumonie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Bronchite aiguë",
+            "Embolie pulmonaire",
+            "Tuberculose",
+            "Pleurésie"
         ],
         "red_flags": [
-            "Désaturation < 92%",
-            "Tachypnée > 25/min"
+            "SpO2 < 94%",
+            "Détresse respiratoire",
+            "Confusion",
+            "Marbrures"
         ]
     }
 }

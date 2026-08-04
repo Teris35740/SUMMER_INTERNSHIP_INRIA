@@ -5,117 +5,144 @@
             "age": 70,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.17,
-                "precision": 0.88,
-                "cooperativeness": 0.59
+                "anxiety": 0.82,
+                "precision": 0.81,
+                "cooperativeness": 0.9
             }
         },
         "chief_complaint": {
-            "information": "Brûlures en urinant depuis 48h",
+            "information": "Brûlures en urinant depuis 2 jours, c'est très désagréable.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 15 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Les brûlures mictionnelles sont apparues progressivement il y a 53 heures, sans facteur déclenchant identifié.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur lombaire ancienne (lombalgie connue) -> risque de confusion avec pyélonéphrite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fréquence urinaire : Besoin d’uriner toutes les 41 minutes, y compris 5 fois la nuit.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Aspect des urines : Urines troubles avec une odeur forte. Pas de sang visible.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de fièvre, pas de frissons, pas de douleur lombaire, pas de nausées.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Antécédents : A déjà eu 2-3 cystites dans le passé, traitées par antibiotiques.",
+                "reveal_policy": "only_if_urinary_history_asked",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "rf2"
             }
         ],
         "travel_history": [
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Voyage professionnel à Bruxelles il y a 6 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Migraines fréquentes",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh4"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "soh1"
             }
         ],
         "family_history": [
             {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
             },
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Père : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 135/81.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
             }
         ],
         "treatments": [
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Ramipril 5mg.",
+                "reveal_policy": "direct_if_treatments_asked",
                 "fact_id": "t1"
             },
             {
-                "information": "Statine (Tahor)",
-                "reveal_policy": "direct_if_asked",
+                "information": "Automédication : A essayé de boire beaucoup d'eau, sans amélioration significative.",
+                "reveal_policy": "only_if_self_medication_asked",
                 "fact_id": "t2"
             }
         ],
         "allergies": [
             {
-                "information": "Pollen",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Allergie au latex (prurit au contact).",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
             },
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
                 "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Infirmière en milieu hospitalier. Travail debout avec horaires décalés.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit seule.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 54 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -124,10 +151,15 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Cystite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pyélonéphrite",
+            "Urétrite",
+            "Prostatite"
         ],
         "red_flags": [
-            "Fièvre > 38.5 (absente)"
+            "Fièvre > 38.5°C",
+            "Douleur lombaire unilatérale",
+            "Frissons",
+            "Hématurie macroscopique"
         ]
     }
 }

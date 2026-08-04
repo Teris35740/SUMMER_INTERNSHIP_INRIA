@@ -5,61 +5,149 @@
             "age": 32,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.86,
-                "precision": 0.24,
-                "cooperativeness": 0.63
+                "anxiety": 0.55,
+                "precision": 0.45,
+                "cooperativeness": 0.8
             }
         },
         "chief_complaint": {
-            "information": "Vomissements et diarrhée depuis 24h",
+            "information": "Je n'arrête pas de vomir et d'avoir la diarrhée depuis hier, je suis épuisé.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 31 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Les symptômes ont commencé il y a environ 24 heures, quelques heures après un repas de poulet au restaurant.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Sensibilité abdominale basse -> confusion avec appendicite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Vomissements : 6-7 épisodes depuis hier, d'abord alimentaires puis bilieux. Les derniers vomissements il y a 2 heures.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
-            }
-        ],
-        "allergies": [
+            },
             {
-                "information": "Arachide",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "a1"
+                "information": "Diarrhée : Selles liquides, environ 8 fois depuis hier. Pas de sang ni de glaires dans les selles.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Douleurs abdominales : Crampes diffuses dans tout le ventre, pas localisées. Soulagées temporairement après les selles.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Hydratation : Arrive à boire un peu d'eau entre les vomissements. Sensation de soif importante.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Entourage : Sa compagne qui a mangé le même repas a aussi des symptômes digestifs similaires mais plus légers.",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h6"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de sang dans les selles, pas de fièvre élevée, pas de douleur localisée en fosse iliaque droite, pas de signes de déshydratation sévère.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
         "risk_factors": [
             {
-                "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Repas au restaurant la veille (poulet possiblement mal cuit).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Pas de voyage récent à l'étranger.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
             }
         ],
-        "social_history": [
+        "family_history": [
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh1"
+                "information": "Rien de particulier dans la famille.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 110/70, FC: 60, T: 36.8°C, Sat: 99%",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Tension Artérielle : 110/65 (un peu basse, probablement liée à la déshydratation).",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 96 bpm (tachycardie modérée, liée à la déshydratation).",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.4°C (sub-fébrile).",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Aucun antécédent notable. En bonne santé habituellement.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris du Smecta et un sachet de réhydratation orale acheté en pharmacie, amélioration partielle de la diarrhée.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à l'arachide (réaction cutanée et gonflement des lèvres).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Développeur web, travaille en télétravail.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, vit avec sa compagne, pas d'enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 2-3 bières le week-end.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 14 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -68,11 +156,15 @@
         "specialty": "Gastro-entérologie",
         "expected_diagnosis": "Gastro-entérite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Intoxication alimentaire",
+            "Appendicite",
+            "Occlusion intestinale"
         ],
         "red_flags": [
-            "Signes du pli cutané",
-            "Tachycardie"
+            "Signes de déshydratation sévère (pli cutané, hypotension)",
+            "Sang dans les selles",
+            "Douleur localisée en FID",
+            "Fièvre > 39°C"
         ]
     }
 }

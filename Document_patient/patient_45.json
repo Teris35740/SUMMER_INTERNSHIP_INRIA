@@ -5,59 +5,139 @@
             "age": 78,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.5,
-                "precision": 0.26,
-                "cooperativeness": 0.94
+                "anxiety": 0.39,
+                "precision": 0.34,
+                "cooperativeness": 0.67
             }
         },
         "chief_complaint": {
-            "information": "Fièvre avec douleur dans le dos côté droit",
+            "information": "Fièvre à 39.3°C et douleur dans le dos du côté gauche depuis 19h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 12 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Début par des brûlures urinaires il y a 33 heures, puis apparition de fièvre et douleur lombaire gauche il y a 19 heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Brûlures urinaires -> confusion avec simple cystite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fièvre : Pics fébriles à 39.3°C avec frissons intenses.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Douleur : Douleur de la fosse lombaire gauche, profonde, majorée à la percussion (signe de Giordano positif).",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes urinaires : Brûlures mictionnelles, pollakiurie. Urines troubles.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Symptômes associés : Nausées et vomissements, fatigue intense, frissons.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h5"
             }
         ],
-        "surgical_history": [
+        "risk_factors": [
             {
-                "information": "Ligature des trompes",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "sh1"
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf1"
             }
         ],
-        "social_history": [
+        "travel_history": [
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "soh1"
+                "information": "Vacances en Portugal il y a 3 mois.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Parents en bonne santé. Rien de notable.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 132/82.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 102 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 39.1°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Antécédent de cystites à répétition (3-4 par an).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
             },
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "pmh2"
+                "information": "Automédication : Paracétamol 1g × 3/jour pour la fièvre, sans effet suffisant.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux AINS (ibuprofène) : urticaire.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Infirmière en milieu hospitalier. Travail debout avec horaires décalés.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Divorcée, garde alternée de 2 enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Césarienne il y a 12 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -66,12 +146,16 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Pyélonéphrite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Cystite simple",
+            "Colique néphrétique",
+            "Pneumonie basale",
+            "Lombalgie infectieuse"
         ],
         "red_flags": [
-            "Marbrures",
-            "Hypotension",
-            "Oligurie"
+            "Sepsis",
+            "Choc septique",
+            "Anurie",
+            "Abcès rénal"
         ]
     }
 }

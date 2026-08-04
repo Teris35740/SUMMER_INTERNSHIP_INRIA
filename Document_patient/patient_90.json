@@ -5,90 +5,149 @@
             "age": 41,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.6,
-                "precision": 0.31,
-                "cooperativeness": 0.93
+                "anxiety": 0.81,
+                "precision": 0.26,
+                "cooperativeness": 0.78
             }
         },
         "chief_complaint": {
-            "information": "Essoufflement apparu d'un coup",
+            "information": "Essoufflement brutal apparu d'un coup il y a 12h, j'ai du mal à respirer.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 20 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Dyspnée soudaine apparue il y a 12 heures, au repos / en se levant du canapé.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Douleur thoracique : Douleur pleurale du côté gauche, majorée à l'inspiration profonde.",
+                "reveal_policy": "only_if_pain_type_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "v1"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a1"
             },
             {
-                "information": "Pollen",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "a2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "pmh1"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "th1"
+                "information": "Intensité de la dyspnée : Essoufflement majeur pour des efforts minimes. Sensation d’oppression thoracique.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
             },
             {
-                "information": "Week-end à Londres",
+                "information": "Symptômes associés : Toux sèche.  ",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteur de risque récent : Immobilisation prolongée (alitement post-chirurgie il y a 2 semaines).",
                 "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "th2"
+                "fact_id": "h5"
+            },
+            {
+                "information": "Jambe : Pas de douleur ni de gonflement des mollets.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "rf2"
             }
         ],
-        "surgical_history": [
+        "travel_history": [
             {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "sh1"
+                "information": "Voyage professionnel à Berlin il y a 2 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            },
+            {
+                "information": "Père : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 120/75.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 125 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.1°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 90%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Antécédent de TVP il y a 8 ans.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Contraception œstroprogestative.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux pollens de graminées (rhinite saisonnière).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Infirmière en milieu hospitalier. Travail debout avec horaires décalés.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit seule.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 30 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -97,12 +156,16 @@
         "specialty": "Pneumologie",
         "expected_diagnosis": "Embolie pulmonaire",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pneumothorax",
+            "Pneumonie",
+            "Syndrome coronarien aigu",
+            "Crise d'angoisse"
         ],
         "red_flags": [
-            "Tachycardie inexpliquée",
-            "Douleur pleurétique",
-            "Hémoptysie"
+            "SpO2 < 90%",
+            "Choc obstructif",
+            "Syncope",
+            "Hémoptysie massive"
         ]
     }
 }

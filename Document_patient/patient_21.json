@@ -5,107 +5,149 @@
             "age": 93,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.24,
-                "precision": 0.6,
-                "cooperativeness": 0.58
+                "anxiety": 0.31,
+                "precision": 0.44,
+                "cooperativeness": 0.94
             }
         },
         "chief_complaint": {
-            "information": "Cheville droite gonflée après une torsion",
+            "information": "Ma cheville droite a gonflé après une torsion en descendant d'un trottoir il y a 13h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 47 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Torsion de la cheville droite il y a 13 heures en descendant d'un trottoir. Le pied a tourné vers l'intérieur (mécanisme d'inversion).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 5/10 à la marche, 5/10 au repos.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "social_history": [
+            },
             {
-                "information": "Ouvrier dans le bâtiment",
+                "information": "Localisation : Gonflement et douleur sur le côté externe de la cheville droite, en avant de la malléole.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Capacité de marche : Grande difficulté à poser le pied, presque impossible de marcher.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h4"
+            },
+            {
+                "information": "A entendu un craquement au moment de la torsion.",
                 "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "soh1"
+                "fact_id": "h5"
             },
             {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "soh3"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Iode (choc)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "a1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "pmh2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Oméprazole 20mg",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t2"
+                "information": "Drapeaux rouges (Négatifs) : Pas de déformation visible, pas de douleur osseuse directe sur les malléoles ni sur la base du 5ème métatarse.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Fumeur actif, 6 cigarettes par jour depuis 23 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
+            }
+        ],
+        "travel_history": [
             {
-                "information": "Sédentarité",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "rf2"
+                "information": "Vacances en Croatie il y a 3 mois.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Père : Infarctus du myocarde à 73 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            },
+            {
+                "information": "Mère : Cancer du sein à 56 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Tension Artérielle : 146/85.",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Aucun antécédent particulier.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses pathologies chroniques.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A appliqué de la glace et pris 1g de paracétamol, soulagement modéré.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux AINS (ibuprofène) : urticaire.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Commercial itinérant, beaucoup de route.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, pas d'enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation occasionnelle en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fumeur actif, 6 cigarettes par jour depuis 23 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécystectomie par cœlioscopie il y a 7 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -114,10 +156,14 @@
         "specialty": "Traumatologie",
         "expected_diagnosis": "Entorse de cheville",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Fracture malléolaire",
+            "Fracture du 5ème métatarse",
+            "Fracture ostéochondrale"
         ],
         "red_flags": [
-            "Incapacité totale de faire 4 pas (Critères d'Ottawa)"
+            "Incapacité totale de faire 4 pas (Ottawa)",
+            "Douleur osseuse malléolaire",
+            "Déformation visible"
         ]
     }
 }

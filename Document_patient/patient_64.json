@@ -5,80 +5,144 @@
             "age": 91,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.42,
-                "precision": 0.43,
-                "cooperativeness": 0.89
+                "anxiety": 0.64,
+                "precision": 0.59,
+                "cooperativeness": 0.63
             }
         },
         "chief_complaint": {
-            "information": "Douleur sous les côtes à droite après un repas gras",
+            "information": "Douleur terrible sous les côtes à droite depuis 11h, surtout après avoir mangé gras.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 8 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur de l'hypocondre droit apparue il y a 11 heures, après un repas riche en graisses (charcuterie).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur épigastrique -> confusion avec gastrite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 8/10. Douleur continue, irradiant vers l'épaule droite et l'omoplate.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Calcium + Vitamine D",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "t1"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t2"
+                "information": "Localisation : Douleur de l'hypocondre droit, augmentée à l'inspiration profonde (signe de Murphy positif).",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Nausées et 3 vomissements. Fièvre modérée.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Antécédents biliaires : Douleurs similaires mais moins intenses après les repas gras depuis 10 mois (coliques hépatiques récurrentes non explorées).",
+                "reveal_policy": "only_if_digestive_history_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges : Pas d'ictère (jaunisse), pas de selles décolorées, pas d'urines foncées.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
-        "family_history": [
+        "risk_factors": [
             {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "fh1"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a1"
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_surgical_history_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Frère : Asthme sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 145/85.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 87 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 38.6°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Lithiase vésiculaire connue (calculs biliaires).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Spasfon + paracétamol, soulagement insuffisant.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Caissière en grande surface.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 3 enfants adolescents.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Amygdalectomie dans l'enfance.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -87,11 +151,16 @@
         "specialty": "Gastro-entérologie",
         "expected_diagnosis": "Cholécystite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Colique hépatique",
+            "Ulcère gastroduodénal perforé",
+            "Pneumonie basale droite",
+            "Appendicite sous-hépatique"
         ],
         "red_flags": [
-            "Signe de Murphy positif",
-            "Ictère"
+            "Fièvre élevée",
+            "Ictère",
+            "Défense de l'hypocondre droit",
+            "Choc"
         ]
     }
 }

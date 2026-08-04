@@ -5,95 +5,149 @@
             "age": 79,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.26,
-                "precision": 0.57,
-                "cooperativeness": 0.51
+                "anxiety": 0.23,
+                "precision": 0.81,
+                "cooperativeness": 0.85
             }
         },
         "chief_complaint": {
-            "information": "Essoufflement apparu d'un coup",
+            "information": "Essoufflement brutal apparu d'un coup il y a 8h, j'ai du mal à respirer.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 41 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Dyspnée soudaine apparue il y a 8 heures, au repos / en se levant du canapé.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Douleur thoracique : Douleur pleurale du côté gauche, majorée à l'inspiration profonde.",
+                "reveal_policy": "only_if_pain_type_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "vitals": [
+            },
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
+                "information": "Intensité de la dyspnée : Essoufflement majeur pour des efforts minimes. ",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Toux sèche. Hémoptysie (crachats teintés de sang). Malaise lipothymique initial.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteur de risque récent : Long voyage en avion il y a 3 jours.",
                 "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Diabète de type 2",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh1"
+                "fact_id": "h5"
             },
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "t2"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "th1"
+                "information": "Jambe : Mollet gauche douloureux et un peu gonflé depuis quelques jours (possible TVP).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Consommation alcool (3 verres/jour)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
+            }
+        ],
+        "travel_history": [
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "rf2"
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            },
+            {
+                "information": "Père : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 139/82.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 112 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.5°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 91%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Aucun antécédent thrombo-embolique.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux acariens (asthme allergique dans l'enfance).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Retraitée, ancienne institutrice.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit seule.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Appendicectomie à 47 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -102,12 +156,16 @@
         "specialty": "Pneumologie",
         "expected_diagnosis": "Embolie pulmonaire",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pneumothorax",
+            "Pneumonie",
+            "Syndrome coronarien aigu",
+            "Crise d'angoisse"
         ],
         "red_flags": [
-            "Tachycardie inexpliquée",
-            "Douleur pleurétique",
-            "Hémoptysie"
+            "SpO2 < 90%",
+            "Choc obstructif",
+            "Syncope",
+            "Hémoptysie massive"
         ]
     }
 }

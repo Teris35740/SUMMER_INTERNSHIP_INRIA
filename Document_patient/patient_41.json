@@ -5,61 +5,149 @@
             "age": 45,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.51,
-                "precision": 0.25,
-                "cooperativeness": 0.87
+                "anxiety": 0.63,
+                "precision": 0.73,
+                "cooperativeness": 0.93
             }
         },
         "chief_complaint": {
-            "information": "Douleur en bas à droite du ventre",
+            "information": "Douleur dans le ventre en bas à droite depuis 21 heures, ça empire.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 6 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La douleur a commencé il y a 21 heures autour du nombril (péri-ombilicale), puis s'est déplacée en fosse iliaque droite en quelques heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "La douleur a commencé autour du nombril -> confusion avec gastro",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 7/10, en augmentation progressive. Douleur continue, pas par crises.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "allergies": [
+            },
             {
-                "information": "Iode (choc)",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "a1"
-            }
-        ],
-        "past_medical_history": [
+                "information": "Localisation : Douleur localisée au point de McBurney (fosse iliaque droite), augmentée à la palpation.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
             {
-                "information": "Asthme infantile",
+                "information": "Symptômes associés : Nausées . Perte d'appétit marquée (anorexie).",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "pmh1"
-            }
-        ],
-        "travel_history": [
+                "fact_id": "h4"
+            },
             {
-                "information": "Pas de voyage récent",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "th1"
-            }
-        ],
-        "social_history": [
+                "information": "Facteurs aggravants : La marche, la toux, les mouvements brusques augmentent la douleur.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh1"
+                "information": "Drapeaux rouges : Légère défense en fosse iliaque droite à la palpation.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Fumeur actif, 12 cigarettes par jour depuis 10 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Vacances en Portugal il y a 3 mois.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Père : Infarctus du myocarde à 61 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Mère : Cancer du sein à 63 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 122/76.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 94 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.5°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Antécédents de troubles digestifs fonctionnels.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris du Spasfon sans effet, puis 1g de paracétamol il y a 2h avec un soulagement minime.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à la pénicilline (éruption cutanée).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'autre allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Retraitée, ancienne couturière.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, pas d'enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation occasionnelle en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fumeur actif, 12 cigarettes par jour depuis 10 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cholécystectomie par cœlioscopie il y a 3 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -68,11 +156,16 @@
         "specialty": "Gastro-entérologie",
         "expected_diagnosis": "Appendicite",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Gastro-entérite",
+            "Colique néphrétique droite",
+            "Torsion ovarienne",
+            "GEU"
         ],
         "red_flags": [
-            "Défense en fosse iliaque droite",
-            "Fièvre persistante"
+            "Défense en FID",
+            "Fièvre persistante",
+            "Péritonite",
+            "Choc"
         ]
     }
 }

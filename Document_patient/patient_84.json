@@ -5,102 +5,144 @@
             "age": 37,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.16,
-                "precision": 0.84,
-                "cooperativeness": 0.65
+                "anxiety": 0.68,
+                "precision": 0.33,
+                "cooperativeness": 0.94
             }
         },
         "chief_complaint": {
-            "information": "Fièvre très élevée et confusion",
+            "information": "Fièvre très élevée et confusion depuis 21h, je ne reconnais plus mes proches.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 17 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Fièvre élevée avec frissons apparue il y a 21 heures, d'origine probablement pulmonaire. Confusion depuis quelques heures.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Confusion et agitation -> risque de conclure à un épisode psychiatrique",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "h2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Statine (Tahor)",
+                "information": "Fièvre : Pics à 40.1°C avec frissons intenses et sueurs.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t1"
+                "fact_id": "h2"
             },
             {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "t2"
-            }
-        ],
-        "family_history": [
+                "information": "Confusion : Désorientation temporo-spatiale, propos incohérents.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "fh1"
-            }
-        ],
-        "vitals": [
+                "information": "Porte d'entrée : Toux productive avec fièvre depuis 5 jours.",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h4"
+            },
             {
-                "information": "TA: 90/60, FC: 115, T: 39.2°C, Sat: 94%",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh1"
+                "information": "État général : Marbrures sur les genoux, extrémités froides, tachycardie.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
-            },
-            {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "rf2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "pmh1"
-            },
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
-            },
-            {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh3"
             }
         ],
         "travel_history": [
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Frère : Asthme sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 112/74.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 96 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 38.6°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 93%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Insuffisance rénale chronique modérée.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses comorbidités.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
             }
         ],
         "allergies": [
             {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Allergie aux acariens (asthme allergique dans l'enfance).",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Sage-femme libérale.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 3 enfants adolescents.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Amygdalectomie dans l'enfance.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -109,12 +151,16 @@
         "specialty": "Réanimation",
         "expected_diagnosis": "Choc septique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Méningite",
+            "Endocardite",
+            "Paludisme",
+            "Choc anaphylactique"
         ],
         "red_flags": [
-            "Tension < 90 mmHg",
-            "Marbrures",
-            "Oligurie"
+            "Hypotension réfractaire",
+            "Défaillance multi-organes",
+            "Lactates élevés",
+            "Marbrures"
         ]
     }
 }

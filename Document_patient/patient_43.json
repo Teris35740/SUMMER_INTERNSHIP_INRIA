@@ -5,107 +5,149 @@
             "age": 50,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.73,
-                "precision": 0.16,
-                "cooperativeness": 0.37
+                "anxiety": 0.62,
+                "precision": 0.83,
+                "cooperativeness": 0.84
             }
         },
         "chief_complaint": {
-            "information": "Douleur violente dans le flanc gauche",
+            "information": "Douleur insupportable dans le flanc gauche, ça vient par vagues depuis 5h.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 4 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur brutale apparue il y a 5 heures dans le flanc gauche, d'intensité croissante.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Hématurie microscopique -> risque de confusion avec infection urinaire",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 8/10 pendant les crises (paroxysmes), descend à 6/10 entre les crises.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "surgical_history": [
-            {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh1"
             },
             {
-                "information": "Césarienne",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "sh2"
+                "information": "Localisation et irradiation : Douleur du flanc gauche irradiant vers la fosse iliaque et les organes génitaux externes. Le patient ne tient pas en place.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Ligature des trompes",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "sh3"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "soh1"
+                "information": "Symptômes associés : Nausées sans vomissements. Pas de diarrhée.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
             },
             {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "a1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "pmh1"
+                "information": "Urines : Présence de sang dans les urines (hématurie macroscopique).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h5"
             },
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh2"
+                "information": "Drapeaux rouges (Négatifs) : Pas de fièvre, pas de frissons, pas d'anurie (continue à uriner).",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Surpoids (IMC 28)",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Amérique du Sud il y a 5 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Père : Décédé d'un cancer du poumon à 74 ans.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
             },
             {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Mère : Arthrose sévère.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh2"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Tension Artérielle : 138/77.",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 95 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
-        "travel_history": [
+        "past_medical_history": [
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "th1"
+                "information": "Antécédent de colique néphrétique il y a 4 ans (calcul expulsé spontanément).",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel pour ses pathologies chroniques.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A pris 400mg de kétoprofène, soulagement insuffisant.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie à l'arachide (œdème facial).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse connue.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Femme au foyer, s'occupe de 3 enfants.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 2 enfants (8 et 12 ans).",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 2 bières par jour le soir après le travail.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Cure de hernie inguinale droit à 24 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -114,11 +156,16 @@
         "specialty": "Urologie",
         "expected_diagnosis": "Colique néphrétique",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pyélonéphrite",
+            "Appendicite",
+            "Dissection aortique",
+            "Torsion ovarienne"
         ],
         "red_flags": [
+            "Fièvre > 38.5°C",
             "Anurie",
-            "Fièvre associée (risque de pyélonéphrite obstructive)"
+            "Sepsis",
+            "Rein unique"
         ]
     }
 }

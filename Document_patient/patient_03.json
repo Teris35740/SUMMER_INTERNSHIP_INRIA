@@ -5,85 +5,159 @@
             "age": 25,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.93,
-                "precision": 0.22,
-                "cooperativeness": 0.58
+                "anxiety": 0.75,
+                "precision": 0.4,
+                "cooperativeness": 0.7
             }
         },
         "chief_complaint": {
-            "information": "Cheville droite gonflée après une torsion",
+            "information": "Ma cheville droite a doublé de volume, je ne peux plus poser le pied.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 32 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Torsion de la cheville hier après-midi en descendant un trottoir, le pied a tourné vers l'intérieur (inversion).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Craquement : A entendu un 'crac' au moment de la torsion, ce qui l'inquiète beaucoup.",
+                "reveal_policy": "only_if_pain_characteristics_explored",
                 "fact_id": "h2"
-            }
-        ],
-        "surgical_history": [
+            },
             {
-                "information": "Aucune opération",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh1"
-            }
-        ],
-        "treatments": [
+                "information": "Intensité : Douleur évaluée à 6/10 au repos, monte à 8/10 si elle essaie de poser le pied.",
+                "reveal_policy": "only_if_pain_scale_asked",
+                "fact_id": "h3"
+            },
             {
-                "information": "Lévothyrox 75",
+                "information": "Localisation : Douleur et gonflement sur le côté externe de la cheville, en avant et en dessous de la malléole externe.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Appui : Arrive à faire 4 pas en boitant fortement, mais c'est très douloureux.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Ecchymose : Un hématome bleu-violacé est apparu ce matin sur le côté externe de la cheville.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t1"
+                "fact_id": "h6"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de déformation visible de la cheville, pas d'impossibilité totale de marcher, pas de douleur osseuse sur la malléole ni sur le 5ème métatarse.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
+            }
+        ],
+        "risk_factors": [
+            {
+                "information": "Porte souvent des chaussures à talons au travail.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
+                "fact_id": "rf1"
+            },
+            {
+                "information": "Pas de sport régulier, sédentaire en dehors du travail.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
+                "fact_id": "rf2"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Vacances en Espagne il y a 2 semaines (sans incident).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Rien de particulier. Parents en bonne santé.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
             }
         ],
         "vitals": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Tension Artérielle : 118/72.",
+                "reveal_policy": "direct_if_vitals_measured",
                 "fact_id": "v1"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "soh1"
             },
             {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "soh2"
-            }
-        ],
-        "allergies": [
+                "information": "Fréquence Cardiaque : 78 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "a1"
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Syndrome de l'intestin irritable",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Hypothyroïdie diagnostiquée à 22 ans, bien équilibrée sous traitement.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
             },
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
+                "information": "Syndrome de l'intestin irritable (troubles digestifs occasionnels).",
+                "reveal_policy": "only_if_digestive_history_asked",
                 "fact_id": "pmh2"
+            },
+            {
+                "information": "Pas d'antécédent d'entorse précédente.",
+                "reveal_policy": "only_if_past_back_pain_asked",
+                "fact_id": "pmh3"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Lévothyrox 75 µg le matin à jeun pour la thyroïde.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A appliqué de la glace et pris 1g de paracétamol hier soir. Le paracétamol a un peu calmé la douleur.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue (ni médicamenteuse, ni alimentaire).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Assistante administrative dans un cabinet d'avocats. Travail de bureau.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit en colocation. Pas d'enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Tabac : Fume 3-4 cigarettes par jour depuis 5 ans.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Alcool : Consommation sociale le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune intervention chirurgicale antérieure.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -92,10 +166,14 @@
         "specialty": "Traumatologie",
         "expected_diagnosis": "Entorse de cheville",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Fracture de la malléole externe",
+            "Fracture du 5ème métatarse",
+            "Fracture ostéochondrale du dôme talien"
         ],
         "red_flags": [
-            "Incapacité totale de faire 4 pas (Critères d'Ottawa)"
+            "Incapacité totale de faire 4 pas (Critères d'Ottawa)",
+            "Douleur osseuse malléolaire",
+            "Déformation de la cheville"
         ]
     }
 }

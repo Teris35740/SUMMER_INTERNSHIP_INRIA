@@ -109,6 +109,7 @@ IDEAL_TOPIC_ORDER = [
     "history_explored",
     "pain_characteristics_explored",
     "associated_symptoms_explored",
+    "vitals_measured",
 ]
 
 # Mapping section du JSON patient -> topic du système
@@ -123,4 +124,5 @@ SECTION_TO_TOPIC = {
     "social_history": "social_history_explored",
     "travel_history": "travel_history_explored",
     "risk_factors": "risk_factors_explored",
+    "vitals": "vitals_measured",
 }

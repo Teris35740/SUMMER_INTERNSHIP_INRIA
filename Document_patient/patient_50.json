@@ -5,85 +5,139 @@
             "age": 62,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.3,
-                "precision": 0.54,
-                "cooperativeness": 0.48
+                "anxiety": 0.63,
+                "precision": 0.5,
+                "cooperativeness": 0.82
             }
         },
         "chief_complaint": {
-            "information": "Douleur violente en bas du ventre",
+            "information": "Douleur violente et soudaine en bas du ventre du côté droit, ça m'a pliée en deux.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 16 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur brutale en fosse iliaque droit apparue il y a 1 heures, pendant un effort physique (montée d’escaliers).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur intermittente -> confusion avec colique néphrétique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 9/10, douleur continue avec des paroxysmes.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh1"
             },
             {
-                "information": "Hypertension artérielle",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Ramipril 5mg",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "t1"
+                "information": "Localisation : Douleur en fosse iliaque droit, profonde, irradiant vers la cuisse.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
             },
             {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "t2"
+                "information": "Symptômes associés : Nausées et vomissements réflexes liés à l'intensité de la douleur.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Gynécologie : Pas de saignement vaginal anormal. Dernières règles il y a 19 jours.",
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
             }
         ],
-        "vitals": [
+        "travel_history": [
             {
-                "information": "TA: 145/90, FC: 90, T: 38.5°C, Sat: 96%",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "v1"
+                "information": "Voyage professionnel à Berlin il y a 5 semaines.",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
             }
         ],
         "family_history": [
             {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            },
+            {
+                "information": "Père : Diabétique de type 2.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 131/79.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 99 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Kyste ovarien droit connu de 5 cm, surveillé par échographie.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive œstroprogestative.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
             }
         ],
         "allergies": [
             {
-                "information": "Aucune allergie connue",
-                "reveal_policy": "only_if_family_history_explored",
+                "information": "Allergie aux pollens de graminées (rhinite saisonnière).",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Pharmacienne titulaire.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit seule.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Ne boit pas d'alcool.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Ne fume pas, n'a jamais fumé.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
             }
         ],
         "surgical_history": [
             {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "sh1"
+                "information": "Appendicectomie à 39 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -92,11 +146,15 @@
         "specialty": "Gynécologie",
         "expected_diagnosis": "Torsion ovarienne",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Grossesse extra-utérine",
+            "Appendicite",
+            "Kyste ovarien rompu",
+            "Colique néphrétique"
         ],
         "red_flags": [
+            "Choc hémodynamique",
             "Défense abdominale",
-            "Nausées/vomissements"
+            "Péritonite"
         ]
     }
 }

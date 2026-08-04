@@ -5,142 +5,144 @@
             "age": 28,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.72,
-                "precision": 0.1,
-                "cooperativeness": 0.67
+                "anxiety": 0.3,
+                "precision": 0.85,
+                "cooperativeness": 0.9
             }
         },
         "chief_complaint": {
-            "information": "Cheville droite gonflée après une torsion",
+            "information": "Je me suis tordu la cheville au foot, elle est toute gonflée.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 17 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Entorse survenue il y a 4 heures lors d'un match de football, en recevant un tacle sur le pied droit planté au sol.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Le patient a entendu un 'crack' -> risque de confusion avec fracture",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 5/10 au repos, 7/10 à la marche. A pu finir de marcher jusqu'au vestiaire.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "t1"
             },
             {
-                "information": "Oméprazole 20mg",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "t2"
+                "information": "Localisation : Douleur en avant et en dessous de la malléole externe gauche. Gonflement localisé.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Capacité de marche : Arrive à faire quelques pas en boitant, mais c'est inconfortable.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Pas de craquement entendu. Pas de sensation de déboîtement.",
+                "reveal_policy": "only_if_pain_characteristics_explored",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de déformation, pas de douleur osseuse sur la malléole interne ni externe, pas de douleur sur la base du 5ème métatarse.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
         "risk_factors": [
             {
-                "information": "Ex-fumeur sevré depuis 5 ans",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Football en club 2 fois par semaine. A déjà eu une entorse bénigne de la même cheville il y a 2 ans.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
                 "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "th3"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Arachide",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "a2"
-            },
-            {
-                "information": "Pénicilline (urticaire)",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "a3"
-            },
-            {
-                "information": "Acariens",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "a4"
-            },
-            {
-                "information": "Pollen",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "a5"
             }
         ],
         "family_history": [
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_gynecological_history_explored",
+                "information": "Rien de particulier.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "fh2"
             }
         ],
-        "surgical_history": [
+        "vitals": [
             {
-                "information": "Fracture du poignet opérée",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "sh1"
+                "information": "Tension Artérielle : 125/78.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "sh2"
+                "information": "Fréquence Cardiaque : 70 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
             },
             {
-                "information": "Cholécysectomie",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "sh3"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Retraité(e) actif(ve)",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh1"
-            },
-            {
-                "information": "Stress professionnel important",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh2"
-            },
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh3"
+                "information": "Température : 36.6°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Entorse bénigne de la cheville gauche il y a 2 ans lors d'un match de foot (grade I, guérie sans séquelles).",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            },
+            {
+                "information": "Aucun autre antécédent.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh2"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : A appliqué un spray de froid directement sur le terrain puis une poche de glace. A pris 400 mg d'ibuprofène il y a 2h.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Kinésithérapeute libéral. Inquiet de l'impact sur son travail debout.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, sans enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Tabac : Ne fume pas.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Alcool : Occasionnel, en contexte social.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune intervention chirurgicale.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -149,10 +151,14 @@
         "specialty": "Traumatologie",
         "expected_diagnosis": "Entorse de cheville",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Fracture malléolaire",
+            "Fracture du 5ème métatarse",
+            "Lésion ostéochondrale"
         ],
         "red_flags": [
-            "Incapacité totale de faire 4 pas (Critères d'Ottawa)"
+            "Incapacité totale de faire 4 pas",
+            "Douleur osseuse malléolaire",
+            "Déformation visible"
         ]
     }
 }

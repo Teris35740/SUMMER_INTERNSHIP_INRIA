@@ -5,57 +5,159 @@
             "age": 34,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.64,
-                "precision": 0.32,
-                "cooperativeness": 0.83
+                "anxiety": 0.6,
+                "precision": 0.7,
+                "cooperativeness": 0.85
             }
         },
         "chief_complaint": {
-            "information": "Mal de tête atroce pulsatile",
+            "information": "J'ai un mal de tête qui ne passe pas depuis 2 jours, c'est comme un étau.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 23 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : La céphalée a débuté progressivement il y a 2 jours, en fin de journée au travail. S'est intensifiée le lendemain.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Raideur cervicale légère (tension) -> risque de confusion méningite",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 5/10 en permanence, monte à 6/10 en fin de journée. C'est plus une gêne sourde qu'une douleur intense.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Localisation et type : Douleur bilatérale en bandeau, serrant des deux côtés de la tête comme un casque. Non pulsatile.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Sensation de tension dans la nuque et les épaules. Pas de nausées, pas de vomissements, pas de photophobie.",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteurs aggravants : Stress, position assise prolongée devant l'écran, fin de journée.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de fièvre, pas de raideur de nuque, pas de troubles visuels, pas de déficit neurologique.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h6"
             }
         ],
-        "family_history": [
+        "risk_factors": [
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "fh1"
+                "information": "Travail prolongé sur écran (8-10h par jour) avec mauvaise ergonomie.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
+                "fact_id": "rf1"
             },
             {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "fh3"
+                "information": "Stress professionnel important depuis plusieurs mois.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
+                "fact_id": "rf2"
             }
         ],
         "travel_history": [
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_substance_use_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Mère : Hypertension artérielle traitée.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            },
+            {
+                "information": "Pas d'antécédent familial de migraine.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh2"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 120/75.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 72 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Céphalées de tension occasionnelles depuis 3-4 ans, environ 1 épisode tous les 2-3 mois. Cet épisode est plus long que d'habitude.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            },
+            {
+                "information": "Légère myopie corrigée par lunettes.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh2"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Pilule contraceptive œstroprogestative (pas de migraine avec aura, donc pas de contre-indication).",
+                "reveal_policy": "only_if_gynecological_history_explored",
+                "fact_id": "t1"
+            },
+            {
+                "information": "Automédication : Paracétamol 1g × 2 par jour depuis 2 jours, soulagement partiel et transitoire.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux pollens de graminées (rhinite allergique printanière).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            },
+            {
+                "information": "Pas d'allergie médicamenteuse.",
+                "reveal_policy": "only_if_drug_allergies_specifically_asked",
+                "fact_id": "a2"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Comptable dans un cabinet. Travail sédentaire avec beaucoup de chiffres et d'écrans.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : En couple, pas d'enfants. En cours de projet d'achat immobilier (source de stress supplémentaire).",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Tabac : Ne fume pas.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Alcool : 1-2 verres de vin le week-end.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh4"
             }
         ],
         "surgical_history": [
             {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "sh1"
+                "information": "Aucune intervention chirurgicale.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -64,11 +166,15 @@
         "specialty": "Neurologie",
         "expected_diagnosis": "Migraine",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Céphalée de tension",
+            "Migraine sans aura",
+            "Céphalée cervicogénique"
         ],
         "red_flags": [
-            "Déficit neurologique focal",
-            "Début brutal en coup de tonnerre"
+            "Céphalée en coup de tonnerre",
+            "Raideur de nuque",
+            "Déficit neurologique",
+            "Fièvre"
         ]
     }
 }

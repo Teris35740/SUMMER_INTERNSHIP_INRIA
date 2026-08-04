@@ -5,59 +5,139 @@
             "age": 65,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.27,
-                "precision": 0.79,
-                "cooperativeness": 0.87
+                "anxiety": 0.4,
+                "precision": 0.62,
+                "cooperativeness": 0.77
             }
         },
         "chief_complaint": {
-            "information": "Essoufflement apparu d'un coup",
+            "information": "Essoufflement brutal apparu d'un coup il y a 12h, j'ai du mal à respirer.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 9 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Dyspnée soudaine apparue il y a 12 heures, au repos / en se levant du canapé.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Patient de nature très anxieuse -> risque de conclure à une attaque de panique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Douleur thoracique : Douleur pleurale du côté gauche, majorée à l'inspiration profonde.",
+                "reveal_policy": "only_if_pain_type_asked",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Intensité de la dyspnée : Essoufflement majeur pour des efforts minimes. ",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Symptômes associés : Toux sèche.  ",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteur de risque récent : Contraception orale (œstroprogestative).",
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Jambe : Mollet droit douloureux et un peu gonflé depuis quelques jours (possible TVP).",
+                "reveal_policy": "only_if_associated_symptoms_explored",
+                "fact_id": "h6"
             }
         ],
-        "treatments": [
+        "risk_factors": [
             {
-                "information": "Calcium + Vitamine D",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Hypercholestérolémie",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "pmh1"
+                "information": "Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_family_history_explored",
+                "information": "Pas de voyage récent.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "th2"
             }
         ],
         "family_history": [
             {
-                "information": "Sans particularité",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Père : Goutte. Mère : Ostéoporose.",
+                "reveal_policy": "direct_if_family_history_asked",
                 "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 132/80.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
+            },
+            {
+                "information": "Fréquence Cardiaque : 111 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 37.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 92%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Aucun antécédent thrombo-embolique.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Traitement habituel.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Aucune allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Femme au foyer, s'occupe de 3 enfants.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit en colocation.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : 2 bières par jour le soir après le travail.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Vapoteur depuis 2 ans, ancien fumeur.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Ablation de polypes du côlon par coloscopie il y a 14 ans.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -66,12 +146,16 @@
         "specialty": "Pneumologie",
         "expected_diagnosis": "Embolie pulmonaire",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Pneumothorax",
+            "Pneumonie",
+            "Syndrome coronarien aigu",
+            "Crise d'angoisse"
         ],
         "red_flags": [
-            "Tachycardie inexpliquée",
-            "Douleur pleurétique",
-            "Hémoptysie"
+            "SpO2 < 90%",
+            "Choc obstructif",
+            "Syncope",
+            "Hémoptysie massive"
         ]
     }
 }

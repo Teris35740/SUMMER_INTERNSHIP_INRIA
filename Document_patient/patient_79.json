@@ -5,134 +5,139 @@
             "age": 53,
             "gender": "femme",
             "patient_attitude": {
-                "anxiety": 0.2,
-                "precision": 0.87,
-                "cooperativeness": 0.54
+                "anxiety": 0.75,
+                "precision": 0.4,
+                "cooperativeness": 0.75
             }
         },
         "chief_complaint": {
-            "information": "Douleur dans la poitrine qui serre",
+            "information": "Douleur dans la poitrine qui serre depuis 4h, ça irradie dans le bras gauche.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 14 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur thoracique rétrosternale constrictive apparue il y a 4 heures, à l’effort (montée d’escaliers).",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Douleur épigastrique associée -> confusion avec reflux ou ulcère",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 9/10. Sensation d’oppression, 'comme un étau' ou 'un éléphant sur la poitrine'.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
-            }
-        ],
-        "travel_history": [
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "only_if_social_history_explored",
-                "fact_id": "th1"
             },
             {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "th2"
+                "information": "Irradiation : La douleur irradie dans le bras gauche, la mâchoire inférieure et le cou.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h3"
             },
             {
-                "information": "Retour de ski dans les Alpes",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "th3"
-            }
-        ],
-        "vitals": [
-            {
-                "information": "TA: 180/100, FC: 105, T: 37.5°C, Sat: 97%",
+                "information": "Symptômes associés : Sueurs froides, nausées. Sensation d'angoisse de mort.",
                 "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "fh1"
+                "fact_id": "h4"
             },
             {
-                "information": "Mère diabétique",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Sœur avec sclérose en plaques",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "fh3"
-            },
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "fh4"
-            }
-        ],
-        "social_history": [
-            {
-                "information": "Marié(e) avec 2 enfants",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "soh1"
-            }
-        ],
-        "past_medical_history": [
-            {
-                "information": "Rien à signaler",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "pmh1"
-            }
-        ],
-        "allergies": [
-            {
-                "information": "Acariens",
-                "reveal_policy": "only_if_family_history_explored",
-                "fact_id": "a1"
-            },
-            {
-                "information": "Iode (choc)",
-                "reveal_policy": "only_if_travel_history_explored",
-                "fact_id": "a2"
-            },
-            {
-                "information": "AINS (Aspirine/Ibuprofène)",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "a3"
+                "information": "Effort : Douleur similaire à l’effort les dernières semaines mais plus légère et passait au repos (angor d’effort).",
+                "reveal_policy": "only_if_evolution_explored",
+                "fact_id": "h5"
             }
         ],
         "risk_factors": [
             {
-                "information": "Obésité (IMC 35)",
-                "reveal_policy": "only_if_allergies_asked",
+                "information": "Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
                 "fact_id": "rf1"
+            }
+        ],
+        "travel_history": [
+            {
+                "information": "Séjour en Afrique de l’Ouest il y a 3 mois (vaccins à jour).",
+                "reveal_policy": "direct_if_travel_asked",
+                "fact_id": "th1"
+            }
+        ],
+        "family_history": [
+            {
+                "information": "Antécédents familiaux de diabète de type 2 (mère et grand-mère maternelle).",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
+            }
+        ],
+        "vitals": [
+            {
+                "information": "Tension Artérielle : 152/100.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Tabagisme actif 15 PA",
-                "reveal_policy": "only_if_surgical_history_explored",
-                "fact_id": "rf2"
+                "information": "Fréquence Cardiaque : 94 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.8°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
+            },
+            {
+                "information": "Saturation en oxygène (SpO2) : 98%.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v4"
+            }
+        ],
+        "past_medical_history": [
+            {
+                "information": "Hypertension artérielle traitée. Diabète de type 2.",
+                "reveal_policy": "direct_if_medical_history_asked",
+                "fact_id": "pmh1"
+            },
+            {
+                "information": "Tabagisme actif 31 PA.",
+                "reveal_policy": "only_if_risk_factors_explored",
+                "fact_id": "pmh2"
             }
         ],
         "treatments": [
             {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_travel_history_explored",
+                "information": "Aspirine 75mg, statine, IEC.",
+                "reveal_policy": "direct_if_treatments_asked",
                 "fact_id": "t1"
+            }
+        ],
+        "allergies": [
+            {
+                "information": "Allergie aux fruits de mer (urticaire et gonflement).",
+                "reveal_policy": "direct_if_allergies_asked",
+                "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Caissière en grande surface.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Mariée, 4 petits-enfants.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Alcool : Consommation de 2-3 verres le week-end uniquement.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Tabac : Fume occasionnellement en soirée (3-4 cigarettes par semaine).",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh4"
             }
         ],
         "surgical_history": [
             {
-                "information": "Appendicectomie à 15 ans",
-                "reveal_policy": "only_if_allergies_asked",
-                "fact_id": "sh1"
-            },
-            {
-                "information": "Césarienne",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "sh2"
+                "information": "Aucune intervention chirurgicale antérieure.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -141,12 +146,16 @@
         "specialty": "Cardiologie",
         "expected_diagnosis": "Syndrome coronarien aigu",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Embolie pulmonaire",
+            "Dissection aortique",
+            "Péricardite",
+            "Douleur pariétale"
         ],
         "red_flags": [
-            "Irradiation mâchoire/bras",
-            "Sueurs profuses",
-            "Douleur constrictive"
+            "Choc cardiogénique",
+            "OAP",
+            "Troubles du rythme",
+            "Arrêt cardiaque"
         ]
     }
 }

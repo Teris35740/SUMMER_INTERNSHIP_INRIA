@@ -5,127 +5,144 @@
             "age": 20,
             "gender": "homme",
             "patient_attitude": {
-                "anxiety": 0.11,
-                "precision": 0.69,
-                "cooperativeness": 0.88
+                "anxiety": 0.35,
+                "precision": 0.5,
+                "cooperativeness": 0.95
             }
         },
         "chief_complaint": {
-            "information": "Dos bloqué après avoir porté un carton",
+            "information": "Je me suis bloqué le dos en déménageant, j'ai du mal à bouger.",
             "reveal_policy": "direct_if_asked",
             "fact_id": "cc1"
         },
         "history": [
             {
-                "information": "Le problème a commencé il y a environ 7 heures.",
-                "reveal_policy": "only_if_history_explored",
+                "information": "Déclenchement : Douleur survenue brutalement il y a 6 heures en soulevant un canapé lors d'un déménagement entre amis.",
+                "reveal_policy": "direct_if_asked_about_onset",
                 "fact_id": "h1"
             },
             {
-                "information": "Petite douleur irradiant dans la fesse -> risque confusion sciatique",
-                "reveal_policy": "only_if_context_explored",
+                "information": "Intensité : 6/10 au repos, 8/10 en bougeant. A senti un 'blocage' soudain.",
+                "reveal_policy": "only_if_pain_scale_asked",
                 "fact_id": "h2"
+            },
+            {
+                "information": "Localisation et type : Douleur en barre dans le bas du dos (lombaire), contracture musculaire palpable.",
+                "reveal_policy": "only_if_pain_type_asked",
+                "fact_id": "h3"
+            },
+            {
+                "information": "Irradiation : Aucune irradiation dans les jambes, les fesses ou le périnée.",
+                "reveal_policy": "only_if_irradiation_explored",
+                "fact_id": "h4"
+            },
+            {
+                "information": "Facteurs aggravants : Se pencher en avant, tousser, rester assis trop longtemps.",
+                "reveal_policy": "only_if_aggravating_factors_asked",
+                "fact_id": "h5"
+            },
+            {
+                "information": "Facteurs calmants : Position allongée sur le côté, genoux pliés.",
+                "reveal_policy": "only_if_alleviating_factors_asked",
+                "fact_id": "h6"
+            },
+            {
+                "information": "Drapeaux rouges (Négatifs) : Pas de perte de sensation au niveau du périnée, pas de troubles sphinctériens, pas de fièvre, pas de déficit moteur dans les jambes.",
+                "reveal_policy": "only_if_red_flags_explored",
+                "fact_id": "h7"
             }
         ],
-        "vitals": [
+        "risk_factors": [
             {
-                "information": "TA: 120/80, FC: 75, T: 37.2°C, Sat: 98%",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "v1"
-            }
-        ],
-        "family_history": [
-            {
-                "information": "Cancer du sein chez la mère",
-                "reveal_policy": "only_if_history_explored",
-                "fact_id": "fh1"
-            },
-            {
-                "information": "Père décédé d'un infarctus",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "fh2"
-            },
-            {
-                "information": "Antécédent de phlébite chez le père",
-                "reveal_policy": "only_if_pain_characteristics_explored",
-                "fact_id": "fh3"
-            }
-        ],
-        "treatments": [
-            {
-                "information": "Lévothyrox 75",
-                "reveal_policy": "only_if_gynecological_history_explored",
-                "fact_id": "t1"
-            },
-            {
-                "information": "Inhalateur de Ventoline si besoin",
-                "reveal_policy": "only_if_context_explored",
-                "fact_id": "t2"
-            },
-            {
-                "information": "Oméprazole 20mg",
-                "reveal_policy": "only_if_associated_symptoms_explored",
-                "fact_id": "t3"
-            },
-            {
-                "information": "Paracétamol occasionnel",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "t4"
+                "information": "Sédentaire, pas de sport régulier. Passe beaucoup de temps assis devant l'ordinateur.",
+                "reveal_policy": "only_if_lifestyle_habits_asked",
+                "fact_id": "rf1"
             }
         ],
         "travel_history": [
             {
-                "information": "Week-end à Londres",
-                "reveal_policy": "only_if_pain_characteristics_explored",
+                "information": "Pas de voyage particulier récemment.",
+                "reveal_policy": "direct_if_travel_asked",
                 "fact_id": "th1"
-            },
-            {
-                "information": "Voyage récent en Asie",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "th2"
-            },
-            {
-                "information": "Séjour en Afrique subsaharienne il y a 1 mois",
-                "reveal_policy": "direct_if_asked",
-                "fact_id": "th3"
             }
         ],
-        "social_history": [
+        "family_history": [
             {
-                "information": "Travaille de nuit",
-                "reveal_policy": "only_if_risk_factors_explored",
-                "fact_id": "soh1"
+                "information": "Pas d'antécédent familial notable. Parents en bonne santé.",
+                "reveal_policy": "direct_if_family_history_asked",
+                "fact_id": "fh1"
             }
         ],
-        "surgical_history": [
+        "vitals": [
             {
-                "information": "Hernie inguinale opérée",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "sh1"
+                "information": "Tension Artérielle : 122/74.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v1"
             },
             {
-                "information": "Opération des dents de sagesse",
-                "reveal_policy": "only_if_substance_use_explored",
-                "fact_id": "sh2"
+                "information": "Fréquence Cardiaque : 76 bpm.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v2"
+            },
+            {
+                "information": "Température : 36.7°C.",
+                "reveal_policy": "direct_if_vitals_measured",
+                "fact_id": "v3"
             }
         ],
         "past_medical_history": [
             {
-                "information": "Hypothyroïdie",
-                "reveal_policy": "only_if_risk_factors_explored",
+                "information": "Aucun antécédent médical notable. Premier épisode de lombalgie.",
+                "reveal_policy": "direct_if_medical_history_asked",
                 "fact_id": "pmh1"
+            }
+        ],
+        "treatments": [
+            {
+                "information": "Aucun traitement en cours.",
+                "reveal_policy": "direct_if_treatments_asked",
+                "fact_id": "t1"
             },
             {
-                "information": "Asthme infantile",
-                "reveal_policy": "only_if_medication_asked",
-                "fact_id": "pmh2"
+                "information": "Automédication : A pris 400 mg d'ibuprofène il y a 3 heures, soulagement modéré.",
+                "reveal_policy": "only_if_self_medication_asked",
+                "fact_id": "t2"
             }
         ],
         "allergies": [
             {
-                "information": "Arachide",
-                "reveal_policy": "only_if_family_history_explored",
+                "information": "Pas d'allergie connue.",
+                "reveal_policy": "direct_if_allergies_asked",
                 "fact_id": "a1"
+            }
+        ],
+        "social_history": [
+            {
+                "information": "Profession : Étudiant en informatique, en 2ème année de licence.",
+                "reveal_policy": "direct_if_job_explored",
+                "fact_id": "sh1"
+            },
+            {
+                "information": "Situation familiale : Célibataire, vit en résidence universitaire.",
+                "reveal_policy": "only_if_social_context_explored",
+                "fact_id": "sh2"
+            },
+            {
+                "information": "Tabac : Ne fume pas.",
+                "reveal_policy": "direct_if_tobacco_asked",
+                "fact_id": "sh3"
+            },
+            {
+                "information": "Alcool : Consommation occasionnelle en soirée le week-end.",
+                "reveal_policy": "direct_if_alcohol_asked",
+                "fact_id": "sh4"
+            }
+        ],
+        "surgical_history": [
+            {
+                "information": "Aucune intervention chirurgicale.",
+                "reveal_policy": "direct_if_surgical_history_asked",
+                "fact_id": "suh1"
             }
         ]
     },
@@ -134,11 +151,15 @@
         "specialty": "Rhumatologie",
         "expected_diagnosis": "Lombalgie",
         "alternative_diagnoses": [
-            "À définir par l'IA lors de l'évaluation"
+            "Sciatique",
+            "Hernie discale",
+            "Fracture vertébrale"
         ],
         "red_flags": [
             "Anesthésie en selle",
-            "Troubles sphinctériens"
+            "Troubles sphinctériens",
+            "Déficit moteur",
+            "Fièvre associée"
         ]
     }
 }
