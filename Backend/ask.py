@@ -71,6 +71,7 @@ def main():
     patient_id = "PAT_001"
     session_id = "session_1"
     MIN_QUESTIONS = 3
+    PEDAGOGICAL_EXCERPT_COUNT = 15
 
     # Charger le diagnostic attendu et les données complètes du patient
     expected_diagnosis = load_expected_diagnosis(patient_id)
@@ -247,7 +248,12 @@ def main():
                             
                             sci_context = ""
                             if sci_rows:
-                                sci_context = build_context(sci_rows[:2])
+                                # Appliquer le reranking et l'expansion parent/enfant
+                                sci_rows = re_ranking(sci_rows, sci_keywords, cross_encoder)
+                                sci_rows = expansion_parent_child(sci_rows)
+                                sci_rows = sci_rows[:3] # On garde les 3 meilleurs documents après expansion
+                                
+                                sci_context = build_context(sci_rows)
                                 print("\n--- Contexte Brut RAG (Scientifique) ---")
                                 print(sci_context)
                                 print("----------------------------------------")
