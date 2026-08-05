@@ -44,6 +44,9 @@ def main():
     #             embeddings,
     #         )
     #         logger.info("Insertion PDF Weaviate réussie.")
+    
+    from core.config import close_weaviate_client
+    close_weaviate_client()
 
 
 if __name__ == "__main__":

@@ -18,7 +18,7 @@ import uvicorn
 from sentence_transformers import SentenceTransformer, CrossEncoder
 
 # Import depuis le backend
-from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, MAX_RETRIES
+from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, MAX_RETRIES, close_weaviate_client
 from core.rag.retrieval import embed_question, fusion_rows
 from core.rag.reranking import re_ranking, build_context, expansion_parent_child
 from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct
@@ -28,6 +28,10 @@ from core.verification import verification_answer, fact_id_authorized_by_motor, 
 from core.diagnostic import handle_diagnosis
 
 app = FastAPI(title="RAG Medical API")
+
+@app.on_event("shutdown")
+def shutdown_event():
+    close_weaviate_client()
 
 # Lazy loading des modèles
 model = None

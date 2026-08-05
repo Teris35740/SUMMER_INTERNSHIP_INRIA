@@ -76,7 +76,16 @@ def get_weaviate_client():
             )
     return _weaviate_client
 
-
+def close_weaviate_client():
+    global _weaviate_client
+    if _weaviate_client is not None:
+        try:
+            _weaviate_client.close()
+        except Exception as e:
+            pass
+        finally:
+            _weaviate_client = None
+            
 # --- Scoring de l'étudiant ---
 # Poids des indicateurs : w4 > w1 > w2 > w3
 SCORING_WEIGHTS = {

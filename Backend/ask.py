@@ -223,7 +223,9 @@ def main():
         print(f"\nErreur critique inattendue : {e}")
     finally:
         clear_session(session_id)
-        print("Session terminée et cache nettoyé.")
+        from core.config import close_weaviate_client
+        close_weaviate_client()
+        print("Session terminée, cache nettoyé et base de données déconnectée.")
 
 
 if __name__ == "__main__":
