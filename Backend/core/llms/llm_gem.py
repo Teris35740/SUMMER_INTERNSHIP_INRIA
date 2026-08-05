@@ -24,6 +24,11 @@ class AnswerStruct(BaseModel):
     used_fact_ids: List[str]
     contains_new_claim: bool
 
+class PedagogyAnalysis(BaseModel):
+    is_pertinent: bool
+    feedback: str
+    scientific_keywords: str
+
 
 SYSTEM_PROMPT = """Tu es un patient virtuel participant à un jeu de rôle clinique pour entraîner des étudiants en médecine au diagnostic.
 
@@ -209,6 +214,74 @@ Réponse :"""
         contents=prompt,
         config={
             "temperature": 0.2
+        }
+    )
+    return response.text
+
+def evaluate_student_question_pedagogy(question, expected_diagnosis, history, api_key):
+    client = _get_client(api_key)
+    
+    past_history_str = ""
+    patient_answer = ""
+    
+    # On isole l'échange actuel (les 2 derniers messages) du reste de l'historique
+    if len(history) >= 2 and history[-2]['role'] == 'user' and history[-1]['role'] == 'assistant':
+        past_msgs = history[:-2]
+        patient_answer = history[-1]['content']
+    else:
+        past_msgs = history
+        
+    for msg in past_msgs:
+        past_history_str += f"{msg['role']}: {msg['content']}\n"
+    
+    prompt = f"""Tu es un professeur de médecine supervisant un étudiant.
+L'étudiant interroge un patient virtuel dont le diagnostic final attendu est : "{expected_diagnosis}".
+
+Historique de la consultation (avant cet échange) :
+{past_history_str if past_history_str else "Aucun échange précédent, c'est le début de la consultation."}
+
+Échange actuel :
+Étudiant : "{question}"
+Réponse du patient : "{patient_answer}"
+
+Instructions :
+1. is_pertinent : true si la question de l'étudiant est pertinente et justifiée à ce stade de la consultation, false sinon.
+2. feedback : Rédige un court retour pédagogique direct et bienveillant (2-3 phrases) adressé à l'étudiant. Évalue sa question en tenant compte de l'historique de la consultation. Dis-lui si sa question est bonne, bien formulée, ou si elle manque de précision.
+3. scientific_keywords : Génère 2 à 4 mots-clés pertinents pour chercher des informations théoriques dans des documents scientifiques (cours, recommandations) en lien avec la question et le diagnostic.
+"""
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=prompt,
+        config={
+            "response_mime_type": "application/json",
+            "response_schema": PedagogyAnalysis,
+            "temperature": 0.2
+        }
+    )
+    return json.loads(response.text)
+
+def generate_pedagogical_synthesis(question, sci_context, api_key, strict_rag=False):
+    client = _get_client(api_key)
+    
+    rag_instruction = "Tu dois te baser STRICTEMENT sur les extraits théoriques fournis. Si l'information ne s'y trouve pas, indique simplement qu'aucune notion théorique précise n'a été trouvée dans la base." if strict_rag else "Tu peux t'appuyer sur tes propres connaissances médicales si les documents fournis ne suffisent pas, mais priorise les extraits théoriques fournis."
+    
+    prompt = f"""Tu es un professeur de médecine expérimenté qui s'adresse à son étudiant en médecine.
+L'étudiant vient de poser cette question dans le cadre d'une consultation virtuelle : "{question}"
+
+Voici des extraits de documents scientifiques (cours, recommandations) récupérés dans notre base de données concernant ce sujet :
+{sci_context if sci_context else "Aucun document trouvé."}
+
+Instructions :
+1. Formule une courte explication théorique (3 à 5 phrases) pour éclairer l'étudiant sur la théorie médicale en lien avec sa question.
+2. Adresse-toi directement à l'étudiant avec bienveillance.
+3. {rag_instruction}
+4. Sois clair et pédagogique. N'utilise pas de jargon sans l'expliquer si nécessaire.
+"""
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=prompt,
+        config={
+            "temperature": 0.3
         }
     )
     return response.text
