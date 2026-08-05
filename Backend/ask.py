@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import argparse
 
 from sentence_transformers import CrossEncoder
 
@@ -16,7 +17,9 @@ from core.llms.llm_gem import (
     answer_with_gemini,
     split_answer_struct,
     split_question_analysis,
-    test_pdf_answer_with_gemini
+    test_pdf_answer_with_gemini,
+    evaluate_student_question_pedagogy,
+    generate_pedagogical_synthesis
 )
 from core.rag.reranking import build_context, expansion_parent_child, re_ranking
 from core.rag.retrieval import embed_question, fusion_rows
@@ -40,6 +43,14 @@ from core.verification import fact_id_authorized_by_motor, verification_answer
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Script de consultation avec un patient virtuel.")
+    parser.add_argument("--pedago", action="store_true", help="Active le mode pédagogique (sans notation, avec retours).")
+    args, unknown = parser.parse_known_args()
+    is_pedago_mode = args.pedago
+    
+    # Conserve les arguments restants pour permettre l'injection directe d'une question
+    sys.argv = [sys.argv[0]] + unknown
+    
     gemini_api_key = os.getenv("GEMINI_API_KEY")
     gemini_api_key_question_analysis = os.getenv("GEMINI_API_KEY_QUESTION_ANALYSIS")
     # mistral_api_key = os.getenv("RAGARENN")
@@ -109,7 +120,10 @@ def main():
 
                 # Affichage du rapport de notation
                 if result.get("report"):
-                    print(format_report(result["report"]))
+                    if is_pedago_mode:
+                        print("\n[Mode Pédagogique] La notation est désactivée pour cet exercice.")
+                    else:
+                        print(format_report(result["report"]))
 
                 continue
             
@@ -216,6 +230,33 @@ def main():
                 q_count = get_question_count(session_id)
                 print(f"\n--- Réponse finale (question {q_count}/{MIN_QUESTIONS} avant diagnostic) ---")
                 print(answer)
+
+                if is_pedago_mode:
+                    print("\n--- Évaluation Pédagogique ---")
+                    try:
+                        updated_history = get_history(session_id)
+                        pedago_res = evaluate_student_question_pedagogy(question, expected_diagnosis, updated_history, gemini_api_key_question_analysis)
+                        print(f"Pertinent : {'Oui' if pedago_res['is_pertinent'] else 'Non'}")
+                        print(f"Feedback : {pedago_res['feedback']}")
+                        
+                        sci_keywords = pedago_res.get("scientific_keywords", "")
+                        if sci_keywords:
+                            print(f"\nRecherche d'informations théoriques ({sci_keywords})...")
+                            sci_emb = embed_question(sci_keywords, model)
+                            sci_rows = fusion_rows(sci_emb, sci_keywords, filter_source_type="reference")
+                            
+                            sci_context = ""
+                            if sci_rows:
+                                sci_context = build_context(sci_rows[:2])
+                                print("\n--- Contexte Brut RAG (Scientifique) ---")
+                                print(sci_context)
+                                print("----------------------------------------")
+                            
+                            print("\n--- Synthèse Pédagogique ---")
+                            pedagogical_summary = generate_pedagogical_synthesis(question, sci_context, gemini_api_key_question_analysis)
+                            print(pedagogical_summary)
+                    except Exception as e:
+                        print(f"Erreur lors de l'évaluation pédagogique : {e}")
 
     except KeyboardInterrupt:
         print("\nInterruption par l'utilisateur. Fin du programme.")
