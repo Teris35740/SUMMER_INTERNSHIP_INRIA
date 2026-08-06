@@ -12,6 +12,37 @@
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
+    <!-- Mode Selection Overlay -->
+    <div class="mode-selection-overlay" id="mode-selection-overlay">
+        <div class="mode-selection-content">
+            <h1 class="mode-title">Bienvenue sur MedSim</h1>
+            <p class="mode-subtitle">Sélectionnez le mode de la consultation virtuelle</p>
+            
+            <div class="mode-cards">
+                <div class="mode-card" id="mode-pedago-btn">
+                    <div class="mode-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Mode Pédagogique</h3>
+                    <p>Posez vos questions librement. L'assistant fournira des retours sur votre méthodologie et des rappels théoriques, sans aucune notation finale.</p>
+                </div>
+                
+                <div class="mode-card" id="mode-notation-btn">
+                    <div class="mode-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3>Mode Notation</h3>
+                    <p>Mode examen standard. Pas d'aide en cours de route. Un rapport de compétences détaillé vous sera remis après votre diagnostic.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-left">
@@ -35,6 +66,13 @@
             </div>
         </div>
         <div class="navbar-right">
+            <button id="change-mode-btn" class="icon-btn" title="Changer de mode" style="margin-right: 8px; width: auto; padding: 0 12px; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <span id="current-mode-label">Mode</span>
+            </button>
             <div class="status-indicator" id="status-indicator">
                 <span class="status-dot"></span>
                 <span class="status-text">Prêt</span>

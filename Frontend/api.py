@@ -21,7 +21,7 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from core.config import EXCERPT_COUNT, MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER, MAX_RETRIES, close_weaviate_client
 from core.rag.retrieval import embed_question, fusion_rows
 from core.rag.reranking import re_ranking, build_context, expansion_parent_child
-from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct
+from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, evaluate_student_question_pedagogy, generate_pedagogical_synthesis
 from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact, increment_question_count, get_question_count, add_useful_question, get_useful_question_count, get_useful_questions
 from core.state_motor import state_motor_advanced
 from core.verification import verification_answer, fact_id_authorized_by_motor, verify_diagnosis
@@ -71,6 +71,7 @@ class AskRequest(BaseModel):
     question: str
     session_id: str = "session_1"
     patient_num: int = 1
+    is_pedago_mode: bool = False
 
 class AskResponse(BaseModel):
     answer: str
@@ -86,11 +87,14 @@ class AskResponse(BaseModel):
     context_sent_to_llm: str
     verification_info: dict
     timing: dict
+    pedagogical_evaluation: Optional[dict] = None
+    pedagogical_synthesis: Optional[str] = None
 
 class DiagnoseRequest(BaseModel):
     diagnosis: str
     session_id: str = "session_1"
     patient_num: int = 1
+    is_pedago_mode: bool = False
 
 class DiagnoseResponse(BaseModel):
     is_correct: bool
@@ -303,6 +307,30 @@ def ask_question(request: AskRequest):
 
     timing["total"] = time.time() - t_start_total
 
+    pedagogical_evaluation = None
+    pedagogical_synthesis = None
+
+    if request.is_pedago_mode:
+        try:
+            expected_diagnosis = patient_data.get("metadata", {}).get("expected_diagnosis", "")
+            pedagogical_evaluation = evaluate_student_question_pedagogy(question, expected_diagnosis, updated_history, gemini_api_key_question_analysis)
+            
+            sci_keywords = pedagogical_evaluation.get("scientific_keywords", "")
+            if sci_keywords:
+                sci_emb = embed_question(sci_keywords, mod)
+                sci_rows = fusion_rows(sci_emb, sci_keywords, filter_source_type="reference")
+                
+                sci_context = ""
+                if sci_rows:
+                    sci_rows = re_ranking(sci_rows, sci_keywords, ce)
+                    sci_rows = expansion_parent_child(sci_rows)
+                    sci_rows = sci_rows[:3]
+                    sci_context = build_context(sci_rows)
+                
+                pedagogical_synthesis = generate_pedagogical_synthesis(question, sci_context, gemini_api_key_question_analysis)
+        except Exception as e:
+            print(f"Erreur lors de l'évaluation pédagogique : {e}")
+
     return AskResponse(
         answer=answer_text,
         analysis=analysis_dict,
@@ -315,7 +343,9 @@ def ask_question(request: AskRequest):
         state_motor_info=state_motor_info,
         context_sent_to_llm=context,
         verification_info=verification_info,
-        timing=timing
+        timing=timing,
+        pedagogical_evaluation=pedagogical_evaluation,
+        pedagogical_synthesis=pedagogical_synthesis
     )
 
 MIN_QUESTIONS_BEFORE_DIAGNOSIS = 3
@@ -358,7 +388,7 @@ def diagnose(request: DiagnoseRequest):
         feedback=result["feedback"],
         expected_diagnosis=expected_diagnosis if not result["is_correct"] else "",
         question_count=get_question_count(session_id),
-        report=result.get("report")
+        report=result.get("report") if not request.is_pedago_mode else None
     )
 
 @app.post("/api/clear")

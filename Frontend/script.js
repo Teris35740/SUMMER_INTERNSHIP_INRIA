@@ -38,6 +38,7 @@ const sessionId = "session_1";
 let questionCount = 0;
 let currentPatientNum = 1;
 let patientsData = [];
+let isPedagoMode = false;
 
 // ── Init ──
 document.addEventListener('DOMContentLoaded', () => {
@@ -143,6 +144,23 @@ function setupEventListeners() {
     diagnosisModal.addEventListener('click', (e) => {
         if (e.target === diagnosisModal) closeDiagnosisModal();
     });
+    
+    // Mode Selection
+    document.getElementById('mode-pedago-btn').addEventListener('click', () => {
+        isPedagoMode = true;
+        document.getElementById('current-mode-label').textContent = 'Pédagogique';
+        document.getElementById('mode-selection-overlay').classList.add('hidden');
+    });
+    document.getElementById('mode-notation-btn').addEventListener('click', () => {
+        isPedagoMode = false;
+        document.getElementById('current-mode-label').textContent = 'Notation';
+        document.getElementById('mode-selection-overlay').classList.add('hidden');
+    });
+    
+    // Change Mode
+    document.getElementById('change-mode-btn').addEventListener('click', () => {
+        document.getElementById('mode-selection-overlay').classList.remove('hidden');
+    });
 }
 
 // ==============================
@@ -219,6 +237,49 @@ function appendSystemMessage(text) {
             <span>${text}</span>
         </div>
     `;
+    chatHistory.appendChild(row);
+    scrollToBottom();
+}
+
+function appendPedagogicalFeedback(evaluation, synthesis) {
+    if (!evaluation) return;
+    
+    const row = document.createElement('div');
+    row.classList.add('message-row', 'assistant-row');
+    
+    let html = `
+        <div class="message-avatar">🎓</div>
+        <div style="width:100%">
+            <div class="pedagogical-feedback-card">
+                <div class="pedago-header">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </svg>
+                    <span>Évaluation Pédagogique</span>
+                </div>
+                
+                <div class="pedago-section">
+                    <h4>Pertinence de la question</h4>
+                    <p><strong>${evaluation.is_pertinent ? 'Pertinent' : 'Non pertinent'}</strong> : ${escapeHtml(evaluation.feedback)}</p>
+                </div>
+    `;
+    
+    if (synthesis) {
+        html += `
+                <div class="pedago-section">
+                    <h4>Synthèse théorique</h4>
+                    <p>${formatMarkdown(escapeHtml(synthesis))}</p>
+                </div>
+        `;
+    }
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    row.innerHTML = html;
     chatHistory.appendChild(row);
     scrollToBottom();
 }
@@ -369,7 +430,7 @@ async function sendMessage() {
         const response = await fetch('/api/ask', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ question, session_id: sessionId, patient_num: currentPatientNum })
+            body: JSON.stringify({ question, session_id: sessionId, patient_num: currentPatientNum, is_pedago_mode: isPedagoMode })
         });
 
         if (!response.ok) {
@@ -398,6 +459,11 @@ async function sendMessage() {
         }, 400);
 
         appendMessage(data.answer, 'assistant');
+        
+        if (isPedagoMode && data.pedagogical_evaluation) {
+            appendPedagogicalFeedback(data.pedagogical_evaluation, data.pedagogical_synthesis);
+        }
+        
         updateClinicalState(data.clinical_state);
         
         questionCount = data.question_count;
@@ -455,7 +521,7 @@ async function handleDiagnosisSubmit() {
         const response = await fetch('/api/diagnose', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ diagnosis, session_id: sessionId, patient_num: currentPatientNum })
+            body: JSON.stringify({ diagnosis, session_id: sessionId, patient_num: currentPatientNum, is_pedago_mode: isPedagoMode })
         });
 
         removeElement(loadingId);
