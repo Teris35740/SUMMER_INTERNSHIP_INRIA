@@ -84,7 +84,7 @@
 }
 
 html, body {
-    height: 100%;
+    height: 100dvh;
     overflow: hidden;
 }
 
@@ -350,7 +350,7 @@ body::after {
 
 .app-layout {
     display: flex;
-    height: calc(100vh - var(--navbar-height));
+    height: calc(100dvh - var(--navbar-height));
     margin-top: var(--navbar-height);
     position: relative;
 }
@@ -1574,10 +1574,33 @@ body::after {
 @media (max-width: 768px) {
     .navbar {
         padding: 0 16px;
+        gap: 8px;
     }
 
-    .navbar-center {
+    .navbar-brand {
         display: none;
+    }
+
+    .patient-selector {
+        padding: 4px 8px;
+    }
+
+    .patient-selector label,
+    .patient-badge {
+        display: none;
+    }
+
+    .patient-selector select {
+        max-width: 130px;
+        font-size: 0.8rem;
+    }
+
+    .status-text {
+        display: none;
+    }
+    
+    .status-indicator {
+        padding: 6px 10px;
     }
 
     .chat-messages {
@@ -1595,10 +1618,212 @@ body::after {
     }
 
     .input-footer-actions {
-        justify-content: flex-end;
+        justify-content: space-between;
+        gap: 8px;
+    }
+    
+    .diagnose-btn, .clear-btn {
+        flex: 1;
+        justify-content: center;
     }
 
     .message-bubble {
         max-width: 85%;
+    }
+}
+
+/* ==============================
+   MODE SELECTION OVERLAY
+   ============================== */
+
+.mode-selection-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: var(--bg-primary);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.mode-selection-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: flex !important;
+}
+
+.mode-selection-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 40px;
+}
+
+.mode-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mode-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+}
+
+.mode-cards {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+}
+
+.mode-card {
+    flex: 1;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.mode-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 12px 32px -12px rgba(99, 102, 241, 0.25);
+    background: var(--bg-surface-hover);
+}
+
+.mode-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--accent-primary-subtle);
+    color: var(--accent-primary);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease;
+}
+
+.mode-card:hover .mode-icon {
+    transform: scale(1.1);
+}
+
+.mode-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.mode-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ==============================
+   PEDAGOGICAL FEEDBACK CARD
+   ============================== */
+
+.pedagogical-feedback-card {
+    background: rgba(45, 212, 191, 0.05); /* accent-teal-subtle base */
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 16px;
+    font-size: 0.95rem;
+}
+
+.pedago-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: var(--accent-teal);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.pedago-header svg {
+    flex-shrink: 0;
+}
+
+.pedago-section {
+    margin-bottom: 16px;
+}
+
+.pedago-section:last-child {
+    margin-bottom: 0;
+}
+
+.pedago-section h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.pedago-section p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==============================
+   RESPONSIVE FOR MODE OVERLAY
+   ============================== */
+@media (max-width: 768px) {
+    .mode-selection-content {
+        padding: 20px;
+    }
+    .mode-title {
+        font-size: 1.8rem;
+    }
+    .mode-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+    }
+    .mode-cards {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .mode-card {
+        padding: 20px;
+    }
+    .mode-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+    .mode-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    .mode-card p {
+        font-size: 0.85rem;
+    }
+    #current-mode-label {
+        display: none;
+    }
+    #change-mode-btn {
+        padding: 0 8px !important;
+    }
+    #change-mode-btn svg {
+        margin-right: 0 !important;
     }
 }

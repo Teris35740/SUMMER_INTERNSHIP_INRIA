@@ -272,7 +272,7 @@ Voici des extraits de documents scientifiques (cours, recommandations) récupér
 {sci_context if sci_context else "Aucun document trouvé."}
 
 Instructions :
-1. Formule une courte explication théorique (3 à 5 phrases) pour éclairer l'étudiant sur la théorie médicale en lien avec sa question.
+1. Formule une courte explication théorique (3 à 4 phrases) pour éclairer l'étudiant sur la théorie médicale en lien avec sa question.
 2. Adresse-toi directement à l'étudiant avec bienveillance.
 3. {rag_instruction}
 4. Sois clair et pédagogique. N'utilise pas de jargon sans l'expliquer si nécessaire.

@@ -12,6 +12,37 @@
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
+    <!-- Mode Selection Overlay -->
+    <div class="mode-selection-overlay" id="mode-selection-overlay">
+        <div class="mode-selection-content">
+            <h1 class="mode-title">Bienvenue sur MedSim</h1>
+            <p class="mode-subtitle">Sélectionnez le mode de la consultation virtuelle</p>
+            
+            <div class="mode-cards">
+                <div class="mode-card" id="mode-pedago-btn">
+                    <div class="mode-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Mode Pédagogique</h3>
+                    <p>Posez vos questions librement. L'assistant fournira des retours sur votre méthodologie et des rappels théoriques, sans aucune notation finale.</p>
+                </div>
+                
+                <div class="mode-card" id="mode-notation-btn">
+                    <div class="mode-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3>Mode Notation</h3>
+                    <p>Mode examen standard. Pas d'aide en cours de route. Un rapport de compétences détaillé vous sera remis après votre diagnostic.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-left">
@@ -35,6 +66,13 @@
             </div>
         </div>
         <div class="navbar-right">
+            <button id="change-mode-btn" class="icon-btn" title="Changer de mode" style="margin-right: 8px; width: auto; padding: 0 12px; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <span id="current-mode-label">Mode</span>
+            </button>
             <div class="status-indicator" id="status-indicator">
                 <span class="status-dot"></span>
                 <span class="status-text">Prêt</span>
@@ -161,28 +199,6 @@
                     <div class="accordion">
                         <button class="accordion-header">
                             <span class="accordion-label">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                                Retrieval (RAG)
-                            </span>
-                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                        </button>
-                        <div class="accordion-content" id="retrieval-container"></div>
-                    </div>
-
-                    <div class="accordion">
-                        <button class="accordion-header">
-                            <span class="accordion-label">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/></svg>
-                                Reranking
-                            </span>
-                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                        </button>
-                        <div class="accordion-content" id="reranking-container"></div>
-                    </div>
-
-                    <div class="accordion">
-                        <button class="accordion-header">
-                            <span class="accordion-label">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06A1.65 1.65 0 0 0 15 19.4a1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.38.23.85.36 1.36.36H21a2 2 0 0 1 0 4h-.09c-.51 0-.98.13-1.36.36z"/></svg>
                                 State Motor
                             </span>
@@ -194,34 +210,12 @@
                     <div class="accordion">
                         <button class="accordion-header">
                             <span class="accordion-label">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                                Contexte LLM
-                            </span>
-                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                        </button>
-                        <div class="accordion-content" id="context-container"></div>
-                    </div>
-
-                    <div class="accordion">
-                        <button class="accordion-header">
-                            <span class="accordion-label">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                                 Vérification
                             </span>
                             <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                         </button>
                         <div class="accordion-content" id="verification-container"></div>
-                    </div>
-                    
-                    <div class="accordion">
-                        <button class="accordion-header">
-                            <span class="accordion-label">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                Timing
-                            </span>
-                            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                        </button>
-                        <div class="accordion-content" id="timing-container"></div>
                     </div>
 
                     <div class="accordion">
@@ -278,6 +272,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
 </body>
 </html>
