@@ -361,10 +361,8 @@ function showToast(message, type = 'error') {
 
 const steps = [
     { id: 'step-analysis', text: 'Analyse de la question' },
-    { id: 'step-retrieval', text: 'Recherche vectorielle (RAG)' },
-    { id: 'step-rerank', text: 'Reranking des documents' },
     { id: 'step-motor', text: 'Filtrage (State Motor)' },
-    { id: 'step-gen', text: 'Génération LLM & Vérification' }
+    { id: 'step-gen', text: 'Vérification' }
 ];
 
 function simulateLoadingSteps() {
@@ -471,12 +469,8 @@ async function sendMessage() {
         
         // Update pipeline panels
         updateAnalysis(data.analysis);
-        updateRetrieval(data.retrieval_info);
-        updateReranking(data.reranking_info);
         updateMotor(data.state_motor_info);
-        updateContext(data.context_sent_to_llm);
         updateVerification(data.verification_info);
-        updateTiming(data.timing);
         jsonContainer.textContent = JSON.stringify(data.raw_json_response, null, 2);
 
         setStatus('ready', 'Prêt');
@@ -838,59 +832,9 @@ function updateAnalysis(analysis) {
     container.innerHTML = html;
 }
 
-function updateRetrieval(info) {
-    const container = document.getElementById('retrieval-container');
-    if (!info) {
-        container.innerHTML = '<p class="placeholder-text">Aucune info</p>';
-        return;
-    }
-    
-    let html = `<p><strong>Documents trouvés :</strong> ${info.count}</p>`;
-    
-    if (info.top_hybrid_scores && info.top_hybrid_scores.length > 0) {
-        html += `<p style="margin-top:6px;"><strong>Top scores hybrides :</strong></p><ul style="list-style:none;margin-top:4px;">`;
-        info.top_hybrid_scores.forEach((score, i) => {
-            const barWidth = Math.min((score / (info.top_hybrid_scores[0] || 1)) * 100, 100);
-            html += `<li style="margin-bottom:4px;display:flex;align-items:center;gap:8px;">
-                <span style="width:40px;font-size:0.78rem;color:var(--text-muted);">Top ${i+1}</span>
-                <div style="flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;">
-                    <div style="height:100%;width:${barWidth}%;background:var(--accent-primary);border-radius:4px;"></div>
-                </div>
-                <span style="font-size:0.78rem;color:var(--text-secondary);width:50px;text-align:right;">${score.toFixed(4)}</span>
-            </li>`;
-        });
-        html += `</ul>`;
-    }
-    container.innerHTML = html;
-}
-
-function updateReranking(info) {
-    const container = document.getElementById('reranking-container');
-    if (!info || info.length === 0) {
-        container.innerHTML = '<p class="placeholder-text">Aucun document reranké</p>';
-        return;
-    }
-    
-    let html = `<table class="data-table">
-        <thead><tr><th>Source</th><th>Hybride</th><th>Rerank</th><th>Aperçu</th></tr></thead>
-        <tbody>`;
-    
-    info.forEach(doc => {
-        const rerankScore = doc.rerank_score !== null ? doc.rerank_score.toFixed(4) : '–';
-        html += `<tr>
-            <td><span class="tag" style="font-size:0.72rem;">${doc.source}</span></td>
-            <td style="font-size:0.78rem;">${doc.hybrid_score.toFixed(4)}</td>
-            <td style="font-size:0.78rem;">${rerankScore}</td>
-            <td style="font-size:0.72rem;color:var(--text-muted);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${doc.content_preview}</td>
-        </tr>`;
-    });
-    html += `</tbody></table>`;
-    container.innerHTML = html;
-}
-
 function updateMotor(info) {
     const container = document.getElementById('motor-container');
-    if (!info) {
+    if (!info || Object.keys(info).length === 0) {
         container.innerHTML = '<p class="placeholder-text">Aucune info</p>';
         return;
     }
@@ -923,18 +867,9 @@ function updateMotor(info) {
     container.innerHTML = html;
 }
 
-function updateContext(context) {
-    const container = document.getElementById('context-container');
-    if (!context) {
-        container.innerHTML = '<p class="placeholder-text">Aucun contexte envoyé</p>';
-        return;
-    }
-    container.innerHTML = `<pre class="code-block" style="font-size:0.75rem;color:var(--text-secondary);">${escapeHtml(context)}</pre>`;
-}
-
 function updateVerification(info) {
     const container = document.getElementById('verification-container');
-    if (!info) {
+    if (!info || Object.keys(info).length === 0) {
         container.innerHTML = '<p class="placeholder-text">Aucune info</p>';
         return;
     }
@@ -972,53 +907,5 @@ function updateVerification(info) {
     }
     
     html += `</div></div>`;
-    container.innerHTML = html;
-}
-
-function updateTiming(timing) {
-    const container = document.getElementById('timing-container');
-    if (!timing) return;
-
-    let html = '';
-    const maxTime = Math.max(timing.total || 1, 1);
-
-    const labels = {
-        'analysis': 'Analyse Question',
-        'retrieval': 'Recherche Vecto',
-        'state_motor': 'Reranking & State Motor',
-        'generation_and_verification': 'Génération LLM & Verif',
-        'total': 'Temps Total'
-    };
-
-    for (const [key, val] of Object.entries(timing)) {
-        if (key === 'total') continue;
-        if (val === undefined) continue;
-
-        const percent = Math.min((val / maxTime) * 100, 100);
-        html += `
-        <div class="timing-bar-container">
-            <div class="timing-bar-label">
-                <span>${labels[key] || key}</span>
-                <span>${val.toFixed(2)}s</span>
-            </div>
-            <div class="timing-bar-bg">
-                <div class="timing-bar-fill" style="width: ${percent}%;"></div>
-            </div>
-        </div>`;
-    }
-    
-    if (timing.total) {
-        html += `
-        <div class="timing-bar-container" style="margin-top: 12px;">
-            <div class="timing-bar-label">
-                <span style="font-weight:600;color:var(--text-primary);">${labels['total']}</span>
-                <span style="font-weight:600;color:var(--text-primary);">${timing.total.toFixed(2)}s</span>
-            </div>
-            <div class="timing-bar-bg">
-                <div class="timing-bar-fill" style="width:100%;background:linear-gradient(90deg, var(--accent-emerald), var(--accent-teal));"></div>
-            </div>
-        </div>`;
-    }
-
     container.innerHTML = html;
 }
