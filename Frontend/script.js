@@ -268,7 +268,7 @@ function appendPedagogicalFeedback(evaluation, synthesis) {
     if (synthesis) {
         html += `
                 <div class="pedago-section">
-                    <h4>Synthèse théorique</h4>
+                    <h4>Revue de cours rapide</h4>
                     <p>${formatMarkdown(escapeHtml(synthesis))}</p>
                 </div>
         `;

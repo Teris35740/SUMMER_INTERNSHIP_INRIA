@@ -1,0 +1,612 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==============================
+   MEDSIM DESIGN SYSTEM — Tailwind v4
+   ============================== */
+
+@theme inline {
+  /* Shadcn color bindings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-heading);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* ── MedSim Custom Colors bindings ── */
+  --color-med-bg-primary: var(--med-bg-primary);
+  --color-med-bg-secondary: var(--med-bg-secondary);
+  --color-med-bg-surface: var(--med-bg-surface);
+  --color-med-bg-surface-hover: var(--med-bg-surface-hover);
+  --color-med-bg-elevated: var(--med-bg-elevated);
+
+  --color-med-border-subtle: var(--med-border-subtle);
+  --color-med-border-default: var(--med-border-default);
+  --color-med-border-strong: var(--med-border-strong);
+  --color-med-border-focus: var(--med-border-focus);
+
+  --color-med-text-primary: var(--med-text-primary);
+  --color-med-text-secondary: var(--med-text-secondary);
+  --color-med-text-muted: var(--med-text-muted);
+  --color-med-text-inverse: var(--med-text-inverse);
+
+  --color-med-sky: var(--med-sky);
+  --color-med-sky-hover: var(--med-sky-hover);
+  --color-med-sky-subtle: var(--med-sky-subtle);
+  --color-med-teal: var(--med-teal);
+  --color-med-teal-subtle: var(--med-teal-subtle);
+  --color-med-emerald: var(--med-emerald);
+  --color-med-emerald-subtle: var(--med-emerald-subtle);
+  --color-med-violet: var(--med-violet);
+  --color-med-violet-subtle: var(--med-violet-subtle);
+  --color-med-amber: var(--med-amber);
+  --color-med-amber-subtle: var(--med-amber-subtle);
+  --color-med-rose: var(--med-rose);
+  --color-med-rose-subtle: var(--med-rose-subtle);
+  --color-med-red: var(--med-red);
+  --color-med-red-subtle: var(--med-red-subtle);
+
+  --color-med-success: var(--med-emerald);
+  --color-med-success-subtle: var(--med-emerald-subtle);
+  --color-med-error: var(--med-red);
+  --color-med-error-subtle: var(--med-red-subtle);
+  --color-med-warning: var(--med-amber);
+  --color-med-warning-subtle: var(--med-amber-subtle);
+}
+
+/* ── Light Theme (Default) ── */
+:root {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --primary: #0284C7;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F1F5F9;
+  --secondary-foreground: #0F172A;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --accent: #F1F5F9;
+  --accent-foreground: #0F172A;
+  --destructive: #EF4444;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: rgba(2, 132, 199, 0.5);
+  
+  --chart-1: #0284C7;
+  --chart-2: #0D9488;
+  --chart-3: #059669;
+  --chart-4: #7C3AED;
+  --chart-5: #D97706;
+  
+  --radius: 0.75rem;
+
+  /* MedSim custom variables - Light */
+  --med-bg-primary: #F8FAFC;
+  --med-bg-secondary: #F1F5F9;
+  --med-bg-surface: rgba(255, 255, 255, 0.7); /* Frosted glass */
+  --med-bg-surface-hover: rgba(255, 255, 255, 0.9);
+  --med-bg-elevated: rgba(255, 255, 255, 0.9);
+
+  --med-border-subtle: rgba(0, 0, 0, 0.04);
+  --med-border-default: rgba(0, 0, 0, 0.08);
+  --med-border-strong: rgba(0, 0, 0, 0.15);
+  --med-border-focus: rgba(2, 132, 199, 0.4);
+
+  --med-text-primary: #0F172A;
+  --med-text-secondary: #475569;
+  --med-text-muted: #94A3B8;
+  --med-text-inverse: #FFFFFF;
+
+  --med-sky: #0284C7;
+  --med-sky-hover: #0369A1;
+  --med-sky-subtle: rgba(2, 132, 199, 0.1);
+  --med-teal: #0D9488;
+  --med-teal-subtle: rgba(13, 148, 136, 0.1);
+  --med-emerald: #059669;
+  --med-emerald-subtle: rgba(5, 150, 105, 0.1);
+  --med-violet: #7C3AED;
+  --med-violet-subtle: rgba(124, 58, 237, 0.1);
+  --med-amber: #D97706;
+  --med-amber-subtle: rgba(217, 119, 6, 0.1);
+  --med-rose: #E11D48;
+  --med-rose-subtle: rgba(225, 29, 72, 0.1);
+  --med-red: #DC2626;
+  --med-red-subtle: rgba(220, 38, 38, 0.1);
+
+  /* Shared Variables */
+  --navbar-height: 80px; /* Increased for sleek island */
+  --pipeline-width: 420px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08); /* More diffuse */
+  --shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 24px rgba(2, 132, 199, 0.15);
+  
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Dark Theme (Sleeker Medical Dark) ── */
+.dark {
+  --background: #090C15; /* Deeper background */
+  --foreground: #F8FAFC;
+  --card: rgba(17, 24, 39, 0.6);
+  --card-foreground: #F8FAFC;
+  --popover: #0F172A;
+  --popover-foreground: #F8FAFC;
+  --primary: #38BDF8;
+  --primary-foreground: #090C15;
+  --secondary: rgba(30, 41, 59, 0.5);
+  --secondary-foreground: #F8FAFC;
+  --muted: rgba(30, 41, 59, 0.5);
+  --muted-foreground: #94A3B8;
+  --accent: rgba(30, 41, 59, 0.5);
+  --accent-foreground: #F8FAFC;
+  --destructive: #F87171;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(56, 189, 248, 0.4);
+  
+  --chart-1: #38BDF8;
+  --chart-2: #2DD4BF;
+  --chart-3: #34D399;
+  --chart-4: #A78BFA;
+  --chart-5: #FBBF24;
+
+  /* MedSim custom variables - Dark */
+  --med-bg-primary: #090C15; /* Very deep blue-black */
+  --med-bg-secondary: #0F172A;
+  --med-bg-surface: rgba(17, 24, 39, 0.55); /* Frosted glass */
+  --med-bg-surface-hover: rgba(30, 41, 59, 0.65);
+  --med-bg-elevated: rgba(15, 23, 42, 0.85);
+
+  --med-border-subtle: rgba(255, 255, 255, 0.04);
+  --med-border-default: rgba(255, 255, 255, 0.08);
+  --med-border-strong: rgba(255, 255, 255, 0.15);
+  --med-border-focus: rgba(56, 189, 248, 0.4);
+
+  --med-text-primary: #F8FAFC;
+  --med-text-secondary: #94A3B8;
+  --med-text-muted: #475569;
+  --med-text-inverse: #090C15;
+
+  --med-sky: #38BDF8;
+  --med-sky-hover: #7DD3FC;
+  --med-sky-subtle: rgba(56, 189, 248, 0.15);
+  --med-teal: #2DD4BF;
+  --med-teal-subtle: rgba(45, 212, 191, 0.15);
+  --med-emerald: #34D399;
+  --med-emerald-subtle: rgba(52, 211, 153, 0.15);
+  --med-violet: #A78BFA;
+  --med-violet-subtle: rgba(167, 139, 250, 0.15);
+  --med-amber: #FBBF24;
+  --med-amber-subtle: rgba(251, 191, 36, 0.15);
+  --med-rose: #FB7185;
+  --med-rose-subtle: rgba(251, 113, 133, 0.15);
+  --med-red: #F87171;
+  --med-red-subtle: rgba(248, 113, 113, 0.15);
+
+  /* Shadows for Dark Mode */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 24px rgba(56, 189, 248, 0.2);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-med-bg-primary text-med-text-primary;
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    @apply font-sans;
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+/* ==============================
+   AMBIENT BACKGROUND GLOW
+   ============================== */
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse, var(--color-med-sky-subtle) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse, var(--color-med-teal-subtle) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ==============================
+   CUSTOM SCROLLBAR
+   ============================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-med-border-strong);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-med-text-muted);
+}
+
+/* ==============================
+   KEYFRAMES
+   ============================== */
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+@keyframes messageSlideIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slideOutRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@keyframes cardScaleIn {
+  from { opacity: 0; transform: scale(0.97) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ==============================
+   UTILITY CLASSES
+   ============================== */
+
+.animate-message-in {
+  animation: messageSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+.animate-card-scale-in {
+  animation: cardScaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-status-pulse {
+  animation: statusPulse 2.5s ease-in-out infinite;
+}
+
+/* Score bar fill transition */
+.score-bar-fill {
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Gradient text helper */
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--color-med-text-primary) 20%, var(--color-med-sky) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* User message gradient background - dynamically uses theme colors */
+.bg-gradient-user-msg {
+  background: linear-gradient(135deg, var(--color-med-sky), var(--color-med-teal));
+}
+
+/* Logo gradient */
+.bg-gradient-logo {
+  background: linear-gradient(135deg, var(--color-med-sky), var(--color-med-teal));
+}
+
+/* Glassmorphism helpers */
+.glass {
+  background: var(--color-med-bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-med-border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.glass-panel {
+  background: var(--color-med-bg-elevated);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-med-border-default);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==============================
+   CUSTOM PALETTES
+   ============================== */
+
+/* 1. Naturel chic */
+.naturel-chic {
+  --background: #F5EFE6;
+  --foreground: #2D2A26;
+  --card: #F5EFE6;
+  --card-foreground: #2D2A26;
+  --popover: #F5EFE6;
+  --popover-foreground: #2D2A26;
+  --primary: #C8813A;
+  --primary-foreground: #F5EFE6;
+  --border: rgba(45, 42, 38, 0.1);
+  --ring: rgba(200, 129, 58, 0.4);
+
+  --med-bg-primary: #F5EFE6; /* Crème */
+  --med-bg-secondary: #E8DFD3;
+  --med-bg-surface: rgba(212, 197, 176, 0.5); /* Sable */
+  --med-bg-surface-hover: rgba(212, 197, 176, 0.7);
+  --med-bg-elevated: rgba(245, 239, 230, 0.9);
+  --med-border-subtle: rgba(45, 42, 38, 0.05);
+  --med-border-default: rgba(45, 42, 38, 0.1);
+  --med-border-strong: rgba(45, 42, 38, 0.2);
+  --med-border-focus: rgba(200, 129, 58, 0.4);
+  --med-text-primary: #2D2A26; /* Brun profond */
+  --med-text-secondary: #5C554D;
+  --med-text-muted: #8A8175;
+  --med-text-inverse: #F5EFE6;
+  --med-sky: #C8813A; /* Terracotta */
+  --med-sky-hover: #B07130;
+  --med-sky-subtle: rgba(200, 129, 58, 0.15);
+  --med-teal: #A86D32;
+  --med-teal-subtle: rgba(168, 109, 50, 0.15);
+  --med-emerald: #5C6B55;
+  --med-emerald-subtle: rgba(92, 107, 85, 0.15);
+  --med-violet: #847570;
+  --med-violet-subtle: rgba(132, 117, 112, 0.15);
+  --med-amber: #C19958;
+  --med-amber-subtle: rgba(193, 153, 88, 0.15);
+  --med-rose: #B86B63;
+  --med-rose-subtle: rgba(184, 107, 99, 0.15);
+  --med-red: #A85A52;
+  --med-red-subtle: rgba(168, 90, 82, 0.15);
+}
+
+/* 2. Tech moderne */
+.tech-moderne {
+  --background: #F9FAFB;
+  --foreground: #111827;
+  --card: #F9FAFB;
+  --card-foreground: #111827;
+  --popover: #F9FAFB;
+  --popover-foreground: #111827;
+  --primary: #6366F1;
+  --primary-foreground: #F9FAFB;
+  --border: rgba(17, 24, 39, 0.08);
+  --ring: rgba(99, 102, 241, 0.4);
+
+  --med-bg-primary: #F9FAFB; /* Blanc cassé */
+  --med-bg-secondary: #F3F4F6;
+  --med-bg-surface: rgba(224, 231, 255, 0.5); /* Lavande pâle */
+  --med-bg-surface-hover: rgba(224, 231, 255, 0.7);
+  --med-bg-elevated: rgba(255, 255, 255, 0.9);
+  --med-border-subtle: rgba(17, 24, 39, 0.04);
+  --med-border-default: rgba(17, 24, 39, 0.08);
+  --med-border-strong: rgba(17, 24, 39, 0.15);
+  --med-border-focus: rgba(99, 102, 241, 0.4);
+  --med-text-primary: #111827;
+  --med-text-secondary: #4B5563;
+  --med-text-muted: #9CA3AF;
+  --med-text-inverse: #F9FAFB;
+  --med-sky: #6366F1; /* Indigo */
+  --med-sky-hover: #4F46E5;
+  --med-sky-subtle: rgba(99, 102, 241, 0.15);
+  --med-teal: #F59E0B; /* Ambre */
+  --med-teal-subtle: rgba(245, 158, 11, 0.15);
+  --med-emerald: #10B981;
+  --med-emerald-subtle: rgba(16, 185, 129, 0.15);
+  --med-violet: #8B5CF6;
+  --med-violet-subtle: rgba(139, 92, 246, 0.15);
+  --med-amber: #F59E0B;
+  --med-amber-subtle: rgba(245, 158, 11, 0.15);
+  --med-rose: #F43F5E;
+  --med-rose-subtle: rgba(244, 63, 94, 0.15);
+  --med-red: #EF4444;
+  --med-red-subtle: rgba(239, 68, 68, 0.15);
+}
+
+/* 3. Éthique et végétal */
+.ethique-vegetal {
+  --background: #F9FBE7;
+  --foreground: #1B4332;
+  --card: #F9FBE7;
+  --card-foreground: #1B4332;
+  --popover: #F9FBE7;
+  --popover-foreground: #1B4332;
+  --primary: #1B4332;
+  --primary-foreground: #F9FBE7;
+  --border: rgba(27, 67, 50, 0.1);
+  --ring: rgba(27, 67, 50, 0.4);
+
+  --med-bg-primary: #F9FBE7; /* Ivoire */
+  --med-bg-secondary: #F1F4D9;
+  --med-bg-surface: rgba(216, 243, 220, 0.5); /* Vert clair */
+  --med-bg-surface-hover: rgba(216, 243, 220, 0.8);
+  --med-bg-elevated: rgba(249, 251, 231, 0.9);
+  --med-border-subtle: rgba(27, 67, 50, 0.05);
+  --med-border-default: rgba(27, 67, 50, 0.1);
+  --med-border-strong: rgba(27, 67, 50, 0.2);
+  --med-border-focus: rgba(27, 67, 50, 0.4);
+  --med-text-primary: #1B4332; /* Vert forêt */
+  --med-text-secondary: #2D6A4F;
+  --med-text-muted: #52B788;
+  --med-text-inverse: #F9FBE7;
+  --med-sky: #1B4332; /* Vert forêt */
+  --med-sky-hover: #081C15;
+  --med-sky-subtle: rgba(27, 67, 50, 0.15);
+  --med-teal: #F4A261; /* Pêche */
+  --med-teal-subtle: rgba(244, 162, 97, 0.15);
+  --med-emerald: #40916C;
+  --med-emerald-subtle: rgba(64, 145, 108, 0.15);
+  --med-violet: #E76F51; /* complementary */
+  --med-violet-subtle: rgba(231, 111, 81, 0.15);
+  --med-amber: #E9C46A;
+  --med-amber-subtle: rgba(233, 196, 106, 0.15);
+  --med-rose: #E76F51;
+  --med-rose-subtle: rgba(231, 111, 81, 0.15);
+  --med-red: #D62828;
+  --med-red-subtle: rgba(214, 40, 40, 0.15);
+}
+
+/* 4. Premium sombre */
+.premium-sombre {
+  --background: #0D0D0D;
+  --foreground: #F5F5F5;
+  --card: #1F1F1F;
+  --card-foreground: #F5F5F5;
+  --popover: #1F1F1F;
+  --popover-foreground: #F5F5F5;
+  --primary: #E2C87E;
+  --primary-foreground: #0D0D0D;
+  --border: rgba(245, 245, 245, 0.08);
+  --ring: rgba(226, 200, 126, 0.4);
+
+  --med-bg-primary: #0D0D0D; /* Noir */
+  --med-bg-secondary: #171717;
+  --med-bg-surface: rgba(31, 31, 31, 0.6); /* Gris anthracite */
+  --med-bg-surface-hover: rgba(45, 45, 45, 0.7);
+  --med-bg-elevated: rgba(20, 20, 20, 0.95);
+  --med-border-subtle: rgba(245, 245, 245, 0.04);
+  --med-border-default: rgba(245, 245, 245, 0.08);
+  --med-border-strong: rgba(245, 245, 245, 0.15);
+  --med-border-focus: rgba(226, 200, 126, 0.4);
+  --med-text-primary: #F5F5F5; /* Blanc */
+  --med-text-secondary: #A3A3A3;
+  --med-text-muted: #737373;
+  --med-text-inverse: #0D0D0D;
+  --med-sky: #E2C87E; /* Or doux */
+  --med-sky-hover: #D4B86A;
+  --med-sky-subtle: rgba(226, 200, 126, 0.15);
+  --med-teal: #C0A865;
+  --med-teal-subtle: rgba(192, 168, 101, 0.15);
+  --med-emerald: #4ADE80;
+  --med-emerald-subtle: rgba(74, 222, 128, 0.15);
+  --med-violet: #A78BFA;
+  --med-violet-subtle: rgba(167, 139, 250, 0.15);
+  --med-amber: #FBBF24;
+  --med-amber-subtle: rgba(251, 191, 36, 0.15);
+  --med-rose: #FB7185;
+  --med-rose-subtle: rgba(251, 113, 133, 0.15);
+  --med-red: #F87171;
+  --med-red-subtle: rgba(248, 113, 113, 0.15);
+}
+
+/* 5. Doux et créatif */
+.doux-creatif {
+  --background: #1E293B;
+  --foreground: #BDE0FE;
+  --card: #0F172A;
+  --card-foreground: #BDE0FE;
+  --popover: #0F172A;
+  --popover-foreground: #BDE0FE;
+  --primary: #A78BFA;
+  --primary-foreground: #1E293B;
+  --border: rgba(189, 224, 254, 0.1);
+  --ring: rgba(167, 139, 250, 0.4);
+
+  --med-bg-primary: #1E293B; /* Bleu nuit */
+  --med-bg-secondary: #0F172A;
+  --med-bg-surface: rgba(167, 139, 250, 0.15); /* Lavande */
+  --med-bg-surface-hover: rgba(167, 139, 250, 0.25);
+  --med-bg-elevated: rgba(15, 23, 42, 0.9);
+  --med-border-subtle: rgba(189, 224, 254, 0.05);
+  --med-border-default: rgba(189, 224, 254, 0.1);
+  --med-border-strong: rgba(189, 224, 254, 0.2);
+  --med-border-focus: rgba(167, 139, 250, 0.4);
+  --med-text-primary: #BDE0FE; /* Bleu clair */
+  --med-text-secondary: #8DA9C4;
+  --med-text-muted: #566D85;
+  --med-text-inverse: #1E293B;
+  --med-sky: #A78BFA; /* Lavande */
+  --med-sky-hover: #8B5CF6;
+  --med-sky-subtle: rgba(167, 139, 250, 0.2);
+  --med-teal: #FFC4A3; /* Pêche */
+  --med-teal-subtle: rgba(255, 196, 163, 0.2);
+  --med-emerald: #A8DADC;
+  --med-emerald-subtle: rgba(168, 218, 220, 0.2);
+  --med-violet: #E0AAFF;
+  --med-violet-subtle: rgba(224, 170, 255, 0.2);
+  --med-amber: #FFD6A5;
+  --med-amber-subtle: rgba(255, 214, 165, 0.2);
+  --med-rose: #FFAFCC;
+  --med-rose-subtle: rgba(255, 175, 204, 0.2);
+  --med-red: #EF476F;
+  --med-red-subtle: rgba(239, 71, 111, 0.2);
+}
