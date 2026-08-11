@@ -62,7 +62,7 @@ export function ChatArea({
       {/* Messages */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto px-8 py-6 flex flex-col gap-1 scroll-smooth"
+        className="flex-1 overflow-y-auto px-4 sm:px-8 pt-8 pb-[280px] flex flex-col gap-6 scroll-smooth"
       >
         {messages.map((msg) => {
           if ("type" in msg && msg.type === "diagnosis") {
@@ -78,19 +78,19 @@ export function ChatArea({
         {isTyping && <TypingIndicator />}
       </div>
 
-      {/* Clinical State Bar */}
-      <ClinicalBar clinicalState={clinicalState} />
-
-      {/* Input */}
-      <ChatInput
-        status={status}
-        questionCount={questionCount}
-        minQuestions={minQuestions}
-        canDiagnose={canDiagnose}
-        onSend={onSend}
-        onDiagnose={onDiagnose}
-        onClear={onClear}
-      />
+      {/* Fixed Bottom Container (Clinical Bar + Input) */}
+      <div className="absolute bottom-6 left-0 right-0 px-4 flex flex-col items-center pointer-events-none z-10">
+        <ClinicalBar clinicalState={clinicalState} />
+        <ChatInput
+          status={status}
+          questionCount={questionCount}
+          minQuestions={minQuestions}
+          canDiagnose={canDiagnose}
+          onSend={onSend}
+          onDiagnose={onDiagnose}
+          onClear={onClear}
+        />
+      </div>
     </main>
   );
 }

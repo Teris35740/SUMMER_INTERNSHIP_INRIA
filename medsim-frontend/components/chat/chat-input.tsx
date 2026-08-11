@@ -61,46 +61,18 @@ export function ChatInput({
   };
 
   return (
-    <div className="border-t border-med-border-subtle bg-med-bg-primary/80 backdrop-blur-lg px-4 py-3">
-      {/* Input row */}
-      <div className="flex items-end gap-2 max-w-[780px] mx-auto">
-        <div className="flex-1 relative">
-          <textarea
-            ref={textareaRef}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Posez une question au patient..."
-            rows={1}
-            autoComplete="off"
-            disabled={status === "busy"}
-            className="w-full px-4 py-2.5 rounded-xl bg-med-bg-surface border border-med-border-default
-                       text-sm text-med-text-primary placeholder:text-med-text-muted
-                       focus:outline-none focus:border-med-border-focus focus:ring-1 focus:ring-med-sky/30
-                       resize-none transition-colors duration-150
-                       disabled:opacity-50 disabled:cursor-not-allowed"
-          />
-        </div>
-        <button
-          onClick={handleSend}
-          disabled={!value.trim() || status === "busy"}
-          title="Envoyer (Entrée)"
-          className="flex items-center justify-center w-10 h-10 rounded-xl
-                     bg-gradient-user-msg text-white
-                     hover:opacity-90 transition-opacity duration-150
-                     disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0"
-        >
-          <Send size={18} />
-        </button>
-      </div>
-
-      {/* Footer row */}
-      <div className="flex items-center justify-between max-w-[780px] mx-auto mt-2">
-        {/* Question counter */}
+    <div className="w-full flex flex-col items-center pointer-events-none z-10">
+      
+      {/* Top action bar (Counters & Actions) */}
+      <div className="w-full max-w-[780px] flex items-center justify-between mb-3 px-2 pointer-events-auto">
+        
+        {/* Question counter pill */}
         <div
-          className={`flex items-center gap-1.5 text-xs ${
-            canDiagnose ? "text-med-emerald" : "text-med-text-muted"
-          }`}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-colors duration-300
+            ${canDiagnose 
+              ? "bg-med-emerald text-white" 
+              : "bg-med-bg-surface border border-med-border-default text-med-text-secondary"
+            }`}
         >
           {canDiagnose ? (
             <CheckCircle size={14} />
@@ -109,12 +81,12 @@ export function ChatInput({
           )}
           <span>
             {canDiagnose
-              ? `${questionCount} question(s) — Diagnostic disponible`
+              ? "Diagnostic disponible"
               : `${questionCount}/${minQuestions} questions avant diagnostic`}
           </span>
         </div>
 
-        {/* Action buttons */}
+        {/* Actions */}
         <div className="flex items-center gap-2">
           <button
             onClick={onDiagnose}
@@ -124,10 +96,10 @@ export function ChatInput({
                 ? "Proposer un diagnostic"
                 : `Posez encore ${minQuestions - questionCount} question(s)`
             }
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
-                       bg-med-emerald-subtle text-med-emerald border border-med-emerald/20
-                       hover:bg-med-emerald/20 transition-colors duration-150
-                       disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
+                       bg-med-bg-surface border border-med-border-default text-med-text-primary
+                       hover:bg-med-emerald hover:text-white hover:border-transparent transition-all duration-200
+                       disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-primary disabled:hover:border-med-border-default disabled:cursor-not-allowed cursor-pointer"
           >
             <CheckCircle size={14} />
             <span>Diagnostiquer</span>
@@ -136,16 +108,52 @@ export function ChatInput({
             onClick={onClear}
             disabled={status === "busy"}
             title="Réinitialiser la session"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
-                       bg-med-bg-surface text-med-text-secondary border border-med-border-subtle
-                       hover:bg-med-bg-surface-hover hover:text-med-text-primary transition-colors duration-150
-                       disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
+                       bg-med-bg-surface border border-med-border-subtle text-med-text-secondary
+                       hover:bg-med-rose hover:text-white hover:border-transparent transition-all duration-200
+                       disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-secondary disabled:hover:border-med-border-subtle disabled:cursor-not-allowed cursor-pointer"
           >
             <RotateCcw size={14} />
-            <span>Nouvelle Session</span>
+            <span>Nouveau</span>
           </button>
         </div>
       </div>
+
+      {/* Input Pill */}
+      <div className="w-full max-w-[780px] pointer-events-auto">
+        <div className="glass-panel flex items-end gap-2 p-2 rounded-[28px] shadow-lg transition-shadow duration-300 focus-within:shadow-glow focus-within:border-med-border-focus">
+          <div className="flex-1 relative flex items-center min-h-[44px]">
+            <textarea
+              ref={textareaRef}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Posez une question au patient..."
+              rows={1}
+              autoComplete="off"
+              disabled={status === "busy"}
+              className="w-full px-4 py-2.5 bg-transparent border-none
+                         text-sm text-med-text-primary placeholder:text-med-text-muted
+                         focus:outline-none focus:ring-0
+                         resize-none transition-colors duration-150
+                         disabled:opacity-50 disabled:cursor-not-allowed
+                         max-h-[160px] overflow-y-auto"
+            />
+          </div>
+          <button
+            onClick={handleSend}
+            disabled={!value.trim() || status === "busy"}
+            title="Envoyer (Entrée)"
+            className="flex items-center justify-center w-[44px] h-[44px] rounded-full
+                       bg-gradient-user-msg text-white shadow-md
+                       hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-200
+                       disabled:opacity-40 disabled:hover:scale-100 disabled:cursor-not-allowed cursor-pointer shrink-0"
+          >
+            <Send size={18} className="ml-0.5" />
+          </button>
+        </div>
+      </div>
+
     </div>
   );
 }

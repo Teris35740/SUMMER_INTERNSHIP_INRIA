@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "sonner";
 import "./globals.css";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -30,23 +32,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`dark ${inter.variable} ${outfit.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="h-dvh overflow-hidden" suppressHydrationWarning>
-        <TooltipProvider delay={300}>
-          {children}
-        </TooltipProvider>
-        <Toaster
-          position="top-right"
-          richColors
-          theme="dark"
-          toastOptions={{
-            style: {
-              background: "#1A1F2E",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              color: "#F1F5F9",
-            },
-          }}
-        />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TooltipProvider delay={300}>
+            {children}
+          </TooltipProvider>
+          <Toaster
+            position="top-right"
+            richColors
+          />
+        </ThemeProvider>
       </body>
     </html>
   );
