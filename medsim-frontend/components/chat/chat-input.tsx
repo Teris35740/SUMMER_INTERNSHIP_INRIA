@@ -5,15 +5,16 @@ import {
   Send,
   CheckCircle,
   RotateCcw,
-  MessageSquare,
+  Clock,
+  Lock,
 } from "lucide-react";
 import type { AppStatus } from "@/types/api";
 
 interface ChatInputProps {
   status: AppStatus;
-  questionCount: number;
-  minQuestions: number;
-  canDiagnose: boolean;
+  timeRemaining: number;
+  timerActive: boolean;
+  sessionExpired: boolean;
   onSend: (message: string) => void;
   onDiagnose: () => void;
   onClear: () => void;
@@ -21,9 +22,9 @@ interface ChatInputProps {
 
 export function ChatInput({
   status,
-  questionCount,
-  minQuestions,
-  canDiagnose,
+  timeRemaining,
+  timerActive,
+  sessionExpired,
   onSend,
   onDiagnose,
   onClear,
@@ -44,7 +45,7 @@ export function ChatInput({
   }, [value, autoResize]);
 
   const handleSend = () => {
-    if (!value.trim() || status === "busy") return;
+    if (!value.trim() || status === "busy" || sessionExpired) return;
     onSend(value);
     setValue("");
     // Reset textarea height
@@ -60,42 +61,55 @@ export function ChatInput({
     }
   };
 
+  // Format time remaining as MM:SS
+  const minutes = Math.floor(timeRemaining / 60);
+  const seconds = Math.floor(timeRemaining % 60);
+  const timeStr = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+  // Timer color classes
+  const isUrgent = timeRemaining <= 120 && timeRemaining > 30;
+  const isCritical = timeRemaining <= 30;
+  const timerColorClass = sessionExpired
+    ? "bg-med-rose text-white"
+    : isCritical
+      ? "bg-med-rose text-white animate-pulse"
+      : isUrgent
+        ? "bg-med-amber-subtle text-med-amber border-med-amber/30"
+        : "bg-med-bg-surface border border-med-border-default text-med-text-secondary";
+
   return (
     <div className="w-full flex flex-col items-center pointer-events-none z-10">
       
-      {/* Top action bar (Counters & Actions) */}
+      {/* Top action bar (Timer & Actions) */}
       <div className="w-full max-w-[780px] flex items-center justify-between mb-3 px-2 pointer-events-auto">
         
-        {/* Question counter pill */}
-        <div
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-colors duration-300
-            ${canDiagnose 
-              ? "bg-med-emerald text-white" 
-              : "bg-med-bg-surface border border-med-border-default text-med-text-secondary"
-            }`}
-        >
-          {canDiagnose ? (
-            <CheckCircle size={14} />
-          ) : (
-            <MessageSquare size={14} />
-          )}
-          <span>
-            {canDiagnose
-              ? "Diagnostic disponible"
-              : `${questionCount}/${minQuestions} questions avant diagnostic`}
-          </span>
-        </div>
+        {/* Timer pill */}
+        {sessionExpired ? (
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm bg-med-rose text-white">
+            <Lock size={14} />
+            <span>Session terminée</span>
+          </div>
+        ) : timerActive ? (
+          <div
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-colors duration-300 ${timerColorClass}`}
+            style={{ fontVariantNumeric: "tabular-nums" }}
+          >
+            <Clock size={14} />
+            <span>{timeStr}</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm bg-med-bg-surface border border-med-border-default text-med-text-secondary">
+            <Clock size={14} />
+            <span>10:00</span>
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex items-center gap-2">
           <button
             onClick={onDiagnose}
-            disabled={!canDiagnose || status === "busy"}
-            title={
-              canDiagnose
-                ? "Proposer un diagnostic"
-                : `Posez encore ${minQuestions - questionCount} question(s)`
-            }
+            disabled={status === "busy" || sessionExpired}
+            title="Proposer un diagnostic"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
                        bg-med-bg-surface border border-med-border-default text-med-text-primary
                        hover:bg-med-emerald hover:text-white hover:border-transparent transition-all duration-200
@@ -128,10 +142,10 @@ export function ChatInput({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Posez une question au patient..."
+              placeholder={sessionExpired ? "Session terminée — cliquez sur Nouveau pour recommencer" : "Posez une question au patient..."}
               rows={1}
               autoComplete="off"
-              disabled={status === "busy"}
+              disabled={status === "busy" || sessionExpired}
               className="w-full px-4 py-2.5 bg-transparent border-none
                          text-sm text-med-text-primary placeholder:text-med-text-muted
                          focus:outline-none focus:ring-0
@@ -142,7 +156,7 @@ export function ChatInput({
           </div>
           <button
             onClick={handleSend}
-            disabled={!value.trim() || status === "busy"}
+            disabled={!value.trim() || status === "busy" || sessionExpired}
             title="Envoyer (Entrée)"
             className="flex items-center justify-center w-[44px] h-[44px] rounded-full
                        bg-gradient-user-msg text-white shadow-md
@@ -157,3 +171,4 @@ export function ChatInput({
     </div>
   );
 }
+
