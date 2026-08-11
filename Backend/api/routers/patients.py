@@ -1,7 +1,8 @@
 import os
 import glob
+from collections import defaultdict
 from fastapi import APIRouter
-from typing import List
+from typing import List, Dict
 from api.schemas import PatientSummary
 from core.utils.helpers import load_patient_data
 
@@ -12,8 +13,8 @@ PATIENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..
 def get_patient_id_from_num(patient_num: int) -> str:
     return f"PAT_{patient_num:03d}"
 
-@router.get("/patients", response_model=List[PatientSummary])
-def list_patients():
+def _load_all_patients() -> List[PatientSummary]:
+    """Charge tous les patients depuis le dossier Document_patient."""
     patients = []
     pattern = os.path.join(PATIENT_DIR, "patient_*.json")
     
@@ -45,3 +46,21 @@ def list_patients():
         ))
     
     return patients
+
+@router.get("/patients", response_model=List[PatientSummary])
+def list_patients():
+    return _load_all_patients()
+
+@router.get("/patients/grouped", response_model=Dict[str, List[PatientSummary]])
+def list_patients_grouped():
+    """Retourne les patients regroupés par spécialité médicale."""
+    patients = _load_all_patients()
+    grouped = defaultdict(list)
+    
+    for patient in patients:
+        specialty = patient.specialty or "Autre"
+        grouped[specialty].append(patient)
+    
+    # Trier les spécialités alphabétiquement
+    return dict(sorted(grouped.items()))
+

@@ -9,9 +9,10 @@ import {
 } from "@/components/ui/tooltip";
 import { ThemeToggle } from "./theme-toggle";
 import { PaletteSelector } from "./palette-selector";
-import type { Patient, AppStatus, AppMode } from "@/types/api";
+import type { Patient, GroupedPatients, AppStatus, AppMode } from "@/types/api";
 
 interface NavbarProps {
+  groupedPatients: GroupedPatients;
   patients: Patient[];
   currentPatientNum: number;
   currentPatient?: Patient;
@@ -24,6 +25,7 @@ interface NavbarProps {
 }
 
 export function Navbar({
+  groupedPatients,
   patients,
   currentPatientNum,
   currentPatient,
@@ -84,15 +86,22 @@ export function Navbar({
               onChange={(e) => onSelectPatient(parseInt(e.target.value, 10))}
               className="bg-transparent border-none text-med-text-primary font-semibold text-sm cursor-pointer outline-none max-w-[280px]"
             >
-              {patients.map((p) => (
-                <option
-                  key={p.num}
-                  value={p.num}
-                  className="bg-med-bg-primary text-med-text-primary"
+              {Object.entries(groupedPatients).map(([specialty, group]) => (
+                <optgroup
+                  key={specialty}
+                  label={specialty}
                 >
-                  #{String(p.num).padStart(2, "0")} —{" "}
-                  {p.chief_complaint || "Patient"}
-                </option>
+                  {group.map((p) => (
+                    <option
+                      key={p.num}
+                      value={p.num}
+                      className="bg-med-bg-primary text-med-text-primary"
+                    >
+                      #{String(p.num).padStart(2, "0")} —{" "}
+                      {p.chief_complaint || "Patient"}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
             {currentPatient?.specialty && diffConfig && (
@@ -173,3 +182,4 @@ export function Navbar({
     </div>
   );
 }
+
