@@ -1,9 +1,6 @@
-// ==============================
-// MedSim — API Client
-// ==============================
-
 import type {
   Patient,
+  GroupedPatients,
   AskResponse,
   DiagnoseResponse,
 } from "@/types/api";
@@ -38,6 +35,13 @@ async function handleResponse<T>(res: Response): Promise<T> {
 export async function fetchPatients(): Promise<Patient[]> {
   const res = await fetch(`${API_BASE}/patients`);
   return handleResponse<Patient[]>(res);
+}
+
+// ── GET /api/patients/grouped ──
+
+export async function fetchGroupedPatients(): Promise<GroupedPatients> {
+  const res = await fetch(`${API_BASE}/patients/grouped`);
+  return handleResponse<GroupedPatients>(res);
 }
 
 // ── POST /api/ask ──

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 class AskRequest(BaseModel):
     question: str
@@ -22,6 +22,8 @@ class AskResponse(BaseModel):
     timing: dict
     pedagogical_evaluation: Optional[dict] = None
     pedagogical_synthesis: Optional[str] = None
+    start_timestamp: Optional[str] = None
+    clinical_vignette: Optional[str] = None
 
 class DiagnoseRequest(BaseModel):
     diagnosis: str
@@ -33,8 +35,9 @@ class DiagnoseResponse(BaseModel):
     is_correct: bool
     feedback: str
     expected_diagnosis: str
-    question_count: int
     report: Optional[dict] = None
+    elapsed_seconds: Optional[float] = None
+    time_expired: bool = False
 
 class ClearRequest(BaseModel):
     question: str = ""
@@ -48,3 +51,4 @@ class PatientSummary(BaseModel):
     difficulty: Optional[str] = None
     specialty: Optional[str] = None
     chief_complaint: Optional[str] = None
+

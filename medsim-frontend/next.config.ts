@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["knickers-saline-geometry.ngrok-free.dev"],
   // Proxy all /api/* requests to the Python backend
   async rewrites() {
     return [

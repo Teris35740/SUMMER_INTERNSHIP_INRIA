@@ -23,6 +23,7 @@ export default function Home() {
 
       {/* Navbar */}
       <Navbar
+        groupedPatients={sim.groupedPatients}
         patients={sim.patients}
         currentPatientNum={sim.currentPatientNum}
         currentPatient={sim.currentPatient}
@@ -46,11 +47,11 @@ export default function Home() {
         <ChatArea
           messages={sim.messages}
           isTyping={sim.isTyping}
-          clinicalState={sim.clinicalState}
+          clinicalVignette={sim.clinicalVignette}
           status={sim.status}
-          questionCount={sim.questionCount}
-          minQuestions={sim.minQuestions}
-          canDiagnose={sim.canDiagnose}
+          timeRemaining={sim.timeRemaining}
+          timerActive={sim.timerActive}
+          sessionExpired={sim.sessionExpired}
           isPipelineOpen={sim.isPipelineOpen}
           onSend={sim.sendMessage}
           onDiagnose={() => setDiagnosisModalOpen(true)}
@@ -75,3 +76,4 @@ export default function Home() {
     </>
   );
 }
+
