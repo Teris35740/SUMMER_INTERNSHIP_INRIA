@@ -1,14 +1,109 @@
 import os
+import re
+import json
 import glob
+import logging
 from collections import defaultdict
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from typing import List, Dict
-from api.schemas import PatientSummary
+from api.schemas import PatientSummary, CreatePatientRequest, CreatePatientResponse
 from core.utils.helpers import load_patient_data
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 PATIENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_patient')
+
+FACT_ID_PREFIXES = {
+    "chief_complaint": "cc",
+    "history": "h",
+    "risk_factors": "rf",
+    "travel_history": "th",
+    "family_history": "fh",
+    "vitals": "v",
+    "past_medical_history": "pmh",
+    "treatments": "t",
+    "allergies": "a",
+    "social_history": "sh",
+    "surgical_history": "suh",
+}
+
+def _get_next_patient_num() -> int:
+    """Scan Document_patient/ to find the next available patient number."""
+    pattern = os.path.join(PATIENT_DIR, "patient_*.json")
+    nums = []
+    for filepath in glob.glob(pattern):
+        filename = os.path.basename(filepath)
+        match = re.match(r"patient_(\d+)\.json", filename)
+        if match:
+            nums.append(int(match.group(1)))
+    return max(nums) + 1 if nums else 1
+
+
+def _build_patient_json(payload: CreatePatientRequest, patient_num: int) -> dict:
+    """Build the full patient JSON with auto-generated patient_id and fact_ids."""
+    patient_id = f"PAT_{patient_num:03d}"
+
+    chief_complaint = {
+        "information": payload.chief_complaint.information,
+        "reveal_policy": payload.chief_complaint.reveal_policy,
+        "fact_id": "cc1",
+    }
+
+    array_sections = {}
+    for section_name in [
+        "history", "risk_factors", "travel_history", "family_history",
+        "vitals", "past_medical_history", "treatments", "allergies",
+        "social_history", "surgical_history",
+    ]:
+        facts = getattr(payload, section_name, [])
+        prefix = FACT_ID_PREFIXES[section_name]
+        array_sections[section_name] = [
+            {
+                "information": fact.information,
+                "reveal_policy": fact.reveal_policy,
+                "fact_id": f"{prefix}{i + 1}",
+            }
+            for i, fact in enumerate(facts)
+        ]
+
+    return {
+        "patient": {
+            "identity": {
+                "patient_id": patient_id,
+                "age": payload.identity.age,
+                "gender": payload.identity.gender,
+                "patient_attitude": {
+                    "anxiety": round(payload.identity.patient_attitude.anxiety, 2),
+                    "precision": round(payload.identity.patient_attitude.precision, 2),
+                    "cooperativeness": round(payload.identity.patient_attitude.cooperativeness, 2),
+                },
+            },
+            "chief_complaint": chief_complaint,
+            **array_sections,
+        },
+        "metadata": {
+            "difficulty": payload.metadata.difficulty,
+            "specialty": payload.metadata.specialty,
+            "expected_diagnosis": payload.metadata.expected_diagnosis,
+            "alternative_diagnoses": payload.metadata.alternative_diagnoses,
+            "red_flags": payload.metadata.red_flags,
+        },
+    }
+
+
+def _ingest_patient_rag(json_path: str):
+    """Run the existing RAG pipeline: chunking → embedding → Weaviate storage."""
+    from core.rag.chunking import build_chunk_records_from_json
+    from core.rag.embedding import embedding_db, store_in_weaviate
+
+    chunk_records = build_chunk_records_from_json(json_path)
+    if chunk_records:
+        chunks = [r["content"] for r in chunk_records]
+        embeddings = embedding_db(chunks)
+        store_in_weaviate(chunk_records, embeddings)
+        logger.info("RAG ingestion OK for %s (%d chunks)", os.path.basename(json_path), len(chunk_records))
+
 
 def get_patient_id_from_num(patient_num: int) -> str:
     return f"PAT_{patient_num:03d}"
@@ -64,3 +159,31 @@ def list_patients_grouped():
     # Trier les spécialités alphabétiquement
     return dict(sorted(grouped.items()))
 
+
+@router.post("/patients", response_model=CreatePatientResponse, status_code=201)
+def create_patient(payload: CreatePatientRequest):
+    """Create a new patient JSON file and run RAG ingestion synchronously."""
+    try:
+        next_num = _get_next_patient_num()
+        patient_id = f"PAT_{next_num:03d}"
+
+        patient_json = _build_patient_json(payload, next_num)
+
+        json_path = os.path.join(PATIENT_DIR, f"patient_{next_num:02d}.json")
+        os.makedirs(PATIENT_DIR, exist_ok=True)
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(patient_json, f, ensure_ascii=False, indent=4)
+
+        logger.info("Patient %s saved to %s", patient_id, json_path)
+
+        _ingest_patient_rag(json_path)
+
+        return CreatePatientResponse(
+            patient_num=next_num,
+            patient_id=patient_id,
+            status="created",
+        )
+
+    except Exception as e:
+        logger.exception("Error creating patient")
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la création du patient : {str(e)}")

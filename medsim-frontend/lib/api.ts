@@ -91,3 +91,22 @@ export async function clearSessionApi(sessionId: string): Promise<void> {
     body: JSON.stringify({ question: "", session_id: sessionId }),
   });
 }
+
+// ── POST /api/patients (Create) ──
+
+export interface CreatePatientResponse {
+  patient_num: number;
+  patient_id: string;
+  status: string;
+}
+
+export async function createPatient(
+  data: Record<string, unknown>
+): Promise<CreatePatientResponse> {
+  const res = await fetch(`${API_BASE}/patients`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return handleResponse<CreatePatientResponse>(res);
+}

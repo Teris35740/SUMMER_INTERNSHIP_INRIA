@@ -1,6 +1,7 @@
 "use client";
 
-import { Activity, Settings, BookOpen } from "lucide-react";
+import Link from "next/link";
+import { Activity, Settings, BookOpen, UserPlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
@@ -113,6 +114,21 @@ export function Navbar({
               </Badge>
             )}
           </div>
+
+          {/* New Patient button */}
+          <Link href="/patients/nouveau">
+            <Tooltip>
+              <TooltipTrigger
+                className="flex items-center justify-center w-[38px] h-[38px] rounded-full
+                           bg-gradient-user-msg text-white shadow-md
+                           hover:opacity-90 hover:shadow-lg
+                           transition-all duration-150 cursor-pointer"
+              >
+                <UserPlus size={18} />
+              </TooltipTrigger>
+              <TooltipContent>Nouveau patient</TooltipContent>
+            </Tooltip>
+          </Link>
         </div>
 
         {/* ── Right: Mode, Status, Theme, Pipeline ── */}
