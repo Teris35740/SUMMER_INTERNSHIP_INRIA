@@ -6,8 +6,13 @@ import logging
 from collections import defaultdict
 from fastapi import APIRouter, HTTPException
 from typing import List, Dict
-from api.schemas import PatientSummary, CreatePatientRequest, CreatePatientResponse
+from api.schemas import PatientSummary, CreatePatientRequest, CreatePatientResponse, DeletePatientResponse
 from core.utils.helpers import load_patient_data
+from core.rag.chunking import build_chunk_records_from_json
+from core.rag.embedding import embedding_db, store_in_weaviate
+
+import weaviate.classes.query as wvq
+from core.config import get_weaviate_client, WEAVIATE_COLLECTION
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -29,7 +34,6 @@ FACT_ID_PREFIXES = {
 }
 
 def _get_next_patient_num() -> int:
-    """Scan Document_patient/ to find the next available patient number."""
     pattern = os.path.join(PATIENT_DIR, "patient_*.json")
     nums = []
     for filepath in glob.glob(pattern):
@@ -41,7 +45,6 @@ def _get_next_patient_num() -> int:
 
 
 def _build_patient_json(payload: CreatePatientRequest, patient_num: int) -> dict:
-    """Build the full patient JSON with auto-generated patient_id and fact_ids."""
     patient_id = f"PAT_{patient_num:03d}"
 
     chief_complaint = {
@@ -93,10 +96,6 @@ def _build_patient_json(payload: CreatePatientRequest, patient_num: int) -> dict
 
 
 def _ingest_patient_rag(json_path: str):
-    """Run the existing RAG pipeline: chunking → embedding → Weaviate storage."""
-    from core.rag.chunking import build_chunk_records_from_json
-    from core.rag.embedding import embedding_db, store_in_weaviate
-
     chunk_records = build_chunk_records_from_json(json_path)
     if chunk_records:
         chunks = [r["content"] for r in chunk_records]
@@ -162,7 +161,6 @@ def list_patients_grouped():
 
 @router.post("/patients", response_model=CreatePatientResponse, status_code=201)
 def create_patient(payload: CreatePatientRequest):
-    """Create a new patient JSON file and run RAG ingestion synchronously."""
     try:
         next_num = _get_next_patient_num()
         patient_id = f"PAT_{next_num:03d}"
@@ -187,3 +185,57 @@ def create_patient(payload: CreatePatientRequest):
     except Exception as e:
         logger.exception("Error creating patient")
         raise HTTPException(status_code=500, detail=f"Erreur lors de la création du patient : {str(e)}")
+
+
+def _delete_patient_chunks(patient_id: str) -> int:
+    """Supprime tous les chunks Weaviate associés à un patient_id (ex: PAT_001)."""
+
+    client = get_weaviate_client()
+
+    if not client.collections.exists(WEAVIATE_COLLECTION):
+        return 0
+
+    collection = client.collections.get(WEAVIATE_COLLECTION)
+
+    result = collection.data.delete_many(
+        where=wvq.Filter.by_property("metadata_json").like(f"*{patient_id}*")
+    )
+
+    deleted_count = result.successful if hasattr(result, 'successful') else 0
+    logger.info("Deleted %d Weaviate chunks for patient %s", deleted_count, patient_id)
+    return deleted_count
+
+
+@router.delete("/patients/{patient_num}", response_model=DeletePatientResponse)
+def delete_patient(patient_num: int):
+    """Supprime un patient : fichier JSON + chunks Weaviate."""
+    patient_id = get_patient_id_from_num(patient_num)
+
+    json_path = None
+    for pattern_fmt in [f"patient_{patient_num}.json", f"patient_{patient_num:02d}.json", f"patient_{patient_num:03d}.json"]:
+        candidate = os.path.join(PATIENT_DIR, pattern_fmt)
+        if os.path.exists(candidate):
+            json_path = candidate
+            break
+
+    if json_path is None:
+        raise HTTPException(status_code=404, detail=f"Patient {patient_num} introuvable (aucun fichier JSON).")
+
+    try:
+        deleted_chunks = _delete_patient_chunks(patient_id)
+
+        os.remove(json_path)
+        logger.info("Deleted patient file: %s", json_path)
+
+        return DeletePatientResponse(
+            patient_num=patient_num,
+            patient_id=patient_id,
+            status="deleted",
+            deleted_chunks=deleted_chunks,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Error deleting patient %s", patient_id)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression du patient : {str(e)}")

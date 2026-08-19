@@ -24,21 +24,21 @@ export default function NouveauPatientPage() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-gradient-user-msg">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 rounded-xl bg-gradient-user-msg hidden sm:block">
               <UserPlus className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-med-text-primary font-heading">
+              <h1 className="text-base sm:text-lg font-bold text-med-text-primary font-heading">
                 Nouveau Patient
               </h1>
-              <p className="text-xs text-med-text-muted">
+              <p className="text-xs text-med-text-muted hidden sm:block">
                 Créer un cas clinique pour MedSim
               </p>
             </div>
           </div>
 
-          <div className="w-20" /> {/* Spacer for centering */}
+          <div className="w-2 sm:w-20" /> {/* Spacer for centering */}
         </div>
       </header>
 

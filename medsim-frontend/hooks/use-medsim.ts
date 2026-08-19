@@ -7,6 +7,7 @@ import {
   askQuestion,
   submitDiagnosis,
   clearSessionApi,
+  deletePatient as deletePatientApi,
 } from "@/lib/api";
 import { useInterval } from "./use-interval";
 import type {
@@ -302,6 +303,36 @@ export function useMedSim() {
     [currentPatientNum, mode, status]
   );
 
+  // ── Refresh patients ──
+  const refreshPatients = useCallback(async () => {
+    try {
+      const data = await fetchGroupedPatients();
+      setGroupedPatients(data);
+      const flat = Object.values(data).flat();
+      setAllPatients(flat);
+      // If the current patient was deleted, select the first available
+      if (!flat.some((p) => p.num === currentPatientNum) && flat.length > 0) {
+        setCurrentPatientNum(flat[0].num);
+        await performClear();
+      }
+    } catch {
+      toast.error("Impossible de recharger la liste des patients.");
+    }
+  }, [currentPatientNum, performClear]);
+
+  // ── Delete patient ──
+  const removePatient = useCallback(
+    async (num: number) => {
+      const result = await deletePatientApi(num);
+      toast.success(
+        `Patient ${result.patient_id} supprimé (${result.deleted_chunks} chunks supprimés). ✅`,
+        { duration: 5000 }
+      );
+      await refreshPatients();
+    },
+    [refreshPatients]
+  );
+
   // ── Toggle pipeline ──
   const togglePipeline = useCallback(() => {
     setIsPipelineOpen((prev) => !prev);
@@ -335,6 +366,8 @@ export function useMedSim() {
     togglePipeline,
     setMode,
     setIsPipelineOpen,
+    refreshPatients,
+    removePatient,
   };
 }
 

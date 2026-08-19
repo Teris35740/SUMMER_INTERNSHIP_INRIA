@@ -33,6 +33,7 @@ export default function Home() {
         onSelectPatient={sim.selectPatient}
         onTogglePipeline={sim.togglePipeline}
         onChangeMode={() => sim.setMode(null)}
+        onDeletePatient={sim.removePatient}
       />
 
       {/* Main layout */}

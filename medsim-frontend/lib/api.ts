@@ -110,3 +110,21 @@ export async function createPatient(
   });
   return handleResponse<CreatePatientResponse>(res);
 }
+
+// ── DELETE /api/patients/:num ──
+
+export interface DeletePatientResponse {
+  patient_num: number;
+  patient_id: string;
+  status: string;
+  deleted_chunks: number;
+}
+
+export async function deletePatient(
+  patientNum: number
+): Promise<DeletePatientResponse> {
+  const res = await fetch(`${API_BASE}/patients/${patientNum}`, {
+    method: "DELETE",
+  });
+  return handleResponse<DeletePatientResponse>(res);
+}

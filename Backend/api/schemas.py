@@ -99,3 +99,9 @@ class CreatePatientResponse(BaseModel):
     patient_num: int
     patient_id: str
     status: str
+
+class DeletePatientResponse(BaseModel):
+    patient_num: int
+    patient_id: str
+    status: str
+    deleted_chunks: int

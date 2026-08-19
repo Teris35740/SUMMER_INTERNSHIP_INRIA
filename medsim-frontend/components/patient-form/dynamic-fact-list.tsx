@@ -166,10 +166,12 @@ export function DynamicFactList({
                     <SelectContent>
                       {REVEAL_POLICY_OPTIONS.map((opt) => (
                         <SelectItem key={opt.value} value={opt.value}>
-                          <span className="text-sm">{opt.label}</span>
-                          <span className="ml-2 text-xs text-med-text-muted font-mono">
-                            {opt.value}
-                          </span>
+                          <div className="flex flex-col items-start gap-1 py-1 w-full max-w-[400px]">
+                            <span className="text-sm font-medium">{opt.label}</span>
+                            <span className="text-xs text-med-text-muted font-mono whitespace-normal break-all leading-tight">
+                              {opt.value}
+                            </span>
+                          </div>
                         </SelectItem>
                       ))}
                       {/* Custom option: user types directly */}

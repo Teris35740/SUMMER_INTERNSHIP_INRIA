@@ -55,7 +55,7 @@ export function ChatArea({
     <main
       className="flex-1 flex flex-col min-w-0 transition-[margin-right] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
       style={{
-        marginRight: isPipelineOpen ? "var(--pipeline-width)" : "0",
+        marginRight: isPipelineOpen ? "var(--pipeline-mr)" : "0",
       }}
     >
       {/* Messages */}

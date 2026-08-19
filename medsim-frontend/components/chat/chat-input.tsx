@@ -110,25 +110,25 @@ export function ChatInput({
             onClick={onDiagnose}
             disabled={status === "busy" || sessionExpired}
             title="Proposer un diagnostic"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
+            className="flex items-center justify-center gap-1.5 w-[32px] sm:w-auto h-[32px] sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold shadow-sm
                        bg-med-bg-surface border border-med-border-default text-med-text-primary
                        hover:bg-med-emerald hover:text-white hover:border-transparent transition-all duration-200
                        disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-primary disabled:hover:border-med-border-default disabled:cursor-not-allowed cursor-pointer"
           >
             <CheckCircle size={14} />
-            <span>Diagnostiquer</span>
+            <span className="hidden sm:inline">Diagnostiquer</span>
           </button>
           <button
             onClick={onClear}
             disabled={status === "busy"}
             title="Réinitialiser la session"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm
+            className="flex items-center justify-center gap-1.5 w-[32px] sm:w-auto h-[32px] sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold shadow-sm
                        bg-med-bg-surface border border-med-border-subtle text-med-text-secondary
                        hover:bg-med-rose hover:text-white hover:border-transparent transition-all duration-200
                        disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-secondary disabled:hover:border-med-border-subtle disabled:cursor-not-allowed cursor-pointer"
           >
             <RotateCcw size={14} />
-            <span>Nouveau</span>
+            <span className="hidden sm:inline">Nouveau</span>
           </button>
         </div>
       </div>
