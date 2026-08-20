@@ -145,62 +145,72 @@ export function DynamicFactList({
                   >
                     Politique de révélation
                   </Label>
-                  <Select
-                    value={watch(`${name}.${index}.reveal_policy` as const) || ""}
-                    onValueChange={(value: string | null) => {
-                      if (value != null) {
-                        setValue(
-                          `${name}.${index}.reveal_policy` as const,
-                          value,
-                          { shouldValidate: true }
-                        );
-                      }
-                    }}
-                  >
-                    <SelectTrigger
-                      id={`${name}.${index}.reveal_policy`}
-                      className="bg-med-bg-primary/50 border-med-border-default"
-                    >
-                      <SelectValue placeholder="Choisir une politique..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {REVEAL_POLICY_OPTIONS.map((opt) => (
-                        <SelectItem key={opt.value} value={opt.value}>
-                          <div className="flex flex-col items-start gap-1 py-1 w-full max-w-[400px]">
-                            <span className="text-sm font-medium">{opt.label}</span>
-                            <span className="text-xs text-med-text-muted font-mono whitespace-normal break-all leading-tight">
-                              {opt.value}
-                            </span>
-                          </div>
-                        </SelectItem>
-                      ))}
-                      {/* Custom option: user types directly */}
-                      <SelectItem value="__custom__">
-                        <span className="text-sm italic">✏️ Personnalisé</span>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                  {(() => {
+                    const currentPolicy = watch(`${name}.${index}.reveal_policy` as const);
+                    const isCustom = currentPolicy === "__custom__" || (currentPolicy && !REVEAL_POLICY_OPTIONS.some((opt) => opt.value === currentPolicy));
+                    
+                    return (
+                      <>
+                        <Select
+                          value={isCustom ? "__custom__" : (currentPolicy || null)}
+                          onValueChange={(value: string | null) => {
+                            if (value != null) {
+                              setValue(
+                                `${name}.${index}.reveal_policy` as const,
+                                value,
+                                { shouldValidate: true }
+                              );
+                            }
+                          }}
+                        >
+                          <SelectTrigger
+                            id={`${name}.${index}.reveal_policy`}
+                            className="bg-med-bg-primary/50 border-med-border-default"
+                          >
+                            <SelectValue placeholder="Choisir une politique..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {REVEAL_POLICY_OPTIONS.map((opt) => (
+                              <SelectItem key={opt.value} value={opt.value}>
+                                <div className="flex flex-col items-start gap-1 py-1 w-full max-w-[400px]">
+                                  <span className="text-sm font-medium">{opt.label}</span>
+                                  <span className="text-xs text-med-text-muted font-mono whitespace-normal break-all leading-tight">
+                                    {opt.value}
+                                  </span>
+                                </div>
+                              </SelectItem>
+                            ))}
+                            {/* Custom option: user types directly */}
+                            <SelectItem value="__custom__">
+                              <span className="text-sm italic">✏️ Personnalisé</span>
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
 
-                  {/* Show custom input when __custom__ is selected */}
-                  {watch(`${name}.${index}.reveal_policy` as const) === "__custom__" && (
-                    <Input
-                      className="mt-2 bg-med-bg-primary/50 border-med-border-default"
-                      placeholder="ex: only_if_chest_pain_asked"
-                      onChange={(e) =>
-                        setValue(
-                          `${name}.${index}.reveal_policy` as const,
-                          e.target.value || "__custom__",
-                          { shouldValidate: true }
-                        )
-                      }
-                    />
-                  )}
+                        {/* Show custom input when custom policy is active */}
+                        {isCustom && (
+                          <Input
+                            className="mt-2 bg-med-bg-primary/50 border-med-border-default"
+                            placeholder="ex: only_if_chest_pain_asked"
+                            value={currentPolicy === "__custom__" ? "" : currentPolicy}
+                            onChange={(e) =>
+                              setValue(
+                                `${name}.${index}.reveal_policy` as const,
+                                e.target.value || "__custom__",
+                                { shouldValidate: true }
+                              )
+                            }
+                          />
+                        )}
 
-                  {fieldErrors?.reveal_policy && (
-                    <p className="text-xs text-med-rose mt-1">
-                      {fieldErrors.reveal_policy.message}
-                    </p>
-                  )}
+                        {fieldErrors?.reveal_policy && (
+                          <p className="text-xs text-med-rose mt-1">
+                            {fieldErrors.reveal_policy.message}
+                          </p>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             </div>

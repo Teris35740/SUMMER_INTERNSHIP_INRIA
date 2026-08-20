@@ -161,6 +161,18 @@ export function PatientForm() {
     }
   };
 
+  const onError = (errors: any) => {
+    const errorKeys = Object.keys(errors).map(key => {
+      if (typeof errors[key] === 'object' && errors[key] !== null && !errors[key].message) {
+        // Nested error (e.g., identity, metadata)
+        return `${key}: ${Object.keys(errors[key]).join(', ')}`;
+      }
+      return key;
+    });
+    console.error("Form validation failed on fields:", errorKeys);
+    alert("Erreur de validation sur les champs : \n" + errorKeys.join('\n'));
+  };
+
   const isLastStep = currentStep === STEPS.length - 1;
 
   return (
@@ -199,7 +211,7 @@ export function PatientForm() {
 
       <FormProvider {...methods}>
         <form
-          onSubmit={handleSubmit(onSubmit as any)}
+          onSubmit={handleSubmit(onSubmit as any, onError)}
           className="max-w-3xl mx-auto space-y-8"
         >
           {/* ── Stepper indicator ── */}

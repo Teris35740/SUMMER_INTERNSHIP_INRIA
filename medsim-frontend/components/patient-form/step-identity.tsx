@@ -66,7 +66,7 @@ export function StepIdentity() {
               Genre <span className="text-med-rose">*</span>
             </Label>
             <Select
-              value={watch("identity.gender") || ""}
+              value={watch("identity.gender") || null}
               onValueChange={(val: string | null) => {
                 if (val != null) {
                   setValue("identity.gender", val as "homme" | "femme", {

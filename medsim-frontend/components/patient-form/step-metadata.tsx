@@ -54,7 +54,7 @@ export function StepMetadata() {
               Difficulté <span className="text-med-rose">*</span>
             </Label>
             <Select
-              value={watch("metadata.difficulty") || ""}
+              value={watch("metadata.difficulty") || null}
               onValueChange={(val: string | null) => {
                 if (val != null) {
                   setValue("metadata.difficulty", val as "easy" | "medium" | "hard", {
@@ -98,7 +98,7 @@ export function StepMetadata() {
               Spécialité <span className="text-med-rose">*</span>
             </Label>
             <Select
-              value={watch("metadata.specialty") || ""}
+              value={watch("metadata.specialty") || null}
               onValueChange={(val: string | null) => {
                 if (val != null) {
                   setValue("metadata.specialty", val, { shouldValidate: true });
@@ -178,22 +178,35 @@ export function StepMetadata() {
           )}
 
         <div className="space-y-2">
-          {altDiagnoses.fields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-2 animate-card-scale-in">
-              <Input
-                {...register(`metadata.alternative_diagnoses.${index}` as const)}
-                placeholder={`Diagnostic alternatif ${index + 1}`}
-                className="bg-med-bg-primary/50 border-med-border-default"
-              />
-              <button
-                type="button"
-                onClick={() => altDiagnoses.remove(index)}
-                className="p-2 rounded-lg text-med-text-muted hover:text-med-rose hover:bg-med-rose-subtle transition-colors"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          ))}
+          {altDiagnoses.fields.map((field, index) => {
+            const fieldErrors = Array.isArray(errors.metadata?.alternative_diagnoses) 
+              ? errors.metadata?.alternative_diagnoses[index] 
+              : undefined;
+              
+            return (
+              <div key={field.id} className="animate-card-scale-in">
+                <div className="flex items-center gap-2">
+                  <Input
+                    {...register(`metadata.alternative_diagnoses.${index}` as const)}
+                    placeholder={`Diagnostic alternatif ${index + 1}`}
+                    className="bg-med-bg-primary/50 border-med-border-default"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => altDiagnoses.remove(index)}
+                    className="p-2 rounded-lg text-med-text-muted hover:text-med-rose hover:bg-med-rose-subtle transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                {fieldErrors && "message" in fieldErrors && (
+                  <p className="text-xs text-med-rose mt-1">
+                    {fieldErrors.message as string}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -234,22 +247,35 @@ export function StepMetadata() {
           )}
 
         <div className="space-y-2">
-          {redFlags.fields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-2 animate-card-scale-in">
-              <Input
-                {...register(`metadata.red_flags.${index}` as const)}
-                placeholder={`Drapeau rouge ${index + 1}`}
-                className="bg-med-bg-primary/50 border-med-border-default"
-              />
-              <button
-                type="button"
-                onClick={() => redFlags.remove(index)}
-                className="p-2 rounded-lg text-med-text-muted hover:text-med-rose hover:bg-med-rose-subtle transition-colors"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          ))}
+          {redFlags.fields.map((field, index) => {
+            const fieldErrors = Array.isArray(errors.metadata?.red_flags)
+              ? errors.metadata?.red_flags[index]
+              : undefined;
+
+            return (
+              <div key={field.id} className="animate-card-scale-in">
+                <div className="flex items-center gap-2">
+                  <Input
+                    {...register(`metadata.red_flags.${index}` as const)}
+                    placeholder={`Drapeau rouge ${index + 1}`}
+                    className="bg-med-bg-primary/50 border-med-border-default"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => redFlags.remove(index)}
+                    className="p-2 rounded-lg text-med-text-muted hover:text-med-rose hover:bg-med-rose-subtle transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                {fieldErrors && "message" in fieldErrors && (
+                  <p className="text-xs text-med-rose mt-1">
+                    {fieldErrors.message as string}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
