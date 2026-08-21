@@ -18,6 +18,10 @@ import {
 import { ThemeToggle } from "./theme-toggle";
 import { PaletteSelector } from "./palette-selector";
 import { DeletePatientDialog } from "./delete-patient-dialog";
+import { UploadDocumentDialog } from "./upload-document-dialog";
+import { DeleteDocumentDialog } from "./delete-document-dialog";
+import { uploadPatientDocument } from "@/lib/api";
+import { toast } from "sonner";
 import type { Patient, GroupedPatients, AppStatus, AppMode } from "@/types/api";
 
 interface NavbarProps {
@@ -49,6 +53,8 @@ export function Navbar({
 }: NavbarProps) {
   const router = useRouter();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const [deleteDocumentDialogOpen, setDeleteDocumentDialogOpen] = useState(false);
   const difficultyConfig: Record<
     string,
     { className: string; label: string }
@@ -63,6 +69,16 @@ export function Navbar({
 
   const difficulty = (currentPatient?.difficulty || "").toLowerCase();
   const diffConfig = difficultyConfig[difficulty];
+
+  const handleUploadDocument = async (file: File) => {
+    try {
+      await uploadPatientDocument(file);
+      toast.success("Document uploadé et ingéré avec succès !");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Erreur inconnue";
+      toast.error(`Échec de l'upload : ${message}`);
+    }
+  };
 
   return (
     <>
@@ -157,11 +173,20 @@ export function Navbar({
                 <span className="font-medium">Supprimer un patient</span>
               </DropdownMenuItem>
               <DropdownMenuItem
-                disabled
-                className="gap-3 cursor-not-allowed opacity-50 p-2"
+                onClick={() => setDeleteDocumentDialogOpen(true)}
+                className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2"
               >
-                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-bg-secondary">
-                  <FileText className="h-4 w-4 text-med-text-muted" />
+                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
+                  <Trash2 className="h-4 w-4 text-med-rose" />
+                </div>
+                <span className="font-medium">Supprimer un document</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setUploadDialogOpen(true)}
+                className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-sky-subtle/40 rounded-lg transition-colors p-2"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-sky-subtle/50">
+                  <FileText className="h-4 w-4 text-med-sky" />
                 </div>
                 <span className="font-medium">Ajouter un document</span>
               </DropdownMenuItem>
@@ -245,6 +270,19 @@ export function Navbar({
       onOpenChange={setDeleteDialogOpen}
       patients={patients}
       onDelete={onDeletePatient}
+    />
+
+    {/* Delete document dialog */}
+    <DeleteDocumentDialog
+      open={deleteDocumentDialogOpen}
+      onOpenChange={setDeleteDocumentDialogOpen}
+    />
+
+    {/* Upload document dialog */}
+    <UploadDocumentDialog
+      open={uploadDialogOpen}
+      onOpenChange={setUploadDialogOpen}
+      onUpload={handleUploadDocument}
     />
     </>
   );

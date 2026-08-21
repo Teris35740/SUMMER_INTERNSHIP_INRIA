@@ -4,11 +4,12 @@ import json
 import glob
 import logging
 from collections import defaultdict
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, File
+import shutil
 from typing import List, Dict
 from api.schemas import PatientSummary, CreatePatientRequest, CreatePatientResponse, DeletePatientResponse
 from core.utils.helpers import load_patient_data
-from core.rag.chunking import build_chunk_records_from_json
+from core.rag.chunking import build_chunk_records_from_json, build_chunk_records_from_pdf
 from core.rag.embedding import embedding_db, store_in_weaviate
 
 import weaviate.classes.query as wvq
@@ -18,6 +19,8 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 PATIENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_patient')
+DOCUMENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_scientifique')
+
 
 FACT_ID_PREFIXES = {
     "chief_complaint": "cc",
@@ -186,6 +189,31 @@ def create_patient(payload: CreatePatientRequest):
         logger.exception("Error creating patient")
         raise HTTPException(status_code=500, detail=f"Erreur lors de la création du patient : {str(e)}")
 
+@router.post("/patients/upload-pdf", status_code=201)
+def upload_patient_pdf(file: UploadFile = File(...)):
+    try:
+        os.makedirs(DOCUMENT_DIR, exist_ok=True)
+        filename = file.filename or "uploaded_document.pdf"
+        pdf_path = os.path.join(DOCUMENT_DIR, filename)
+        
+        with open(pdf_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+            
+        logger.info("Uploaded PDF saved to %s", pdf_path)
+        
+        # Ingestion vectorielle
+        chunk_records = build_chunk_records_from_pdf(pdf_path, method="parent_child")
+        if chunk_records:
+            chunks = [r["content"] for r in chunk_records]
+            embeddings = embedding_db(chunks)
+            store_in_weaviate(chunk_records, embeddings)
+            logger.info("RAG ingestion OK for uploaded PDF %s (%d chunks)", filename, len(chunk_records))
+            
+        return {"filename": filename, "status": "uploaded and ingested"}
+    except Exception as e:
+        logger.exception("Error uploading and ingesting PDF %s", file.filename)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de l'upload du PDF : {str(e)}")
+
 
 def _delete_patient_chunks(patient_id: str) -> int:
     """Supprime tous les chunks Weaviate associés à un patient_id (ex: PAT_001)."""
@@ -239,3 +267,60 @@ def delete_patient(patient_num: int):
     except Exception as e:
         logger.exception("Error deleting patient %s", patient_id)
         raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression du patient : {str(e)}")
+
+@router.get("/patients/documents")
+def list_patient_documents():
+    """Liste tous les documents PDF dans le répertoire Document_patient."""
+    try:
+        pattern = os.path.join(DOCUMENT_DIR, "*.pdf")
+        documents = []
+        for filepath in sorted(glob.glob(pattern)):
+            filename = os.path.basename(filepath)
+            size = os.path.getsize(filepath)
+            documents.append({"filename": filename, "size": size})
+        return documents
+    except Exception as e:
+        logger.exception("Error listing documents")
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la récupération des documents : {str(e)}")
+
+def _delete_document_chunks(filename: str) -> int:
+    """Supprime tous les chunks Weaviate associés à un document PDF."""
+    client = get_weaviate_client()
+
+    if not client.collections.exists(WEAVIATE_COLLECTION):
+        return 0
+
+    collection = client.collections.get(WEAVIATE_COLLECTION)
+
+    result = collection.data.delete_many(
+        where=wvq.Filter.by_property("metadata_json").like(f"*{filename}*")
+    )
+
+    deleted_count = result.successful if hasattr(result, 'successful') else 0
+    logger.info("Deleted %d Weaviate chunks for document %s", deleted_count, filename)
+    return deleted_count
+
+@router.delete("/patients/documents/{filename}")
+def delete_patient_document(filename: str):
+    """Supprime un document PDF et ses chunks vectoriels associés."""
+    if ".." in filename or "/" in filename or "\\" in filename:
+        raise HTTPException(status_code=400, detail="Nom de fichier invalide.")
+        
+    pdf_path = os.path.join(DOCUMENT_DIR, filename)
+    if not os.path.exists(pdf_path):
+        raise HTTPException(status_code=404, detail=f"Document {filename} introuvable.")
+        
+    try:
+        deleted_chunks = _delete_document_chunks(filename)
+        os.remove(pdf_path)
+        logger.info("Deleted document file: %s", pdf_path)
+        
+        return {
+            "filename": filename,
+            "status": "deleted",
+            "deleted_chunks": deleted_chunks
+        }
+    except Exception as e:
+        logger.exception("Error deleting document %s", filename)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression du document : {str(e)}")
+

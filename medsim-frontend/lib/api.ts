@@ -128,3 +128,53 @@ export async function deletePatient(
   });
   return handleResponse<DeletePatientResponse>(res);
 }
+
+// ── POST /api/patients/upload-pdf ──
+
+export interface UploadDocumentResponse {
+  filename: string;
+  status: string;
+}
+
+export async function uploadPatientDocument(
+  file: File
+): Promise<UploadDocumentResponse> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${API_BASE}/patients/upload-pdf`, {
+    method: "POST",
+    body: formData, // Do not set Content-Type header manually for FormData
+  });
+  return handleResponse<UploadDocumentResponse>(res);
+}
+
+// ── GET /api/patients/documents ──
+
+export interface PatientDocument {
+  filename: string;
+  size: number;
+}
+
+export async function fetchPatientDocuments(): Promise<PatientDocument[]> {
+  const res = await fetch(`${API_BASE}/patients/documents`);
+  return handleResponse<PatientDocument[]>(res);
+}
+
+// ── DELETE /api/patients/documents/:filename ──
+
+export interface DeleteDocumentResponse {
+  filename: string;
+  status: string;
+  deleted_chunks: number;
+}
+
+export async function deletePatientDocument(
+  filename: string
+): Promise<DeleteDocumentResponse> {
+  const res = await fetch(`${API_BASE}/patients/documents/${encodeURIComponent(filename)}`, {
+    method: "DELETE",
+  });
+  return handleResponse<DeleteDocumentResponse>(res);
+}
+
