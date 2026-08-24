@@ -25,8 +25,8 @@ export function PipelinePanel({
     <aside
       className={`fixed top-0 right-0 bottom-0 bg-med-bg-secondary/80 backdrop-blur-3xl border-l border-med-border-default
                    flex flex-col z-[150] transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl
+                   w-full md:w-[var(--pipeline-width)] max-w-full
                    ${isOpen ? "translate-x-0" : "translate-x-full"}`}
-      style={{ width: "var(--pipeline-width)" }}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-med-border-default shrink-0 bg-med-bg-surface/50">

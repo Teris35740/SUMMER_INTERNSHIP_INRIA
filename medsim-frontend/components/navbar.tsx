@@ -1,17 +1,31 @@
 "use client";
 
-import { Activity, Settings, BookOpen } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Activity, Settings, BookOpen, Plus, UserPlus, Trash2, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "./theme-toggle";
 import { PaletteSelector } from "./palette-selector";
-import type { Patient, AppStatus, AppMode } from "@/types/api";
+import { DeletePatientDialog } from "./delete-patient-dialog";
+import { UploadDocumentDialog } from "./upload-document-dialog";
+import { DeleteDocumentDialog } from "./delete-document-dialog";
+import { uploadPatientDocument } from "@/lib/api";
+import { toast } from "sonner";
+import type { Patient, GroupedPatients, AppStatus, AppMode } from "@/types/api";
 
 interface NavbarProps {
+  groupedPatients: GroupedPatients;
   patients: Patient[];
   currentPatientNum: number;
   currentPatient?: Patient;
@@ -21,9 +35,11 @@ interface NavbarProps {
   onSelectPatient: (num: number) => void;
   onTogglePipeline: () => void;
   onChangeMode: () => void;
+  onDeletePatient: (num: number) => Promise<void>;
 }
 
 export function Navbar({
+  groupedPatients,
   patients,
   currentPatientNum,
   currentPatient,
@@ -33,7 +49,12 @@ export function Navbar({
   onSelectPatient,
   onTogglePipeline,
   onChangeMode,
+  onDeletePatient,
 }: NavbarProps) {
+  const router = useRouter();
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const [deleteDocumentDialogOpen, setDeleteDocumentDialogOpen] = useState(false);
   const difficultyConfig: Record<
     string,
     { className: string; label: string }
@@ -49,18 +70,28 @@ export function Navbar({
   const difficulty = (currentPatient?.difficulty || "").toLowerCase();
   const diffConfig = difficultyConfig[difficulty];
 
+  const handleUploadDocument = async (file: File) => {
+    try {
+      await uploadPatientDocument(file);
+      toast.success("Document uploadé et ingéré avec succès !");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Erreur inconnue";
+      toast.error(`Échec de l'upload : ${message}`);
+    }
+  };
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-[100] px-4 pt-4 pb-2 pointer-events-none">
+    <>
+    <div className="fixed top-0 left-0 right-0 z-[100] px-2 sm:px-4 pt-2 sm:pt-4 pb-2 pointer-events-none">
       <nav
-        className="mx-auto flex items-center justify-between px-5 glass rounded-2xl pointer-events-auto"
-        style={{ height: "64px", maxWidth: "1200px" }}
+        className="mx-auto flex items-center justify-between px-2.5 sm:px-5 glass rounded-xl sm:rounded-2xl pointer-events-auto h-[56px] sm:h-[64px] w-full max-w-[1200px]"
       >
         {/* ── Left: Logo ── */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-[40px] h-[40px] rounded-xl bg-gradient-logo text-white shadow-sm">
-            <Activity size={22} strokeWidth={2.5} />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center justify-center w-[34px] sm:w-[40px] h-[34px] sm:h-[40px] rounded-xl bg-gradient-logo text-white shadow-sm shrink-0">
+            <Activity size={18} className="sm:w-[22px] sm:h-[22px]" strokeWidth={2.5} />
           </div>
-          <div className="flex flex-col leading-tight">
+          <div className="flex-col leading-tight hidden sm:flex">
             <span
               className="text-gradient-brand font-extrabold text-[1.2rem] tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
@@ -74,50 +105,107 @@ export function Navbar({
         </div>
 
         {/* ── Center: Patient Selector ── */}
-        <div className="flex items-center">
-          <div className="flex items-center gap-2.5 px-4 py-1.5 bg-med-bg-secondary/50 border border-med-border-subtle rounded-full text-sm shadow-inner">
-            <span className="text-med-text-secondary font-medium whitespace-nowrap">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-2.5 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-med-bg-surface/80 border border-med-border-default rounded-full text-sm shadow-sm backdrop-blur-md transition-all hover:bg-med-bg-surface hover:shadow hover:border-med-sky/30">
+            <span className="text-med-text-secondary font-medium whitespace-nowrap hidden md:inline">
               Patient :
             </span>
             <select
               value={currentPatientNum}
               onChange={(e) => onSelectPatient(parseInt(e.target.value, 10))}
-              className="bg-transparent border-none text-med-text-primary font-semibold text-sm cursor-pointer outline-none max-w-[280px]"
+              className="bg-transparent border-none text-med-text-primary font-semibold text-xs sm:text-sm cursor-pointer outline-none max-w-[110px] sm:max-w-[280px] hover:text-med-sky transition-colors"
             >
-              {patients.map((p) => (
-                <option
-                  key={p.num}
-                  value={p.num}
-                  className="bg-med-bg-primary text-med-text-primary"
+              {Object.entries(groupedPatients).map(([specialty, group]) => (
+                <optgroup
+                  key={specialty}
+                  label={specialty}
                 >
-                  #{String(p.num).padStart(2, "0")} —{" "}
-                  {p.chief_complaint || "Patient"}
-                </option>
+                  {group.map((p) => (
+                    <option
+                      key={p.num}
+                      value={p.num}
+                      className="bg-med-bg-primary text-med-text-primary"
+                    >
+                      #{String(p.num).padStart(2, "0")} —{" "}
+                      {p.chief_complaint || "Patient"}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
             {currentPatient?.specialty && diffConfig && (
               <Badge
                 variant="outline"
-                className={`text-[0.7rem] font-bold uppercase tracking-widest px-2.5 py-0.5 border ${diffConfig.className}`}
+                className={`text-[0.6rem] sm:text-[0.7rem] font-bold uppercase tracking-widest px-1.5 sm:px-2.5 py-0.5 border ${diffConfig.className} hidden sm:inline-flex`}
               >
                 {currentPatient.specialty}
               </Badge>
             )}
           </div>
+
+          {/* Patient management menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className="flex items-center justify-center w-[34px] sm:w-[38px] h-[34px] sm:h-[38px] rounded-full
+                         bg-gradient-user-msg text-white shadow-md
+                         hover:opacity-100 hover:shadow-lg hover:scale-105 active:scale-95
+                         transition-all duration-200 cursor-pointer border border-white/10"
+            >
+              <Plus size={18} className="sm:w-[20px] sm:h-[20px]" strokeWidth={2.5} />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center" className="w-56 bg-med-bg-elevated border-med-border-strong p-1.5 rounded-xl shadow-xl">
+              <DropdownMenuItem
+                onClick={() => router.push("/patients/nouveau")}
+                className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-bg-surface-hover rounded-lg transition-colors p-2"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-sky-subtle">
+                  <UserPlus className="h-4 w-4 text-med-sky" />
+                </div>
+                <span className="font-medium">Ajouter un patient</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setDeleteDialogOpen(true)}
+                className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
+                  <Trash2 className="h-4 w-4 text-med-rose" />
+                </div>
+                <span className="font-medium">Supprimer un patient</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setDeleteDocumentDialogOpen(true)}
+                className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
+                  <Trash2 className="h-4 w-4 text-med-rose" />
+                </div>
+                <span className="font-medium">Supprimer un document</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setUploadDialogOpen(true)}
+                className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-sky-subtle/40 rounded-lg transition-colors p-2"
+              >
+                <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-sky-subtle/50">
+                  <FileText className="h-4 w-4 text-med-sky" />
+                </div>
+                <span className="font-medium">Ajouter un document</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* ── Right: Mode, Status, Theme, Pipeline ── */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {/* Mode button */}
           <button
             onClick={onChangeMode}
-            className="flex items-center gap-1.5 px-3 h-[38px] rounded-lg bg-med-bg-surface
+            className="flex items-center justify-center sm:justify-start gap-1.5 w-[34px] sm:w-auto px-0 sm:px-3 h-[34px] sm:h-[38px] rounded-lg sm:rounded-lg bg-med-bg-surface
                        border border-med-border-subtle text-med-text-secondary text-sm font-medium
                        hover:bg-med-bg-surface-hover hover:text-med-text-primary hover:border-med-border-default
                        transition-all duration-150 cursor-pointer shadow-sm"
           >
             <BookOpen size={16} />
-            <span>
+            <span className="hidden md:inline">
               {mode === "pedago"
                 ? "Pédagogique"
                 : mode === "notation"
@@ -127,9 +215,9 @@ export function Navbar({
           </button>
 
           {/* Status indicator */}
-          <div className="flex items-center gap-2 px-3.5 py-1.5 bg-med-bg-surface border border-med-border-subtle shadow-sm rounded-full text-[0.8rem] text-med-text-secondary font-medium">
+          <div className="flex items-center justify-center sm:justify-start gap-2 w-[34px] sm:w-auto h-[34px] sm:h-[38px] px-0 sm:px-3.5 bg-med-bg-surface border border-med-border-subtle shadow-sm rounded-lg sm:rounded-full text-[0.8rem] text-med-text-secondary font-medium">
             <span
-              className={`w-2 h-2 rounded-full animate-status-pulse ${
+              className={`w-2 h-2 rounded-full animate-status-pulse shrink-0 ${
                 status === "busy"
                   ? "bg-med-amber shadow-[0_0_8px_var(--color-med-amber)]"
                   : status === "error"
@@ -137,7 +225,7 @@ export function Navbar({
                     : "bg-med-success shadow-[0_0_8px_var(--color-med-success)]"
               }`}
             />
-            <span>
+            <span className="hidden md:inline">
               {status === "busy"
                 ? "Traitement..."
                 : status === "error"
@@ -146,17 +234,21 @@ export function Navbar({
             </span>
           </div>
 
-          <div className="w-px h-6 bg-med-border-default mx-1" />
+          <div className="w-px h-6 bg-med-border-default mx-0.5 sm:mx-1" />
 
           {/* Theme Toggle */}
-          <ThemeToggle />
-          <PaletteSelector />
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
+          <div className="hidden sm:block">
+            <PaletteSelector />
+          </div>
 
           {/* Pipeline toggle */}
           <Tooltip>
             <TooltipTrigger
                 onClick={onTogglePipeline}
-                className={`flex items-center justify-center w-[38px] h-[38px] rounded-lg
+                className={`flex items-center justify-center w-[34px] sm:w-[38px] h-[34px] sm:h-[38px] rounded-lg
                            border transition-all duration-150 cursor-pointer shadow-sm
                            ${
                              isPipelineOpen
@@ -164,12 +256,35 @@ export function Navbar({
                                : "bg-med-bg-surface text-med-text-secondary border-med-border-subtle hover:bg-med-bg-surface-hover hover:text-med-text-primary hover:border-med-border-default"
                            }`}
               >
-                <Settings size={18} />
+                <Settings size={16} className="sm:w-[18px] sm:h-[18px]" />
             </TooltipTrigger>
             <TooltipContent>Pipeline Internals</TooltipContent>
           </Tooltip>
         </div>
       </nav>
     </div>
+
+    {/* Delete patient dialog */}
+    <DeletePatientDialog
+      open={deleteDialogOpen}
+      onOpenChange={setDeleteDialogOpen}
+      patients={patients}
+      onDelete={onDeletePatient}
+    />
+
+    {/* Delete document dialog */}
+    <DeleteDocumentDialog
+      open={deleteDocumentDialogOpen}
+      onOpenChange={setDeleteDocumentDialogOpen}
+    />
+
+    {/* Upload document dialog */}
+    <UploadDocumentDialog
+      open={uploadDialogOpen}
+      onOpenChange={setUploadDialogOpen}
+      onUpload={handleUploadDocument}
+    />
+    </>
   );
 }
+

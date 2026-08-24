@@ -7,6 +7,7 @@ from core.utils.cache import (
     get_useful_question_count,
     get_useful_questions,
     get_clinical_state,
+    get_elapsed_seconds,
 )
 
 
@@ -21,30 +22,21 @@ def parse_diagnosis_attempt(question):
     return None
 
 
-def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, min_questions, patient_data=None):
+def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, patient_data=None):
     """Gère une tentative de diagnostic d'un étudiant.
     
-    Vérifie que le nombre minimum de questions a été atteint,
-    puis évalue le diagnostic proposé par l'étudiant.
+    Évalue le diagnostic proposé par l'étudiant.
+    Le scoring est basé sur le temps écoulé (chrono 10 min) au lieu du nombre de questions.
     Si patient_data est fourni, calcule aussi le rapport de notation.
     
     Retourne un dict :
-        - Si trop peu de questions posées :
-            {"status": "too_early", "q_count": int, "min_questions": int, "remaining": int}
-        - Si le diagnostic est évalué :
-            {"status": "evaluated", "is_correct": bool, "feedback": str, "report": dict|None}
+        {\"status\": \"evaluated\", \"is_correct\": bool, \"feedback\": str, \"report\": dict|None,
+         \"elapsed_seconds\": float}
     """
-    q_count = get_question_count(session_id)
-    if q_count < min_questions:
-        remaining = min_questions - q_count
-        return {
-            "status": "too_early",
-            "q_count": q_count,
-            "min_questions": min_questions,
-            "remaining": remaining,
-        }
-
     is_correct, feedback = verify_diagnosis(student_diagnosis, expected_diagnosis)
+
+    elapsed_seconds = get_elapsed_seconds(session_id)
+    q_count = get_question_count(session_id)
 
     # Calcul du rapport de notation si les données patient sont disponibles
     report = None
@@ -61,8 +53,7 @@ def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, min_ques
             useful_questions_list=useful_questions_list,
             total_count=q_count,
             is_correct=is_correct,
-            q_count=q_count,
-            min_questions=min_questions,
+            elapsed_seconds=elapsed_seconds,
         )
 
     return {
@@ -70,4 +61,6 @@ def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, min_ques
         "is_correct": is_correct,
         "feedback": feedback,
         "report": report,
+        "elapsed_seconds": elapsed_seconds,
     }
+

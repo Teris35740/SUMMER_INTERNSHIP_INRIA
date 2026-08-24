@@ -1,19 +1,117 @@
 import os
+import re
+import json
 import glob
-from fastapi import APIRouter
-from typing import List
-from api.schemas import PatientSummary
+import logging
+from collections import defaultdict
+from fastapi import APIRouter, HTTPException, UploadFile, File
+import shutil
+from typing import List, Dict
+from api.schemas import PatientSummary, CreatePatientRequest, CreatePatientResponse, DeletePatientResponse
 from core.utils.helpers import load_patient_data
+from core.rag.chunking import build_chunk_records_from_json, build_chunk_records_from_pdf
+from core.rag.embedding import embedding_db, store_in_weaviate
+
+import weaviate.classes.query as wvq
+from core.config import get_weaviate_client, WEAVIATE_COLLECTION
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 PATIENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_patient')
+DOCUMENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_scientifique')
+
+
+FACT_ID_PREFIXES = {
+    "chief_complaint": "cc",
+    "history": "h",
+    "risk_factors": "rf",
+    "travel_history": "th",
+    "family_history": "fh",
+    "vitals": "v",
+    "past_medical_history": "pmh",
+    "treatments": "t",
+    "allergies": "a",
+    "social_history": "sh",
+    "surgical_history": "suh",
+}
+
+def _get_next_patient_num() -> int:
+    pattern = os.path.join(PATIENT_DIR, "patient_*.json")
+    nums = []
+    for filepath in glob.glob(pattern):
+        filename = os.path.basename(filepath)
+        match = re.match(r"patient_(\d+)\.json", filename)
+        if match:
+            nums.append(int(match.group(1)))
+    return max(nums) + 1 if nums else 1
+
+
+def _build_patient_json(payload: CreatePatientRequest, patient_num: int) -> dict:
+    patient_id = f"PAT_{patient_num:03d}"
+
+    chief_complaint = {
+        "information": payload.chief_complaint.information,
+        "reveal_policy": payload.chief_complaint.reveal_policy,
+        "fact_id": "cc1",
+    }
+
+    array_sections = {}
+    for section_name in [
+        "history", "risk_factors", "travel_history", "family_history",
+        "vitals", "past_medical_history", "treatments", "allergies",
+        "social_history", "surgical_history",
+    ]:
+        facts = getattr(payload, section_name, [])
+        prefix = FACT_ID_PREFIXES[section_name]
+        array_sections[section_name] = [
+            {
+                "information": fact.information,
+                "reveal_policy": fact.reveal_policy,
+                "fact_id": f"{prefix}{i + 1}",
+            }
+            for i, fact in enumerate(facts)
+        ]
+
+    return {
+        "patient": {
+            "identity": {
+                "patient_id": patient_id,
+                "age": payload.identity.age,
+                "gender": payload.identity.gender,
+                "patient_attitude": {
+                    "anxiety": round(payload.identity.patient_attitude.anxiety, 2),
+                    "precision": round(payload.identity.patient_attitude.precision, 2),
+                    "cooperativeness": round(payload.identity.patient_attitude.cooperativeness, 2),
+                },
+            },
+            "chief_complaint": chief_complaint,
+            **array_sections,
+        },
+        "metadata": {
+            "difficulty": payload.metadata.difficulty,
+            "specialty": payload.metadata.specialty,
+            "expected_diagnosis": payload.metadata.expected_diagnosis,
+            "alternative_diagnoses": payload.metadata.alternative_diagnoses,
+            "red_flags": payload.metadata.red_flags,
+        },
+    }
+
+
+def _ingest_patient_rag(json_path: str):
+    chunk_records = build_chunk_records_from_json(json_path)
+    if chunk_records:
+        chunks = [r["content"] for r in chunk_records]
+        embeddings = embedding_db(chunks)
+        store_in_weaviate(chunk_records, embeddings)
+        logger.info("RAG ingestion OK for %s (%d chunks)", os.path.basename(json_path), len(chunk_records))
+
 
 def get_patient_id_from_num(patient_num: int) -> str:
     return f"PAT_{patient_num:03d}"
 
-@router.get("/patients", response_model=List[PatientSummary])
-def list_patients():
+def _load_all_patients() -> List[PatientSummary]:
+    """Charge tous les patients depuis le dossier Document_patient."""
     patients = []
     pattern = os.path.join(PATIENT_DIR, "patient_*.json")
     
@@ -45,3 +143,184 @@ def list_patients():
         ))
     
     return patients
+
+@router.get("/patients", response_model=List[PatientSummary])
+def list_patients():
+    return _load_all_patients()
+
+@router.get("/patients/grouped", response_model=Dict[str, List[PatientSummary]])
+def list_patients_grouped():
+    """Retourne les patients regroupés par spécialité médicale."""
+    patients = _load_all_patients()
+    grouped = defaultdict(list)
+    
+    for patient in patients:
+        specialty = patient.specialty or "Autre"
+        grouped[specialty].append(patient)
+    
+    # Trier les spécialités alphabétiquement
+    return dict(sorted(grouped.items()))
+
+
+@router.post("/patients", response_model=CreatePatientResponse, status_code=201)
+def create_patient(payload: CreatePatientRequest):
+    try:
+        next_num = _get_next_patient_num()
+        patient_id = f"PAT_{next_num:03d}"
+
+        patient_json = _build_patient_json(payload, next_num)
+
+        json_path = os.path.join(PATIENT_DIR, f"patient_{next_num:02d}.json")
+        os.makedirs(PATIENT_DIR, exist_ok=True)
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(patient_json, f, ensure_ascii=False, indent=4)
+
+        logger.info("Patient %s saved to %s", patient_id, json_path)
+
+        _ingest_patient_rag(json_path)
+
+        return CreatePatientResponse(
+            patient_num=next_num,
+            patient_id=patient_id,
+            status="created",
+        )
+
+    except Exception as e:
+        logger.exception("Error creating patient")
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la création du patient : {str(e)}")
+
+@router.post("/patients/upload-pdf", status_code=201)
+def upload_patient_pdf(file: UploadFile = File(...)):
+    try:
+        os.makedirs(DOCUMENT_DIR, exist_ok=True)
+        filename = file.filename or "uploaded_document.pdf"
+        pdf_path = os.path.join(DOCUMENT_DIR, filename)
+        
+        with open(pdf_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+            
+        logger.info("Uploaded PDF saved to %s", pdf_path)
+        
+        # Ingestion vectorielle
+        chunk_records = build_chunk_records_from_pdf(pdf_path, method="parent_child")
+        if chunk_records:
+            chunks = [r["content"] for r in chunk_records]
+            embeddings = embedding_db(chunks)
+            store_in_weaviate(chunk_records, embeddings)
+            logger.info("RAG ingestion OK for uploaded PDF %s (%d chunks)", filename, len(chunk_records))
+            
+        return {"filename": filename, "status": "uploaded and ingested"}
+    except Exception as e:
+        logger.exception("Error uploading and ingesting PDF %s", file.filename)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de l'upload du PDF : {str(e)}")
+
+
+def _delete_patient_chunks(patient_id: str) -> int:
+    """Supprime tous les chunks Weaviate associés à un patient_id (ex: PAT_001)."""
+
+    client = get_weaviate_client()
+
+    if not client.collections.exists(WEAVIATE_COLLECTION):
+        return 0
+
+    collection = client.collections.get(WEAVIATE_COLLECTION)
+
+    result = collection.data.delete_many(
+        where=wvq.Filter.by_property("metadata_json").like(f"*{patient_id}*")
+    )
+
+    deleted_count = result.successful if hasattr(result, 'successful') else 0
+    logger.info("Deleted %d Weaviate chunks for patient %s", deleted_count, patient_id)
+    return deleted_count
+
+
+@router.delete("/patients/{patient_num}", response_model=DeletePatientResponse)
+def delete_patient(patient_num: int):
+    """Supprime un patient : fichier JSON + chunks Weaviate."""
+    patient_id = get_patient_id_from_num(patient_num)
+
+    json_path = None
+    for pattern_fmt in [f"patient_{patient_num}.json", f"patient_{patient_num:02d}.json", f"patient_{patient_num:03d}.json"]:
+        candidate = os.path.join(PATIENT_DIR, pattern_fmt)
+        if os.path.exists(candidate):
+            json_path = candidate
+            break
+
+    if json_path is None:
+        raise HTTPException(status_code=404, detail=f"Patient {patient_num} introuvable (aucun fichier JSON).")
+
+    try:
+        deleted_chunks = _delete_patient_chunks(patient_id)
+
+        os.remove(json_path)
+        logger.info("Deleted patient file: %s", json_path)
+
+        return DeletePatientResponse(
+            patient_num=patient_num,
+            patient_id=patient_id,
+            status="deleted",
+            deleted_chunks=deleted_chunks,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Error deleting patient %s", patient_id)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression du patient : {str(e)}")
+
+@router.get("/patients/documents")
+def list_patient_documents():
+    """Liste tous les documents PDF dans le répertoire Document_patient."""
+    try:
+        pattern = os.path.join(DOCUMENT_DIR, "*.pdf")
+        documents = []
+        for filepath in sorted(glob.glob(pattern)):
+            filename = os.path.basename(filepath)
+            size = os.path.getsize(filepath)
+            documents.append({"filename": filename, "size": size})
+        return documents
+    except Exception as e:
+        logger.exception("Error listing documents")
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la récupération des documents : {str(e)}")
+
+def _delete_document_chunks(filename: str) -> int:
+    """Supprime tous les chunks Weaviate associés à un document PDF."""
+    client = get_weaviate_client()
+
+    if not client.collections.exists(WEAVIATE_COLLECTION):
+        return 0
+
+    collection = client.collections.get(WEAVIATE_COLLECTION)
+
+    result = collection.data.delete_many(
+        where=wvq.Filter.by_property("metadata_json").like(f"*{filename}*")
+    )
+
+    deleted_count = result.successful if hasattr(result, 'successful') else 0
+    logger.info("Deleted %d Weaviate chunks for document %s", deleted_count, filename)
+    return deleted_count
+
+@router.delete("/patients/documents/{filename}")
+def delete_patient_document(filename: str):
+    """Supprime un document PDF et ses chunks vectoriels associés."""
+    if ".." in filename or "/" in filename or "\\" in filename:
+        raise HTTPException(status_code=400, detail="Nom de fichier invalide.")
+        
+    pdf_path = os.path.join(DOCUMENT_DIR, filename)
+    if not os.path.exists(pdf_path):
+        raise HTTPException(status_code=404, detail=f"Document {filename} introuvable.")
+        
+    try:
+        deleted_chunks = _delete_document_chunks(filename)
+        os.remove(pdf_path)
+        logger.info("Deleted document file: %s", pdf_path)
+        
+        return {
+            "filename": filename,
+            "status": "deleted",
+            "deleted_chunks": deleted_chunks
+        }
+    except Exception as e:
+        logger.exception("Error deleting document %s", filename)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression du document : {str(e)}")
+

@@ -9,9 +9,10 @@ from core.config import EXCERPT_COUNT, MAX_RETRIES
 from core.rag.retrieval import embed_question, fusion_rows
 from core.rag.reranking import re_ranking, build_context, expansion_parent_child
 from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, evaluate_student_question_pedagogy, generate_pedagogical_synthesis
-from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact, increment_question_count, get_question_count, add_useful_question
+from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact, increment_question_count, get_question_count, add_useful_question, get_start_timestamp
 from core.state_motor import state_motor_advanced
 from core.verification import verification_answer, fact_id_authorized_by_motor
+from core.vignette import generate_clinical_vignette
 
 def get_patient_id_from_num(patient_num: int) -> str:
     """Derive patient_id from number, e.g., 1 -> PAT_001, 100 -> PAT_100."""
@@ -137,6 +138,14 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
     updated_history = get_history(session_id)
     updated_clinical_state = get_clinical_state(session_id)
 
+    # Générer la vignette clinique humanisée
+    clinical_vignette = ""
+    if patient_data:
+        clinical_vignette = generate_clinical_vignette(patient_data, updated_clinical_state)
+
+    # Récupérer le timestamp de début de session
+    start_timestamp = get_start_timestamp(session_id)
+
     try:
         raw_json_dict = json.loads(raw_answer)
     except:
@@ -180,5 +189,7 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
         verification_info=verification_info,
         timing=timing,
         pedagogical_evaluation=pedagogical_evaluation,
-        pedagogical_synthesis=pedagogical_synthesis
+        pedagogical_synthesis=pedagogical_synthesis,
+        start_timestamp=start_timestamp,
+        clinical_vignette=clinical_vignette,
     )

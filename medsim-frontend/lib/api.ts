@@ -1,9 +1,6 @@
-// ==============================
-// MedSim — API Client
-// ==============================
-
 import type {
   Patient,
+  GroupedPatients,
   AskResponse,
   DiagnoseResponse,
 } from "@/types/api";
@@ -38,6 +35,13 @@ async function handleResponse<T>(res: Response): Promise<T> {
 export async function fetchPatients(): Promise<Patient[]> {
   const res = await fetch(`${API_BASE}/patients`);
   return handleResponse<Patient[]>(res);
+}
+
+// ── GET /api/patients/grouped ──
+
+export async function fetchGroupedPatients(): Promise<GroupedPatients> {
+  const res = await fetch(`${API_BASE}/patients/grouped`);
+  return handleResponse<GroupedPatients>(res);
 }
 
 // ── POST /api/ask ──
@@ -87,3 +91,90 @@ export async function clearSessionApi(sessionId: string): Promise<void> {
     body: JSON.stringify({ question: "", session_id: sessionId }),
   });
 }
+
+// ── POST /api/patients (Create) ──
+
+export interface CreatePatientResponse {
+  patient_num: number;
+  patient_id: string;
+  status: string;
+}
+
+export async function createPatient(
+  data: Record<string, unknown>
+): Promise<CreatePatientResponse> {
+  const res = await fetch(`${API_BASE}/patients`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return handleResponse<CreatePatientResponse>(res);
+}
+
+// ── DELETE /api/patients/:num ──
+
+export interface DeletePatientResponse {
+  patient_num: number;
+  patient_id: string;
+  status: string;
+  deleted_chunks: number;
+}
+
+export async function deletePatient(
+  patientNum: number
+): Promise<DeletePatientResponse> {
+  const res = await fetch(`${API_BASE}/patients/${patientNum}`, {
+    method: "DELETE",
+  });
+  return handleResponse<DeletePatientResponse>(res);
+}
+
+// ── POST /api/patients/upload-pdf ──
+
+export interface UploadDocumentResponse {
+  filename: string;
+  status: string;
+}
+
+export async function uploadPatientDocument(
+  file: File
+): Promise<UploadDocumentResponse> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${API_BASE}/patients/upload-pdf`, {
+    method: "POST",
+    body: formData, // Do not set Content-Type header manually for FormData
+  });
+  return handleResponse<UploadDocumentResponse>(res);
+}
+
+// ── GET /api/patients/documents ──
+
+export interface PatientDocument {
+  filename: string;
+  size: number;
+}
+
+export async function fetchPatientDocuments(): Promise<PatientDocument[]> {
+  const res = await fetch(`${API_BASE}/patients/documents`);
+  return handleResponse<PatientDocument[]>(res);
+}
+
+// ── DELETE /api/patients/documents/:filename ──
+
+export interface DeleteDocumentResponse {
+  filename: string;
+  status: string;
+  deleted_chunks: number;
+}
+
+export async function deletePatientDocument(
+  filename: string
+): Promise<DeleteDocumentResponse> {
+  const res = await fetch(`${API_BASE}/patients/documents/${encodeURIComponent(filename)}`, {
+    method: "DELETE",
+  });
+  return handleResponse<DeleteDocumentResponse>(res);
+}
+

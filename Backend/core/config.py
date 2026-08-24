@@ -29,6 +29,9 @@ GEMINI_MODEL = "gemini-flash-lite-latest"
 EXCERPT_COUNT = int(os.getenv("EXCERPT_COUNT", "50"))
 MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
 
+# --- Chrono de consultation (en secondes) ---
+SESSION_TIME_LIMIT = 600  # 10 minutes
+
 # --- Weaviate ---
 WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
 WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY", "")

@@ -167,6 +167,13 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --pipeline-mr: 0px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pipeline-mr: var(--pipeline-width);
+  }
 }
 
 /* ── Dark Theme (Sleeker Medical Dark) ── */

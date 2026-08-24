@@ -10,7 +10,7 @@ Calcule 4 indicateurs :
 Score final = w1·Coverage + w2·Pertinence + w3·Structure + w4·Diagnostic
 """
 
-from core.config import SCORING_WEIGHTS, IDEAL_TOPIC_ORDER, SECTION_TO_TOPIC
+from core.config import SCORING_WEIGHTS, IDEAL_TOPIC_ORDER, SECTION_TO_TOPIC, SESSION_TIME_LIMIT
 
 
 # ── Fonctions utilitaires ──────────────────────────────────────────────
@@ -147,23 +147,26 @@ def compute_structure(asked_topics_history, ideal_order=None):
     return (tau + 1) / 2
 
 
-def compute_diagnostic(is_correct, q_count, min_questions):
-    """Performance diagnostique.
+def compute_diagnostic(is_correct, elapsed_seconds, time_limit=None):
+    """Performance diagnostique basée sur le temps.
 
     - Diagnostic incorrect → 0.0
-    - Diagnostic correct → score d'efficacité (bonus si peu de questions)
+    - Diagnostic correct dans le temps → score d'efficacité (bonus si rapide)
+    - Diagnostic correct hors temps → 0.3 (pénalité pour dépassement)
 
     Retourne un float dans [0, 1].
     """
+    if time_limit is None:
+        time_limit = SESSION_TIME_LIMIT
+
     if not is_correct:
         return 0.0
 
-    if q_count <= 0:
-        return 1.0
+    if elapsed_seconds > time_limit:
+        return 0.3
 
-    # Plus l'étudiant est efficace, plus le score est élevé (plafonné à 1.0)
-    efficiency = min(1.0, min_questions / q_count)
-    return efficiency
+    time_remaining_ratio = (time_limit - elapsed_seconds) / time_limit
+    return 0.5 + 0.5 * time_remaining_ratio
 
 
 # ── Score final et rapport ─────────────────────────────────────────────
@@ -200,7 +203,7 @@ def _score_to_grade(score):
         return "F"
 
 
-def generate_report(asked_topics_history, patient_data, useful_count, total_count, is_correct, q_count, min_questions, useful_questions_list=None,):
+def generate_report(asked_topics_history, patient_data, useful_count, total_count, is_correct, elapsed_seconds, useful_questions_list=None):
     """Génère un rapport complet de notation de l'étudiant.
 
     Retourne un dict structuré avec les sous-scores, le score final,
@@ -209,7 +212,7 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
     coverage = compute_coverage(asked_topics_history, patient_data)
     pertinence = compute_pertinence(useful_count, total_count)
     structure = compute_structure(asked_topics_history)
-    diagnostic = compute_diagnostic(is_correct, q_count, min_questions)
+    diagnostic = compute_diagnostic(is_correct, elapsed_seconds)
 
     final_score = compute_final_score(coverage, pertinence, structure, diagnostic)
     grade = _score_to_grade(final_score)
@@ -218,6 +221,13 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
     important = _extract_important_topics(patient_data)
     explored = _flatten_asked_topics(asked_topics_history)
     missed = important - explored
+
+    # Formater le temps écoulé en mm:ss
+    minutes = int(elapsed_seconds // 60)
+    seconds = int(elapsed_seconds % 60)
+    time_str = f"{minutes}:{seconds:02d}"
+    time_limit_str = f"{SESSION_TIME_LIMIT // 60}:{SESSION_TIME_LIMIT % 60:02d}"
+    within_time = elapsed_seconds <= SESSION_TIME_LIMIT
 
     return {
         "scores": {
@@ -237,6 +247,10 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
             "useful_questions_list": useful_questions_list or [],
             "total_questions": total_count,
             "diagnosis_correct": is_correct,
+            "elapsed_time": time_str,
+            "time_limit": time_limit_str,
+            "within_time": within_time,
+            "elapsed_seconds": round(elapsed_seconds, 1),
         },
     }
 
@@ -245,6 +259,7 @@ def format_report(report):
     """Formate un rapport de scoring pour affichage en console."""
     scores = report["scores"]
     weights = report["weights"]
+    details = report["details"]
     lines = [
         "",
         "╔══════════════════════════════════════════════════╗",
@@ -259,7 +274,6 @@ def format_report(report):
         "╚══════════════════════════════════════════════════╝",
     ]
 
-    details = report["details"]
     if details["missed_topics"]:
         lines.append(f"\n  Thèmes non explorés : {', '.join(details['missed_topics'])}")
 
@@ -268,6 +282,13 @@ def format_report(report):
         lines.append("  Liste des questions utiles :")
         for q in details["useful_questions_list"]:
             lines.append(f"    - {q}")
+
+    # Temps de consultation
+    elapsed = details.get('elapsed_time', '?')
+    limit = details.get('time_limit', '10:00')
+    within = details.get('within_time', True)
+    time_status = '✓ dans le temps' if within else '✗ hors temps'
+    lines.append(f"  Temps : {elapsed} / {limit} ({time_status})")
             
     lines.append(f"  Diagnostic {'correct ✓' if details['diagnosis_correct'] else 'incorrect ✗'}")
     lines.append("")

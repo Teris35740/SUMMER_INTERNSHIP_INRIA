@@ -11,6 +11,8 @@ export interface Patient {
   difficulty?: string;
 }
 
+export type GroupedPatients = Record<string, Patient[]>;
+
 // ── Clinical State ──
 
 export interface PatientAttitude {
@@ -68,6 +70,8 @@ export interface AskResponse {
   raw_json_response: Record<string, unknown>;
   pedagogical_evaluation?: PedagogicalEvaluation;
   pedagogical_synthesis?: string;
+  start_timestamp?: string;
+  clinical_vignette?: string;
 }
 
 // ── Scoring Report ──
@@ -92,6 +96,10 @@ export interface ScoringDetails {
   useful_questions: number;
   total_questions: number;
   useful_questions_list?: string[];
+  elapsed_time?: string;
+  time_limit?: string;
+  within_time?: boolean;
+  elapsed_seconds?: number;
 }
 
 export interface ScoringReport {
@@ -109,6 +117,8 @@ export interface DiagnoseResponse {
   feedback: string;
   expected_diagnosis: string;
   report?: ScoringReport;
+  elapsed_seconds?: number;
+  time_expired?: boolean;
 }
 
 // ── Message Types ──
@@ -154,3 +164,4 @@ export interface PipelineData {
   verificationInfo?: VerificationInfo;
   rawJson?: Record<string, unknown>;
 }
+

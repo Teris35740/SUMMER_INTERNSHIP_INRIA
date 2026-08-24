@@ -35,6 +35,7 @@ from core.utils.cache import (
     increment_question_count,
     add_useful_question,
     get_question_count,
+    get_elapsed_seconds,
     init_session
 )
 from core.utils.helpers import load_patient_attitude, load_expected_diagnosis, load_patient_data
@@ -70,7 +71,6 @@ def main():
     # à améliorer pour gérer plusieurs sessions/patients
     patient_id = "PAT_001"
     session_id = "session_1"
-    MIN_QUESTIONS = 3
     PEDAGOGICAL_EXCERPT_COUNT = 15
 
     # Charger le diagnostic attendu et les données complètes du patient
@@ -102,14 +102,9 @@ def main():
             student_diagnosis = parse_diagnosis_attempt(question)
             if student_diagnosis is not None:
                 result = handle_diagnosis(
-                    student_diagnosis, expected_diagnosis, session_id, MIN_QUESTIONS,
+                    student_diagnosis, expected_diagnosis, session_id,
                     patient_data=patient_data,
                 )
-
-                if result["status"] == "too_early":
-                    print(f"\n  Vous devez poser au moins {result['min_questions']} questions avant de diagnostiquer.")
-                    print(f"    Questions posées : {result['q_count']}/{result['min_questions']} (encore {result['remaining']})")
-                    continue
 
                 print("\n" + "=" * 50)
                 if result["is_correct"]:
@@ -117,6 +112,11 @@ def main():
                 else:
                     print("DIAGNOSTIC INCORRECT")
                 print(f"   {result['feedback']}")
+                
+                elapsed = result.get('elapsed_seconds', 0)
+                minutes = int(elapsed // 60)
+                seconds = int(elapsed % 60)
+                print(f"   Temps écoulé : {minutes}:{seconds:02d} / 10:00")
                 print("=" * 50)
 
                 # Affichage du rapport de notation
@@ -229,7 +229,10 @@ def main():
                 add_revealed_fact(session_id, used_fact_ids)
 
                 q_count = get_question_count(session_id)
-                print(f"\n--- Réponse finale (question {q_count}/{MIN_QUESTIONS} avant diagnostic) ---")
+                elapsed = get_elapsed_seconds(session_id)
+                minutes = int(elapsed // 60)
+                seconds = int(elapsed % 60)
+                print(f"\n--- Réponse finale (question {q_count} | temps {minutes}:{seconds:02d} / 10:00) ---")
                 print(answer)
 
                 if is_pedago_mode:

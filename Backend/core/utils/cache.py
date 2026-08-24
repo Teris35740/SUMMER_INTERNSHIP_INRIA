@@ -15,6 +15,7 @@ def init_session(session_id, patient_attitude):
             "question_count": 0,
             "useful_question_count": 0,
             "useful_questions_list": [],
+            "start_timestamp": datetime.now(timezone.utc).isoformat(),
             "state": {
                 "revealed_facts": [],
                 "asked_topics": [],
@@ -68,6 +69,18 @@ def get_useful_question_count(session_id):
 
 def get_useful_questions(session_id):
     return cache.get(session_id, {}).get("useful_questions_list", [])
+
+def get_start_timestamp(session_id):
+    return cache.get(session_id, {}).get("start_timestamp", None)
+
+def get_elapsed_seconds(session_id):
+    """Calcule le nombre de secondes écoulées depuis le début de la session."""
+    ts = get_start_timestamp(session_id)
+    if ts is None:
+        return 0.0
+    start = datetime.fromisoformat(ts)
+    now = datetime.now(timezone.utc)
+    return (now - start).total_seconds()
 
 def clear_session(session_id):
     cache.pop(session_id, None)

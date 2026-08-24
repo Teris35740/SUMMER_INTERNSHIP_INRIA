@@ -3,13 +3,16 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import {
-  fetchPatients,
+  fetchGroupedPatients,
   askQuestion,
   submitDiagnosis,
   clearSessionApi,
+  deletePatient as deletePatientApi,
 } from "@/lib/api";
+import { useInterval } from "./use-interval";
 import type {
   Patient,
+  GroupedPatients,
   DisplayMessage,
   ChatMessage,
   PedagogicalMessage,
@@ -19,6 +22,8 @@ import type {
   AppStatus,
   AppMode,
 } from "@/types/api";
+
+const SESSION_TIME_LIMIT = 600; // 10 minutes in seconds
 
 // Generate a unique session ID per browser tab
 function generateSessionId(): string {
@@ -48,16 +53,48 @@ export function useMedSim() {
   const sessionIdRef = useRef<string>(generateSessionId());
 
   // ── State ──
-  const [patients, setPatients] = useState<Patient[]>([]);
+  const [groupedPatients, setGroupedPatients] = useState<GroupedPatients>({});
+  const [allPatients, setAllPatients] = useState<Patient[]>([]);
   const [currentPatientNum, setCurrentPatientNum] = useState<number>(1);
   const [messages, setMessages] = useState<DisplayMessage[]>([WELCOME_MESSAGE]);
-  const [questionCount, setQuestionCount] = useState(0);
   const [clinicalState, setClinicalState] = useState<ClinicalState>({});
+  const [clinicalVignette, setClinicalVignette] = useState<string>("");
   const [pipelineData, setPipelineData] = useState<PipelineData>({});
   const [status, setStatus] = useState<AppStatus>("ready");
   const [mode, setMode] = useState<AppMode | null>(null); // null = not yet selected
   const [isPipelineOpen, setIsPipelineOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+
+  // ── Timer State ──
+  const [startTimestamp, setStartTimestamp] = useState<string | null>(null);
+  const [timeRemaining, setTimeRemaining] = useState<number>(SESSION_TIME_LIMIT);
+  const [timerActive, setTimerActive] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
+  const autodiagTriggeredRef = useRef(false);
+
+  // ── Timer tick (every second when active) ──
+  useInterval(
+    () => {
+      if (!startTimestamp) return;
+
+      const start = new Date(startTimestamp).getTime();
+      const now = Date.now();
+      const elapsedSec = (now - start) / 1000;
+      const remaining = Math.max(0, SESSION_TIME_LIMIT - elapsedSec);
+
+      setTimeRemaining(remaining);
+
+      if (remaining <= 0 && !autodiagTriggeredRef.current) {
+        setSessionExpired(true);
+        setTimerActive(false);
+        autodiagTriggeredRef.current = true;
+
+        // Auto-lock: force diagnosis submission
+        toast.error("⏱️ Temps écoulé ! La session est terminée.");
+      }
+    },
+    timerActive ? 1000 : null
+  );
 
   // ── Clear session (defined before references) ──
   const performClear = useCallback(async () => {
@@ -70,26 +107,37 @@ export function useMedSim() {
       } as ChatMessage,
     ]);
     setClinicalState({});
+    setClinicalVignette("");
     setPipelineData({});
-    setQuestionCount(0);
     setIsTyping(false);
+    setStartTimestamp(null);
+    setTimeRemaining(SESSION_TIME_LIMIT);
+    setTimerActive(false);
+    setSessionExpired(false);
+    autodiagTriggeredRef.current = false;
 
     try {
       await clearSessionApi(sessionIdRef.current);
     } catch {
       console.error("Erreur clear session");
     }
+
+    // Generate new session ID
+    sessionIdRef.current = generateSessionId();
   }, []);
 
-  // ── Load patients on mount ──
+  // ── Load grouped patients on mount ──
   useEffect(() => {
     let cancelled = false;
-    fetchPatients()
+    fetchGroupedPatients()
       .then((data) => {
         if (cancelled) return;
-        setPatients(data);
-        if (data.length > 0) {
-          setCurrentPatientNum(data[0].num);
+        setGroupedPatients(data);
+        // Flatten for quick lookup
+        const flat = Object.values(data).flat();
+        setAllPatients(flat);
+        if (flat.length > 0) {
+          setCurrentPatientNum(flat[0].num);
         }
       })
       .catch(() => {
@@ -101,7 +149,7 @@ export function useMedSim() {
   }, []);
 
   // ── Get current patient ──
-  const currentPatient = patients.find((p) => p.num === currentPatientNum);
+  const currentPatient = allPatients.find((p) => p.num === currentPatientNum);
 
   // ── Select patient ──
   const selectPatient = useCallback(
@@ -116,7 +164,7 @@ export function useMedSim() {
   // ── Send message ──
   const sendMessage = useCallback(
     async (question: string) => {
-      if (!question.trim() || status === "busy") return;
+      if (!question.trim() || status === "busy" || sessionExpired) return;
 
       // Add user message
       const userMsg: ChatMessage = {
@@ -142,6 +190,12 @@ export function useMedSim() {
 
         setIsTyping(false);
 
+        // Start timer on first response
+        if (data.start_timestamp && !startTimestamp) {
+          setStartTimestamp(data.start_timestamp);
+          setTimerActive(true);
+        }
+
         // Add assistant message
         const assistantMsg: ChatMessage = {
           id: createId(),
@@ -165,7 +219,7 @@ export function useMedSim() {
 
         // Update state
         setClinicalState(data.clinical_state);
-        setQuestionCount(data.question_count);
+        setClinicalVignette(data.clinical_vignette || "");
         setPipelineData({
           analysis: data.analysis,
           stateMotorInfo: data.state_motor_info,
@@ -185,7 +239,7 @@ export function useMedSim() {
         setTimeout(() => setStatus("ready"), 3000);
       }
     },
-    [currentPatientNum, mode, status]
+    [currentPatientNum, mode, status, sessionExpired, startTimestamp]
   );
 
   // ── Diagnose ──
@@ -204,6 +258,9 @@ export function useMedSim() {
       setStatus("busy");
       setIsTyping(true);
 
+      // Stop the timer
+      setTimerActive(false);
+
       try {
         const data = await submitDiagnosis({
           diagnosis: diagnosis.trim(),
@@ -213,6 +270,7 @@ export function useMedSim() {
         });
 
         setIsTyping(false);
+        setSessionExpired(true); // Lock session after diagnosis
 
         const diagResult: DiagnosisResultMessage = {
           id: createId(),
@@ -245,30 +303,60 @@ export function useMedSim() {
     [currentPatientNum, mode, status]
   );
 
+  // ── Refresh patients ──
+  const refreshPatients = useCallback(async () => {
+    try {
+      const data = await fetchGroupedPatients();
+      setGroupedPatients(data);
+      const flat = Object.values(data).flat();
+      setAllPatients(flat);
+      // If the current patient was deleted, select the first available
+      if (!flat.some((p) => p.num === currentPatientNum) && flat.length > 0) {
+        setCurrentPatientNum(flat[0].num);
+        await performClear();
+      }
+    } catch {
+      toast.error("Impossible de recharger la liste des patients.");
+    }
+  }, [currentPatientNum, performClear]);
+
+  // ── Delete patient ──
+  const removePatient = useCallback(
+    async (num: number) => {
+      const result = await deletePatientApi(num);
+      toast.success(
+        `Patient ${result.patient_id} supprimé (${result.deleted_chunks} chunks supprimés). ✅`,
+        { duration: 5000 }
+      );
+      await refreshPatients();
+    },
+    [refreshPatients]
+  );
+
   // ── Toggle pipeline ──
   const togglePipeline = useCallback(() => {
     setIsPipelineOpen((prev) => !prev);
   }, []);
 
-  // ── Min questions for diagnosis ──
-  const minQuestions = 3;
-  const canDiagnose = questionCount >= minQuestions;
-
   return {
     // Data
-    patients,
+    groupedPatients,
+    patients: allPatients,
     currentPatient,
     currentPatientNum,
     messages,
-    questionCount,
-    minQuestions,
-    canDiagnose,
     clinicalState,
+    clinicalVignette,
     pipelineData,
     status,
     mode,
     isPipelineOpen,
     isTyping,
+
+    // Timer
+    timeRemaining,
+    timerActive,
+    sessionExpired,
 
     // Actions
     selectPatient,
@@ -278,5 +366,8 @@ export function useMedSim() {
     togglePipeline,
     setMode,
     setIsPipelineOpen,
+    refreshPatients,
+    removePatient,
   };
 }
+

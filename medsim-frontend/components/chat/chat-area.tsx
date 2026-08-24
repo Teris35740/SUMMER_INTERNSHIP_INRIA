@@ -9,18 +9,17 @@ import { ChatInput } from "./chat-input";
 import type {
   DisplayMessage,
   DiagnosisResultMessage,
-  ClinicalState,
   AppStatus,
 } from "@/types/api";
 
 interface ChatAreaProps {
   messages: DisplayMessage[];
   isTyping: boolean;
-  clinicalState: ClinicalState;
+  clinicalVignette: string;
   status: AppStatus;
-  questionCount: number;
-  minQuestions: number;
-  canDiagnose: boolean;
+  timeRemaining: number;
+  timerActive: boolean;
+  sessionExpired: boolean;
   isPipelineOpen: boolean;
   onSend: (message: string) => void;
   onDiagnose: () => void;
@@ -30,11 +29,11 @@ interface ChatAreaProps {
 export function ChatArea({
   messages,
   isTyping,
-  clinicalState,
+  clinicalVignette,
   status,
-  questionCount,
-  minQuestions,
-  canDiagnose,
+  timeRemaining,
+  timerActive,
+  sessionExpired,
   isPipelineOpen,
   onSend,
   onDiagnose,
@@ -56,7 +55,7 @@ export function ChatArea({
     <main
       className="flex-1 flex flex-col min-w-0 transition-[margin-right] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
       style={{
-        marginRight: isPipelineOpen ? "var(--pipeline-width)" : "0",
+        marginRight: isPipelineOpen ? "var(--pipeline-mr)" : "0",
       }}
     >
       {/* Messages */}
@@ -80,12 +79,12 @@ export function ChatArea({
 
       {/* Fixed Bottom Container (Clinical Bar + Input) */}
       <div className="absolute bottom-6 left-0 right-0 px-4 flex flex-col items-center pointer-events-none z-10">
-        <ClinicalBar clinicalState={clinicalState} />
+        <ClinicalBar clinicalVignette={clinicalVignette} />
         <ChatInput
           status={status}
-          questionCount={questionCount}
-          minQuestions={minQuestions}
-          canDiagnose={canDiagnose}
+          timeRemaining={timeRemaining}
+          timerActive={timerActive}
+          sessionExpired={sessionExpired}
           onSend={onSend}
           onDiagnose={onDiagnose}
           onClear={onClear}
@@ -94,3 +93,4 @@ export function ChatArea({
     </main>
   );
 }
+
