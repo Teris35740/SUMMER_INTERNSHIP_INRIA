@@ -29,6 +29,19 @@ class PedagogyAnalysis(BaseModel):
     feedback: str
     scientific_keywords: str
 
+class PrescriptionEvaluation(BaseModel):
+    molecule_score: float
+    dosage_score: float
+    route_score: float
+    duration_score: float
+    contraindications_respected: bool
+    overall_score: float
+    feedback: str
+    expected_molecules: List[str]
+    prescribed_molecules: List[str]
+    missed_molecules: List[str]
+    contraindication_details: str
+
 
 SYSTEM_PROMPT = """Tu es un patient virtuel participant à un jeu de rôle clinique pour entraîner des étudiants en médecine au diagnostic.
 
@@ -285,3 +298,59 @@ Instructions :
         }
     )
     return response.text
+
+
+def evaluate_prescription_with_gemini(student_prescription, expected_treatment, patient_data, api_key):
+    """Évalue la prescription de l'étudiant en la comparant au traitement attendu.
+    
+    Utilise Gemini avec structured output pour obtenir des scores granulaires.
+    Retourne un dict avec les scores et le feedback.
+    """
+    client = _get_client(api_key)
+    
+    # Extraire le contexte patient pertinent pour l'évaluation des CI
+    patient = patient_data.get("patient", {})
+    allergies = patient.get("allergies", [])
+    treatments = patient.get("treatments", [])
+    pmh = patient.get("past_medical_history", [])
+    
+    patient_context = {
+        "allergies": [a.get("information", "") for a in allergies],
+        "traitements_en_cours": [t.get("information", "") for t in treatments],
+        "antecedents": [p.get("information", "") for p in pmh],
+    }
+    
+    prompt = f"""Tu es un pharmacologue expert évaluant l'ordonnance d'un étudiant en médecine.
+
+PRESCRIPTION ATTENDUE (référence) :
+{json.dumps(expected_treatment, ensure_ascii=False, indent=2)}
+
+DONNÉES DU PATIENT (pour vérifier les contre-indications) :
+{json.dumps(patient_context, ensure_ascii=False, indent=2)}
+
+PRESCRIPTION DE L'ÉTUDIANT :
+{json.dumps(student_prescription, ensure_ascii=False, indent=2)}
+
+INSTRUCTIONS D'ÉVALUATION :
+1. **molecule_score** (0.0 à 1.0) : Compare les molécules prescrites avec celles attendues. Accepte les noms commerciaux courants (ex: Doliprane = Paracétamol, Advil = Ibuprofène, Nurofen = Ibuprofène, Monuril = Fosfomycine, Imigrane = Sumatriptan). Score 1.0 si toutes les molécules attendues sont prescrites, 0.0 si aucune.
+2. **dosage_score** (0.0 à 1.0) : Évalue si la posologie est dans les fourchettes thérapeutiques acceptables. Sois tolérant sur les formulations (ex: "1g x3/j" est acceptable pour "1g toutes les 6 heures").
+3. **route_score** (0.0 à 1.0) : Vérifie si la voie d'administration est correcte.
+4. **duration_score** (0.0 à 1.0) : Vérifie si la durée du traitement est appropriée (fourchette acceptable).
+5. **contraindications_respected** : true si l'étudiant n'a PAS prescrit de médicament contre-indiqué pour ce patient, false sinon.
+6. **overall_score** (0.0 à 1.0) : Score global pondéré de la prescription. Formule suggérée : 0.35×molecule + 0.25×dosage + 0.15×route + 0.15×duration + 0.10×(1.0 si CI respectées, 0.0 sinon).
+7. **feedback** : Retour pédagogique bref (2-3 phrases) en français, bienveillant, expliquant les points forts et les erreurs.
+8. **expected_molecules** : Liste des noms de molécules attendues.
+9. **prescribed_molecules** : Liste des noms de molécules prescrites par l'étudiant (normalisés en DCI).
+10. **missed_molecules** : Liste des molécules attendues qui n'ont pas été prescrites.
+11. **contraindication_details** : Explication brève des contre-indications vérifiées et si elles ont été respectées."""
+
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=prompt,
+        config={
+            "response_mime_type": "application/json",
+            "response_schema": PrescriptionEvaluation,
+            "temperature": 0.1
+        }
+    )
+    return json.loads(response.text)

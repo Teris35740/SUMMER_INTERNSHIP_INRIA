@@ -90,12 +90,13 @@ def close_weaviate_client():
             _weaviate_client = None
             
 # --- Scoring de l'étudiant ---
-# Poids des indicateurs : w4 > w1 > w2 > w3
+# Poids des indicateurs : w4 > w5 > w1 > w2 = w3
 SCORING_WEIGHTS = {
-    "w1_coverage": 0.30,       # Couverture de l'anamnèse
-    "w2_pertinence": 0.15,     # Pertinence des questions
+    "w1_coverage": 0.25,       # Couverture de l'anamnèse
+    "w2_pertinence": 0.10,     # Pertinence des questions
     "w3_structure": 0.10,      # Structure de l'entretien
-    "w4_diagnostic": 0.45,     # Performance diagnostique
+    "w4_diagnostic": 0.30,     # Performance diagnostique
+    "w5_prescription": 0.25,   # Qualité de la prescription
 }
 
 # Ordre clinique idéal (enseigné aux étudiants en médecine)

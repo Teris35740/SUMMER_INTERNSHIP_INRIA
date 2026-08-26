@@ -25,12 +25,26 @@ const chiefComplaintSchema = z.object({
   reveal_policy: z.string().default("direct_if_asked"),
 });
 
+const moleculeSchema = z.object({
+  name: z.string().min(1, "Le nom de la molécule est requis"),
+  dosage: z.string().min(1, "La posologie est requise"),
+  route: z.string().min(1, "La voie d'administration est requise"),
+  duration: z.string().min(1, "La durée est requise"),
+});
+
+const expectedTreatmentSchema = z.object({
+  molecules: z.array(moleculeSchema).min(1, "Au moins une molécule"),
+  contraindications_to_check: z.array(z.string().min(1)).default([]),
+  notes: z.string().default(""), // Keeping this for the form, though we won't strictly use it in the JSON based on user feedback
+});
+
 const metadataSchema = z.object({
   difficulty: z.enum(["easy", "medium", "hard"], { required_error: "La difficulté est requise" }),
   specialty: z.string().min(1, "La spécialité est requise"),
   expected_diagnosis: z.string().min(1, "Le diagnostic attendu est requis"),
   alternative_diagnoses: z.array(z.string().min(1, "Valeur requise")).min(1, "Au moins un diagnostic alternatif"),
   red_flags: z.array(z.string().min(1, "Valeur requise")).min(1, "Au moins un drapeau rouge"),
+  expected_treatment: expectedTreatmentSchema,
 });
 
 // ── Schéma principal ──

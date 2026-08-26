@@ -6,6 +6,7 @@ import {
   fetchGroupedPatients,
   askQuestion,
   submitDiagnosis,
+  submitPrescription,
   clearSessionApi,
   deletePatient as deletePatientApi,
 } from "@/lib/api";
@@ -17,6 +18,8 @@ import type {
   ChatMessage,
   PedagogicalMessage,
   DiagnosisResultMessage,
+  PrescriptionResultMessage,
+  PrescriptionMolecule,
   ClinicalState,
   PipelineData,
   AppStatus,
@@ -64,6 +67,7 @@ export function useMedSim() {
   const [mode, setMode] = useState<AppMode | null>(null); // null = not yet selected
   const [isPipelineOpen, setIsPipelineOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [prescriptionPhase, setPrescriptionPhase] = useState(false);
 
   // ── Timer State ──
   const [startTimestamp, setStartTimestamp] = useState<string | null>(null);
@@ -110,6 +114,7 @@ export function useMedSim() {
     setClinicalVignette("");
     setPipelineData({});
     setIsTyping(false);
+    setPrescriptionPhase(false);
     setStartTimestamp(null);
     setTimeRemaining(SESSION_TIME_LIMIT);
     setTimerActive(false);
@@ -270,7 +275,8 @@ export function useMedSim() {
         });
 
         setIsTyping(false);
-        setSessionExpired(true); // Lock session after diagnosis
+        // Transition to prescription phase
+        setPrescriptionPhase(true);
 
         const diagResult: DiagnosisResultMessage = {
           id: createId(),
@@ -302,6 +308,57 @@ export function useMedSim() {
     },
     [currentPatientNum, mode, status]
   );
+
+  // ── Prescribe ──
+
+  const prescribe = useCallback(
+    async (molecules: PrescriptionMolecule[]) => {
+      if (molecules.length === 0 || status === "busy") return;
+
+      // Add user prescription message
+      const molNames = molecules.map(m => m.name).join(", ");
+      const userMsg: ChatMessage = {
+        id: createId(),
+        sender: "user",
+        text: `Prescription : ${molNames}`,
+        timestamp: createTimestamp(),
+      };
+      setMessages((prev) => [...prev, userMsg]);
+      setStatus("busy");
+      setIsTyping(true);
+
+      try {
+        const data = await submitPrescription({
+          molecules,
+          session_id: sessionIdRef.current,
+          patient_num: currentPatientNum,
+          is_pedago_mode: mode === "pedago",
+        });
+
+        setIsTyping(false);
+        setSessionExpired(true); // Lock session completely after prescription
+        setPrescriptionPhase(false);
+
+        const presResult: PrescriptionResultMessage = {
+          id: createId(),
+          type: "prescription",
+          evaluation: data.prescription_evaluation,
+          report: data.report,
+          timestamp: createTimestamp(),
+        };
+        setMessages((prev) => [...prev, presResult]);
+        setStatus("ready");
+      } catch (error) {
+        setIsTyping(false);
+        const detail =
+          error instanceof Error ? error.message : "Erreur lors de l'évaluation de la prescription";
+        toast.error(detail);
+        setStatus("ready");
+      }
+    },
+    [currentPatientNum, mode, status]
+  );
+
 
   // ── Refresh patients ──
   const refreshPatients = useCallback(async () => {
@@ -352,6 +409,7 @@ export function useMedSim() {
     mode,
     isPipelineOpen,
     isTyping,
+    prescriptionPhase,
 
     // Timer
     timeRemaining,
@@ -362,6 +420,7 @@ export function useMedSim() {
     selectPatient,
     sendMessage,
     diagnose,
+    prescribe,
     clearSession: performClear,
     togglePipeline,
     setMode,

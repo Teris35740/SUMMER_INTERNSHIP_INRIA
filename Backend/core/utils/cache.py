@@ -84,3 +84,17 @@ def get_elapsed_seconds(session_id):
 
 def clear_session(session_id):
     cache.pop(session_id, None)
+
+
+def store_diagnosis_result(session_id, result):
+    """Stocke le résultat du diagnostic dans le cache de session.
+    
+    Utilisé pour conserver le résultat entre l'appel /diagnose et /prescribe.
+    """
+    if session_id in cache:
+        cache[session_id]["diagnosis_result"] = result
+
+
+def get_diagnosis_result(session_id):
+    """Récupère le résultat du diagnostic stocké dans le cache."""
+    return cache.get(session_id, {}).get("diagnosis_result", None)

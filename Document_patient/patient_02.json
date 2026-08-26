@@ -195,6 +195,21 @@
             "Douleur lombaire unilatérale",
             "Frissons",
             "Rétention urinaire aiguë"
-        ]
+        ],
+        "expected_treatment": {
+            "molecules": [
+                {
+                    "name": "Fosfomycine-trométamol",
+                    "dosage": "3g en dose unique",
+                    "route": "orale",
+                    "duration": "dose unique"
+                }
+            ],
+            "contraindications_to_check": [
+                "Allergie à la pénicilline (ne contre-indique pas la fosfomycine)",
+                "Insuffisance rénale sévère (adapter si DFG < 10 mL/min)",
+                "Vérifier ECBU avant traitement chez l'homme (cystite masculine = bilan systématique)"
+            ]
+        }
     }
 }

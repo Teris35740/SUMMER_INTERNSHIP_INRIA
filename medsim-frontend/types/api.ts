@@ -81,6 +81,7 @@ export interface ScoringScores {
   pertinence: number;
   structure: number;
   diagnostic: number;
+  prescription?: number;
 }
 
 export interface ScoringWeights {
@@ -88,6 +89,7 @@ export interface ScoringWeights {
   w2_pertinence: number;
   w3_structure: number;
   w4_diagnostic: number;
+  w5_prescription?: number;
 }
 
 export interface ScoringDetails {
@@ -100,6 +102,7 @@ export interface ScoringDetails {
   time_limit?: string;
   within_time?: boolean;
   elapsed_seconds?: number;
+  prescription_details?: PrescriptionEvaluation;
 }
 
 export interface ScoringReport {
@@ -119,6 +122,43 @@ export interface DiagnoseResponse {
   report?: ScoringReport;
   elapsed_seconds?: number;
   time_expired?: boolean;
+}
+
+// ── Prescription ──
+
+export interface PrescriptionMolecule {
+  name: string;
+  dosage: string;
+  route: string;
+  duration: string;
+}
+
+export interface PrescribeParams {
+  session_id: string;
+  patient_num: number;
+  is_pedago_mode: boolean;
+  molecules: PrescriptionMolecule[];
+}
+
+export interface PrescriptionEvaluation {
+  molecule_score: number;
+  dosage_score: number;
+  route_score: number;
+  duration_score: number;
+  contraindications_respected: boolean;
+  overall_score: number;
+  feedback: string;
+  expected_molecules: string[];
+  prescribed_molecules: string[];
+  missed_molecules: string[];
+  contraindication_details: string;
+}
+
+export interface PrescribeResponse {
+  status: string;
+  prescription_evaluation?: PrescriptionEvaluation;
+  report?: ScoringReport;
+  error?: string;
 }
 
 // ── Message Types ──
@@ -147,11 +187,19 @@ export interface DiagnosisResultMessage {
   isWarning: boolean;
   feedback: string;
   expectedDiagnosis?: string;
+  report?: ScoringReport; // Keeping this for backward compatibility or when prescription is skipped
+  timestamp: string;
+}
+
+export interface PrescriptionResultMessage {
+  id: string;
+  type: "prescription";
+  evaluation?: PrescriptionEvaluation;
   report?: ScoringReport;
   timestamp: string;
 }
 
-export type DisplayMessage = ChatMessage | PedagogicalMessage | DiagnosisResultMessage;
+export type DisplayMessage = ChatMessage | PedagogicalMessage | DiagnosisResultMessage | PrescriptionResultMessage;
 
 // ── App State ──
 
@@ -164,4 +212,5 @@ export interface PipelineData {
   verificationInfo?: VerificationInfo;
   rawJson?: Record<string, unknown>;
 }
+
 

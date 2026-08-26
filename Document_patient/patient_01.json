@@ -200,6 +200,29 @@
             "Troubles sphinctériens",
             "Déficit moteur",
             "Fièvre associée"
-        ]
+        ],
+        "expected_treatment": {
+            "molecules": [
+                {
+                    "name": "Paracétamol",
+                    "dosage": "1g toutes les 6 heures (max 4g/jour)",
+                    "route": "orale",
+                    "duration": "5 à 7 jours"
+                },
+                {
+                    "name": "Ibuprofène",
+                    "dosage": "400mg 3 fois par jour au cours des repas",
+                    "route": "orale",
+                    "duration": "5 jours"
+                }
+            ],
+            "contraindications_to_check": [
+                "Allergie aux AINS",
+                "Insuffisance rénale",
+                "Ulcère gastroduodénal",
+                "Grossesse (3e trimestre)",
+                "Interaction avec Metformine (surveillance fonction rénale)"
+            ]
+        }
     }
 }

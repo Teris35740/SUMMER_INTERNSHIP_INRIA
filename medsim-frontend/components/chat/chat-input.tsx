@@ -7,6 +7,7 @@ import {
   RotateCcw,
   Clock,
   Lock,
+  Pill,
 } from "lucide-react";
 import type { AppStatus } from "@/types/api";
 
@@ -15,8 +16,10 @@ interface ChatInputProps {
   timeRemaining: number;
   timerActive: boolean;
   sessionExpired: boolean;
+  prescriptionPhase: boolean;
   onSend: (message: string) => void;
   onDiagnose: () => void;
+  onOpenPrescription: () => void;
   onClear: () => void;
 }
 
@@ -25,8 +28,10 @@ export function ChatInput({
   timeRemaining,
   timerActive,
   sessionExpired,
+  prescriptionPhase,
   onSend,
   onDiagnose,
+  onOpenPrescription,
   onClear,
 }: ChatInputProps) {
   const [value, setValue] = useState("");
@@ -45,7 +50,7 @@ export function ChatInput({
   }, [value, autoResize]);
 
   const handleSend = () => {
-    if (!value.trim() || status === "busy" || sessionExpired) return;
+    if (!value.trim() || status === "busy" || sessionExpired || prescriptionPhase) return;
     onSend(value);
     setValue("");
     // Reset textarea height
@@ -69,7 +74,7 @@ export function ChatInput({
   // Timer color classes
   const isUrgent = timeRemaining <= 120 && timeRemaining > 30;
   const isCritical = timeRemaining <= 30;
-  const timerColorClass = sessionExpired
+  const timerColorClass = sessionExpired && !prescriptionPhase
     ? "bg-med-rose text-white"
     : isCritical
       ? "bg-med-rose text-white animate-pulse"
@@ -84,7 +89,12 @@ export function ChatInput({
       <div className="w-full max-w-[780px] flex items-center justify-between mb-3 px-2 pointer-events-auto">
         
         {/* Timer pill */}
-        {sessionExpired ? (
+        {prescriptionPhase ? (
+           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm bg-med-blue-subtle text-med-blue border border-med-blue/30">
+           <Pill size={14} />
+           <span>Phase de prescription</span>
+         </div>
+        ) : sessionExpired ? (
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm bg-med-rose text-white">
             <Lock size={14} />
             <span>Session terminée</span>
@@ -106,18 +116,33 @@ export function ChatInput({
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={onDiagnose}
-            disabled={status === "busy" || sessionExpired}
-            title="Proposer un diagnostic"
-            className="flex items-center justify-center gap-1.5 w-[32px] sm:w-auto h-[32px] sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold shadow-sm
-                       bg-med-bg-surface border border-med-border-default text-med-text-primary
-                       hover:bg-med-emerald hover:text-white hover:border-transparent transition-all duration-200
-                       disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-primary disabled:hover:border-med-border-default disabled:cursor-not-allowed cursor-pointer"
-          >
-            <CheckCircle size={14} />
-            <span className="hidden sm:inline">Diagnostiquer</span>
-          </button>
+          {prescriptionPhase ? (
+            <button
+              onClick={onOpenPrescription}
+              disabled={status === "busy" || sessionExpired}
+              title="Proposer une ordonnance"
+              className="flex items-center justify-center gap-1.5 w-[32px] sm:w-auto h-[32px] sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold shadow-sm
+                         bg-med-bg-surface border border-med-border-default text-med-text-primary
+                         hover:bg-med-blue hover:text-white hover:border-transparent transition-all duration-200
+                         disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-primary disabled:hover:border-med-border-default disabled:cursor-not-allowed cursor-pointer"
+            >
+              <Pill size={14} />
+              <span className="hidden sm:inline">Prescrire</span>
+            </button>
+          ) : (
+            <button
+              onClick={onDiagnose}
+              disabled={status === "busy" || sessionExpired}
+              title="Proposer un diagnostic"
+              className="flex items-center justify-center gap-1.5 w-[32px] sm:w-auto h-[32px] sm:h-auto sm:px-3 sm:py-1.5 rounded-full text-xs font-semibold shadow-sm
+                         bg-med-bg-surface border border-med-border-default text-med-text-primary
+                         hover:bg-med-emerald hover:text-white hover:border-transparent transition-all duration-200
+                         disabled:opacity-40 disabled:hover:bg-med-bg-surface disabled:hover:text-med-text-primary disabled:hover:border-med-border-default disabled:cursor-not-allowed cursor-pointer"
+            >
+              <CheckCircle size={14} />
+              <span className="hidden sm:inline">Diagnostiquer</span>
+            </button>
+          )}
           <button
             onClick={onClear}
             disabled={status === "busy"}
@@ -142,10 +167,10 @@ export function ChatInput({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={sessionExpired ? "Session terminée — cliquez sur Nouveau pour recommencer" : "Posez une question au patient..."}
+              placeholder={prescriptionPhase ? "Cliquez sur 'Prescrire' pour rédiger votre ordonnance" : sessionExpired ? "Session terminée — cliquez sur Nouveau pour recommencer" : "Posez une question au patient..."}
               rows={1}
               autoComplete="off"
-              disabled={status === "busy" || sessionExpired}
+              disabled={status === "busy" || sessionExpired || prescriptionPhase}
               className="w-full px-4 py-2.5 bg-transparent border-none
                          text-sm text-med-text-primary placeholder:text-med-text-muted
                          focus:outline-none focus:ring-0
@@ -156,7 +181,7 @@ export function ChatInput({
           </div>
           <button
             onClick={handleSend}
-            disabled={!value.trim() || status === "busy" || sessionExpired}
+            disabled={!value.trim() || status === "busy" || sessionExpired || prescriptionPhase}
             title="Envoyer (Entrée)"
             className="flex items-center justify-center w-[44px] h-[44px] rounded-full
                        bg-gradient-user-msg text-white shadow-md
@@ -171,4 +196,5 @@ export function ChatInput({
     </div>
   );
 }
+
 

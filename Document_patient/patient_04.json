@@ -187,6 +187,28 @@
             "Déficit neurologique focal",
             "Première céphalée après 50 ans",
             "Fièvre associée"
-        ]
+        ],
+        "expected_treatment": {
+            "molecules": [
+                {
+                    "name": "Sumatriptan",
+                    "dosage": "50mg dès le début de la crise, renouvelable une fois après 2 heures si nécessaire (max 100mg/jour)",
+                    "route": "orale",
+                    "duration": "traitement de la crise (dose unique ou renouvelée)"
+                },
+                {
+                    "name": "Paracétamol",
+                    "dosage": "1g en association, renouvelable toutes les 6 heures",
+                    "route": "orale",
+                    "duration": "durée de la crise"
+                }
+            ],
+            "contraindications_to_check": [
+                "Hypertension artérielle non contrôlée (triptans vasoconstricteurs)",
+                "Antécédent d'AVC ou d'infarctus du myocarde",
+                "Insuffisance hépatique sévère",
+                "Association avec des IMAO ou ergotamine"
+            ]
+        }
     }
 }

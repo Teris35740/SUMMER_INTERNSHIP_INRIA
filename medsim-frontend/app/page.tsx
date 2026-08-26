@@ -8,9 +8,12 @@ import { ChatArea } from "@/components/chat/chat-area";
 import { PipelinePanel } from "@/components/pipeline/pipeline-panel";
 import { DiagnosisModal } from "@/components/diagnosis-modal";
 
+import { PrescriptionModal } from "@/components/chat/prescription-modal";
+
 export default function Home() {
   const sim = useMedSim();
   const [diagnosisModalOpen, setDiagnosisModalOpen] = useState(false);
+  const [prescriptionModalOpen, setPrescriptionModalOpen] = useState(false);
 
   return (
     <>
@@ -46,6 +49,7 @@ export default function Home() {
       >
         {/* Chat Area */}
         <ChatArea
+          mode={sim.mode}
           messages={sim.messages}
           isTyping={sim.isTyping}
           clinicalVignette={sim.clinicalVignette}
@@ -54,8 +58,10 @@ export default function Home() {
           timerActive={sim.timerActive}
           sessionExpired={sim.sessionExpired}
           isPipelineOpen={sim.isPipelineOpen}
+          prescriptionPhase={sim.prescriptionPhase}
           onSend={sim.sendMessage}
           onDiagnose={() => setDiagnosisModalOpen(true)}
+          onOpenPrescription={() => setPrescriptionModalOpen(true)}
           onClear={sim.clearSession}
         />
 
@@ -73,6 +79,17 @@ export default function Home() {
         open={diagnosisModalOpen}
         onOpenChange={setDiagnosisModalOpen}
         onSubmit={sim.diagnose}
+      />
+
+      {/* Prescription Modal */}
+      <PrescriptionModal
+        isOpen={prescriptionModalOpen}
+        onClose={() => setPrescriptionModalOpen(false)}
+        onSubmit={(molecules) => {
+          sim.prescribe(molecules);
+          setPrescriptionModalOpen(false);
+        }}
+        isSubmitting={sim.status === "busy"}
       />
     </>
   );

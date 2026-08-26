@@ -94,6 +94,18 @@ def _build_patient_json(payload: CreatePatientRequest, patient_num: int) -> dict
             "expected_diagnosis": payload.metadata.expected_diagnosis,
             "alternative_diagnoses": payload.metadata.alternative_diagnoses,
             "red_flags": payload.metadata.red_flags,
+            **({"expected_treatment": {
+                "molecules": [
+                    {
+                        "name": mol.name,
+                        "dosage": mol.dosage,
+                        "route": mol.route,
+                        "duration": mol.duration,
+                    }
+                    for mol in payload.metadata.expected_treatment.molecules
+                ],
+                "contraindications_to_check": payload.metadata.expected_treatment.contraindications_to_check,
+            }} if payload.metadata.expected_treatment else {}),
         },
     }
 

@@ -174,6 +174,27 @@
             "Incapacité totale de faire 4 pas (Critères d'Ottawa)",
             "Douleur osseuse malléolaire",
             "Déformation de la cheville"
-        ]
+        ],
+        "expected_treatment": {
+            "molecules": [
+                {
+                    "name": "Paracétamol",
+                    "dosage": "1g toutes les 6 heures (max 4g/jour)",
+                    "route": "orale",
+                    "duration": "7 à 10 jours"
+                },
+                {
+                    "name": "Kétoprofène gel",
+                    "dosage": "1 application 2 fois par jour sur la cheville",
+                    "route": "topique (cutanée)",
+                    "duration": "7 jours"
+                }
+            ],
+            "contraindications_to_check": [
+                "Allergie aux AINS (même topiques)",
+                "Grossesse",
+                "Lésion cutanée ouverte sur la zone d'application"
+            ]
+        }
     }
 }
