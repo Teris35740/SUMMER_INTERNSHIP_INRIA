@@ -1,13 +1,14 @@
 """
 Module de scoring de l'étudiant.
 
-Calcule 4 indicateurs :
+Calcule 5 indicateurs :
 - Couverture de l'anamnèse (coverage)
 - Pertinence des questions (pertinence)
 - Structure de l'entretien (structure)
 - Performance diagnostique (diagnostic)
+- Qualité de la prescription (prescription)
 
-Score final = w1·Coverage + w2·Pertinence + w3·Structure + w4·Diagnostic
+Score final = w1·Coverage + w2·Pertinence + w3·Structure + w4·Diagnostic + w5·Prescription
 """
 
 from core.config import SCORING_WEIGHTS, IDEAL_TOPIC_ORDER, SECTION_TO_TOPIC, SESSION_TIME_LIMIT
@@ -169,12 +170,23 @@ def compute_diagnostic(is_correct, elapsed_seconds, time_limit=None):
     return 0.5 + 0.5 * time_remaining_ratio
 
 
+def compute_prescription(prescription_score):
+    """Qualité de la prescription thérapeutique.
+
+    Le score est directement issu de l'évaluation LLM (overall_score).
+    Retourne un float dans [0, 1].
+    """
+    if prescription_score is None:
+        return 0.0
+    return max(0.0, min(1.0, float(prescription_score)))
+
+
 # ── Score final et rapport ─────────────────────────────────────────────
 
-def compute_final_score(coverage, pertinence, structure, diagnostic, weights=None):
+def compute_final_score(coverage, pertinence, structure, diagnostic, prescription=0.0, weights=None):
     """Calcule le score final pondéré.
 
-    Score = w1·Coverage + w2·Pertinence + w3·Structure + w4·Diagnostic
+    Score = w1·Coverage + w2·Pertinence + w3·Structure + w4·Diagnostic + w5·Prescription
 
     Retourne un float dans [0, 1].
     """
@@ -186,6 +198,7 @@ def compute_final_score(coverage, pertinence, structure, diagnostic, weights=Non
         + weights["w2_pertinence"] * pertinence
         + weights["w3_structure"] * structure
         + weights["w4_diagnostic"] * diagnostic
+        + weights["w5_prescription"] * prescription
     )
 
 
@@ -203,7 +216,9 @@ def _score_to_grade(score):
         return "F"
 
 
-def generate_report(asked_topics_history, patient_data, useful_count, total_count, is_correct, elapsed_seconds, useful_questions_list=None):
+def generate_report(asked_topics_history, patient_data, useful_count, total_count,
+                    is_correct, elapsed_seconds, useful_questions_list=None,
+                    prescription_score=None, prescription_details=None):
     """Génère un rapport complet de notation de l'étudiant.
 
     Retourne un dict structuré avec les sous-scores, le score final,
@@ -213,8 +228,9 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
     pertinence = compute_pertinence(useful_count, total_count)
     structure = compute_structure(asked_topics_history)
     diagnostic = compute_diagnostic(is_correct, elapsed_seconds)
+    prescription = compute_prescription(prescription_score)
 
-    final_score = compute_final_score(coverage, pertinence, structure, diagnostic)
+    final_score = compute_final_score(coverage, pertinence, structure, diagnostic, prescription)
     grade = _score_to_grade(final_score)
 
     # Détail des topics pour le feedback
@@ -235,6 +251,7 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
             "pertinence": round(pertinence, 2),
             "structure": round(structure, 2),
             "diagnostic": round(diagnostic, 2),
+            "prescription": round(prescription, 2),
         },
         "weights": SCORING_WEIGHTS,
         "final_score": round(final_score, 2),
@@ -251,6 +268,7 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
             "time_limit": time_limit_str,
             "within_time": within_time,
             "elapsed_seconds": round(elapsed_seconds, 1),
+            "prescription_details": prescription_details,
         },
     }
 
@@ -269,6 +287,7 @@ def format_report(report):
         f"║  Pertinence questions (×{weights['w2_pertinence']:.2f}) :  {scores['pertinence']:.2f}  / 1.00    ║",
         f"║  Structure entretien  (×{weights['w3_structure']:.2f}) :  {scores['structure']:.2f}  / 1.00    ║",
         f"║  Perf. diagnostique   (×{weights['w4_diagnostic']:.2f}) :  {scores['diagnostic']:.2f}  / 1.00    ║",
+        f"║  Prescription         (×{weights['w5_prescription']:.2f}) :  {scores['prescription']:.2f}  / 1.00    ║",
         "╠══════════════════════════════════════════════════╣",
         f"║  SCORE FINAL :  {report['final_score']:.2f}  / 1.00    Note : {report['grade']}         ║",
         "╚══════════════════════════════════════════════════╝",

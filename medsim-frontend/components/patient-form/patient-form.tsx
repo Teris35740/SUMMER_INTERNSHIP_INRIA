@@ -15,11 +15,13 @@ import { StepIdentity } from "./step-identity";
 import { StepAnamnesis } from "./step-anamnesis";
 import { StepContext } from "./step-context";
 import { StepMetadata } from "./step-metadata";
+import { StepTreatment } from "./step-treatment";
 import {
   User,
   Stethoscope,
   Users,
   Target,
+  Pill,
   ChevronLeft,
   ChevronRight,
   Send,
@@ -64,7 +66,19 @@ const STEPS = [
     id: "metadata",
     label: "Métadonnées",
     icon: Target,
-    fields: ["metadata"] as const,
+    fields: [
+      "metadata.difficulty",
+      "metadata.specialty",
+      "metadata.expected_diagnosis",
+      "metadata.alternative_diagnoses",
+      "metadata.red_flags",
+    ] as const,
+  },
+  {
+    id: "treatment",
+    label: "Traitement attendu",
+    icon: Pill,
+    fields: ["metadata.expected_treatment"] as const,
   },
 ] as const;
 
@@ -100,6 +114,11 @@ const DEFAULT_VALUES: PatientFormData = {
     expected_diagnosis: "",
     alternative_diagnoses: [""],
     red_flags: [""],
+    expected_treatment: {
+      molecules: [],
+      contraindications_to_check: [],
+      notes: "",
+    },
   },
 };
 
@@ -170,10 +189,19 @@ export function PatientForm() {
       return key;
     });
     console.error("Form validation failed on fields:", errorKeys);
-    alert("Erreur de validation sur les champs : \n" + errorKeys.join('\n'));
+    toast.error("Certains champs requis n'ont pas été remplis correctement.");
   };
 
   const isLastStep = currentStep === STEPS.length - 1;
+
+  const onFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isLastStep) {
+      handleSubmit(onSubmit as any, onError)(e);
+    } else {
+      nextStep();
+    }
+  };
 
   return (
     <>
@@ -211,7 +239,7 @@ export function PatientForm() {
 
       <FormProvider {...methods}>
         <form
-          onSubmit={handleSubmit(onSubmit as any, onError)}
+          onSubmit={onFormSubmit}
           className="max-w-3xl mx-auto space-y-8"
         >
           {/* ── Stepper indicator ── */}
@@ -290,6 +318,7 @@ export function PatientForm() {
               {currentStep === 1 && <StepAnamnesis />}
               {currentStep === 2 && <StepContext />}
               {currentStep === 3 && <StepMetadata />}
+              {currentStep === 4 && <StepTreatment />}
             </div>
           </div>
 
@@ -326,7 +355,10 @@ export function PatientForm() {
             ) : (
               <Button
                 type="button"
-                onClick={nextStep}
+                onClick={(e) => {
+                  e.preventDefault();
+                  nextStep();
+                }}
                 className="gap-2 bg-med-sky text-med-text-inverse hover:bg-med-sky-hover transition-colors"
               >
                 Suivant

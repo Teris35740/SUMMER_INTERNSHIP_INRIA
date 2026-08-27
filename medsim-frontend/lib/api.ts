@@ -82,6 +82,21 @@ export async function submitDiagnosis(
   return handleResponse<DiagnoseResponse>(res);
 }
 
+// ── POST /api/prescribe ──
+
+import type { PrescribeParams, PrescribeResponse } from "@/types/api";
+
+export async function submitPrescription(
+  params: PrescribeParams
+): Promise<PrescribeResponse> {
+  const res = await fetch(`${API_BASE}/prescribe`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  return handleResponse<PrescribeResponse>(res);
+}
+
 // ── POST /api/clear ──
 
 export async function clearSessionApi(sessionId: string): Promise<void> {

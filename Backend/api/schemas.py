@@ -39,6 +39,28 @@ class DiagnoseResponse(BaseModel):
     elapsed_seconds: Optional[float] = None
     time_expired: bool = False
 
+
+# ── Prescription ──
+
+class PrescriptionMolecule(BaseModel):
+    name: str
+    dosage: str
+    route: str
+    duration: str
+
+class PrescribeRequest(BaseModel):
+    session_id: str = "session_1"
+    patient_num: int = 1
+    is_pedago_mode: bool = False
+    molecules: List[PrescriptionMolecule]
+
+class PrescribeResponse(BaseModel):
+    status: str
+    prescription_evaluation: Optional[dict] = None
+    report: Optional[dict] = None
+    error: Optional[str] = None
+
+
 class ClearRequest(BaseModel):
     question: str = ""
     session_id: str = "session_1"
@@ -73,12 +95,23 @@ class ChiefComplaintInput(BaseModel):
     information: str
     reveal_policy: str = "direct_if_asked"
 
+class MoleculeInput(BaseModel):
+    name: str
+    dosage: str
+    route: str
+    duration: str
+
+class ExpectedTreatmentInput(BaseModel):
+    molecules: List[MoleculeInput]
+    contraindications_to_check: List[str] = []
+
 class MetadataInput(BaseModel):
     difficulty: str
     specialty: str
     expected_diagnosis: str
     alternative_diagnoses: List[str]
     red_flags: List[str]
+    expected_treatment: Optional[ExpectedTreatmentInput] = None
 
 class CreatePatientRequest(BaseModel):
     identity: IdentityInput

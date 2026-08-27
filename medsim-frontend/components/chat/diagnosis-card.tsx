@@ -1,7 +1,7 @@
 "use client";
 
 import { Activity, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
-import type { DiagnosisResultMessage, ScoringReport } from "@/types/api";
+import type { DiagnosisResultMessage, ScoringReport, AppMode } from "@/types/api";
 
 // ── Score Bar ──
 
@@ -41,7 +41,7 @@ function ScoreBar({
 
 // ── Scoring Report ──
 
-function ScoringReportCard({ report }: { report: ScoringReport }) {
+export function ScoringReportCard({ report }: { report: ScoringReport }) {
   const gradeColors: Record<
     string,
     { bg: string; color: string; border: string; shadow: string }
@@ -80,6 +80,8 @@ function ScoringReportCard({ report }: { report: ScoringReport }) {
 
   const gc = gradeColors[report.grade] || gradeColors["C"];
 
+  const hasPrescription = report.scores.prescription !== undefined && report.weights.w5_prescription !== undefined;
+  
   return (
     <div className="animate-message-in max-w-[780px] w-full mx-auto mt-4">
       <div className="rounded-[24px] glass-panel overflow-hidden">
@@ -120,31 +122,39 @@ function ScoringReportCard({ report }: { report: ScoringReport }) {
         </div>
 
         {/* Score bars */}
-        <div className="px-6 pb-6 space-y-4">
+        <div className={`px-6 pb-6 gap-4 grid grid-cols-2 ${hasPrescription ? 'sm:grid-cols-5' : 'sm:grid-cols-4'}`}>
           <ScoreBar
-            label="Couverture anamnèse"
+            label="Anamnèse"
             score={report.scores.coverage}
             weight={report.weights.w1_coverage}
             colorVar="var(--color-med-sky)"
           />
           <ScoreBar
-            label="Pertinence questions"
+            label="Pertinence"
             score={report.scores.pertinence}
             weight={report.weights.w2_pertinence}
             colorVar="var(--color-med-teal)"
           />
           <ScoreBar
-            label="Structure entretien"
+            label="Structure"
             score={report.scores.structure}
             weight={report.weights.w3_structure}
             colorVar="var(--color-med-violet)"
           />
           <ScoreBar
-            label="Perf. diagnostique"
+            label="Diagnostic"
             score={report.scores.diagnostic}
             weight={report.weights.w4_diagnostic}
             colorVar="var(--color-med-emerald)"
           />
+          {hasPrescription && (
+            <ScoreBar
+              label="Prescription"
+              score={report.scores.prescription!}
+              weight={report.weights.w5_prescription!}
+              colorVar="var(--color-med-blue)"
+            />
+          )}
         </div>
 
         {/* Details */}
@@ -221,9 +231,10 @@ function ScoringReportCard({ report }: { report: ScoringReport }) {
 
 interface DiagnosisCardProps {
   message: DiagnosisResultMessage;
+  mode?: AppMode | null;
 }
 
-export function DiagnosisCard({ message }: DiagnosisCardProps) {
+export function DiagnosisCard({ message, mode }: DiagnosisCardProps) {
   const config = message.isWarning
     ? {
         icon: <AlertTriangle size={24} />,
@@ -264,25 +275,30 @@ export function DiagnosisCard({ message }: DiagnosisCardProps) {
             <div className="font-bold text-med-text-primary mb-1 text-lg tracking-tight">
               {config.title}
             </div>
-            <div className="text-sm text-med-text-secondary leading-relaxed font-medium">
-              {message.feedback}
-            </div>
-            {!message.isCorrect &&
-              !message.isWarning &&
-              message.expectedDiagnosis && (
-                <div className="mt-3 p-3 rounded-xl bg-med-bg-surface/50 border border-med-border-subtle text-sm">
-                  <span className="text-med-text-secondary">Diagnostic attendu : </span>
-                  <strong className="text-med-text-primary block mt-1">
-                    {message.expectedDiagnosis}
-                  </strong>
+            
+            {mode !== "notation" && (
+              <>
+                <div className="text-sm text-med-text-secondary leading-relaxed font-medium">
+                  {message.feedback}
                 </div>
-              )}
+                {!message.isCorrect &&
+                  !message.isWarning &&
+                  message.expectedDiagnosis && (
+                    <div className="mt-3 p-3 rounded-xl bg-med-bg-surface/50 border border-med-border-subtle text-sm">
+                      <span className="text-med-text-secondary">Diagnostic attendu : </span>
+                      <strong className="text-med-text-primary block mt-1">
+                        {message.expectedDiagnosis}
+                      </strong>
+                    </div>
+                  )}
+              </>
+            )}
           </div>
         </div>
       </div>
 
       {/* Scoring report */}
-      {message.report && !message.isWarning && (
+      {mode === "notation" && message.report && !message.isWarning && (
         <ScoringReportCard report={message.report} />
       )}
     </>

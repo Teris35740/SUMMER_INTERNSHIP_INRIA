@@ -3,16 +3,20 @@
 import { useEffect, useRef } from "react";
 import { MessageBubble } from "./message-bubble";
 import { DiagnosisCard } from "./diagnosis-card";
+import { PrescriptionCard } from "./prescription-card";
 import { TypingIndicator } from "./typing-indicator";
 import { ClinicalBar } from "./clinical-bar";
 import { ChatInput } from "./chat-input";
 import type {
   DisplayMessage,
   DiagnosisResultMessage,
+  PrescriptionResultMessage,
   AppStatus,
+  AppMode,
 } from "@/types/api";
 
 interface ChatAreaProps {
+  mode: AppMode | null;
   messages: DisplayMessage[];
   isTyping: boolean;
   clinicalVignette: string;
@@ -21,12 +25,15 @@ interface ChatAreaProps {
   timerActive: boolean;
   sessionExpired: boolean;
   isPipelineOpen: boolean;
+  prescriptionPhase: boolean;
   onSend: (message: string) => void;
   onDiagnose: () => void;
+  onOpenPrescription: () => void;
   onClear: () => void;
 }
 
 export function ChatArea({
+  mode,
   messages,
   isTyping,
   clinicalVignette,
@@ -35,8 +42,10 @@ export function ChatArea({
   timerActive,
   sessionExpired,
   isPipelineOpen,
+  prescriptionPhase,
   onSend,
   onDiagnose,
+  onOpenPrescription,
   onClear,
 }: ChatAreaProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -69,6 +78,16 @@ export function ChatArea({
               <DiagnosisCard
                 key={msg.id}
                 message={msg as DiagnosisResultMessage}
+                mode={mode}
+              />
+            );
+          }
+          if ("type" in msg && msg.type === "prescription") {
+            return (
+              <PrescriptionCard
+                key={msg.id}
+                message={msg as PrescriptionResultMessage}
+                mode={mode}
               />
             );
           }
@@ -85,8 +104,10 @@ export function ChatArea({
           timeRemaining={timeRemaining}
           timerActive={timerActive}
           sessionExpired={sessionExpired}
+          prescriptionPhase={prescriptionPhase}
           onSend={onSend}
           onDiagnose={onDiagnose}
+          onOpenPrescription={onOpenPrescription}
           onClear={onClear}
         />
       </div>
