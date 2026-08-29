@@ -7,6 +7,7 @@ import uvicorn
 
 from core.config import close_weaviate_client
 from api.routers import patients, chat
+from api.auth.router import router as auth_router
 
 app = FastAPI(title="RAG Medical API")
 
@@ -22,6 +23,7 @@ app.add_middleware(
 def shutdown_event():
     close_weaviate_client()
 
+app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 app.include_router(patients.router, prefix="/api", tags=["patients"])
 app.include_router(chat.router, prefix="/api", tags=["chat"])
 
