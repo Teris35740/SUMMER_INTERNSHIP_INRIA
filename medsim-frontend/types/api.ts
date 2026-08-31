@@ -2,6 +2,36 @@
 // MedSim — API Types
 // ==============================
 
+// ── Authentication ──
+
+export type UserRole = "PROFESSOR" | "STUDENT";
+
+export interface AuthUser {
+  id?: string;
+  email: string;
+  full_name: string;
+  role: UserRole;
+}
+
+export interface TokenResponse {
+  access_token: string;
+  token_type: string;
+  role: UserRole;
+  full_name: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  full_name: string;
+  role: UserRole;
+}
+
 // ── Patient ──
 
 export interface Patient {
