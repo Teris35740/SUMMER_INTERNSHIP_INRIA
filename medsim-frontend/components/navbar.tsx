@@ -14,6 +14,7 @@ import {
   GraduationCap,
   School,
   ChevronDown,
+  Lock,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -158,7 +159,7 @@ export function Navbar({
               >
                 <Plus size={18} strokeWidth={2.5} />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="w-56 bg-med-bg-elevated border-med-border-strong p-1.5 rounded-xl shadow-xl">
+              <DropdownMenuContent align="center" className="w-60 bg-med-bg-elevated border-med-border-strong p-1.5 rounded-xl shadow-xl">
                 <DropdownMenuItem
                   onClick={() => router.push("/patients/nouveau")}
                   className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-bg-surface-hover rounded-lg transition-colors p-2 text-xs font-medium"
@@ -166,35 +167,52 @@ export function Navbar({
                   <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-sky-subtle">
                     <UserPlus className="h-4 w-4 text-med-sky" />
                   </div>
-                  <span>Ajouter un patient</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setDeleteDialogOpen(true)}
-                  className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2 text-xs font-medium"
-                >
-                  <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
-                    <Trash2 className="h-4 w-4 text-med-rose" />
+                  <div>
+                    <span>Ajouter un patient</span>
+                    {!isProfessor && (
+                      <p className="text-[0.65rem] text-med-text-muted">Temporaire (48h)</p>
+                    )}
                   </div>
-                  <span>Supprimer un patient</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setDeleteDocumentDialogOpen(true)}
-                  className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2 text-xs font-medium"
-                >
-                  <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
-                    <Trash2 className="h-4 w-4 text-med-rose" />
+
+                {isProfessor ? (
+                  <>
+                    <DropdownMenuItem
+                      onClick={() => setDeleteDialogOpen(true)}
+                      className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2 text-xs font-medium"
+                    >
+                      <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
+                        <Trash2 className="h-4 w-4 text-med-rose" />
+                      </div>
+                      <span>Supprimer un patient</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setDeleteDocumentDialogOpen(true)}
+                      className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-rose-subtle/40 rounded-lg transition-colors p-2 text-xs font-medium"
+                    >
+                      <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-rose-subtle/50">
+                        <Trash2 className="h-4 w-4 text-med-rose" />
+                      </div>
+                      <span>Supprimer un document</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setUploadDialogOpen(true)}
+                      className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-sky-subtle/40 rounded-lg transition-colors p-2 text-xs font-medium"
+                    >
+                      <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-sky-subtle/50">
+                        <FileText className="h-4 w-4 text-med-sky" />
+                      </div>
+                      <span>Ajouter un document</span>
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <div className="px-2 py-2 mt-1 border-t border-med-border-subtle">
+                    <div className="flex items-center gap-2 text-[0.68rem] text-med-text-muted px-1">
+                      <Lock className="w-3.5 h-3.5 text-med-text-muted shrink-0" />
+                      <span>Suppressions réservées aux professeurs</span>
+                    </div>
                   </div>
-                  <span>Supprimer un document</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setUploadDialogOpen(true)}
-                  className="gap-3 cursor-pointer text-med-text-primary hover:bg-med-sky-subtle/40 rounded-lg transition-colors p-2 text-xs font-medium"
-                >
-                  <div className="flex items-center justify-center w-7 h-7 rounded-md bg-med-sky-subtle/50">
-                    <FileText className="h-4 w-4 text-med-sky" />
-                  </div>
-                  <span>Ajouter un document</span>
-                </DropdownMenuItem>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

@@ -11,8 +11,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Loader2, Trash2, AlertTriangle, Search, File as FileIcon } from "lucide-react";
+import { Loader2, Trash2, AlertTriangle, Search, File as FileIcon, Lock } from "lucide-react";
 import { fetchPatientDocuments, PatientDocument, deletePatientDocument } from "@/lib/api";
+import { useAuth } from "@/context/auth-context";
 import { toast } from "sonner";
 
 interface DeleteDocumentDialogProps {
@@ -24,6 +25,7 @@ export function DeleteDocumentDialog({
   open,
   onOpenChange,
 }: DeleteDocumentDialogProps) {
+  const { isProfessor } = useAuth();
   const [documents, setDocuments] = useState<PatientDocument[]>([]);
   const [isLoadingDocs, setIsLoadingDocs] = useState(false);
   
@@ -225,15 +227,17 @@ export function DeleteDocumentDialog({
               <Button
                 type="button"
                 onClick={handleConfirmDelete}
-                disabled={isDeleting}
-                className="gap-2 bg-med-rose text-white hover:bg-med-rose/90 transition-colors"
+                disabled={isDeleting || !isProfessor}
+                className="gap-2 bg-med-rose text-white hover:bg-med-rose/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isDeleting ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
+                ) : !isProfessor ? (
+                  <Lock className="h-4 w-4" />
                 ) : (
                   <Trash2 className="h-4 w-4" />
                 )}
-                Supprimer définitivement
+                {!isProfessor ? "Réservé aux professeurs" : "Supprimer définitivement"}
               </Button>
             </div>
           </>

@@ -31,9 +31,12 @@ frontend_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.
 
 @app.get("/")
 def read_root():
-    return FileResponse(os.path.join(frontend_dir, "index.html"))
+    if os.path.exists(os.path.join(frontend_dir, "index.html")):
+        return FileResponse(os.path.join(frontend_dir, "index.html"))
+    return {"status": "ok", "message": "MedSim API is running"}
 
-app.mount("/", StaticFiles(directory=frontend_dir), name="static")
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir), name="static")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
