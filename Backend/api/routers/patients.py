@@ -6,10 +6,8 @@ import logging
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Optional
-from pathlib import Path
 
-from fastapi import APIRouter, HTTPException, Depends, Query, UploadFile, File
-import shutil
+from fastapi import APIRouter, HTTPException, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
 
@@ -23,7 +21,7 @@ from api.schemas import (
     CreatePatientResponse,
     DeletePatientResponse,
 )
-from core.rag.chunking import build_chunk_records_from_dict, build_chunk_records_from_pdf
+from core.rag.chunking import build_chunk_records_from_dict
 from core.rag.embedding import embedding_db, store_in_weaviate
 import weaviate.classes.query as wvq
 from core.config import get_weaviate_client, WEAVIATE_COLLECTION
@@ -32,7 +30,6 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 PATIENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_patient')
-DOCUMENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..', 'Document_scientifique')
 
 FACT_ID_PREFIXES = {
     "chief_complaint": "cc",
@@ -181,23 +178,6 @@ def _delete_patient_chunks(patient_id: str) -> int:
         logger.warning("Weaviate deletion error for %s: %s", patient_id, e)
         return 0
 
-
-def _delete_document_chunks(filename: str) -> int:
-    """Supprime tous les chunks Weaviate associés à un document PDF."""
-    try:
-        client = get_weaviate_client()
-        if not client.collections.exists(WEAVIATE_COLLECTION):
-            return 0
-        collection = client.collections.get(WEAVIATE_COLLECTION)
-        result = collection.data.delete_many(
-            where=wvq.Filter.by_property("metadata_json").like(f"*{filename}*")
-        )
-        return result.successful if hasattr(result, 'successful') else 0
-    except Exception:
-        return 0
-
-
-
 @router.get("/patients", response_model=List[PatientSummary])
 def list_patients(
     difficulty: Optional[str] = Query(None, description="Filtrer par difficulté (ex: facile, moyen, difficile)"),
@@ -260,68 +240,6 @@ def list_patients_grouped(db: Session = Depends(get_db)):
     return dict(sorted(grouped.items()))
 
 
-@router.get("/patients/documents")
-def list_patient_documents():
-    """Liste tous les documents PDF dans le répertoire Document_scientifique."""
-    try:
-        pattern = os.path.join(DOCUMENT_DIR, "*.pdf")
-        documents = []
-        for filepath in sorted(glob.glob(pattern)):
-            filename = os.path.basename(filepath)
-            size = os.path.getsize(filepath)
-            documents.append({"filename": filename, "size": size})
-        return documents
-    except Exception as e:
-        logger.exception("Error listing documents")
-        raise HTTPException(status_code=500, detail=f"Erreur lors de la récupération des documents : {str(e)}")
-
-
-@router.post("/patients/upload-pdf", status_code=201)
-def upload_patient_pdf(file: UploadFile = File(...),current_user: User = Depends(require_role("PROFESSOR"))):
-    """Upload et ingestion d'un document scientifique (PROFESSOR only)."""
-    try:
-        os.makedirs(DOCUMENT_DIR, exist_ok=True)
-        filename = file.filename or "uploaded_document.pdf"
-        pdf_path = os.path.join(DOCUMENT_DIR, filename)
-
-        with open(pdf_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        logger.info("Uploaded PDF saved to %s by %s", pdf_path, current_user.email)
-
-        chunk_records = build_chunk_records_from_pdf(pdf_path, method="parent_child")
-        if chunk_records:
-            chunks = [r["content"] for r in chunk_records]
-            embeddings = embedding_db(chunks)
-            store_in_weaviate(chunk_records, embeddings)
-            logger.info("RAG ingestion OK for uploaded PDF %s (%d chunks)", filename, len(chunk_records))
-
-        return {"filename": filename, "status": "uploaded and ingested"}
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.exception("Error uploading PDF %s", file.filename)
-        raise HTTPException(status_code=500, detail=f"Erreur lors de l'upload du PDF : {str(e)}")
-
-
-@router.delete("/patients/documents/{filename}")
-def delete_patient_document(filename: str,current_user: User = Depends(require_role("PROFESSOR"))):
-    """Supprime un document PDF et ses chunks vectoriels associés (PROFESSOR only)."""
-    if ".." in filename or "/" in filename or "\\" in filename:
-        raise HTTPException(status_code=400, detail="Nom de fichier invalide.")
-
-    pdf_path = os.path.join(DOCUMENT_DIR, filename)
-    if not os.path.exists(pdf_path):
-        raise HTTPException(status_code=404, detail=f"Document {filename} introuvable.")
-
-    try:
-        deleted_chunks = _delete_document_chunks(filename)
-        os.remove(pdf_path)
-        logger.info("Deleted document %s by professor %s", filename, current_user.email)
-        return {"filename": filename, "status": "deleted", "deleted_chunks": deleted_chunks}
-    except Exception as e:
-        logger.exception("Error deleting document %s", filename)
-        raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression du document : {str(e)}")
 
 
 @router.post("/patients", response_model=CreatePatientResponse, status_code=201)

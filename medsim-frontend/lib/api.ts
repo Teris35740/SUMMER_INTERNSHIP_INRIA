@@ -223,52 +223,75 @@ export async function deletePatient(
   return handleResponse<DeletePatientResponse>(res);
 }
 
-// ── POST /api/patients/upload-pdf ──
+// ── POST /api/documents/upload-pdf ──
 
-export interface UploadDocumentResponse {
-  filename: string;
-  status: string;
+export interface ScientificDocument {
+  id: string;
+  title: string;
+  file_name: string;
+  mime_type: string;
+  file_size_bytes: number | null;
+  chunks_count: number;
+  is_ingested: boolean;
+  created_at: string;
 }
 
 export async function uploadPatientDocument(
-  file: File
-): Promise<UploadDocumentResponse> {
+  file: File,
+  title?: string
+): Promise<ScientificDocument> {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch(`${API_BASE}/patients/upload-pdf`, {
+  if (title) {
+    formData.append("title", title);
+  }
+
+  const res = await fetch(`${API_BASE}/documents`, {
     method: "POST",
-    body: formData, // Do not set Content-Type header manually for FormData
+    headers: {
+      ...getAuthHeaders(),
+    },
+    body: formData,
   });
-  return handleResponse<UploadDocumentResponse>(res);
+
+  return handleResponse<ScientificDocument>(res);
 }
 
 // ── GET /api/patients/documents ──
 
-export interface PatientDocument {
-  filename: string;
-  size: number;
-}
+export async function fetchPatientDocuments(): Promise<ScientificDocument[]> {
+  const res = await fetch(`${API_BASE}/documents`, {
+    headers: {
+      ...getAuthHeaders(),
+    },
+  });
 
-export async function fetchPatientDocuments(): Promise<PatientDocument[]> {
-  const res = await fetch(`${API_BASE}/patients/documents`);
-  return handleResponse<PatientDocument[]>(res);
+  return handleResponse<ScientificDocument[]>(res);
 }
 
 // ── DELETE /api/patients/documents/:filename ──
 
 export interface DeleteDocumentResponse {
-  filename: string;
+  id: string;
+  file_name: string;
   status: string;
   deleted_chunks: number;
 }
 
 export async function deletePatientDocument(
-  filename: string
+  documentId: string
 ): Promise<DeleteDocumentResponse> {
-  const res = await fetch(`${API_BASE}/patients/documents/${encodeURIComponent(filename)}`, {
-    method: "DELETE",
-  });
+  const res = await fetch(
+    `${API_BASE}/documents/${encodeURIComponent(documentId)}`,
+    {
+      method: "DELETE",
+      headers: {
+        ...getAuthHeaders(),
+      },
+    }
+  );
+
   return handleResponse<DeleteDocumentResponse>(res);
 }
 

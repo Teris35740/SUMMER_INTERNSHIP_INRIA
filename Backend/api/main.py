@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from core.config import close_weaviate_client
-from api.routers import patients, chat
+from api.routers import patients, chat, images, documents
 from api.auth.router import router as auth_router
 
 app = FastAPI(title="RAG Medical API")
@@ -34,7 +34,8 @@ def shutdown_event():
 app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 app.include_router(patients.router, prefix="/api", tags=["patients"])
 app.include_router(chat.router, prefix="/api", tags=["chat"])
-
+app.include_router(images.router, prefix="/api", tags=["images"])
+app.include_router(documents.router, prefix="/api", tags=["documents"])
 frontend_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'Frontend')
 
 @app.get("/")
