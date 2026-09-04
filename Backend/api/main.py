@@ -19,6 +19,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+def startup_event():
+    # Preload models at startup so user requests never suffer from cold start latency
+    from api.dependencies import get_models
+    print("Preloading ML embedding and reranker models at startup...")
+    get_models()
+    print("Models successfully loaded and ready.")
+
 @app.on_event("shutdown")
 def shutdown_event():
     close_weaviate_client()

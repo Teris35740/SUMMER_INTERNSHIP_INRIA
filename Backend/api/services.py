@@ -38,8 +38,11 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
     history = get_history(session_id)
     clinical_state = get_clinical_state(session_id)
 
+    t_req_start = time.time()
     # Analyze Question
+    t_step = time.time()
     rep = analyze_student_question(question, gemini_api_key_question_analysis)
+    print(f"[TIMING] 1. analyze_student_question: {time.time() - t_step:.2f}s")
     question_type, target_slots, requires_retrieval, search_keywords = split_question_analysis(rep)
     
     analysis_dict = {
@@ -50,8 +53,10 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
     }
 
     # Retrieval
+    t_step = time.time()
     query_embedding = embed_question(question, mod)
     raw_rows = fusion_rows(query_embedding, search_keywords, filter_patient_id=patient_id)
+    print(f"[TIMING] 2. retrieval (embed+fusion): {time.time() - t_step:.2f}s, rows={len(raw_rows)}")
     
     retrieval_info = {
         "count": len(raw_rows),
@@ -67,7 +72,9 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
     rows = raw_rows
     if rows:
         state_motor_info["before_count"] = len(rows)
+        t_step = time.time()
         rows = re_ranking(rows, question, ce)
+        print(f"[TIMING] 3. reranking: {time.time() - t_step:.2f}s")
         
         # Save reranking info for UI
         for r in rows:
@@ -104,7 +111,9 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
     
     while tentative < MAX_RETRIES:
         try:
-            raw_answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key)
+            t_gen_step = time.time()
+            raw_answer = answer_with_gemini(question, context, history, clinical_state, gemini_api_key, correction=verification_msg if tentative > 0 else "")
+            print(f"[TIMING] 4. answer_with_gemini (tentative {tentative+1}): {time.time() - t_gen_step:.2f}s")
             answer_text, used_fact_ids, contains_new_claim = split_answer_struct(raw_answer)
             is_valid, verification_msg = verification_answer(answer_text, used_fact_ids, contains_new_claim, authorized_fact_ids)
             if not is_valid:
@@ -113,8 +122,11 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
         except Exception as e:
             tentative += 1
             verification_msg = str(e)
+            print(f"[TIMING] Verification failed (tentative {tentative}): {verification_msg}")
             if tentative >= MAX_RETRIES:
                 raise HTTPException(status_code=500, detail=f"Erreur de génération/vérification LLM: {str(e)}")
+    
+    print(f"[TIMING] Total ask pipeline time: {time.time() - t_req_start:.2f}s")
     
     verification_info = {
         "is_valid": is_valid,

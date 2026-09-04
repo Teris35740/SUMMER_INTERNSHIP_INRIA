@@ -9,7 +9,7 @@ import type {
   AuthUser,
 } from "@/types/api";
 
-const API_BASE = "/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "/api";
 const TOKEN_KEY = "medsim_access_token";
 const USER_KEY = "medsim_user";
 
