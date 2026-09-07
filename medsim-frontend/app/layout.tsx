@@ -5,6 +5,8 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/context/auth-context";
+import { AuthDialog } from "@/components/auth-dialog";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,13 +42,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider delay={300}>
-            {children}
-          </TooltipProvider>
-          <Toaster
-            position="top-right"
-            richColors
-          />
+          <AuthProvider>
+            <TooltipProvider delay={300}>
+              {children}
+            </TooltipProvider>
+            <AuthDialog />
+            <Toaster
+              position="top-right"
+              richColors
+            />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

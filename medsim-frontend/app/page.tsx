@@ -2,18 +2,39 @@
 
 import { useState } from "react";
 import { useMedSim } from "@/hooks/use-medsim";
+import { useAuth } from "@/context/auth-context";
 import { ModeSelection } from "@/components/mode-selection";
+import { AuthScreen } from "@/components/auth-screen";
 import { Navbar } from "@/components/navbar";
 import { ChatArea } from "@/components/chat/chat-area";
-import { PipelinePanel } from "@/components/pipeline/pipeline-panel";
 import { DiagnosisModal } from "@/components/diagnosis-modal";
-
 import { PrescriptionModal } from "@/components/chat/prescription-modal";
+import { Activity } from "lucide-react";
 
 export default function Home() {
+  const { isAuthenticated, isLoading } = useAuth();
   const sim = useMedSim();
   const [diagnosisModalOpen, setDiagnosisModalOpen] = useState(false);
   const [prescriptionModalOpen, setPrescriptionModalOpen] = useState(false);
+
+  // Splash loading screen while checking stored credentials
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[400] flex flex-col items-center justify-center bg-med-bg-primary">
+        <div className="w-14 h-14 rounded-2xl bg-gradient-logo flex items-center justify-center text-white shadow-xl animate-pulse">
+          <Activity className="w-7 h-7 animate-spin" strokeWidth={2.5} />
+        </div>
+        <p className="text-sm font-semibold text-med-text-secondary mt-4">
+          Chargement de MedSim...
+        </p>
+      </div>
+    );
+  }
+
+  // Authentication Gate: must login or register first
+  if (!isAuthenticated) {
+    return <AuthScreen />;
+  }
 
   return (
     <>
@@ -24,28 +45,21 @@ export default function Home() {
         />
       )}
 
-      {/* Navbar */}
+      {/* Floating Navbar */}
       <Navbar
         groupedPatients={sim.groupedPatients}
         patients={sim.patients}
         currentPatientNum={sim.currentPatientNum}
         currentPatient={sim.currentPatient}
-        status={sim.status}
         mode={sim.mode}
-        isPipelineOpen={sim.isPipelineOpen}
         onSelectPatient={sim.selectPatient}
-        onTogglePipeline={sim.togglePipeline}
         onChangeMode={() => sim.setMode(null)}
         onDeletePatient={sim.removePatient}
       />
 
       {/* Main layout */}
       <div
-        className="flex relative"
-        style={{
-          height: "calc(100dvh - var(--navbar-height))",
-          marginTop: "var(--navbar-height)",
-        }}
+        className="flex relative w-full h-[calc(100dvh-var(--navbar-height))] mt-[var(--navbar-height)]"
       >
         {/* Chat Area */}
         <ChatArea
@@ -57,20 +71,11 @@ export default function Home() {
           timeRemaining={sim.timeRemaining}
           timerActive={sim.timerActive}
           sessionExpired={sim.sessionExpired}
-          isPipelineOpen={sim.isPipelineOpen}
           prescriptionPhase={sim.prescriptionPhase}
           onSend={sim.sendMessage}
           onDiagnose={() => setDiagnosisModalOpen(true)}
           onOpenPrescription={() => setPrescriptionModalOpen(true)}
           onClear={sim.clearSession}
-        />
-
-        {/* Pipeline Panel */}
-        <PipelinePanel
-          isOpen={sim.isPipelineOpen}
-          status={sim.status}
-          data={sim.pipelineData}
-          onClose={() => sim.setIsPipelineOpen(false)}
         />
       </div>
 
@@ -94,4 +99,3 @@ export default function Home() {
     </>
   );
 }
-

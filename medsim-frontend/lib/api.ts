@@ -3,9 +3,62 @@ import type {
   GroupedPatients,
   AskResponse,
   DiagnoseResponse,
+  LoginRequest,
+  RegisterRequest,
+  TokenResponse,
+  AuthUser,
 } from "@/types/api";
 
-const API_BASE = "/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "/api";
+const TOKEN_KEY = "medsim_access_token";
+const USER_KEY = "medsim_user";
+
+// ── Auth Storage Helpers ──
+
+export function getStoredToken(): string | null {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function setStoredToken(token: string): void {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(TOKEN_KEY, token);
+}
+
+export function removeStoredToken(): void {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(TOKEN_KEY);
+}
+
+export function getStoredUser(): AuthUser | null {
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(USER_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as AuthUser;
+  } catch {
+    return null;
+  }
+}
+
+export function setStoredUser(user: AuthUser): void {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+}
+
+export function removeStoredUser(): void {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(USER_KEY);
+}
+
+export function getAuthHeaders(): HeadersInit {
+  const token = getStoredToken();
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+  return headers;
+}
 
 class ApiError extends Error {
   status: number;
@@ -28,6 +81,26 @@ async function handleResponse<T>(res: Response): Promise<T> {
     );
   }
   return res.json() as Promise<T>;
+}
+
+// ── AUTH ENDPOINTS ──
+
+export async function loginUser(req: LoginRequest): Promise<TokenResponse> {
+  const res = await fetch(`${API_BASE}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  return handleResponse<TokenResponse>(res);
+}
+
+export async function registerUser(req: RegisterRequest): Promise<TokenResponse> {
+  const res = await fetch(`${API_BASE}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  return handleResponse<TokenResponse>(res);
 }
 
 // ── GET /api/patients ──
@@ -120,7 +193,10 @@ export async function createPatient(
 ): Promise<CreatePatientResponse> {
   const res = await fetch(`${API_BASE}/patients`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeaders(),
+    },
     body: JSON.stringify(data),
   });
   return handleResponse<CreatePatientResponse>(res);
@@ -136,60 +212,86 @@ export interface DeletePatientResponse {
 }
 
 export async function deletePatient(
-  patientNum: number
+  patientNum: number | string
 ): Promise<DeletePatientResponse> {
   const res = await fetch(`${API_BASE}/patients/${patientNum}`, {
     method: "DELETE",
+    headers: {
+      ...getAuthHeaders(),
+    },
   });
   return handleResponse<DeletePatientResponse>(res);
 }
 
-// ── POST /api/patients/upload-pdf ──
+// ── POST /api/documents/upload-pdf ──
 
-export interface UploadDocumentResponse {
-  filename: string;
-  status: string;
+export interface ScientificDocument {
+  id: string;
+  title: string;
+  file_name: string;
+  mime_type: string;
+  file_size_bytes: number | null;
+  chunks_count: number;
+  is_ingested: boolean;
+  created_at: string;
 }
 
 export async function uploadPatientDocument(
-  file: File
-): Promise<UploadDocumentResponse> {
+  file: File,
+  title?: string
+): Promise<ScientificDocument> {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch(`${API_BASE}/patients/upload-pdf`, {
+  if (title) {
+    formData.append("title", title);
+  }
+
+  const res = await fetch(`${API_BASE}/documents`, {
     method: "POST",
-    body: formData, // Do not set Content-Type header manually for FormData
+    headers: {
+      ...getAuthHeaders(),
+    },
+    body: formData,
   });
-  return handleResponse<UploadDocumentResponse>(res);
+
+  return handleResponse<ScientificDocument>(res);
 }
 
 // ── GET /api/patients/documents ──
 
-export interface PatientDocument {
-  filename: string;
-  size: number;
-}
+export async function fetchPatientDocuments(): Promise<ScientificDocument[]> {
+  const res = await fetch(`${API_BASE}/documents`, {
+    headers: {
+      ...getAuthHeaders(),
+    },
+  });
 
-export async function fetchPatientDocuments(): Promise<PatientDocument[]> {
-  const res = await fetch(`${API_BASE}/patients/documents`);
-  return handleResponse<PatientDocument[]>(res);
+  return handleResponse<ScientificDocument[]>(res);
 }
 
 // ── DELETE /api/patients/documents/:filename ──
 
 export interface DeleteDocumentResponse {
-  filename: string;
+  id: string;
+  file_name: string;
   status: string;
   deleted_chunks: number;
 }
 
 export async function deletePatientDocument(
-  filename: string
+  documentId: string
 ): Promise<DeleteDocumentResponse> {
-  const res = await fetch(`${API_BASE}/patients/documents/${encodeURIComponent(filename)}`, {
-    method: "DELETE",
-  });
+  const res = await fetch(
+    `${API_BASE}/documents/${encodeURIComponent(documentId)}`,
+    {
+      method: "DELETE",
+      headers: {
+        ...getAuthHeaders(),
+      },
+    }
+  );
+
   return handleResponse<DeleteDocumentResponse>(res);
 }
 

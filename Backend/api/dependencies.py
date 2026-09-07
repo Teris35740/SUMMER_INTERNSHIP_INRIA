@@ -1,17 +1,24 @@
 import os
+import threading
 from fastapi import HTTPException
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from core.config import MODEL_NAME_QUERY, MODEL_NAME_CROSS_ENCODER
 
+# Disable huggingface tokenizers parallelism deadlock on macOS
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 model = None
 cross_encoder = None
+_lock = threading.Lock()
 
 def get_models():
     global model, cross_encoder
-    if model is None:
-        model = SentenceTransformer(MODEL_NAME_QUERY)
-    if cross_encoder is None:
-        cross_encoder = CrossEncoder(MODEL_NAME_CROSS_ENCODER)
+    if model is None or cross_encoder is None:
+        with _lock:
+            if model is None:
+                model = SentenceTransformer(MODEL_NAME_QUERY)
+            if cross_encoder is None:
+                cross_encoder = CrossEncoder(MODEL_NAME_CROSS_ENCODER)
     return model, cross_encoder
 
 def verify_api_keys():

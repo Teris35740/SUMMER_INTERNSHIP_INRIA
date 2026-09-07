@@ -1,5 +1,21 @@
 
 services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: medsim
+      POSTGRES_PASSWORD: medsim_password
+      POSTGRES_DB: medsim
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medsim -d medsim"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   weaviate:
     image: cr.weaviate.io/semitechnologies/weaviate:1.30.0
     restart: on-failure:0
@@ -17,4 +33,5 @@ services:
       - weaviate_data:/var/lib/weaviate
 
 volumes:
+  postgres_data:
   weaviate_data:

@@ -24,7 +24,6 @@ interface ChatAreaProps {
   timeRemaining: number;
   timerActive: boolean;
   sessionExpired: boolean;
-  isPipelineOpen: boolean;
   prescriptionPhase: boolean;
   onSend: (message: string) => void;
   onDiagnose: () => void;
@@ -41,7 +40,6 @@ export function ChatArea({
   timeRemaining,
   timerActive,
   sessionExpired,
-  isPipelineOpen,
   prescriptionPhase,
   onSend,
   onDiagnose,
@@ -61,16 +59,11 @@ export function ChatArea({
   }, [messages, isTyping]);
 
   return (
-    <main
-      className="flex-1 flex flex-col min-w-0 transition-[margin-right] duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
-      style={{
-        marginRight: isPipelineOpen ? "var(--pipeline-mr)" : "0",
-      }}
-    >
+    <main className="flex-1 flex flex-col min-w-0 w-full h-full">
       {/* Messages */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto px-4 sm:px-8 pt-8 pb-[280px] flex flex-col gap-6 scroll-smooth"
+        className="flex-1 overflow-y-auto px-4 sm:px-8 pt-8 pb-[280px] flex flex-col gap-6 scroll-smooth max-w-[1000px] w-full mx-auto"
       >
         {messages.map((msg) => {
           if ("type" in msg && msg.type === "diagnosis") {
@@ -114,4 +107,3 @@ export function ChatArea({
     </main>
   );
 }
-

@@ -12,7 +12,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Loader2, Trash2, AlertTriangle, Search } from "lucide-react";
+import { Loader2, Trash2, AlertTriangle, Search, Lock } from "lucide-react";
+import { useAuth } from "@/context/auth-context";
 import type { Patient } from "@/types/api";
 
 interface DeletePatientDialogProps {
@@ -28,6 +29,7 @@ export function DeletePatientDialog({
   patients,
   onDelete,
 }: DeletePatientDialogProps) {
+  const { isProfessor } = useAuth();
   const [selectedNum, setSelectedNum] = useState<number | null>(null);
   const [confirmStep, setConfirmStep] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -211,15 +213,17 @@ export function DeletePatientDialog({
               <Button
                 type="button"
                 onClick={handleConfirmDelete}
-                disabled={isDeleting}
-                className="gap-2 bg-med-rose text-white hover:bg-med-rose/90 transition-colors"
+                disabled={isDeleting || !isProfessor}
+                className="gap-2 bg-med-rose text-white hover:bg-med-rose/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isDeleting ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
+                ) : !isProfessor ? (
+                  <Lock className="h-4 w-4" />
                 ) : (
                   <Trash2 className="h-4 w-4" />
                 )}
-                Supprimer définitivement
+                {!isProfessor ? "Réservé aux professeurs" : "Supprimer définitivement"}
               </Button>
             </div>
           </>

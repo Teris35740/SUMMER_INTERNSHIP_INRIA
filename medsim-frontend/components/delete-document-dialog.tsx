@@ -11,8 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
-import { Loader2, Trash2, AlertTriangle, Search, File as FileIcon } from "lucide-react";
-import { fetchPatientDocuments, PatientDocument, deletePatientDocument } from "@/lib/api";
+import { Loader2, Trash2, AlertTriangle, Search, File as FileIcon, Lock } from "lucide-react";
+import {
+  fetchPatientDocuments,
+  ScientificDocument,
+  deletePatientDocument,
+} from "@/lib/api";
+import { useAuth } from "@/context/auth-context";
 import { toast } from "sonner";
 
 interface DeleteDocumentDialogProps {
@@ -24,22 +29,14 @@ export function DeleteDocumentDialog({
   open,
   onOpenChange,
 }: DeleteDocumentDialogProps) {
-  const [documents, setDocuments] = useState<PatientDocument[]>([]);
+  const { isProfessor } = useAuth();
+  const [documents, setDocuments] = useState<ScientificDocument[]>([]);
   const [isLoadingDocs, setIsLoadingDocs] = useState(false);
   
-  const [selectedFilename, setSelectedFilename] = useState<string | null>(null);
+  const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(null);
   const [confirmStep, setConfirmStep] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    if (open) {
-      loadDocuments();
-      setSearch("");
-      setSelectedFilename(null);
-      setConfirmStep(false);
-    }
-  }, [open]);
 
   const loadDocuments = async () => {
     setIsLoadingDocs(true);
@@ -54,30 +51,40 @@ export function DeleteDocumentDialog({
     }
   };
 
-  const selectedDocument = documents.find((d) => d.filename === selectedFilename);
+  useEffect(() => {
+    if (!open) return;
+
+    const timeoutId = window.setTimeout(() => {
+      void loadDocuments();
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [open]);
+
+  const selectedDocument = documents.find((d) => d.id === selectedDocumentId);
 
   const filteredDocuments = documents.filter((d) => {
     const q = search.toLowerCase();
-    return !q || d.filename.toLowerCase().includes(q);
+    return !q || d.file_name.toLowerCase().includes(q);
   });
 
   const handleClose = () => {
-    setSelectedFilename(null);
+    setSelectedDocumentId(null);
     setConfirmStep(false);
     setSearch("");
     onOpenChange(false);
   };
 
-  const handleSelectDocument = (filename: string) => {
-    setSelectedFilename(filename);
+  const handleSelectDocument = (documentId: string) => {
+    setSelectedDocumentId(documentId);
     setConfirmStep(true);
   };
 
   const handleConfirmDelete = async () => {
-    if (!selectedFilename) return;
+    if (!selectedDocumentId) return;
     setIsDeleting(true);
     try {
-      await deletePatientDocument(selectedFilename);
+      await deletePatientDocument(selectedDocumentId);
       toast.success("Document et données vectorielles supprimés avec succès.");
       handleClose();
     } catch (error) {
@@ -90,7 +97,7 @@ export function DeleteDocumentDialog({
 
   const handleBack = () => {
     setConfirmStep(false);
-    setSelectedFilename(null);
+    setSelectedDocumentId(null);
   };
 
   return (
@@ -153,9 +160,9 @@ export function DeleteDocumentDialog({
                 ) : (
                   filteredDocuments.map((d) => (
                     <button
-                      key={d.filename}
+                      key={d.id}
                       type="button"
-                      onClick={() => handleSelectDocument(d.filename)}
+                      onClick={() => handleSelectDocument(d.id)}
                       className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left
                                  bg-med-bg-surface/50 border border-transparent
                                  hover:bg-med-rose-subtle/30 hover:border-med-rose/20
@@ -166,10 +173,10 @@ export function DeleteDocumentDialog({
                       </span>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-med-text-primary truncate">
-                          {d.filename}
+                          {d.file_name}
                         </p>
                         <p className="text-xs text-med-text-muted truncate">
-                          {(d.size / 1024 / 1024).toFixed(2)} Mo
+                          {((d.file_size_bytes ?? 0) / 1024 / 1024).toFixed(2)} Mo
                         </p>
                       </div>
                       <Trash2 className="h-4 w-4 text-med-text-muted opacity-0 group-hover:opacity-100 group-hover:text-med-rose transition-all" />
@@ -199,10 +206,11 @@ export function DeleteDocumentDialog({
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold text-med-text-primary truncate">
-                    {selectedDocument?.filename}
+                    {selectedDocument?.file_name}
                   </p>
                   <p className="text-xs text-med-text-secondary">
-                    {selectedDocument && (selectedDocument.size / 1024 / 1024).toFixed(2)} Mo
+                    {selectedDocument &&
+                      ((selectedDocument.file_size_bytes ?? 0) / 1024 / 1024).toFixed(2)} Mo
                   </p>
                 </div>
               </div>
@@ -225,15 +233,17 @@ export function DeleteDocumentDialog({
               <Button
                 type="button"
                 onClick={handleConfirmDelete}
-                disabled={isDeleting}
-                className="gap-2 bg-med-rose text-white hover:bg-med-rose/90 transition-colors"
+                disabled={isDeleting || !isProfessor}
+                className="gap-2 bg-med-rose text-white hover:bg-med-rose/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isDeleting ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
+                ) : !isProfessor ? (
+                  <Lock className="h-4 w-4" />
                 ) : (
                   <Trash2 className="h-4 w-4" />
                 )}
-                Supprimer définitivement
+                {!isProfessor ? "Réservé aux professeurs" : "Supprimer définitivement"}
               </Button>
             </div>
           </>

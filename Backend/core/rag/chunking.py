@@ -181,16 +181,10 @@ def build_chunk_records_from_pdf(pdf_path, method="parent_child", model=None, to
     return chunk_records
 
 
-def build_chunk_records_from_json(json_path):
-    '''Génère les records de chunks à partir d'un fichier JSON structuré pour les patients.
-    Chaque chunk contient le texte enrichi avec le contexte du patient et la catégorie de l'information.
-    '''
-    json_name = Path(json_path).name
+def build_chunk_records_from_dict(doc, source_file="database"):
+    '''Génère les records de chunks à partir d'un dictionnaire patient structuré.'''
     chunk_records = []
 
-    with open(json_path, "r", encoding="utf-8") as file:
-        doc = json.load(file)
-        
     if "patient" in doc:
         patient_data = doc["patient"]
         identity = patient_data.get("identity", {})
@@ -237,7 +231,7 @@ def build_chunk_records_from_json(json_path):
                 chunk_records.append({
                     "content": enriched_content,       
                     "source_type": "patient",
-                    "source_file": json_name,
+                    "source_file": source_file,
                     "patient_id": patient_id,
                     "fact_id": fact_id,              
                     "reveal_policy": fact.get("reveal_policy", "unknown"),
@@ -247,6 +241,14 @@ def build_chunk_records_from_json(json_path):
                 chunk_index += 1
                 
     return chunk_records
+
+
+def build_chunk_records_from_json(json_path):
+    '''Génère les records de chunks à partir d'un fichier JSON structuré pour les patients.'''
+    json_name = Path(json_path).name
+    with open(json_path, "r", encoding="utf-8") as file:
+        doc = json.load(file)
+    return build_chunk_records_from_dict(doc, source_file=json_name)
 
 
 def _merge_splits(splits, separator, chunk_size):
