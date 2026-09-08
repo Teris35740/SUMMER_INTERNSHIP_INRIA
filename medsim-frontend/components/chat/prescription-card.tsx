@@ -30,10 +30,14 @@ export const PrescriptionCard = memo(function PrescriptionCard({ message, mode }
                 Évaluation de la Prescription
               </h2>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-med-text-secondary">
-                  Score : <strong className="text-med-text-primary">{Math.round(evaluation.overall_score * 100)}%</strong>
-                </span>
-                <span className="text-med-text-muted">•</span>
+                {mode === "notation" && (
+                  <>
+                    <span className="text-med-text-secondary">
+                      Score : <strong className="text-med-text-primary">{Math.round(evaluation.overall_score * 100)}%</strong>
+                    </span>
+                    <span className="text-med-text-muted">•</span>
+                  </>
+                )}
                 <span className="text-med-text-secondary">
                   {evaluation.prescribed_molecules.length} molécule(s) proposée(s)
                 </span>
@@ -57,13 +61,15 @@ export const PrescriptionCard = memo(function PrescriptionCard({ message, mode }
               </div>
             )}
 
-            {/* Scores Breakdown */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <ScoreBox label="Molécule" score={evaluation.molecule_score} />
-              <ScoreBox label="Posologie" score={evaluation.dosage_score} />
-              <ScoreBox label="Voie" score={evaluation.route_score} />
-              <ScoreBox label="Durée" score={evaluation.duration_score} />
-            </div>
+            {/* Scores Breakdown (Mode Notation uniquement) */}
+            {mode === "notation" && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <ScoreBox label="Molécule" score={evaluation.molecule_score} />
+                <ScoreBox label="Posologie" score={evaluation.dosage_score} />
+                <ScoreBox label="Voie" score={evaluation.route_score} />
+                <ScoreBox label="Durée" score={evaluation.duration_score} />
+              </div>
+            )}
 
             {/* Details */}
             <div className="grid sm:grid-cols-2 gap-6">

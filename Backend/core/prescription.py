@@ -50,6 +50,7 @@ def handle_prescription(student_prescription, session_id, patient_data):
     
     is_correct = diagnosis_result.get("is_correct", False)
     elapsed_seconds = diagnosis_result.get("elapsed_seconds", 0.0)
+    differential_diagnoses = diagnosis_result.get("differential_diagnoses", [])
     
     clinical_state = get_clinical_state(session_id)
     asked_topics_history = clinical_state.get("asked_topics", [])
@@ -84,6 +85,7 @@ def handle_prescription(student_prescription, session_id, patient_data):
         elapsed_seconds=elapsed_seconds,
         prescription_score=prescription_score,
         prescription_details=prescription_details,
+        differential_diagnoses=differential_diagnoses,
     )
     
     return {

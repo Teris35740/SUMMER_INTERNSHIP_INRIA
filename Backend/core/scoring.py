@@ -13,6 +13,7 @@ Score final = w1·Coverage + w2·Pertinence + w3·Structure + w4·Diagnostic + w
 
 from core.config import SCORING_WEIGHTS, IDEAL_TOPIC_ORDER, SECTION_TO_TOPIC, SESSION_TIME_LIMIT
 
+import unicodedata
 
 # ── Fonctions utilitaires ──────────────────────────────────────────────
 
@@ -181,6 +182,68 @@ def compute_prescription(prescription_score):
     return max(0.0, min(1.0, float(prescription_score)))
 
 
+def _normalize_text(text):
+    """Normalise un texte pour comparaison : minuscules, sans accents, sans tirets."""
+    text = text.lower().strip()
+    text = unicodedata.normalize("NFD", text)
+    filtered_chars = []
+    for c in text:
+        if unicodedata.category(c) != "Mn":
+            filtered_chars.append(c)
+    text = "".join(filtered_chars)
+    text = text.replace("-", " ").replace("_", " ")
+    return text
+
+
+def _texts_overlap(a, b):
+    """Vérifie si deux textes partagent des mots significatifs (≥4 chars)."""
+    words_a = set()
+    for word in _normalize_text(a).split():
+        if len(word) >= 4:
+            words_a.add(word)
+
+    words_b = set()
+    for word in _normalize_text(b).split():
+        if len(word) >= 4:
+            words_b.add(word)
+    return bool(words_a & words_b)
+
+
+def compute_differential_bonus(differential_diagnoses, patient_data, is_final_correct):
+    """Bonus si des diagnostics différentiels pertinents ont été proposés.
+
+    Compare les hypothèses de l'étudiant avec metadata.alternative_diagnoses
+    via un matching lexical (mots partagés ≥4 chars).
+
+    Règles :
+    - Si diagnostic final correct ET ≥1 différentiel pertinent -> bonus [+0.05, +0.10]
+    - Si diagnostic final correct ET aucun différentiel -> 0 (pas de pénalité)
+    - Si diagnostic final incorrect -> 0 (le bonus ne compense pas un mauvais diagnostic)
+
+    Retourne un float dans [0, 0.10].
+    """
+    if not is_final_correct or not differential_diagnoses:
+        return 0.0
+
+    alternative_diagnoses = patient_data.get("metadata", {}).get("alternative_diagnoses", [])
+    if not alternative_diagnoses:
+        return 0.0
+
+    matched = 0
+    for student_diag in differential_diagnoses:
+        for alt in alternative_diagnoses:
+            if _texts_overlap(student_diag, alt):
+                matched += 1
+                break  # Compter chaque hypothèse étudiante une seule fois
+
+    if matched == 0:
+        return 0.0
+    elif matched == 1:
+        return 0.05
+    else:
+        return 0.10
+
+
 # ── Score final et rapport ─────────────────────────────────────────────
 
 def compute_final_score(coverage, pertinence, structure, diagnostic, prescription=0.0, weights=None):
@@ -218,19 +281,24 @@ def _score_to_grade(score):
 
 def generate_report(asked_topics_history, patient_data, useful_count, total_count,
                     is_correct, elapsed_seconds, useful_questions_list=None,
-                    prescription_score=None, prescription_details=None):
+                    prescription_score=None, prescription_details=None,
+                    differential_diagnoses=None):
     """Génère un rapport complet de notation de l'étudiant.
 
     Retourne un dict structuré avec les sous-scores, le score final,
     la note lettrée, et un feedback textuel.
     """
+    differential_diagnoses = differential_diagnoses or []
+
     coverage = compute_coverage(asked_topics_history, patient_data)
     pertinence = compute_pertinence(useful_count, total_count)
     structure = compute_structure(asked_topics_history)
     diagnostic = compute_diagnostic(is_correct, elapsed_seconds)
     prescription = compute_prescription(prescription_score)
+    differential_bonus = compute_differential_bonus(differential_diagnoses, patient_data, is_correct)
 
-    final_score = compute_final_score(coverage, pertinence, structure, diagnostic, prescription)
+    # Le bonus différentiel est plafonné pour ne pas dépasser 1.0 au total
+    final_score = min(1.0, compute_final_score(coverage, pertinence, structure, diagnostic, prescription) + differential_bonus)
     grade = _score_to_grade(final_score)
 
     # Détail des topics pour le feedback
@@ -244,6 +312,16 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
     time_str = f"{minutes}:{seconds:02d}"
     time_limit_str = f"{SESSION_TIME_LIMIT // 60}:{SESSION_TIME_LIMIT % 60:02d}"
     within_time = elapsed_seconds <= SESSION_TIME_LIMIT
+
+    # Diagnostics différentiels soumis vs attendus
+    alternative_diagnoses = patient_data.get("metadata", {}).get("alternative_diagnoses", [])
+    matched_differentials = []
+    if differential_diagnoses:
+        for student_diag in differential_diagnoses:
+            for alt in alternative_diagnoses:
+                if _texts_overlap(student_diag, alt):
+                    matched_differentials.append(student_diag)
+                    break
 
     return {
         "scores": {
@@ -269,6 +347,10 @@ def generate_report(asked_topics_history, patient_data, useful_count, total_coun
             "within_time": within_time,
             "elapsed_seconds": round(elapsed_seconds, 1),
             "prescription_details": prescription_details,
+            # Diagnostics différentiels
+            "differential_diagnoses": differential_diagnoses,
+            "matched_differentials": matched_differentials,
+            "differential_bonus": round(differential_bonus, 2),
         },
     }
 

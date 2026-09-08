@@ -36,23 +36,30 @@ def verify_diagnosis(student_diagnosis, expected_diagnosis, gemini_api_key=None)
         return text
 
     SYNONYMS = {
-        "lombalgie": ["lumbago", "mal de dos", "douleur lombaire", "tour de rein"],
-        "lumbago": ["lombalgie", "mal de dos", "douleur lombaire", "tour de rein"],
-        "infarctus du myocarde": ["crise cardiaque", "idm", "infarctus"],
-        "crise cardiaque": ["infarctus du myocarde", "idm", "infarctus"],
+        "lombalgie": ["lumbago", "mal de dos", "douleur lombaire", "tour de rein", "lombalgie aigue", "lombalgie mecanique", "lombalgie aigue mecanique"],
+        "lombalgie aigue mecanique": ["lombalgie", "lumbago", "mal de dos", "douleur lombaire", "tour de rein", "lombalgie aigue", "lombalgie mecanique"],
+        "lombalgie aigue": ["lombalgie", "lumbago", "mal de dos", "douleur lombaire", "tour de rein", "lombalgie aigue mecanique"],
+        "lombalgie mecanique": ["lombalgie", "lumbago", "mal de dos", "douleur lombaire", "tour de rein", "lombalgie aigue mecanique"],
+        "lumbago": ["lombalgie", "mal de dos", "douleur lombaire", "tour de rein", "lombalgie aigue", "lombalgie mecanique", "lombalgie aigue mecanique"],
+        "infarctus du myocarde": ["crise cardiaque", "idm", "infarctus", "syndrome coronarien aigu"],
+        "crise cardiaque": ["infarctus du myocarde", "idm", "infarctus", "syndrome coronarien aigu"],
+        "idm": ["infarctus du myocarde", "crise cardiaque", "infarctus"],
         "avc": ["accident vasculaire cerebral", "attaque cerebrale"],
         "accident vasculaire cerebral": ["avc", "attaque cerebrale"],
-        "pneumonie": ["pneumopathie", "infection pulmonaire"],
-        "pneumopathie": ["pneumonie", "infection pulmonaire"],
+        "pneumonie": ["pneumopathie", "infection pulmonaire", "pneumopathie franche lobaire aigue"],
+        "pneumopathie": ["pneumonie", "infection pulmonaire", "pneumopathie franche lobaire aigue"],
+        "pneumopathie franche lobaire aigue": ["pneumonie", "pneumopathie", "infection pulmonaire"],
         "hypertension arterielle": ["hta"],
         "hta": ["hypertension arterielle"],
         "diabete de type 2": ["diabete type 2", "dt2", "diabete type ii"],
         "insuffisance cardiaque": ["ic", "decompensation cardiaque"],
         "embolie pulmonaire": ["ep"],
         "ep": ["embolie pulmonaire"],
-        "infection urinaire": ["iu", "cystite"],
-        "cystite": ["infection urinaire", "iu"],
+        "infection urinaire": ["iu", "cystite", "cystite aigue"],
+        "cystite": ["infection urinaire", "iu", "cystite aigue"],
+        "cystite aigue": ["infection urinaire", "iu", "cystite"],
         "appendicite": ["appendicite aigue"],
+        "appendicite aigue": ["appendicite"],
         "migraine": ["cephalee migraineuse"],
         "sciatique": ["sciatalgie", "lombosciatique"],
         "lombosciatique": ["sciatique", "sciatalgie"],
@@ -65,18 +72,25 @@ def verify_diagnosis(student_diagnosis, expected_diagnosis, gemini_api_key=None)
     norm_student = normalize(student_diagnosis)
     norm_expected = normalize(expected_diagnosis)
 
+    if not norm_student:
+        return False, f"Diagnostic non renseigné. Le diagnostic attendu était : « {expected_diagnosis} »."
+
+    # 1. Correspondance exacte normalisée
     if norm_student == norm_expected:
         return True, f"Correct ! Le diagnostic est bien « {expected_diagnosis} »."
 
-    if norm_student in norm_expected or norm_expected in norm_student:
-        return True, f"Correct ! Le diagnostic est bien « {expected_diagnosis} »."
-
-    expected_synonyms = SYNONYMS.get(norm_expected, [])
-    if norm_student in [normalize(s) for s in expected_synonyms]:
+    # 2. Correspondance par dictionnaire de synonymes
+    expected_synonyms = [normalize(s) for s in SYNONYMS.get(norm_expected, [])]
+    if norm_student in expected_synonyms:
         return True, f"Correct ! « {student_diagnosis} » est un synonyme reconnu de « {expected_diagnosis} »."
 
-    student_synonyms = SYNONYMS.get(norm_student, [])
-    if norm_expected in [normalize(s) for s in student_synonyms]:
+    student_synonyms = [normalize(s) for s in SYNONYMS.get(norm_student, [])]
+    if norm_expected in student_synonyms:
         return True, f"Correct ! « {student_diagnosis} » est un synonyme reconnu de « {expected_diagnosis} »."
+
+    for key, syns in SYNONYMS.items():
+        group = {normalize(key)} | {normalize(s) for s in syns}
+        if norm_student in group and norm_expected in group:
+            return True, f"Correct ! « {student_diagnosis} » est un synonyme reconnu de « {expected_diagnosis} »."
 
     return False, f"Diagnostic incorrect. Le diagnostic attendu était : « {expected_diagnosis} »."

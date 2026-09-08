@@ -13,6 +13,7 @@ import type {
   PrescriptionResultMessage,
   AppStatus,
   AppMode,
+  Patient,
 } from "@/types/api";
 
 interface ChatAreaProps {
@@ -25,9 +26,8 @@ interface ChatAreaProps {
   timerActive: boolean;
   sessionExpired: boolean;
   prescriptionPhase: boolean;
+  currentPatient?: Patient;
   onSend: (message: string) => void;
-  onDiagnose: () => void;
-  onOpenPrescription: () => void;
   onClear: () => void;
 }
 
@@ -42,8 +42,6 @@ export function ChatArea({
   sessionExpired,
   prescriptionPhase,
   onSend,
-  onDiagnose,
-  onOpenPrescription,
   onClear,
 }: ChatAreaProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -59,11 +57,11 @@ export function ChatArea({
   }, [messages, isTyping]);
 
   return (
-    <main className="flex-1 flex flex-col min-w-0 w-full h-full">
-      {/* Messages */}
+    <main className="flex-1 flex flex-col min-w-0 w-full h-full relative overflow-hidden">
+      {/* Messages Scroll Area */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto px-4 sm:px-8 pt-8 pb-[280px] flex flex-col gap-6 scroll-smooth max-w-[1000px] w-full mx-auto"
+        className="flex-1 overflow-y-auto px-4 sm:px-8 pt-[88px] sm:pt-[96px] pb-[260px] flex flex-col gap-5 scroll-smooth max-w-[900px] w-full mx-auto"
       >
         {messages.map((msg) => {
           if ("type" in msg && msg.type === "diagnosis") {
@@ -90,7 +88,7 @@ export function ChatArea({
       </div>
 
       {/* Fixed Bottom Container (Clinical Bar + Input) */}
-      <div className="absolute bottom-6 left-0 right-0 px-4 flex flex-col items-center pointer-events-none z-10">
+      <div className="absolute bottom-5 left-0 right-0 px-4 flex flex-col items-center pointer-events-none z-10">
         <ClinicalBar clinicalVignette={clinicalVignette} />
         <ChatInput
           status={status}
@@ -99,8 +97,6 @@ export function ChatArea({
           sessionExpired={sessionExpired}
           prescriptionPhase={prescriptionPhase}
           onSend={onSend}
-          onDiagnose={onDiagnose}
-          onOpenPrescription={onOpenPrescription}
           onClear={onClear}
         />
       </div>

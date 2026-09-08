@@ -87,7 +87,7 @@ export function Navbar({
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[100] px-3 sm:px-6 pt-3 sm:pt-4 pb-2 pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 z-30 px-3 sm:px-6 pt-3 sm:pt-4 pb-2 pointer-events-none">
         <nav
           className="mx-auto flex items-center justify-between px-3.5 sm:px-6 glass-panel rounded-2xl pointer-events-auto h-[58px] sm:h-[64px] w-full max-w-[1200px] border border-med-border-default shadow-xl shadow-black/5"
         >

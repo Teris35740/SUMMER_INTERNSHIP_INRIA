@@ -24,6 +24,7 @@ import type {
   PipelineData,
   AppStatus,
   AppMode,
+  ClinicalSubmitPayload,
 } from "@/types/api";
 
 const SESSION_TIME_LIMIT = 600; // 10 minutes in seconds
@@ -88,6 +89,13 @@ export function useMedSim() {
   const [isPipelineOpen, setIsPipelineOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [prescriptionPhase, setPrescriptionPhase] = useState(false);
+  const [sessionLocked, setSessionLocked] = useState(false);
+  const [diagnosisResult, setDiagnosisResult] = useState<{
+    isCorrect: boolean;
+    isWarning?: boolean;
+    feedback: string;
+    expectedDiagnosis?: string;
+  } | null>(null);
 
   // ── Timer State ──
   const [startTimestamp, setStartTimestamp] = useState<string | null>(null);
@@ -135,6 +143,8 @@ export function useMedSim() {
     setPipelineData({});
     setIsTyping(false);
     setPrescriptionPhase(false);
+    setSessionLocked(false);
+    setDiagnosisResult(null);
     setStartTimestamp(null);
     setTimeRemaining(SESSION_TIME_LIMIT);
     setTimerActive(false);
@@ -269,14 +279,15 @@ export function useMedSim() {
 
   // ── Diagnose ──
   const diagnose = useCallback(
-    async (diagnosis: string) => {
-      if (!diagnosis.trim() || status === "busy") return;
+    async (payload: ClinicalSubmitPayload) => {
+      const { final_diagnosis, differential_diagnoses } = payload;
+      if (!final_diagnosis.trim() || status === "busy") return;
 
       // Add user diagnosis message
       const userMsg: ChatMessage = {
         id: createId(),
         sender: "user",
-        text: `Diagnostic : ${diagnosis.trim()}`,
+        text: `Diagnostic : ${final_diagnosis.trim()}`,
         timestamp: createTimestamp(),
       };
       setMessages((prev) => [...prev, userMsg]);
@@ -288,7 +299,8 @@ export function useMedSim() {
 
       try {
         const data = await submitDiagnosis({
-          diagnosis: diagnosis.trim(),
+          diagnosis: final_diagnosis.trim(),
+          differential_diagnoses: differential_diagnoses.filter(Boolean),
           session_id: sessionIdRef.current,
           patient_num: currentPatientNum,
           is_pedago_mode: mode === "pedago",
@@ -297,12 +309,19 @@ export function useMedSim() {
         setIsTyping(false);
         // Transition to prescription phase
         setPrescriptionPhase(true);
+        // Store result for sidebar
+        setDiagnosisResult({
+          isCorrect: data.is_correct,
+          isWarning: data.is_warning ?? false,
+          feedback: data.feedback,
+          expectedDiagnosis: data.expected_diagnosis,
+        });
 
         const diagResult: DiagnosisResultMessage = {
           id: createId(),
           type: "diagnosis",
           isCorrect: data.is_correct,
-          isWarning: false,
+          isWarning: data.is_warning ?? false,
           feedback: data.feedback,
           expectedDiagnosis: data.expected_diagnosis,
           report: data.report,
@@ -314,6 +333,12 @@ export function useMedSim() {
         setIsTyping(false);
         const detail =
           error instanceof Error ? error.message : "Erreur inconnue";
+        // Store warning in sidebar
+        setDiagnosisResult({
+          isCorrect: false,
+          isWarning: true,
+          feedback: detail,
+        });
         const diagResult: DiagnosisResultMessage = {
           id: createId(),
           type: "diagnosis",
@@ -357,6 +382,7 @@ export function useMedSim() {
 
         setIsTyping(false);
         setSessionExpired(true); // Lock session completely after prescription
+        setSessionLocked(true);
         setPrescriptionPhase(false);
 
         const presResult: PrescriptionResultMessage = {
@@ -430,6 +456,8 @@ export function useMedSim() {
     isPipelineOpen,
     isTyping,
     prescriptionPhase,
+    sessionLocked,
+    diagnosisResult,
 
     // Timer
     timeRemaining,

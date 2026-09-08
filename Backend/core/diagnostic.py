@@ -1,3 +1,4 @@
+import os
 import re
 
 from core.verification import verify_diagnosis
@@ -22,7 +23,14 @@ def parse_diagnosis_attempt(question):
     return None
 
 
-def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, patient_data=None):
+def handle_diagnosis(
+    student_diagnosis,
+    expected_diagnosis,
+    session_id,
+    patient_data=None,
+    differential_diagnoses=None,
+    is_pedago_mode=False,
+):
     """Gère une tentative de diagnostic d'un étudiant.
     
     Évalue le diagnostic proposé par l'étudiant.
@@ -30,9 +38,10 @@ def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, patient_
     Si patient_data est fourni, calcule aussi le rapport de notation.
     
     Retourne un dict :
-        {\"status\": \"evaluated\", \"is_correct\": bool, \"feedback\": str, \"report\": dict|None,
-         \"elapsed_seconds\": float}
+        {"status": "evaluated", "is_correct": bool, "feedback": str, "report": dict|None,
+         "elapsed_seconds": float}
     """
+    differential_diagnoses = differential_diagnoses or []
     is_correct, feedback = verify_diagnosis(student_diagnosis, expected_diagnosis)
 
     elapsed_seconds = get_elapsed_seconds(session_id)
@@ -54,6 +63,7 @@ def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, patient_
             total_count=q_count,
             is_correct=is_correct,
             elapsed_seconds=elapsed_seconds,
+            differential_diagnoses=differential_diagnoses,
         )
 
     return {
@@ -63,4 +73,3 @@ def handle_diagnosis(student_diagnosis, expected_diagnosis, session_id, patient_
         "report": report,
         "elapsed_seconds": elapsed_seconds,
     }
-

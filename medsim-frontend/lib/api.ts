@@ -3,6 +3,7 @@ import type {
   GroupedPatients,
   AskResponse,
   DiagnoseResponse,
+  DiagnoseParams,
   LoginRequest,
   RegisterRequest,
   TokenResponse,
@@ -136,13 +137,6 @@ export async function askQuestion(params: AskParams): Promise<AskResponse> {
 }
 
 // ── POST /api/diagnose ──
-
-export interface DiagnoseParams {
-  diagnosis: string;
-  session_id: string;
-  patient_num: number;
-  is_pedago_mode: boolean;
-}
 
 export async function submitDiagnosis(
   params: DiagnoseParams

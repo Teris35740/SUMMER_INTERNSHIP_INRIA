@@ -27,12 +27,14 @@ class AskResponse(BaseModel):
 
 class DiagnoseRequest(BaseModel):
     diagnosis: str
+    differential_diagnoses: List[str] = []
     session_id: str = "session_1"
     patient_num: int = 1
     is_pedago_mode: bool = False
 
 class DiagnoseResponse(BaseModel):
     is_correct: bool
+    is_warning: bool = False
     feedback: str
     expected_diagnosis: str
     report: Optional[dict] = None
