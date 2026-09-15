@@ -14,6 +14,9 @@ from core.state_motor import state_motor_advanced
 from core.verification import verification_answer, fact_id_authorized_by_motor
 from core.vignette import generate_clinical_vignette
 
+from db.session import SessionLocal
+from db.models import Patient, PatientImage
+
 def get_patient_id_from_num(patient_num: int) -> str:
     """Derive patient_id from number, e.g., 1 -> PAT_001, 100 -> PAT_100."""
     return f"PAT_{patient_num:03d}"
@@ -187,6 +190,66 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
         except Exception as e:
             print(f"Erreur lors de l'évaluation pédagogique : {e}")
 
+    # Récupérer les images associées aux faits dévoilés
+    revealed_images = []
+    if patient_data and used_fact_ids:
+        patient_root = patient_data.get("patient", patient_data)
+        sections = [
+            "chief_complaint", "history", "risk_factors", "travel_history",
+            "family_history", "vitals", "past_medical_history", "treatments",
+            "allergies", "social_history", "surgical_history"
+        ]
+        used_facts_set = set(used_fact_ids)
+        for sec in sections:
+            items = patient_root.get(sec)
+            if isinstance(items, dict):
+                items = [items]
+            if isinstance(items, list):
+                for item in items:
+                    if isinstance(item, dict) and item.get("fact_id") in used_facts_set:
+                        img = item.get("image")
+                        if img and isinstance(img, dict):
+                            revealed_images.append({
+                                "id": str(img.get("id")),
+                                "patient_id": patient_id,
+                                "fact_id": item.get("fact_id"),
+                                "image_type": img.get("image_type", "Examen"),
+                                "file_name": img.get("file_name", "image"),
+                                "mime_type": img.get("mime_type"),
+                                "description": img.get("description"),
+                                "url": img.get("url") or f"/api/patients/{patient_id}/images/{img.get('id')}",
+                            })
+
+    # Compléter depuis la table patient_images si la DB est accessible
+    if used_fact_ids:
+        try:
+            with SessionLocal() as db:
+                db_patient = db.query(Patient).filter(Patient.patient_id == patient_id).first()
+                if db_patient:
+                    db_images = (
+                        db.query(PatientImage)
+                        .filter(
+                            PatientImage.patient_id == db_patient.id,
+                            PatientImage.fact_id.in_(used_fact_ids)
+                        )
+                        .all()
+                    )
+                    existing_ids = {img["id"] for img in revealed_images}
+                    for db_img in db_images:
+                        if str(db_img.id) not in existing_ids:
+                            revealed_images.append({
+                                "id": str(db_img.id),
+                                "patient_id": patient_id,
+                                "fact_id": db_img.fact_id,
+                                "image_type": db_img.image_type,
+                                "file_name": db_img.file_name,
+                                "mime_type": db_img.mime_type,
+                                "description": db_img.description,
+                                "url": f"/api/patients/{patient_id}/images/{db_img.id}",
+                            })
+        except Exception as e:
+            print(f"Erreur extraction images DB: {e}")
+
     return AskResponse(
         answer=answer_text,
         analysis=analysis_dict,
@@ -204,4 +267,5 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
         pedagogical_synthesis=pedagogical_synthesis,
         start_timestamp=start_timestamp,
         clinical_vignette=clinical_vignette,
+        images=revealed_images,
     )

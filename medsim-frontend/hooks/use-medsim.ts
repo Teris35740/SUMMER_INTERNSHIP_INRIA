@@ -25,6 +25,7 @@ import type {
   AppStatus,
   AppMode,
   ClinicalSubmitPayload,
+  RevealedImage,
 } from "@/types/api";
 
 const SESSION_TIME_LIMIT = 600; // 10 minutes in seconds
@@ -88,6 +89,7 @@ export function useMedSim() {
   const [mode, setMode] = useState<AppMode | null>(null); // null = not yet selected
   const [isPipelineOpen, setIsPipelineOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [revealedImages, setRevealedImages] = useState<RevealedImage[]>([]);
   const [prescriptionPhase, setPrescriptionPhase] = useState(false);
   const [sessionLocked, setSessionLocked] = useState(false);
   const [diagnosisResult, setDiagnosisResult] = useState<{
@@ -149,6 +151,7 @@ export function useMedSim() {
     setTimeRemaining(SESSION_TIME_LIMIT);
     setTimerActive(false);
     setSessionExpired(false);
+    setRevealedImages([]);
     autodiagTriggeredRef.current = false;
 
     try {
@@ -237,8 +240,18 @@ export function useMedSim() {
           sender: "assistant",
           text: data.answer,
           timestamp: createTimestamp(),
+          images: data.images || [],
         };
         setMessages((prev) => [...prev, assistantMsg]);
+
+        // Track newly revealed images
+        if (data.images && data.images.length > 0) {
+          setRevealedImages((prev) => {
+            const existingIds = new Set(prev.map((img) => img.id));
+            const newOnes = data.images!.filter((img) => !existingIds.has(img.id));
+            return [...prev, ...newOnes];
+          });
+        }
 
         // Add pedagogical feedback if in pedago mode
         if (mode === "pedago" && data.pedagogical_evaluation) {
@@ -458,6 +471,7 @@ export function useMedSim() {
     prescriptionPhase,
     sessionLocked,
     diagnosisResult,
+    revealedImages,
 
     // Timer
     timeRemaining,

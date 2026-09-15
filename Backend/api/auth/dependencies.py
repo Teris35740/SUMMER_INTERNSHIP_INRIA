@@ -27,6 +27,24 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
     return user
 
 
+security_optional = HTTPBearer(auto_error=False)
+
+def get_current_user_optional(credentials: HTTPAuthorizationCredentials | None = Depends(security_optional), db: Session = Depends(get_db)) -> User | None:
+    """Retourne l'utilisateur s'il est authentifié, sinon None (sans bloquer)."""
+    if not credentials:
+        return None
+    try:
+        payload = decode_access_token(credentials.credentials)
+        user = db.query(User).filter(User.id == payload["sub"]).first()
+        return (
+            user
+            if user and user.is_active
+            else None
+        )
+    except Exception:
+        return None
+
+
 def require_role(required_role: str):
     """Vérifie que l'utilisateur a le bon rôle."""
     def check_role(user: User = Depends(get_current_user)):

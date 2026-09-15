@@ -18,7 +18,7 @@ import {
   X,
   Sparkles,
 } from "lucide-react";
-import type { ClinicalSubmitPayload, PrescriptionMolecule, AppStatus, AppMode, Patient } from "@/types/api";
+import type { ClinicalSubmitPayload, PrescriptionMolecule, AppStatus, AppMode, Patient, RevealedImage } from "@/types/api";
 
 // ── Types ──
 
@@ -37,6 +37,7 @@ interface ClinicalSidebarProps {
   currentPatient?: Patient;
   isOpen?: boolean;
   onToggleOpen?: () => void;
+  revealedImages?: RevealedImage[];
   onSubmitDiagnosis: (payload: ClinicalSubmitPayload) => void;
   onSubmitPrescription: (molecules: PrescriptionMolecule[]) => void;
 }
@@ -153,6 +154,7 @@ function SidebarContent({
   prescriptionPhase,
   diagnosisResult,
   sessionLocked,
+  revealedImages = [],
   onSubmitDiagnosis,
   onSubmitPrescription,
 }: ClinicalSidebarProps) {

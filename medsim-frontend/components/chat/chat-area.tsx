@@ -1,12 +1,11 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessageBubble } from "./message-bubble";
 import { DiagnosisCard } from "./diagnosis-card";
 import { PrescriptionCard } from "./prescription-card";
 import { TypingIndicator } from "./typing-indicator";
 import { ClinicalBar } from "./clinical-bar";
 import { ChatInput } from "./chat-input";
+import { MedicalImageModal } from "./medical-image-modal";
 import type {
   DisplayMessage,
   DiagnosisResultMessage,
@@ -14,6 +13,7 @@ import type {
   AppStatus,
   AppMode,
   Patient,
+  RevealedImage,
 } from "@/types/api";
 
 interface ChatAreaProps {
@@ -45,6 +45,7 @@ export function ChatArea({
   onClear,
 }: ChatAreaProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [selectedImage, setSelectedImage] = useState<RevealedImage | null>(null);
 
   // Auto-scroll to bottom on new messages
   useEffect(() => {
@@ -82,10 +83,22 @@ export function ChatArea({
               />
             );
           }
-          return <MessageBubble key={msg.id} message={msg} />;
+          return (
+            <MessageBubble
+              key={msg.id}
+              message={msg}
+              onSelectImage={setSelectedImage}
+            />
+          );
         })}
         {isTyping && <TypingIndicator />}
       </div>
+
+      {/* Medical Image Lightbox Modal */}
+      <MedicalImageModal
+        image={selectedImage}
+        onClose={() => setSelectedImage(null)}
+      />
 
       {/* Fixed Bottom Container (Clinical Bar + Input) */}
       <div className="absolute bottom-5 left-0 right-0 px-4 flex flex-col items-center pointer-events-none z-10">

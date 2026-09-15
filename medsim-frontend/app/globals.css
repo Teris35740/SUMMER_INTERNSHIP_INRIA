@@ -253,11 +253,11 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
   }
   html {
     @apply font-sans;
-    height: 100dvh;
-    overflow: hidden;
+    min-height: 100dvh;
   }
 }
 

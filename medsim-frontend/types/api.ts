@@ -88,6 +88,33 @@ export interface PedagogicalEvaluation {
   feedback: string;
 }
 
+// ── Images & Examens ──
+
+export interface RevealedImage {
+  id: string;
+  patient_id: string;
+  fact_id?: string;
+  image_type: string;
+  file_name: string;
+  mime_type?: string;
+  description?: string;
+  url: string;
+}
+
+export interface PatientImage {
+  id: string;
+  patient_id: string;
+  fact_id?: string;
+  image_type: string;
+  file_name: string;
+  mime_type: string;
+  file_size_bytes?: number;
+  description?: string;
+  reveal_policy: string;
+  created_at: string;
+  url?: string;
+}
+
 // ── Ask Response ──
 
 export interface AskResponse {
@@ -102,6 +129,7 @@ export interface AskResponse {
   pedagogical_synthesis?: string;
   start_timestamp?: string;
   clinical_vignette?: string;
+  images?: RevealedImage[];
 }
 
 // ── Scoring Report ──
@@ -220,6 +248,7 @@ export interface ChatMessage {
   sender: MessageSender;
   text: string;
   timestamp: string;
+  images?: RevealedImage[];
 }
 
 export interface PedagogicalMessage {

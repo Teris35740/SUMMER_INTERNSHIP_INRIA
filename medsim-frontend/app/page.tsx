@@ -111,6 +111,7 @@ export default function Home() {
           diagnosisResult={sim.diagnosisResult}
           sessionLocked={sim.sessionLocked}
           currentPatient={sim.currentPatient}
+          revealedImages={sim.revealedImages}
           onSubmitDiagnosis={sim.diagnose}
           onSubmitPrescription={sim.prescribe}
         />
