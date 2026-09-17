@@ -3,10 +3,12 @@ import type {
   GroupedPatients,
   AskResponse,
   DiagnoseResponse,
+  DiagnoseParams,
   LoginRequest,
   RegisterRequest,
   TokenResponse,
   AuthUser,
+  PatientImage,
 } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "/api";
@@ -136,13 +138,6 @@ export async function askQuestion(params: AskParams): Promise<AskResponse> {
 }
 
 // ── POST /api/diagnose ──
-
-export interface DiagnoseParams {
-  diagnosis: string;
-  session_id: string;
-  patient_num: number;
-  is_pedago_mode: boolean;
-}
 
 export async function submitDiagnosis(
   params: DiagnoseParams
@@ -294,4 +289,34 @@ export async function deletePatientDocument(
 
   return handleResponse<DeleteDocumentResponse>(res);
 }
+
+// ── PATIENT IMAGES (Radiographies, Échographies, etc.) ──
+
+export async function uploadPatientImage(
+  patientId: string,
+  formData: FormData
+): Promise<PatientImage> {
+  const res = await fetch(`${API_BASE}/patients/${encodeURIComponent(patientId)}/images`, {
+    method: "POST",
+    headers: {
+      ...getAuthHeaders(),
+    },
+    body: formData,
+  });
+  return handleResponse<PatientImage>(res);
+}
+
+export async function fetchPatientImages(
+  patientId: string,
+  factId?: string
+): Promise<PatientImage[]> {
+  const query = factId ? `?fact_id=${encodeURIComponent(factId)}` : "";
+  const res = await fetch(`${API_BASE}/patients/${encodeURIComponent(patientId)}/images${query}`, {
+    headers: {
+      ...getAuthHeaders(),
+    },
+  });
+  return handleResponse<PatientImage[]>(res);
+}
+
 

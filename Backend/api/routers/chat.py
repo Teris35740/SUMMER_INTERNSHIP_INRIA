@@ -33,6 +33,14 @@ def diagnose(request: DiagnoseRequest):
     """
     session_id = request.session_id
     student_diagnosis = request.diagnosis.strip()
+    differential_diagnoses = []
+    for diagnosis in request.differential_diagnoses:
+        diagnosis = diagnosis.strip()
+        if diagnosis:
+            differential_diagnoses.append(diagnosis)
+
+        if len(differential_diagnoses) == 3:
+            break
     patient_num = request.patient_num
 
     patient_id = get_patient_id_from_num(patient_num)
@@ -48,6 +56,8 @@ def diagnose(request: DiagnoseRequest):
     result = handle_diagnosis(
         student_diagnosis, expected_diagnosis, session_id,
         patient_data=None,
+        differential_diagnoses=differential_diagnoses,
+        is_pedago_mode=request.is_pedago_mode,
     )
 
     elapsed_seconds = result.get("elapsed_seconds", 0.0)
@@ -57,11 +67,15 @@ def diagnose(request: DiagnoseRequest):
     store_diagnosis_result(session_id, {
         "is_correct": result["is_correct"],
         "elapsed_seconds": elapsed_seconds,
+        "differential_diagnoses": differential_diagnoses,
     })
 
     # Ajouter le diagnostic dans l'historique
     add_message(session_id, "user", f"[DIAGNOSTIC] {student_diagnosis}")
-    add_message(session_id, "assistant", f"[RÉSULTAT] {'✅ Correct' if result['is_correct'] else '❌ Incorrect'} — {result['feedback']}")
+    if differential_diagnoses:
+        add_message(session_id, "user", f"[DIFF. DIAGS] {', '.join(differential_diagnoses)}")
+    status_label = "✅ Correct" if result["is_correct"] else "❌ Incorrect"
+    add_message(session_id, "assistant", f"[RÉSULTAT] {status_label} — {result['feedback']}")
 
     return DiagnoseResponse(
         is_correct=result["is_correct"],

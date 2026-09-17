@@ -18,7 +18,7 @@ import type { PatientFormData } from "@/lib/schemas/patient-form-schema";
 
 type ArrayFieldName = Exclude<
   keyof PatientFormData,
-  "identity" | "chief_complaint" | "metadata"
+  "identity" | "chief_complaint" | "metadata" | "imaging"
 >;
 
 interface DynamicFactListProps {
@@ -128,10 +128,10 @@ export function DynamicFactList({
                     id={`${name}.${index}.information`}
                     {...register(`${name}.${index}.information` as const)}
                     placeholder={placeholder}
-                    className="min-h-[72px] resize-y bg-med-bg-primary/50 border-med-border-default focus:border-med-border-focus"
+                    className="min-h-[72px] resize-y bg-med-bg-surface border-med-border-default hover:border-med-border-strong focus:border-med-sky focus:ring-2 focus:ring-med-sky/20 transition-all rounded-xl shadow-xs"
                   />
                   {fieldErrors?.information && (
-                    <p className="text-xs text-med-rose mt-1">
+                    <p className="text-xs text-med-rose mt-1 font-medium">
                       {fieldErrors.information.message}
                     </p>
                   )}
@@ -165,7 +165,7 @@ export function DynamicFactList({
                         >
                           <SelectTrigger
                             id={`${name}.${index}.reveal_policy`}
-                            className="bg-med-bg-primary/50 border-med-border-default"
+                            className="bg-med-bg-surface border-med-border-default hover:border-med-border-strong rounded-xl shadow-xs"
                           >
                             <SelectValue placeholder="Choisir une politique..." />
                           </SelectTrigger>
@@ -190,7 +190,7 @@ export function DynamicFactList({
                         {/* Show custom input when custom policy is active */}
                         {isCustom && (
                           <Input
-                            className="mt-2 bg-med-bg-primary/50 border-med-border-default"
+                            className="mt-2 bg-med-bg-surface border-med-border-default hover:border-med-border-strong rounded-xl shadow-xs"
                             placeholder="ex: only_if_chest_pain_asked"
                             value={currentPolicy === "__custom__" ? "" : currentPolicy}
                             onChange={(e) =>

@@ -1,10 +1,9 @@
-"use client";
-
-import { Info, Stethoscope, User, GraduationCap } from "lucide-react";
+import { Info, Stethoscope, User, GraduationCap, Maximize2, ImageIcon } from "lucide-react";
 import type {
   ChatMessage,
   PedagogicalMessage,
   DisplayMessage,
+  RevealedImage,
 } from "@/types/api";
 
 // ── Helpers ──
@@ -22,7 +21,13 @@ function formatMarkdown(text: string): string {
 
 // ── Chat Message Bubble ──
 
-function ChatBubble({ message }: { message: ChatMessage }) {
+function ChatBubble({
+  message,
+  onSelectImage,
+}: {
+  message: ChatMessage;
+  onSelectImage?: (image: RevealedImage) => void;
+}) {
   if (message.sender === "system") {
     return (
       <div className="flex items-start gap-2.5 animate-message-in max-w-[780px] w-full mx-auto justify-center mb-2">
@@ -58,11 +63,53 @@ function ChatBubble({ message }: { message: ChatMessage }) {
       <div className="flex items-center justify-center w-9 h-9 rounded-full bg-med-bg-surface border border-med-border-default text-med-text-secondary shrink-0 shadow-sm">
         <User size={18} />
       </div>
-      <div>
+      <div className="min-w-0 max-w-[600px]">
         <div
-          className="px-5 py-3.5 rounded-[24px] rounded-bl-sm glass text-sm text-med-text-primary leading-relaxed max-w-[600px]"
+          className="px-5 py-3.5 rounded-[24px] rounded-bl-sm glass text-sm text-med-text-primary leading-relaxed"
           dangerouslySetInnerHTML={{ __html: formatMarkdown(message.text) }}
         />
+
+        {/* Attached medical images */}
+        {message.images && message.images.length > 0 && (
+          <div className="mt-2.5 space-y-2">
+            {message.images.map((img) => (
+              <button
+                key={img.id}
+                type="button"
+                onClick={() => onSelectImage?.(img)}
+                className="w-full flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-med-bg-surface/90 hover:bg-med-bg-surface-hover border border-med-border-default hover:border-med-sky/50 transition-all text-left shadow-xs hover:shadow-md group/img cursor-pointer"
+              >
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-black/40 border border-med-border-default shrink-0 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img.url}
+                    alt={img.description || img.file_name}
+                    className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-200"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover/img:bg-transparent transition-colors" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-med-sky-subtle text-med-sky border border-med-sky/30">
+                      {img.image_type}
+                    </span>
+                    <span className="text-[0.65rem] text-med-text-muted truncate">
+                      {img.file_name}
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold text-med-text-primary line-clamp-1">
+                    {img.description || "Consulter le cliché médical"}
+                  </p>
+                  <span className="text-[0.68rem] text-med-sky font-medium flex items-center gap-1 mt-0.5 group-hover/img:underline">
+                    <Maximize2 size={11} />
+                    <span>Agrandir le cliché</span>
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+
         <span className="text-[0.65rem] text-med-text-muted mt-1.5 ml-2 block opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           {message.timestamp}
         </span>
@@ -134,9 +181,10 @@ function PedagogicalBubble({ message }: { message: PedagogicalMessage }) {
 
 interface MessageBubbleProps {
   message: DisplayMessage;
+  onSelectImage?: (image: RevealedImage) => void;
 }
 
-export function MessageBubble({ message }: MessageBubbleProps) {
+export function MessageBubble({ message, onSelectImage }: MessageBubbleProps) {
   if ("type" in message && message.type === "pedagogical") {
     return <PedagogicalBubble message={message as PedagogicalMessage} />;
   }
@@ -146,5 +194,11 @@ export function MessageBubble({ message }: MessageBubbleProps) {
     return null;
   }
 
-  return <ChatBubble message={message as ChatMessage} />;
+  return (
+    <ChatBubble
+      message={message as ChatMessage}
+      onSelectImage={onSelectImage}
+    />
+  );
 }
+

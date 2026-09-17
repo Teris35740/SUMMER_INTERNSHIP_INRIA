@@ -88,6 +88,33 @@ export interface PedagogicalEvaluation {
   feedback: string;
 }
 
+// ── Images & Examens ──
+
+export interface RevealedImage {
+  id: string;
+  patient_id: string;
+  fact_id?: string;
+  image_type: string;
+  file_name: string;
+  mime_type?: string;
+  description?: string;
+  url: string;
+}
+
+export interface PatientImage {
+  id: string;
+  patient_id: string;
+  fact_id?: string;
+  image_type: string;
+  file_name: string;
+  mime_type: string;
+  file_size_bytes?: number;
+  description?: string;
+  reveal_policy: string;
+  created_at: string;
+  url?: string;
+}
+
 // ── Ask Response ──
 
 export interface AskResponse {
@@ -102,6 +129,7 @@ export interface AskResponse {
   pedagogical_synthesis?: string;
   start_timestamp?: string;
   clinical_vignette?: string;
+  images?: RevealedImage[];
 }
 
 // ── Scoring Report ──
@@ -133,6 +161,10 @@ export interface ScoringDetails {
   within_time?: boolean;
   elapsed_seconds?: number;
   prescription_details?: PrescriptionEvaluation;
+  // Diagnostics différentiels
+  differential_diagnoses?: string[];
+  matched_differentials?: string[];
+  differential_bonus?: number;
 }
 
 export interface ScoringReport {
@@ -143,10 +175,26 @@ export interface ScoringReport {
   final_score: number;
 }
 
+// ── Diagnose ──
+
+export interface ClinicalSubmitPayload {
+  differential_diagnoses: string[];  // 0 à 3 éléments (optionnel)
+  final_diagnosis: string;           // obligatoire
+}
+
+export interface DiagnoseParams {
+  diagnosis: string;
+  differential_diagnoses: string[];
+  session_id: string;
+  patient_num: number;
+  is_pedago_mode: boolean;
+}
+
 // ── Diagnose Response ──
 
 export interface DiagnoseResponse {
   is_correct: boolean;
+  is_warning?: boolean;
   feedback: string;
   expected_diagnosis: string;
   report?: ScoringReport;
@@ -200,6 +248,7 @@ export interface ChatMessage {
   sender: MessageSender;
   text: string;
   timestamp: string;
+  images?: RevealedImage[];
 }
 
 export interface PedagogicalMessage {

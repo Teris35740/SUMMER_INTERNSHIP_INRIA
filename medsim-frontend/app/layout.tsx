@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
-      <body className="h-dvh overflow-hidden" suppressHydrationWarning>
+      <body className="min-h-dvh antialiased bg-med-bg-primary text-med-text-primary" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

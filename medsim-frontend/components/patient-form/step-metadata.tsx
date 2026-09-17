@@ -63,7 +63,7 @@ export function StepMetadata() {
                 }
               }}
             >
-              <SelectTrigger className="bg-med-bg-primary/50 border-med-border-default">
+              <SelectTrigger className="bg-med-bg-surface border-med-border-default hover:border-med-border-strong rounded-xl shadow-xs">
                 <SelectValue placeholder="Sélectionner..." />
               </SelectTrigger>
               <SelectContent>
@@ -105,7 +105,7 @@ export function StepMetadata() {
                 }
               }}
             >
-              <SelectTrigger className="bg-med-bg-primary/50 border-med-border-default">
+              <SelectTrigger className="bg-med-bg-surface border-med-border-default hover:border-med-border-strong rounded-xl shadow-xs">
                 <SelectValue placeholder="Sélectionner..." />
               </SelectTrigger>
               <SelectContent>
@@ -131,7 +131,7 @@ export function StepMetadata() {
             id="metadata.expected_diagnosis"
             {...register("metadata.expected_diagnosis")}
             placeholder="Ex: Lombalgie aiguë mécanique"
-            className="bg-med-bg-primary/50 border-med-border-default focus:border-med-border-focus"
+            className="bg-med-bg-surface border-med-border-default hover:border-med-border-strong focus:border-med-sky focus:ring-2 focus:ring-med-sky/20 transition-all rounded-xl shadow-xs"
           />
           {errors.metadata?.expected_diagnosis && (
             <p className="text-xs text-med-rose">
@@ -189,7 +189,7 @@ export function StepMetadata() {
                   <Input
                     {...register(`metadata.alternative_diagnoses.${index}` as const)}
                     placeholder={`Diagnostic alternatif ${index + 1}`}
-                    className="bg-med-bg-primary/50 border-med-border-default"
+                    className="bg-med-bg-surface border-med-border-default hover:border-med-border-strong rounded-xl shadow-xs"
                   />
                   <button
                     type="button"
@@ -258,7 +258,7 @@ export function StepMetadata() {
                   <Input
                     {...register(`metadata.red_flags.${index}` as const)}
                     placeholder={`Drapeau rouge ${index + 1}`}
-                    className="bg-med-bg-primary/50 border-med-border-default"
+                    className="bg-med-bg-surface border-med-border-default hover:border-med-border-strong rounded-xl shadow-xs"
                   />
                   <button
                     type="button"

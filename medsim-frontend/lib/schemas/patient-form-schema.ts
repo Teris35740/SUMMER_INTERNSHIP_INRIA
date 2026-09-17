@@ -15,7 +15,17 @@ const medicalFactSchema = z.object({
 });
 
 const identitySchema = z.object({
-  age: z.coerce.number().int().min(0, "L'âge doit être positif").max(120, "L'âge doit être ≤ 120"),
+  age: z.preprocess(
+    (val) => (val === "" || val === null || val === undefined ? undefined : Number(val)),
+    z
+      .number({
+        required_error: "L'âge est requis",
+        invalid_type_error: "L'âge doit être un nombre",
+      })
+      .int("L'âge doit être un entier")
+      .min(0, "L'âge doit être positif")
+      .max(120, "L'âge doit être ≤ 120")
+  ),
   gender: z.enum(["homme", "femme"], { required_error: "Le genre est requis" }),
   patient_attitude: patientAttitudeSchema,
 });
@@ -47,6 +57,18 @@ const metadataSchema = z.object({
   expected_treatment: expectedTreatmentSchema,
 });
 
+export const patientImageFormSchema = z.object({
+  id: z.string().optional(),
+  file: z.any().optional(), // File instance in browser
+  previewUrl: z.string().optional(),
+  image_type: z.string().min(1, "Le type d'examen est requis"),
+  description: z.string().default(""),
+  reveal_policy: z.string().default("direct_if_asked"),
+  linked_fact_ref: z.string().default(""), // reference key e.g. "history.0", "vitals.0", "cc1"
+});
+
+export type PatientImageFormData = z.infer<typeof patientImageFormSchema>;
+
 // ── Schéma principal ──
 
 export const patientFormSchema = z.object({
@@ -62,6 +84,7 @@ export const patientFormSchema = z.object({
   allergies: z.array(medicalFactSchema).default([]),
   social_history: z.array(medicalFactSchema).default([]),
   surgical_history: z.array(medicalFactSchema).default([]),
+  imaging: z.array(patientImageFormSchema).default([]),
   metadata: metadataSchema,
 });
 
@@ -120,3 +143,16 @@ export const SPECIALTY_OPTIONS = [
   "Rhumatologie",
   "Urologie",
 ] as const;
+
+// ── Types d'examens médicaux / imagerie ──
+
+export const IMAGE_TYPE_OPTIONS = [
+  { value: "Radiographie", label: "Radiographie (Rayons X)" },
+  { value: "Échographie", label: "Échographie" },
+  { value: "Scanner (TDM)", label: "Scanner / Tomodensitométrie (TDM)" },
+  { value: "IRM", label: "IRM (Imagerie par Résonance Magnétique)" },
+  { value: "Électrocardiogramme (ECG)", label: "Électrocardiogramme (ECG)" },
+  { value: "Photo clinique", label: "Photographie clinique / Lésion" },
+  { value: "Autre examen", label: "Autre examen complémentaire" },
+] as const;
+

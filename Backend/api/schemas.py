@@ -7,6 +7,16 @@ class AskRequest(BaseModel):
     patient_num: int = 1
     is_pedago_mode: bool = False
 
+class RevealedImage(BaseModel):
+    id: str
+    patient_id: str
+    fact_id: Optional[str] = None
+    image_type: str
+    file_name: str
+    mime_type: Optional[str] = None
+    description: Optional[str] = None
+    url: str
+
 class AskResponse(BaseModel):
     answer: str
     analysis: dict
@@ -24,15 +34,18 @@ class AskResponse(BaseModel):
     pedagogical_synthesis: Optional[str] = None
     start_timestamp: Optional[str] = None
     clinical_vignette: Optional[str] = None
+    images: List[RevealedImage] = []
 
 class DiagnoseRequest(BaseModel):
     diagnosis: str
+    differential_diagnoses: List[str] = []
     session_id: str = "session_1"
     patient_num: int = 1
     is_pedago_mode: bool = False
 
 class DiagnoseResponse(BaseModel):
     is_correct: bool
+    is_warning: bool = False
     feedback: str
     expected_diagnosis: str
     report: Optional[dict] = None
@@ -80,6 +93,8 @@ class PatientSummary(BaseModel):
 class MedicalFact(BaseModel):
     information: str
     reveal_policy: str
+    fact_id: Optional[str] = None
+    image: Optional[dict] = None
 
 class PatientAttitudeInput(BaseModel):
     anxiety: float = 0.5

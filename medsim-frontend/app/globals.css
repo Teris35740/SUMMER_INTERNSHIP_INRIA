@@ -126,13 +126,13 @@
   /* MedSim custom variables - Light */
   --med-bg-primary: #F8FAFC;
   --med-bg-secondary: #F1F5F9;
-  --med-bg-surface: rgba(255, 255, 255, 0.7); /* Frosted glass */
-  --med-bg-surface-hover: rgba(255, 255, 255, 0.9);
-  --med-bg-elevated: rgba(255, 255, 255, 0.9);
+  --med-bg-surface: rgba(255, 255, 255, 0.78); /* Frosted glass */
+  --med-bg-surface-hover: rgba(255, 255, 255, 0.92);
+  --med-bg-elevated: rgba(255, 255, 255, 0.96);
 
-  --med-border-subtle: rgba(0, 0, 0, 0.04);
-  --med-border-default: rgba(0, 0, 0, 0.08);
-  --med-border-strong: rgba(0, 0, 0, 0.15);
+  --med-border-subtle: rgba(0, 0, 0, 0.05);
+  --med-border-default: rgba(0, 0, 0, 0.1);
+  --med-border-strong: rgba(0, 0, 0, 0.18);
   --med-border-focus: rgba(2, 132, 199, 0.4);
 
   --med-text-primary: #0F172A;
@@ -253,11 +253,11 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
   }
   html {
     @apply font-sans;
-    height: 100dvh;
-    overflow: hidden;
+    min-height: 100dvh;
   }
 }
 
@@ -406,44 +406,44 @@ body::after {
 /* 1. Naturel chic */
 .naturel-chic {
   --background: #F5EFE6;
-  --foreground: #2D2A26;
-  --card: #F5EFE6;
-  --card-foreground: #2D2A26;
-  --popover: #F5EFE6;
-  --popover-foreground: #2D2A26;
+  --foreground: #25221E;
+  --card: #FFFFFF;
+  --card-foreground: #25221E;
+  --popover: #FFFFFF;
+  --popover-foreground: #25221E;
   --primary: #C8813A;
-  --primary-foreground: #F5EFE6;
-  --border: rgba(45, 42, 38, 0.1);
+  --primary-foreground: #FFFFFF;
+  --border: rgba(45, 42, 38, 0.12);
   --ring: rgba(200, 129, 58, 0.4);
 
   --med-bg-primary: #F5EFE6; /* Crème */
-  --med-bg-secondary: #E8DFD3;
-  --med-bg-surface: rgba(212, 197, 176, 0.5); /* Sable */
-  --med-bg-surface-hover: rgba(212, 197, 176, 0.7);
-  --med-bg-elevated: rgba(245, 239, 230, 0.9);
-  --med-border-subtle: rgba(45, 42, 38, 0.05);
-  --med-border-default: rgba(45, 42, 38, 0.1);
-  --med-border-strong: rgba(45, 42, 38, 0.2);
-  --med-border-focus: rgba(200, 129, 58, 0.4);
-  --med-text-primary: #2D2A26; /* Brun profond */
-  --med-text-secondary: #5C554D;
-  --med-text-muted: #8A8175;
-  --med-text-inverse: #F5EFE6;
+  --med-bg-secondary: #EAE2D5;
+  --med-bg-surface: rgba(255, 255, 255, 0.65); /* Warm translucent white */
+  --med-bg-surface-hover: rgba(255, 255, 255, 0.85);
+  --med-bg-elevated: rgba(255, 255, 255, 0.94);
+  --med-border-subtle: rgba(45, 42, 38, 0.07);
+  --med-border-default: rgba(45, 42, 38, 0.13);
+  --med-border-strong: rgba(45, 42, 38, 0.24);
+  --med-border-focus: rgba(200, 129, 58, 0.5);
+  --med-text-primary: #24211D; /* Brun profond net */
+  --med-text-secondary: #544D44;
+  --med-text-muted: #8C8274;
+  --med-text-inverse: #FFFFFF;
   --med-sky: #C8813A; /* Terracotta */
-  --med-sky-hover: #B07130;
-  --med-sky-subtle: rgba(200, 129, 58, 0.15);
-  --med-teal: #A86D32;
-  --med-teal-subtle: rgba(168, 109, 50, 0.15);
-  --med-emerald: #5C6B55;
-  --med-emerald-subtle: rgba(92, 107, 85, 0.15);
-  --med-violet: #847570;
-  --med-violet-subtle: rgba(132, 117, 112, 0.15);
-  --med-amber: #C19958;
-  --med-amber-subtle: rgba(193, 153, 88, 0.15);
-  --med-rose: #B86B63;
-  --med-rose-subtle: rgba(184, 107, 99, 0.15);
-  --med-red: #A85A52;
-  --med-red-subtle: rgba(168, 90, 82, 0.15);
+  --med-sky-hover: #B26F2D;
+  --med-sky-subtle: rgba(200, 129, 58, 0.14);
+  --med-teal: #A0642C;
+  --med-teal-subtle: rgba(160, 100, 44, 0.14);
+  --med-emerald: #4E684C;
+  --med-emerald-subtle: rgba(78, 104, 76, 0.14);
+  --med-violet: #78645E;
+  --med-violet-subtle: rgba(120, 100, 94, 0.14);
+  --med-amber: #B88532;
+  --med-amber-subtle: rgba(184, 133, 50, 0.14);
+  --med-rose: #B8564E;
+  --med-rose-subtle: rgba(184, 86, 78, 0.14);
+  --med-red: #A34038;
+  --med-red-subtle: rgba(163, 64, 56, 0.14);
 }
 
 /* 2. Tech moderne */
