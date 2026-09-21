@@ -10,7 +10,7 @@ from core.rag.retrieval import embed_question, fusion_rows
 from core.rag.reranking import re_ranking, build_context, expansion_parent_child
 from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, evaluate_student_question_pedagogy, generate_pedagogical_synthesis
 from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact, increment_question_count, get_question_count, add_useful_question, get_start_timestamp
-from core.state_motor import state_motor_advanced
+from core.state_motor import state_motor_datalog
 from core.verification import verification_answer, fact_id_authorized_by_motor
 from core.vignette import generate_clinical_vignette
 
@@ -95,7 +95,50 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
         global_topics = clinical_state.get('asked_topics', [])
         state_motor_info["global_topics_used"] = global_topics
         
-        rows, blocked_rows = state_motor_advanced(global_topics, target_slots, rows)
+        print("\n" + "=" * 60)
+        print("[STATE MOTOR] Entrees")
+        print(f"  Topics deja explores : {global_topics}")
+        print(f"  Topics de la question : {target_slots}")
+        print(f"  Nombre de lignes recues : {len(rows)}")
+        for index, row in enumerate(rows, start=1):
+            metadata = row.get("metadata", {})
+            print(
+                f"  [{index}] fact_id={metadata.get('fact_id', '?')} | "
+                f"source={row.get('source_type', '?')} | "
+                f"policy={metadata.get('reveal_policy', '?')} | "
+                f"contenu={row.get('content', '')[:120]!r}"
+            )
+
+        t_state_motor = time.time()
+        rows, blocked_rows = state_motor_datalog(global_topics, target_slots, rows)
+        print(f"[TIMING] 3bis. state_motor_datalog: {time.time() - t_state_motor:.2f}s")
+        print("[STATE MOTOR] Sortie")
+        print(f"  Lignes autorisees : {len(rows)}")
+        print(f"  Lignes bloquees : {len(blocked_rows)}")
+        for index, row in enumerate(rows, start=1):
+            metadata = row.get("metadata", {})
+            print(
+                f"  [AUTORISE {index}] fact_id={metadata.get('fact_id', '?')} | "
+                f"policy={metadata.get('reveal_policy', '?')}"
+            )
+            explanation = metadata.get("datalog_explanation")
+            if explanation:
+                print("      └─ Preuve Datalog (explain_fact_text why-true) :")
+                for line in explanation.strip().splitlines():
+                    print(f"         {line}")
+        for index, blocked in enumerate(blocked_rows, start=1):
+            print(
+                f"  [BLOQUE {index}] fact_id={blocked.get('fact_id', '?')} | "
+                f"policy={blocked.get('reveal_policy', '?')} | "
+                f"topic requis={blocked.get('required_topic', '?')}"
+            )
+            explanation = blocked.get("datalog_explanation")
+            if explanation:
+                print("      └─ Preuve Datalog (explain_fact_text why-blocked) :")
+                for line in explanation.strip().splitlines():
+                    print(f"         {line}")
+        print("=" * 60 + "\n")
+
         state_motor_info["after_count"] = len(rows)
         
         authorized_fact_ids = fact_id_authorized_by_motor(rows)

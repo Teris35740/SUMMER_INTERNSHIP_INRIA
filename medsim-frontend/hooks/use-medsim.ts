@@ -90,6 +90,7 @@ export function useMedSim() {
   const [isPipelineOpen, setIsPipelineOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [revealedImages, setRevealedImages] = useState<RevealedImage[]>([]);
+  const [sessionResetKey, setSessionResetKey] = useState(0);
   const [prescriptionPhase, setPrescriptionPhase] = useState(false);
   const [sessionLocked, setSessionLocked] = useState(false);
   const [diagnosisResult, setDiagnosisResult] = useState<{
@@ -153,6 +154,7 @@ export function useMedSim() {
     setSessionExpired(false);
     setRevealedImages([]);
     autodiagTriggeredRef.current = false;
+    setSessionResetKey((k) => k + 1);
 
     try {
       await clearSessionApi(sessionIdRef.current);
@@ -477,6 +479,7 @@ export function useMedSim() {
     timeRemaining,
     timerActive,
     sessionExpired,
+    sessionResetKey,
 
     // Actions
     selectPatient,

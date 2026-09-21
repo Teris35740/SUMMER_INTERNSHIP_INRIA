@@ -114,6 +114,7 @@ export default function Home() {
           revealedImages={sim.revealedImages}
           onSubmitDiagnosis={sim.diagnose}
           onSubmitPrescription={sim.prescribe}
+          resetKey={sim.sessionResetKey}
         />
       </div>
     </>
