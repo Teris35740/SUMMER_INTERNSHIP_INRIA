@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from core.config import close_weaviate_client
+from core.datalog_engine import close_engine
 from api.routers import patients, chat, images, documents
 from api.auth.router import router as auth_router
 
@@ -30,6 +31,7 @@ def startup_event():
 @app.on_event("shutdown")
 def shutdown_event():
     close_weaviate_client()
+    close_engine()
 
 app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
 app.include_router(patients.router, prefix="/api", tags=["patients"])

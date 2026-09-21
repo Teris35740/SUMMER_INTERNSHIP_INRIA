@@ -24,7 +24,7 @@ from core.llms.llm_gem import (
 from core.rag.reranking import build_context, expansion_parent_child, re_ranking
 from core.rag.retrieval import embed_question, fusion_rows
 from core.diagnostic import parse_diagnosis_attempt, handle_diagnosis
-from core.state_motor import state_motor_advanced, state_motor_simple
+from core.state_motor import state_motor_datalog, state_motor_simple
 from core.utils.cache import (
     add_asked_topic,
     add_message,
@@ -42,6 +42,8 @@ from core.utils.helpers import load_patient_attitude, load_expected_diagnosis, l
 from core.scoring import format_report
 from core.verification import fact_id_authorized_by_motor, verification_answer
 
+from core.config import close_weaviate_client
+from core.datalog_engine import close_engine
 
 def main():
     parser = argparse.ArgumentParser(description="Script de consultation avec un patient virtuel.")
@@ -174,7 +176,7 @@ def main():
 
             global_topics = clinical_state.get('asked_topics', [])
             # rows = state_motor_simple(target_slots, rows)
-            rows, blocked = state_motor_advanced(global_topics, target_slots, rows)
+            rows, blocked = state_motor_datalog(global_topics, target_slots, rows)
 
             if blocked:
                 print(f"\n--- Faits bloqués par le moteur d'état ({len(blocked)}) ---")
@@ -182,6 +184,10 @@ def main():
                     print(f"  [BLOQUÉ] {b['fact_id']} | policy: {b['reveal_policy']} | "
                           f"topic requis: {b['required_topic']} | "
                           f"topics explorés: {b['explored_topics']}")
+                    if b.get("datalog_explanation"):
+                        print("  └─ Preuve Datalog (explain_fact_text why-blocked) :")
+                        for line in b["datalog_explanation"].strip().splitlines():
+                            print(f"     {line}")
 
             # Construction du contexte
             context = build_context(rows)
@@ -273,8 +279,9 @@ def main():
         print(f"\nErreur critique inattendue : {e}")
     finally:
         clear_session(session_id)
-        from core.config import close_weaviate_client
+        
         close_weaviate_client()
+        close_engine()
         print("Session terminée, cache nettoyé et base de données déconnectée.")
 
 
