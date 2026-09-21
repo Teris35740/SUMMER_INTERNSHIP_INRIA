@@ -40,6 +40,7 @@ interface ClinicalSidebarProps {
   revealedImages?: RevealedImage[];
   onSubmitDiagnosis: (payload: ClinicalSubmitPayload) => void;
   onSubmitPrescription: (molecules: PrescriptionMolecule[]) => void;
+  resetKey?: number;
 }
 
 // ── Hypothesis Input ──
@@ -628,6 +629,7 @@ function SidebarContent({
 export function ClinicalSidebar({
   isOpen = true,
   onToggleOpen,
+  resetKey,
   ...props
 }: ClinicalSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -718,7 +720,7 @@ export function ClinicalSidebar({
 
         {/* Content */}
         <div className="flex-1 overflow-hidden w-[350px] lg:w-[380px]">
-          <SidebarContent {...props} />
+          <SidebarContent key={resetKey} {...props} />
         </div>
       </aside>
 
@@ -759,7 +761,7 @@ export function ClinicalSidebar({
               </button>
             </div>
             <div className="flex-1 overflow-hidden">
-              <SidebarContent {...props} />
+              <SidebarContent key={resetKey} {...props} />
             </div>
           </div>
         </div>
