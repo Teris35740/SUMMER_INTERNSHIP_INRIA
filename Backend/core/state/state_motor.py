@@ -1,4 +1,4 @@
-from core.datalog_engine import get_ruleset
+from core.state.datalog_engine import get_ruleset
 
 def _extract_topic_from_policy(reveal_policy):
     """Extrait le topic requis d'une reveal_policy.

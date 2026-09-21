@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from core.config import close_weaviate_client
-from core.datalog_engine import close_engine
+from core.state.datalog_engine import close_engine
 from api.routers import patients, chat, images, documents
 from api.auth.router import router as auth_router
 

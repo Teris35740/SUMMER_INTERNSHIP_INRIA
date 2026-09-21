@@ -10,9 +10,9 @@ from core.rag.retrieval import embed_question, fusion_rows
 from core.rag.reranking import re_ranking, build_context, expansion_parent_child
 from core.llms.llm_gem import answer_with_gemini, analyze_student_question, split_question_analysis, split_answer_struct, evaluate_student_question_pedagogy, generate_pedagogical_synthesis
 from core.utils.cache import add_message, get_history, clear_session, init_session, add_asked_topic, get_clinical_state, add_revealed_fact, increment_question_count, get_question_count, add_useful_question, get_start_timestamp
-from core.state_motor import state_motor_datalog
-from core.verification import verification_answer, fact_id_authorized_by_motor
-from core.vignette import generate_clinical_vignette
+from core.state.state_motor import state_motor_datalog
+from core.state.verification import verification_answer, fact_id_authorized_by_motor
+from core.clinical.vignette import generate_clinical_vignette
 
 from db.session import SessionLocal
 from db.models import Patient, PatientImage

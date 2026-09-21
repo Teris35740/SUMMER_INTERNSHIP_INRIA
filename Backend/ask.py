@@ -23,8 +23,8 @@ from core.llms.llm_gem import (
 )
 from core.rag.reranking import build_context, expansion_parent_child, re_ranking
 from core.rag.retrieval import embed_question, fusion_rows
-from core.diagnostic import parse_diagnosis_attempt, handle_diagnosis
-from core.state_motor import state_motor_datalog, state_motor_simple
+from core.evaluation.diagnostic import parse_diagnosis_attempt, handle_diagnosis
+from core.state.state_motor import state_motor_datalog, state_motor_simple
 from core.utils.cache import (
     add_asked_topic,
     add_message,
@@ -39,11 +39,11 @@ from core.utils.cache import (
     init_session
 )
 from core.utils.helpers import load_patient_attitude, load_expected_diagnosis, load_patient_data
-from core.scoring import format_report
-from core.verification import fact_id_authorized_by_motor, verification_answer
+from core.evaluation.scoring import format_report
+from core.state.verification import fact_id_authorized_by_motor, verification_answer
 
 from core.config import close_weaviate_client
-from core.datalog_engine import close_engine
+from core.state.datalog_engine import close_engine
 
 def main():
     parser = argparse.ArgumentParser(description="Script de consultation avec un patient virtuel.")
