@@ -5,8 +5,8 @@ from api.dependencies import verify_api_keys
 from core.utils.helpers import load_patient_data
 from core.utils.cache import add_message, get_question_count, get_elapsed_seconds, clear_session as clear, store_diagnosis_result
 from core.config import SESSION_TIME_LIMIT
-from core.diagnostic import handle_diagnosis
-from core.prescription import handle_prescription
+from core.evaluation.diagnostic import handle_diagnosis
+from core.evaluation.prescription import handle_prescription
 
 router = APIRouter()
 

@@ -12,7 +12,7 @@ import sys
 import os
 
 # Ajouter le binding Python de maelys-datalog au path si nécessaire
-_MAELYS_BINDING_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'maelys-datalog', 'bindings', 'python')
+_MAELYS_BINDING_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'maelys-datalog', 'bindings', 'python')
 
 if os.path.isdir(_MAELYS_BINDING_PATH) and _MAELYS_BINDING_PATH not in sys.path:
     sys.path.insert(0, os.path.abspath(_MAELYS_BINDING_PATH))

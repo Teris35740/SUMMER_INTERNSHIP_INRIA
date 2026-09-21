@@ -1,8 +1,8 @@
 import os
 import re
 
-from core.verification import verify_diagnosis
-from core.scoring import generate_report, format_report
+from core.state.verification import verify_diagnosis
+from core.evaluation.scoring import generate_report, format_report
 from core.utils.cache import (
     get_question_count,
     get_useful_question_count,

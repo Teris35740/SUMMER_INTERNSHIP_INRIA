@@ -1,7 +1,7 @@
 import os
 
 from core.llms.llm_gem import evaluate_prescription_with_gemini
-from core.scoring import generate_report
+from core.evaluation.scoring import generate_report
 from core.utils.cache import (
     get_question_count,
     get_useful_question_count,
