@@ -1,0 +1,3 @@
+[submodule "maelys-datalog"]
+	path = maelys-datalog
+	url = https://github.com/maelys-dev/maelys-datalog.git
