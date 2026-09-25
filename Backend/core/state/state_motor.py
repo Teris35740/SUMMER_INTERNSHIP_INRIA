@@ -173,38 +173,37 @@ def state_motor_datalog(global_asked_topics, current_target_slots, rows):
                     elif policy.startswith("only_if_"):
                         edb.add_fact('is_only', [policy, topic])
     
-    result = ruleset.solve(edb)
-    
-    # recup les faits autorisés et bloqués
-    allowed_facts = set()
-    for row in result.enumerate_predicate_facts('allow', 1):
-        allowed_facts.add(row[0])
-    
-    blocked_fact_ids = set()
-    for row in result.enumerate_predicate_facts('blocked', 1):
-        blocked_fact_ids.add(row[0])
-    
-    # faire les listes de sortie
-    authorized_rows = []
-    blocked_rows = []
-    
-    for fact_id, policy, row_idx, is_ref in fact_rows:
-        if fact_id in allowed_facts:
-            explanation = result.explain_fact_text('allow', [fact_id])
-            row = rows[row_idx]
-            if "metadata" not in row or row["metadata"] is None:
-                row["metadata"] = {}
-            row["metadata"]["datalog_explanation"] = explanation
-            authorized_rows.append(row)
-        else:
-            explanation = result.explain_fact_text('blocked', [fact_id])
-            required_topic = _extract_topic_from_policy(policy) if policy else None
-            blocked_rows.append({
-                "fact_id": fact_id,
-                "reveal_policy": policy or "reference",
-                "required_topic": required_topic,
-                "explored_topics": list(all_explored_topics),
-                "datalog_explanation": explanation,
-            })
+    with ruleset.solve(edb) as result:
+        # recup les faits autorisés et bloqués
+        allowed_facts = set()
+        for row in result.enumerate_predicate_facts('allow', 1):
+            allowed_facts.add(row[0])
+        
+        blocked_fact_ids = set()
+        for row in result.enumerate_predicate_facts('blocked', 1):
+            blocked_fact_ids.add(row[0])
+        
+        # faire les listes de sortie
+        authorized_rows = []
+        blocked_rows = []
+        
+        for fact_id, policy, row_idx, is_ref in fact_rows:
+            if fact_id in allowed_facts:
+                explanation = result.explain_true('allow', [fact_id])
+                row = rows[row_idx]
+                if "metadata" not in row or row["metadata"] is None:
+                    row["metadata"] = {}
+                row["metadata"]["datalog_explanation"] = explanation
+                authorized_rows.append(row)
+            else:
+                explanation = result.explain_false('allow', [fact_id])
+                required_topic = _extract_topic_from_policy(policy) if policy else None
+                blocked_rows.append({
+                    "fact_id": fact_id,
+                    "reveal_policy": policy or "reference",
+                    "required_topic": required_topic,
+                    "explored_topics": list(all_explored_topics),
+                    "datalog_explanation": explanation,
+                })
     
     return authorized_rows, blocked_rows

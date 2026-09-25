@@ -109,10 +109,13 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
                 f"contenu={row.get('content', '')[:120]!r}"
             )
 
-        t_state_motor = time.time()
+        t_state_motor_start = time.perf_counter_ns()
         rows, blocked_rows = state_motor_datalog(global_topics, target_slots, rows)
-        print(f"[TIMING] 3bis. state_motor_datalog: {time.time() - t_state_motor:.2f}s")
+        duration_us = (time.perf_counter_ns() - t_state_motor_start) / 1000.0
+        duration_ms = duration_us / 1000.0
+        print(f"[TIMING] 3bis. state_motor_datalog: {duration_us:.1f} µs ({duration_ms:.3f} ms)")
         print("[STATE MOTOR] Sortie")
+        print(f"  Temps d'execution : {duration_us:.1f} µs ({duration_ms:.3f} ms)")
         print(f"  Lignes autorisees : {len(rows)}")
         print(f"  Lignes bloquees : {len(blocked_rows)}")
         for index, row in enumerate(rows, start=1):
@@ -123,7 +126,7 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
             )
             explanation = metadata.get("datalog_explanation")
             if explanation:
-                print("      └─ Preuve Datalog (explain_fact_text why-true) :")
+                print("      └─ Preuve Datalog (explain_true why-true) :")
                 for line in explanation.strip().splitlines():
                     print(f"         {line}")
         for index, blocked in enumerate(blocked_rows, start=1):
@@ -134,12 +137,16 @@ def process_ask_request(request: AskRequest, patient_data: dict, gemini_api_key:
             )
             explanation = blocked.get("datalog_explanation")
             if explanation:
-                print("      └─ Preuve Datalog (explain_fact_text why-blocked) :")
+                print("      └─ Preuve Datalog (explain_false why-blocked) :")
                 for line in explanation.strip().splitlines():
                     print(f"         {line}")
         print("=" * 60 + "\n")
 
         state_motor_info["after_count"] = len(rows)
+        state_motor_info["execution_time_us"] = round(duration_us, 1)
+        state_motor_info["execution_time_ms"] = round(duration_ms, 3)
+        timing["state_motor_us"] = round(duration_us, 1)
+        timing["state_motor_ms"] = round(duration_ms, 3)
         
         authorized_fact_ids = fact_id_authorized_by_motor(rows)
         
