@@ -1,5 +1,5 @@
 """
-Singleton Engine maelys-datalog pour le moteur d'état.
+Singleton Engine maelys-datalog-next pour le moteur d'état.
 
 Un Engine par process, domain enregistré une seule fois.
 Utilise la variante Inline Dynamic : register_domain() puis load_inline_ruleset().
@@ -11,13 +11,13 @@ le problème des atoms inconnus dans le registre de domaine.
 import sys
 import os
 
-# Ajouter le binding Python de maelys-datalog au path si nécessaire
-_MAELYS_BINDING_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'maelys-datalog', 'bindings', 'python')
+# Ajouter le binding Python-Next de maelys-datalog au path si nécessaire
+_MAELYS_BINDING_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'maelys-datalog', 'bindings', 'python-next')
 
 if os.path.isdir(_MAELYS_BINDING_PATH) and _MAELYS_BINDING_PATH not in sys.path:
     sys.path.insert(0, os.path.abspath(_MAELYS_BINDING_PATH))
 
-from maelys_datalog import Engine, Predicate, PRED_EDB, PRED_IDB, PRED_QUERY
+from maelys_datalog_next import Engine, Predicate
 
 _engine = None
 _ruleset = None
@@ -25,15 +25,15 @@ _ruleset = None
 DOMAIN_NAME = "medical_access_control"
 
 PREDICATES = [
-    Predicate('explored',     1, PRED_EDB),          # Topic déjà exploré dans la session
-    Predicate('current_slot', 1, PRED_EDB),           # Target slot de la question courante
-    Predicate('has_policy',   2, PRED_EDB),            # (fact_id, policy_string)
-    Predicate('is_always',    1, PRED_EDB),            # Policy "direct_if_asked" (toujours OK)
-    Predicate('is_direct',    2, PRED_EDB),            # (policy_string, topic) — autorisé si topic exploré
-    Predicate('is_only',      2, PRED_EDB),            # (policy_string, topic) — autorisé si exploré + current_slot
-    Predicate('is_reference', 1, PRED_EDB),            # Fait de type "reference" (toujours autorisé)
-    Predicate('allow',        1, PRED_IDB | PRED_QUERY),  # Fait autorisé à être révélé
-    Predicate('blocked',      1, PRED_IDB | PRED_QUERY),  # Fait bloqué
+    Predicate.edb('explored',     1),    # Topic déjà exploré dans la session
+    Predicate.edb('current_slot', 1),    # Target slot de la question courante
+    Predicate.edb('has_policy',   2),    # (fact_id, policy_string)
+    Predicate.edb('is_always',    1),    # Policy "direct_if_asked" (toujours OK)
+    Predicate.edb('is_direct',    2),    # (policy_string, topic) — autorisé si topic exploré
+    Predicate.edb('is_only',      2),    # (policy_string, topic) — autorisé si exploré + current_slot
+    Predicate.edb('is_reference', 1),    # Fait de type "reference" (toujours autorisé)
+    Predicate.idb_query('allow',   1),   # Fait autorisé à être révélé
+    Predicate.idb_query('blocked', 1),   # Fait bloqué
 ]
 
 # Règles STATIQUES — pas de string literals, que des variables.

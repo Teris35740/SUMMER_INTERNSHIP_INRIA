@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import argparse
+import time
 
 from sentence_transformers import CrossEncoder
 
@@ -176,7 +177,10 @@ def main():
 
             global_topics = clinical_state.get('asked_topics', [])
             # rows = state_motor_simple(target_slots, rows)
+            t_motor_start = time.perf_counter_ns()
             rows, blocked = state_motor_datalog(global_topics, target_slots, rows)
+            t_motor_duration_us = (time.perf_counter_ns() - t_motor_start) / 1000.0
+            print(f"\n[TIMING] state_motor_datalog: {t_motor_duration_us:.1f} µs ({t_motor_duration_us / 1000.0:.3f} ms)")
 
             if blocked:
                 print(f"\n--- Faits bloqués par le moteur d'état ({len(blocked)}) ---")
@@ -185,7 +189,7 @@ def main():
                           f"topic requis: {b['required_topic']} | "
                           f"topics explorés: {b['explored_topics']}")
                     if b.get("datalog_explanation"):
-                        print("  └─ Preuve Datalog (explain_fact_text why-blocked) :")
+                        print("  └─ Preuve Datalog (explain_false why-blocked) :")
                         for line in b["datalog_explanation"].strip().splitlines():
                             print(f"     {line}")
 
