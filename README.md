@@ -146,12 +146,13 @@ pip install -r requirements.txt
 Le moteur de règles de MedSim repose sur `maelys-datalog` (implémenté en C11). Il est nécessaire de compiler la bibliothèque C partagée et de générer l'extension CFFI Python :
 
 ```bash
-# Compiler la bibliothèque C partagée
-cmake -S maelys-datalog -B maelys-datalog/build/python-small -DMAELYS_DATALOG_BUILD_PYTHON_BINDING=ON
-cmake --build maelys-datalog/build/python-small --target maelys_py_bind
+# Compiler et installer le SDK C
+cmake -S maelys-datalog -B maelys-datalog/build/cmake-small
+cmake --build maelys-datalog/build/cmake-small --parallel 4
+cmake --install maelys-datalog/build/cmake-small --prefix maelys-datalog/build/sdk-small
 
 # Compiler l'extension CFFI Python
-python maelys-datalog/bindings/python/build_cffi.py
+python maelys-datalog/bindings/python/build_cffi.py --sdk-prefix maelys-datalog/build/sdk-small
 ```
 
 #### d) Configurer les variables d'environnement

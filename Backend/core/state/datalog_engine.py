@@ -1,5 +1,5 @@
 """
-Singleton Engine maelys-datalog-next pour le moteur d'état.
+Singleton Engine maelys-datalog pour le moteur d'état.
 
 Un Engine par process, domain enregistré une seule fois.
 Utilise la variante Inline Dynamic : register_domain() puis load_inline_ruleset().
@@ -11,16 +11,17 @@ le problème des atoms inconnus dans le registre de domaine.
 import sys
 import os
 
-# Ajouter le binding Python-Next de maelys-datalog au path si nécessaire
-_MAELYS_BINDING_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'maelys-datalog', 'bindings', 'python-next')
+# Ajouter le binding Python de maelys-datalog au path si nécessaire
+_MAELYS_BINDING_PATH = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'maelys-datalog', 'bindings', 'python')
 
 if os.path.isdir(_MAELYS_BINDING_PATH) and _MAELYS_BINDING_PATH not in sys.path:
     sys.path.insert(0, os.path.abspath(_MAELYS_BINDING_PATH))
 
-from maelys_datalog_next import Engine, Predicate
+from maelys_datalog import Engine, Predicate, ExplanationKind
 
 _engine = None
 _ruleset = None
+_session = None
 
 DOMAIN_NAME = "medical_access_control"
 
@@ -65,9 +66,23 @@ def get_ruleset():
     return _ruleset
 
 
+def get_session():
+    """Retourne le singleton Session réutilisable, configuré avec workspace d'explications préalloué."""
+    global _session
+    if _session is None:
+        ruleset = get_ruleset()
+        _session = ruleset.prepare(
+            explanations=ExplanationKind.TRUE | ExplanationKind.FALSE
+        )
+    return _session
+
+
 def close_engine():
-    """Ferme le singleton Engine proprement (ferme aussi le Ruleset)."""
-    global _engine, _ruleset
+    """Ferme le singleton Engine proprement (ferme aussi Session et Ruleset)."""
+    global _engine, _ruleset, _session
+    if _session is not None:
+        _session.close()
+        _session = None
     if _engine is not None:
         _engine.close()
         _engine = None

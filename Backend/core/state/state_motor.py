@@ -1,4 +1,4 @@
-from core.state.datalog_engine import get_ruleset
+from core.state.datalog_engine import get_ruleset, get_session
 
 def _extract_topic_from_policy(reveal_policy):
     """Extrait le topic requis d'une reveal_policy.
@@ -147,33 +147,37 @@ def state_motor_datalog(global_asked_topics, current_target_slots, rows):
         fact_id = row.get("metadata", {}).get("fact_id", f"unknown_{i}")
         fact_rows.append((fact_id, policy, i, False))
 
-    # creer l'edb et ajouter les faits
-    edb = ruleset.edb()
-    
+    # préparer les faits pour insertion
+    facts_to_add = []
     for topic in all_explored_topics:
-        edb.add_fact('explored', [topic])
+        facts_to_add.append(('explored', [topic]))
     
     for slot in current_target_slots:
-        edb.add_fact('current_slot', [slot])
+        facts_to_add.append(('current_slot', [slot]))
     
     for fact_id, policy, row_idx, is_ref in fact_rows:
         if is_ref:
-            edb.add_fact('is_reference', [fact_id])
+            facts_to_add.append(('is_reference', [fact_id]))
         else:
-            edb.add_fact('has_policy', [fact_id, policy])
+            facts_to_add.append(('has_policy', [fact_id, policy]))
             
             # Classifier la policy en EDB
             if policy == "direct_if_asked":
-                edb.add_fact('is_always', [policy])
+                facts_to_add.append(('is_always', [policy]))
             else:
                 topic = _extract_topic_from_policy(policy)
                 if topic is not None:
                     if policy.startswith("direct_if_"):
-                        edb.add_fact('is_direct', [policy, topic])
+                        facts_to_add.append(('is_direct', [policy, topic]))
                     elif policy.startswith("only_if_"):
-                        edb.add_fact('is_only', [policy, topic])
+                        facts_to_add.append(('is_only', [policy, topic]))
     
-    with ruleset.solve(edb) as result:
+    # Remplir l'edb
+    edb = ruleset.edb()
+    edb.add_facts(facts_to_add)
+    
+    session = get_session()
+    with session.solve(edb) as result:
         # recup les faits autorisés et bloqués
         allowed_facts = set()
         for row in result.enumerate_predicate_facts('allow', 1):

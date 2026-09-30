@@ -14,7 +14,7 @@ Trois approches ont été implémentées successivement pour résoudre ce probl�
 
 Le choix d'un moteur Datalog apporte :
 - **Déterminisme** : pour un même état (topics explorés + policies), le résultat est toujours identique
-- **Traçabilité** : chaque décision est accompagnée d'une preuve (`explain_fact_text`)
+- **Traçabilité** : chaque décision est accompagnée d'une preuve formelle (`explain_true` / `explain_false`)
 - **Séparation données/logique** : les règles sont statiques, seuls les faits EDB changent à chaque requête
 - **Auditabilité** : les règles sont lisibles et modifiables sans toucher au code Python
 
@@ -27,7 +27,7 @@ MedSim utilise [**maelys-datalog**](https://github.com/maelys-dev/maelys-datalog
 - Évaluation semi-naïve en point fixe
 - Négation stratifiée avec rejet des cycles négatifs
 - Mémoire bornée (pas d'allocation heap pendant le solve)
-- Preuves et diagnostics intégrés (`explain_fact_text`)
+- Preuves et diagnostics intégrés (`explain_true`, `explain_false`)
 - API : `Engine` → `register_domain` → `load_inline_ruleset` → `solve` → résultat
 
 La documentation complète est disponible sur le [dépôt GitHub de maelys-datalog](https://github.com/maelys-dev/maelys-datalog). Le binding Python se trouve dans `maelys-datalog/bindings/python/`.
@@ -42,13 +42,13 @@ Le domaine `medical_access_control` définit 9 prédicats :
 
 ```python
 # datalog_engine.py — PREDICATES
-Predicate('explored',     1, PRED_EDB)   # Topic déjà exploré dans la session
-Predicate('current_slot', 1, PRED_EDB)   # Target slot de la question courante
-Predicate('has_policy',   2, PRED_EDB)   # (fact_id, policy_string)
-Predicate('is_always',    1, PRED_EDB)   # Policy "direct_if_asked" (toujours OK)
-Predicate('is_direct',    2, PRED_EDB)   # (policy_string, topic) — autorisé si topic exploré
-Predicate('is_only',      2, PRED_EDB)   # (policy_string, topic) — autorisé si exploré + current_slot
-Predicate('is_reference', 1, PRED_EDB)   # Fait de type "reference" (toujours autorisé)
+Predicate.edb('explored',     1)   # Topic déjà exploré dans la session
+Predicate.edb('current_slot', 1)   # Target slot de la question courante
+Predicate.edb('has_policy',   2)   # (fact_id, policy_string)
+Predicate.edb('is_always',    1)   # Policy "direct_if_asked" (toujours OK)
+Predicate.edb('is_direct',    2)   # (policy_string, topic) — autorisé si topic exploré
+Predicate.edb('is_only',      2)   # (policy_string, topic) — autorisé si exploré + current_slot
+Predicate.edb('is_reference', 1)   # Fait de type "reference" (toujours autorisé)
 ```
 
 | Prédicat | Arité | Exemple | Rempli par |
@@ -64,8 +64,8 @@ Predicate('is_reference', 1, PRED_EDB)   # Fait de type "reference" (toujours au
 ### Prédicats IDB (faits dérivés — calculés par les règles)
 
 ```python
-Predicate('allow',   1, PRED_IDB | PRED_QUERY)  # Fait autorisé à être révélé
-Predicate('blocked', 1, PRED_IDB | PRED_QUERY)  # Fait bloqué
+Predicate.idb_query('allow',   1)  # Fait autorisé à être révélé
+Predicate.idb_query('blocked', 1)  # Fait bloqué
 ```
 
 ---
@@ -113,54 +113,60 @@ flowchart LR
     E -->|add_fact| F[EDB rempli]
     F -->|ruleset.solve| G[Résultat]
     G -->|enumerate_predicate_facts| H[allow / blocked]
-    G -->|explain_fact_text| I[Preuves]
+    G -->|explain_true / explain_false| I[Preuves]
 ```
 
 1. **Création de l'Engine** : singleton via `get_engine()`. Créé une seule fois au premier appel.
 2. **Enregistrement du domaine** : `engine.register_domain("medical_access_control", PREDICATES)` — définit les 9 prédicats.
 3. **Chargement des règles** : `engine.load_inline_ruleset(...)` — charge les 5 règles statiques. Singleton via `get_ruleset()`.
-4. **À chaque requête** : créer un EDB frais (`ruleset.edb()`), y ajouter les faits, résoudre, extraire les résultats.
-5. **Fermeture** : `close_engine()` appelé au shutdown de FastAPI (`shutdown_event`).
+4. **Préparation de la Session** : `ruleset.prepare(explanations=ExplanationKind.TRUE | ExplanationKind.FALSE)` — session réutilisable préallouant un workspace d'explications (`get_session()`).
+5. **À chaque requête** : créer un EDB frais (`ruleset.edb()`), y insérer tous les faits par lot atomique (`edb.add_facts(...)`), résoudre via la session (`session.solve(edb)`), extraire les décisions et preuves.
+6. **Fermeture** : `close_engine()` appelé au shutdown de FastAPI (`shutdown_event`).
 
 ### Code d'exécution (par requête)
 
 ```python
 # state_motor.py — state_motor_datalog() (simplifié)
 ruleset = get_ruleset()
+session = get_session()
 edb = ruleset.edb()
 
-# 1. Ajouter les topics explorés
+# 1. Préparer les faits
+facts = []
 for topic in all_explored_topics:
-    edb.add_fact('explored', [topic])
+    facts.append(('explored', [topic]))
 for slot in current_target_slots:
-    edb.add_fact('current_slot', [slot])
+    facts.append(('current_slot', [slot]))
 
-# 2. Ajouter les faits et classifier les policies
 for fact_id, policy, row_idx, is_ref in fact_rows:
     if is_ref:
-        edb.add_fact('is_reference', [fact_id])
+        facts.append(('is_reference', [fact_id]))
     else:
-        edb.add_fact('has_policy', [fact_id, policy])
+        facts.append(('has_policy', [fact_id, policy]))
         if policy == "direct_if_asked":
-            edb.add_fact('is_always', [policy])
+            facts.append(('is_always', [policy]))
         elif policy.startswith("direct_if_"):
             topic = policy[len("direct_if_"):]
-            edb.add_fact('is_direct', [policy, topic])
+            facts.append(('is_direct', [policy, topic]))
         elif policy.startswith("only_if_"):
             topic = policy[len("only_if_"):]
-            edb.add_fact('is_only', [policy, topic])
+            facts.append(('is_only', [policy, topic]))
 
-# 3. Résoudre
-result = ruleset.solve(edb)
+# 2. Ajout atomique par lot (API v0.10+)
+edb.add_facts(facts)
 
-# 4. Extraire les résultats
-allowed_facts = set()
-for row in result.enumerate_predicate_facts('allow', 1):
-    allowed_facts.add(row[0])
+# 3. Résoudre via la session préparée réutilisable
+with session.solve(edb) as result:
+    # 4. Extraire les résultats
+    allowed_facts = set()
+    for row in result.enumerate_predicate_facts('allow', 1):
+        allowed_facts.add(row[0])
 
-# 5. Preuves (pour le debug)
-for fact_id in allowed_facts:
-    explanation = result.explain_fact_text('allow', [fact_id])
+    # 5. Preuves formelles (workspace réutilisable sans réallocation)
+    for fact_id in allowed_facts:
+        explanation = result.explain_true('allow', [fact_id])
+    for fact_id in blocked_facts:
+        explanation = result.explain_false('allow', [fact_id])
 ```
 
 ---
